@@ -1,4 +1,4 @@
-package com.retailer.retailermodule
+package app.retailer.retailermodule
 
 import org.junit.Test
 

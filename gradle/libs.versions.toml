@@ -11,6 +11,53 @@ constraintlayout = "2.2.1"
 navigationFragmentKtx = "2.8.9"
 navigationUiKtx = "2.8.9"
 activity = "1.10.1"
+legacy-support = "1.0.0"
+multidex = "2.0.1"
+flexbox = "3.0.0"
+lifecycle-ext = "1.1.1"
+lifecycle-livedata = "2.4.1"
+lifecycle-viewmodel = "2.4.1"
+lifecycle-runtime = "2.5.0-alpha06"
+coroutines = "1.6.0"
+firebase-messaging = "22.0.0"
+firebase-config = "21.0.2"
+firebase-analytics = "21.0.0"
+firebase-firestore = "24.1.2"
+firebase-crashlytics = "18.2.11"
+play-analytics = "18.0.1"
+play-auth = "21.1.0"
+places = "2.6.0"
+maps = "18.0.2"
+places-legacy = "17.0.0"
+location = "20.0.0"
+feature-delivery = "2.1.0"
+app-update = "2.1.0"
+okhttp = "4.9.0"
+retrofit = "2.9.0"
+logging-interceptor = "5.0.0-alpha.2"
+gson = "2.8.6"
+rxandroid = "2.1.1"
+rxjava = "2.2.20"
+gif = "1.2.23"
+compressor = "3.0.1"
+circleimageview = "3.1.0"
+picasso = "2.71828"
+glide = "4.11.0"
+viewpagerindicator = "2.4.1"
+rangeseekbar = "0.3.0"
+arclayout = "1.0.0"
+shimmer = "0.5.0"
+room = "2.4.2"
+mixpanel = "5.9.1"
+permissions = "3.8"
+azure = "2.0.0"
+installreferrer = "2.2"
+zoomage = "1.3.1"
+aws-s3 = "2.17.1"
+fab-expand = "1.1.2"
+jsoup = "1.11.3"
+razorpay = "1.6.39"
+ucrop = "2.2.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,6 +70,68 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+legacy-support = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support" }
+multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
+lifecycle-ext = { group = "android.arch.lifecycle", name = "extensions", version.ref = "lifecycle-ext" }
+lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle-livedata" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime" }
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebase-messaging" }
+firebase-config = { group = "com.google.firebase", name = "firebase-config", version.ref = "firebase-config" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-analytics" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebase-firestore" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebase-crashlytics" }
+
+play-analytics = { group = "com.google.android.gms", name = "play-services-analytics", version.ref = "play-analytics" }
+play-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-auth" }
+places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
+maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "maps" }
+places-legacy = { group = "com.google.android.gms", name = "play-services-places", version.ref = "places-legacy" }
+location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
+feature-delivery = { group = "com.google.android.play", name = "feature-delivery-ktx", version.ref = "feature-delivery" }
+app-update = { group = "com.google.android.play", name = "app-update-ktx", version.ref = "app-update" }
+
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+adapter-rxjava2 = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "retrofit" }
+converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+rxandroid = { group = "io.reactivex.rxjava2", name = "rxandroid", version.ref = "rxandroid" }
+rxjava = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxjava" }
+
+gif = { group = "pl.droidsonroids.gif", name = "android-gif-drawable", version.ref = "gif" }
+compressor = { group = "id.zelory", name = "compressor", version.ref = "compressor" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
+viewpagerindicator = { group = "com.mcxiaoke.viewpagerindicator", name = "library", version.ref = "viewpagerindicator" }
+rangeseekbar = { group = "org.florescu.android.rangeseekbar", name = "rangeseekbar-library", version.ref = "rangeseekbar" }
+arclayout = { group = "com.ogaclejapan.arclayout", name = "library", version.ref = "arclayout" }
+shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-rxjava2 = { group = "androidx.room", name = "room-rxjava2", version.ref = "room" }
+
+mixpanel = { group = "com.mixpanel.android", name = "mixpanel-android", version.ref = "mixpanel" }
+permissions = { group = "com.github.Redman1037", name = "Android-Permissions", version.ref = "permissions" }
+
+azure = { group = "com.microsoft.azure.android", name = "azure-storage-android", version.ref = "azure" }
+installreferrer = { group = "com.android.installreferrer", name = "installreferrer", version.ref = "installreferrer" }
+
+zoomage = { group = "com.jsibbold", name = "zoomage", version.ref = "zoomage" }
+aws-s3 = { group = "com.amazonaws", name = "aws-android-sdk-s3", version.ref = "aws-s3" }
+fab-expand = { group = "com.github.imtuann", name = "FloatingActionButtonExpandable", version.ref = "fab-expand" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+razorpay = { group = "com.razorpay", name = "checkout", version.ref = "razorpay" }
+ucrop = { group = "com.github.yalantis", name = "ucrop", version.ref = "ucrop" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -1,4 +1,4 @@
-package com.sk.mylibrary
+package app.sk.mylibrary
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.retailer.retailermodule
+package app.retailer.retailermodule
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
+import com.retailer.retailermodule.R
 import com.retailer.retailermodule.databinding.ActivityMainBinding
-import com.sk.mylibrary.MainActivity
 
 class MainActivity : AppCompatActivity() {
 

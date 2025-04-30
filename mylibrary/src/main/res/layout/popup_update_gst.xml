@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_10"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvRequestGSTHead"
+        style="@style/CommonStyleB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/view_padding_10"
+        android:text="@string/request_gst_update"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_10dp_padding"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/layout_10dp_padding"
+        android:layout_marginBottom="@dimen/layout_5dp_padding"
+        android:background="@drawable/white_rectangle_box"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TilGstNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:paddingTop="6dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/popup_et_gst_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/txt_gst_no"
+                android:inputType="textCapCharacters"
+                android:maxLength="15"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textColor="@color/Black"
+                android:textColorHighlight="@color/Darkgrey"
+                android:textColorHint="@color/Darkgrey" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/rectangle_grey">
+
+            <ImageView
+                android:id="@+id/popup_iv_gst_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/view_padding_10"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_photo_camera_orange_24dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RLVerifyLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_10dp_padding"
+        android:layout_marginTop="@dimen/layout_5dp_padding"
+        android:layout_marginEnd="@dimen/layout_10dp_padding"
+        android:layout_marginBottom="@dimen/layout_10dp_padding"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/popup_progress_bar_gst"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_isverified"
+            style="@style/CommonStyleSB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/layout_10dp_padding"
+            android:layout_marginEnd="@dimen/layout_10dp_padding"
+            android:layout_toRightOf="@+id/popup_progress_bar_gst"
+            android:visibility="visible" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_10dp_padding"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/layout_10dp_padding"
+        android:layout_marginBottom="@dimen/layout_10dp_padding"
+        android:background="@drawable/white_rectangle_box"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPanNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/pannumber"
+                android:inputType="textCapCharacters"
+                android:maxLength="15"
+                android:padding="10dp"
+                android:enabled="false"
+                android:textAllCaps="true"
+                android:textColor="@color/Black"
+                android:textColorHighlight="@color/Darkgrey"
+                android:textColorHint="@color/Darkgrey" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_padding_10"
+        android:layout_marginEnd="@dimen/view_padding_10"
+        android:background="@drawable/white_rectangle_box"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:paddingTop="6dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/popup_et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="top"
+                android:hint="@string/comment"
+                android:maxLength="800"
+                android:maxLines="8"
+                android:minLines="4"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:textColorHint="@color/Darkgrey" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/popup_submit_request_btn"
+            style="@style/CommonStyleB"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/view_padding_20"
+            android:minWidth="135dp"
+            android:text="@string/submit_request"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/popup_cancel_request_btn"
+            style="@style/CommonStyleB"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/view_padding_20"
+            android:minWidth="135dp"
+            android:text="@string/cancel_request_gst"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="#FF682F" />
+    </LinearLayout>
+</LinearLayout>

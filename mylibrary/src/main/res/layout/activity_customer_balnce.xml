@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_hisab_kitab"
+            layout="@layout/toolbar_arrow" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar_hisab_kitab"
+            android:layout_margin="@dimen/size5"
+            android:background="@drawable/border_orange_report"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/size60"
+                android:layout_marginTop="@dimen/size10"
+                android:padding="@dimen/size5"
+                android:text="@string/total_balance"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size16" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size30"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size40"
+                    android:layout_margin="@dimen/size10"
+                    android:padding="@dimen/size5"
+                    android:tint="@color/colorAccent"
+                    app:srcCompat="@drawable/ic_wallet_new" />
+
+
+                <TextView
+                    android:id="@+id/tv_total_balnce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="26dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size50"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_payment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight=".5"
+                        android:layout_marginBottom="@dimen/size3"
+                        android:layout_marginLeft="@dimen/size20"
+                        android:text="Bhagwan"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_credit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight=".5"
+                        android:layout_marginBottom="@dimen/size3"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:text="Bhagwan"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size5"
+                    android:layout_marginRight="@dimen/size5"
+                    android:layout_marginBottom="@dimen/size20"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_weight=".5"
+                        android:background="@drawable/border_orange_report"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/size40"
+                            android:layout_height="@dimen/size40"
+                            android:layout_margin="@dimen/size10"
+                            android:padding="@dimen/size5"
+                            app:srcCompat="@drawable/ic_accept" />
+
+
+                        <TextView
+                            android:id="@+id/tv_accpet_pay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text=""
+                            android:textColor="@color/green_50"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size10"
+                        android:layout_weight=".5"
+                        android:background="@drawable/border_orange_report"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/size40"
+                            android:layout_height="@dimen/size40"
+                            android:layout_margin="@dimen/size10"
+                            android:padding="@dimen/size5"
+                            app:srcCompat="@drawable/ic_pay" />
+
+                        <TextView
+                            android:id="@+id/tv_give_pay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text=""
+                            android:textColor="@color/red"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

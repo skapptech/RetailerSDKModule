@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/tvAddPhotoHead"
+        style="@style/BottomDiaologTitleStyle"
+        tools:text="@string/addphoto" />
+
+    <View style="@style/BottomDialogButtonsSeparator" />
+
+    <TextView
+        android:id="@+id/take_photo"
+        style="@style/ButtonDialogButtonText"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_middle"
+        android:text="@string/takephoto" />
+
+    <View style="@style/BottomDialogButtonsSeparator" />
+
+    <TextView
+        android:id="@+id/gallery"
+        style="@style/ButtonDialogButtonText"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_end"
+        android:text="@string/txt_Choose_from_Library" />
+
+    <View style="@style/BottomDialogButtonsSeparator" />
+
+    <TextView
+        android:id="@+id/tvVideo"
+        style="@style/ButtonDialogButtonText"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_end"
+        android:text="Upload Video"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/liCancel"
+        style="@style/ButtonDialogButtonText"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bottom_dialog_rounded_corner_button_very_last"
+        android:text="@string/cancel" />
+
+</LinearLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:id="@+id/tvAddPhotoHead"
+                style="@style/CommonStyleB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/addphoto"
+                android:textColor="@color/primary_text"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/take_photo"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="@string/takephoto"
+                    android:textColor="@color/tertiary_text"
+                    android:textSize="15sp"
+                    app:drawableTopCompat="@drawable/ic_camera_colored" />
+
+                <TextView
+                    android:id="@+id/gallery"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="7dp"
+                    android:gravity="center"
+                    android:text="@string/txt_Choose_from_Library"
+                    android:textColor="@color/tertiary_text"
+                    android:textSize="15sp"
+                    app:drawableTopCompat="@drawable/ic_gallery_colored" />
+
+                <LinearLayout
+                    android:id="@+id/liCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_close" />
+
+                    <TextView
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:gravity="center"
+                        android:text="@string/cancel"
+                        android:textColor="@color/tertiary_text"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>-->

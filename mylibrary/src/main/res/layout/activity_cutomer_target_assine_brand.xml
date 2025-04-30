@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size5"
+        android:layout_marginTop="@dimen/size3"
+        android:layout_marginBottom="@dimen/size3"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/direct_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="100dp"
+                    android:src="@drawable/logo_sk" />
+
+                <TextView
+                    android:id="@+id/tvStoreName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/size15"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvleftDay"
+                        android:layout_width="139dp"
+                        android:layout_height="23dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="12dp"
+                        android:paddingLeft="@dimen/size30"
+                        android:text="Congratulate"
+                        android:textColor="#F0142F"
+                        android:textSize="@dimen/size15"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTargetMonth"
+                        android:layout_width="139dp"
+                        android:layout_height="23dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="1dp"
+                        android:paddingLeft="@dimen/size30"
+                        android:text="January Target"
+                        android:textColor="#7E84A3"
+                        android:textSize="@dimen/size12"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/on_completi"
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size20"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/on_completi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/tvgiftmpr"
+                style="@style/CommonStyleSB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="1.1dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvBrandName"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/tertiary_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_target_assine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginBottom="@dimen/size10">
+
+                <TextView
+                    android:id="@+id/more_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_horizontal|top"
+                    android:lineSpacingExtra="0sp"
+                    android:padding="@dimen/size10"
+                    android:text="More Info"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size12" />
+
+                <Button
+                    android:id="@+id/btOrderNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size5"
+                    android:background="@drawable/drawable_round_button"
+                    android:text="@string/order_now"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

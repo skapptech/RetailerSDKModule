@@ -57,6 +57,8 @@ fab-expand = "1.1.2"
 jsoup = "1.11.3"
 razorpay = "1.6.39"
 ucrop = "2.2.8"
+playServicesMeasurementApi = "21.0.0"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -130,6 +132,8 @@ fab-expand = { group = "com.github.imtuann", name = "FloatingActionButtonExpanda
 jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 razorpay = { group = "com.razorpay", name = "checkout", version.ref = "razorpay" }
 ucrop = { group = "com.github.yalantis", name = "ucrop", version.ref = "ucrop" }
+play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

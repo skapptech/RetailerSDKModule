@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/size16"
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:id="@+id/tvAddPhotoHead"
+            style="@style/BottomDiaologTitleStyle"
+            android:textSize="@dimen/size16"
+            tools:text="@string/addphoto" />
+
+        <View style="@style/BottomDialogButtonsSeparator" />
+
+        <TextView
+            android:id="@+id/tvCamera"
+            style="@style/ButtonDialogButtonText"
+            android:background="@drawable/bottom_dialog_rounded_corner_button_middle"
+            android:text="@string/takephoto" />
+
+        <View style="@style/BottomDialogButtonsSeparator" />
+
+        <TextView
+            android:id="@+id/tvGallery"
+            style="@style/ButtonDialogButtonText"
+            android:visibility="gone"
+            android:background="@drawable/bottom_dialog_rounded_corner_button_end"
+            android:text="@string/txt_Choose_from_Library" />
+
+        <View style="@style/BottomDialogButtonsSeparator" />
+
+        <TextView
+            android:id="@+id/tvVideo"
+            style="@style/ButtonDialogButtonText"
+            android:background="@drawable/bottom_dialog_rounded_corner_button_end"
+            android:text="Upload Video"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/ButtonDialogButtonText"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bottom_dialog_rounded_corner_button_very_last"
+            android:text="@string/cancel" />
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lcv_ticket_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size5"
+            android:layout_marginTop="@dimen/size22"
+            android:layout_marginEnd="@dimen/size60"
+            android:background="@drawable/chat_bord_background"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size5"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginBottom="@dimen/size5"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Direct Support"
+                    android:textColor="@color/color_orange"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/ltv_message"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ltv_message_time"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/size5"
+                    android:layout_marginBottom="@dimen/size5"
+                    android:textColor="@color/order_ray"
+                    android:textSize="11sp"
+                    android:text="12;30"/>
+
+                <TextView
+                    android:id="@+id/ltv_message_name"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size5"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="@dimen/size5"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cv_rv_issue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size2"
+                android:background="@drawable/item_rectangle"
+                android:backgroundTint="@color/seashell">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_issue_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size2"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rcv_ticket_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/size2"
+            android:layout_marginEnd="@dimen/size5"
+            android:background="@drawable/chat_border_right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rtv_message"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size5"
+                android:maxLines="2"
+                android:text="hello"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ltv_res_time"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/size5"
+                android:layout_marginBottom="@dimen/size5"
+                android:text="12:30"
+                android:textColor="@color/order_ray"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

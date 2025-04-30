@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="firm_type_array">
+        <item>Select Firm Type</item>
+        <item>ProprietorShip</item>
+        <item>PartnerShip</item>
+        <item>Private Limited/Limited</item>
+        <item>LLP</item>
+    </string-array>
+    <string-array name="return_type">
+        <item>Select Return/Replacement</item>
+        <item>Return</item>
+        <item>Replace</item>
+    </string-array>
+    <string-array name="return_reason">
+        <item>Select Reason</item>
+        <item>Quality Defective</item>
+        <item>Wrong Merchandise</item>
+        <item>Packaging Damage</item>
+        <item>Purchased from Somewhere</item>
+        <item>Arrived Late</item>
+        <item>Duplicate Order</item>
+        <item>Rate Difference</item>
+    </string-array>
+    <string-array name="udhar_price">
+        <item>Please Select </item>
+        <item>0 Lakh - 5 Lakh</item>
+        <item>5 Lakh - 10 Lakh</item>
+        <item> Above 10</item>
+    </string-array>
+    <string-array name="udhar_gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="udhar_doc">
+        <item>Please Select </item>
+        <item>Driving License</item>
+        <item>Aadhaar Card</item>
+        <item>Passport</item>
+        <item>Voter ID</item>
+        <item>Electricity Bill</item>
+    </string-array>
+    <string-array name="udhar_tencher_time">
+        <item>Please Select </item>
+        <item>1 – 3 Years</item>
+        <item>3 – 5 Years</item>
+        <item>5 – 10 Years</item>
+        <item> Above 10</item>
+    </string-array>
+    <string-array name="salesman_times">
+        <item>Twice In a week</item>
+        <item>Weekly</item>
+        <item>Twice Monthly</item>
+        <item>Monthly</item>
+        <item>Never Visited</item>
+    </string-array>
+    <string-array name="days_array">
+        <item>Select Day</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+</resources>

@@ -1,0 +1,195 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.fragment.EditProfileHomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            app:behavior_overlapTop="80dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginRight="@dimen/size5"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="38dp"
+                                android:layout_marginBottom="@dimen/size5"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                android:paddingBottom="25dp">
+
+                                <TextView
+                                    android:id="@+id/tv_cust_name"
+                                    style="@style/CommonStyleB"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:paddingStart="5dp"
+                                    android:paddingEnd="5dp"
+                                    android:textColor="@color/grey"
+                                    android:background="@color/grey"
+                                    android:text="Name of the customer"
+                                    android:layout_marginTop="2dp"
+                                    android:textSize="@dimen/text_size_20" />
+
+                                <TextView
+                                    android:id="@+id/tv_cust_email"
+                                    style="@style/CommonStyleSR"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="@color/secondary"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/tv_cust_mobile"
+                                    style="@style/CommonStyleSR"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="@color/secondary"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/tv_cust_skcode"
+                                    style="@style/CommonStyleSR"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="@color/grey"
+                                    android:background="@color/grey"
+                                    android:text="Name of the customer" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_cust_profile"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            app:civ_circle_background_color="@color/grey"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:contentDescription="@string/app_name"
+                            android:background="@color/grey"/>
+                    </RelativeLayout>
+                </FrameLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_e_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="9dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/size5"
+                        android:paddingBottom="@dimen/size5">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="@dimen/size10"
+                            android:layout_marginRight="@dimen/size10"
+                            android:contentDescription="@string/app_name"
+                            android:background="@color/grey"/>
+
+                        <TextView
+                            android:id="@+id/tv_cust_address"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/grey"
+                            android:background="@color/grey"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/btn_address"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="@dimen/size10"
+                            android:layout_margin="10dp"
+                            android:background="@color/grey"/>
+
+                        <Button
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/size32"
+                            android:layout_marginTop="@dimen/size2"
+                            android:layout_marginEnd="@dimen/size10"
+                            android:layout_marginBottom="@dimen/size2"
+                            android:background="@drawable/white_rectangle_box"
+                            android:text="@string/txt_change_address"
+                            android:textColor="@color/colorAccent"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/CommonStyleSR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size8"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/txt_preferences"
+                    android:textColor="@color/grey"
+                    android:background="@color/grey"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    app:cardCornerRadius="9dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardBackgroundColor="@color/grey">
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>

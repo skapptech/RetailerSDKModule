@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/logo_sk_ep" />
+
+        <TextView
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/EnterMobileNumber"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/msg_sent_otp"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91-"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_oldnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1234567890"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_chngnumber"
+            style="@style/CommonStyleSB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/ChangeNumber"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/otp"-->
+        <!--            style="@style/CommonStyleSR"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginStart="25dp"-->
+        <!--            android:layout_marginTop="@dimen/size20"-->
+        <!--            android:layout_marginEnd="25dp"-->
+        <!--            android:background="@drawable/border_grey_light"-->
+        <!--            android:gravity="center"-->
+        <!--            android:hint="@string/EnterOTP"-->
+        <!--            android:inputType="number"-->
+        <!--            android:maxLength="4"-->
+        <!--            android:textSize="15sp" />-->
+
+        <app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.OtpEditText
+            android:id="@+id/et_otp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:layout_marginTop="20dp"
+            android:digits="1234567890"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/resendotp"
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/resend_otp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/resend_otp_timer"
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:text="30 Seconds"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/verify_otp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="@dimen/size30"
+            app:srcCompat="@drawable/next" />
+    </LinearLayout>
+
+</layout>

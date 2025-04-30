@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.murli.StoryActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <app.retailer.krina.shop.com.mp_shopkrina_retailer.flip.FlipViewController
+            android:id="@+id/flip_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:orientation="horizontal" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_close"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/size6"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_close_white_24dp"
+            app:tint="@color/holo_gray_dark" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_next"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center|end"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:padding="7dp"
+            app:srcCompat="@drawable/ic_next_black"
+            app:tint="@color/holo_gray_dark" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_previous"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center|start"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:padding="7dp"
+            app:srcCompat="@drawable/ic_back_white"
+            app:tint="@color/holo_gray_dark" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:indeterminateOnly="true" />
+    </FrameLayout>
+</layout>

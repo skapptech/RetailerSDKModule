@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarPost"
+            layout="@layout/toolbar_mandi_bhav" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White">
+
+            <TextView
+                android:id="@+id/tvLable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size15"
+                android:layout_marginBottom="@dimen/size15"
+                android:drawableLeft="@drawable/location_on_user"
+                android:drawablePadding="@dimen/size10"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="अपने क्षेत्र का रेट देखे"
+                android:textColor="#2D4099"
+                android:textSize="16dp" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMandiCity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvLable"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_mandi_city" />
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+</layout>

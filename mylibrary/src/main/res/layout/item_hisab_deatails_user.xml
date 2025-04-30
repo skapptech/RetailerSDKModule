@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingVertical="10dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_header_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/round_light"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:text=""
+            android:visibility="gone"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/message_image"
+            android:layout_below="@+id/tv_header_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/size5"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="120dp" />
+
+        <RelativeLayout
+            android:id="@+id/Rl_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/message_image"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/my_message"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/message_user"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_note"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/message_user"
+                android:text=""
+                android:ellipsize="end"
+                android:ems="5"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Rl_message"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:padding="@dimen/size2">
+
+            <ImageView
+                android:id="@+id/im_user_camera"
+                android:layout_width="@dimen/size15"
+                android:layout_height="@dimen/size15"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:src="@drawable/camera" />
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/size5"
+                android:text=""
+                android:textColor="@color/Black"
+                android:textSize="@dimen/size8" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

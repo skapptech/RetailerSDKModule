@@ -1,0 +1,5 @@
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/line_divider"
+    android:insetRight="20dp"
+    android:insetLeft="20dp">
+</inset>

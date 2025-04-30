@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_upload_document"
+            layout="@layout/toolbar_arrow" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_upload_pan"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/layout_10dp_padding"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="@dimen/layout_20dp_padding"
+                        android:text="@string/txt_any_other_doc"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:id="@+id/sp_document"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_upload_pan"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_10dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_upload_pan_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_below="@+id/sp_document"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_20dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:layout_marginBottom="@dimen/view_padding_10"
+                        android:background="#f2f2f2">
+
+                        <ImageView
+                            android:id="@+id/iv_show_iv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_photo_camera" />
+
+                        <ImageView
+                            android:id="@+id/iv_upload_pan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY" />
+
+                        <TextView
+                            android:id="@+id/tv_uplod_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_show_iv"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/view_padding_20"
+                            android:text="@string/txt_Upload_Document"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txt_bck"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_10dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+
+                        android:layout_below="@+id/rl_upload_pan_txt"
+                        android:text="@string/txt_Upload_Document_back"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_upload_doc_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_below="@+id/txt_bck"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_10dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:layout_marginBottom="@dimen/view_padding_10"
+                        android:background="#f2f2f2">
+
+                        <ImageView
+                            android:id="@+id/iv_show_iv_back"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_photo_camera" />
+
+                        <ImageView
+                            android:id="@+id/iv_upload_doc_back"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY" />
+
+                        <TextView
+                            android:id="@+id/tv_uplod_text_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_show_iv_back"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/view_padding_20"
+                            android:text="@string/txt_Upload_Document_back"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/layout_30dp_padding">
+
+                    <Button
+                        android:id="@+id/bt_next"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/drawable_corner_udhar"
+                        android:text="@string/submit"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

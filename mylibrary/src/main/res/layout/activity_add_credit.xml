@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/activity_reward_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/toolbar_dream"
+            layout="@layout/toolbar_hisab_details" />
+
+        <LinearLayout
+            android:id="@+id/ll_add_credit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar_dream"
+            android:layout_marginLeft="@dimen/size30"
+            android:layout_marginTop="@dimen/size30"
+            android:layout_marginRight="@dimen/size30"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_weight=".7"
+                android:gravity="right"
+                android:padding="10dp"
+                android:text="₹"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size20"
+                android:tint="@color/black"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <EditText
+                android:id="@+id/et_amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size5"
+                android:layout_weight=".3"
+                android:background="@null"
+                android:hint="@string/add_credit"
+                android:inputType="numberDecimal"
+                android:textColor="@color/colorAccent"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/size5"
+                android:textSize="25dp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ll_add_credit"
+            android:layout_marginLeft="@dimen/size60"
+            android:layout_marginRight="70dp"
+            android:background="@color/black"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_credit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_divider"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/size20"
+            android:background="@drawable/stock_date"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/tv_date_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/size30"
+                android:paddingTop="@dimen/size5"
+                android:paddingRight="@dimen/size30"
+                android:paddingBottom="@dimen/size5"
+                android:text="" />
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image_list"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/rl_add_note_chat_view"
+            android:layout_marginBottom="65dp"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/rl_add_note_chat_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/size20">
+
+            <RelativeLayout
+                android:id="@+id/rl_add_note"
+                android:layout_width="250dp"
+                android:layout_height="@dimen/size40"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/size20"
+                android:background="@drawable/stock_msg">
+
+                <EditText
+                    android:id="@+id/et_add_note"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="40dp"
+                    android:background="@null"
+                    android:hint="@string/add_note"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:textSize="@dimen/size12"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/size10"
+                    android:paddingRight="@dimen/size10"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_camera"
+                    android:layout_width="@dimen/size20"
+                    android:layout_height="@dimen/size20"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/size20"
+                    android:layout_marginRight="@dimen/size20"
+                    android:layout_marginBottom="@dimen/size10"
+                    app:srcCompat="@drawable/ic_photo_camera" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_send_message"
+                android:layout_width="@dimen/size40"
+                android:layout_height="@dimen/size40"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginRight="@dimen/size20"
+                android:layout_marginBottom="@dimen/size10"
+                android:layout_toRightOf="@+id/rl_add_note"
+                app:srcCompat="@drawable/send" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

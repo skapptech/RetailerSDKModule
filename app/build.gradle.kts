@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
 }
 
 android {
@@ -84,12 +85,12 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.glide)
     implementation(libs.viewpagerindicator)
-  //  implementation(libs.rangeseekbar)
+    //implementation(libs.rangeseekbar) // this place use material RangeSlider com.google.android.material.slider.RangeSlider
     implementation(libs.arclayout)
     implementation(libs.shimmer)
-    implementation(libs.glide.compiler)
+    kapt(libs.glide.compiler)
     implementation(libs.room.runtime)
-   // implementation(libs.room.compiler)
+    kapt(libs.room.compiler)
     implementation(libs.room.rxjava2)
     implementation(libs.mixpanel)
     implementation(libs.permissions)
@@ -97,7 +98,7 @@ dependencies {
     implementation(libs.installreferrer)
     implementation(libs.zoomage)
     implementation(libs.aws.s3)
-//    implementation(libs.fab.expand)
+    //implementation(libs.fab.expand) // this place use material bar  com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     implementation(libs.jsoup)
     implementation(libs.razorpay)
     implementation(libs.ucrop)

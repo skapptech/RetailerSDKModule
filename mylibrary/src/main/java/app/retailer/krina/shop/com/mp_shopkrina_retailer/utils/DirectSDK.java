@@ -1,4 +1,4 @@
-package com.sk.mylibrary.utils;
+package app.retailer.krina.shop.com.mp_shopkrina_retailer.utils;
 
 import android.app.Activity;
 import android.content.Context;

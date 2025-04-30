@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="app">
+      <SelectionState runConfigName="RetailerModule.app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="retailermodule">
+      <SelectionState runConfigName="RetailerModule.retailermodule">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

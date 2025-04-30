@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.MainActivityTest
 import com.retailer.retailermodule.R
 import com.retailer.retailermodule.databinding.ActivityMainBinding
 
@@ -20,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener {
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivityForResult(intent, 99)
+            val intent = Intent(applicationContext, MainActivityTest::class.java)
+            startActivity(intent)
         }
     }
 

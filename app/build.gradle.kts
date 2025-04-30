@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.multidex)
     implementation(libs.flexbox)
-   // implementation(libs.lifecycle.ext)
+    implementation(libs.lifecycle.ext)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime)

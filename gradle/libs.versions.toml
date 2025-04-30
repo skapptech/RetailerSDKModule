@@ -13,10 +13,10 @@ navigationUiKtx = "2.8.9"
 activity = "1.10.1"
 multidex = "2.0.1"
 flexbox = "3.0.0"
-lifecycle-ext = "1.1.1"
-lifecycle-livedata = "2.4.1"
-lifecycle-viewmodel = "2.4.1"
-lifecycle-runtime = "2.5.0-alpha06"
+lifecycle-ext = "2.2.0"
+lifecycle-livedata = "2.8.7"
+lifecycle-viewmodel = "2.8.7"
+lifecycle-runtime = "2.8.7"
 coroutines = "1.6.0"
 firebase-messaging = "22.0.0"
 firebase-config = "21.0.2"
@@ -71,7 +71,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
-lifecycle-ext = { group = "android.arch.lifecycle", name = "extensions", version.ref = "lifecycle-ext" }
+lifecycle-ext = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycle-ext" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle-livedata" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime" }

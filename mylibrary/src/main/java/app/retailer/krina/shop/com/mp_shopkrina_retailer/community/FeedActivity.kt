@@ -142,9 +142,6 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         }
     }
 
-    override fun onBackPressed() {
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -430,8 +427,8 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
 
     private fun slideDown() {
         mBinding.bottomNav.visibility = View.GONE
-        mBinding.createPostFB.collapse()
-        mBinding.createPostFB.setIconActionButton(R.drawable.collapes_image)
+       // mBinding.createPostFB.collapse()
+       // mBinding.createPostFB.setIconActionButton(R.drawable.collapes_image)
         val animate = TranslateAnimation(
             0f,
             0f,
@@ -456,7 +453,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
 
     private fun slideUp() {
         mBinding.bottomNav.visibility = View.VISIBLE
-        mBinding.createPostFB.expand()
+       // mBinding.createPostFB.expand()
         val animateOne = TranslateAnimation(
             0f,  // fromXDelta
             0f,  // toXDelta

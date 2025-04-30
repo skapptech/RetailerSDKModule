@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sk.mylibrary"
+    namespace = "app.retailer.krina.shop.com.mp_shopkrina_retailer"
     compileSdk = 35
 
     defaultConfig {

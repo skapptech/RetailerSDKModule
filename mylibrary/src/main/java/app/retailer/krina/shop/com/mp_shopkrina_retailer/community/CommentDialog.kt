@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.comment.CommentAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.comment.CommentFactory
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.comment.CommentModel
@@ -68,8 +69,8 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            position = arguments!!.getInt("position")
-            model = arguments!!.getSerializable("list") as FeedPostModel
+            position = requireArguments().getInt("position")
+            model = requireArguments().getSerializable("list") as FeedPostModel
         }
     }
 

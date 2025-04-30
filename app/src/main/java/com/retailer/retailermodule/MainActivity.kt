@@ -9,7 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.retailer.retailermodule.databinding.ActivityMainBinding
 import com.sk.mylibrary.MainActivity
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

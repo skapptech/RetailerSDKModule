@@ -65,13 +65,13 @@ class BucketGameViewPagerAdapter : RecyclerView.Adapter<BucketGameViewPagerAdapt
             .into((holder.binding.ivBanner))
 
         holder.binding.root.setOnClickListener {
-            Intent().setClassName(
-                BuildConfig.APPLICATION_ID,
-                "com.sk.bucketgame.BucketGameActivity"
-            ).also {
-                activity.startActivity(it)
-            }
-            Utils.fadeTransaction(activity)
+//            Intent().setClassName(
+//                BuildConfig.APPLICATION_ID,
+//                "com.sk.bucketgame.BucketGameActivity"
+//            ).also {
+//                activity.startActivity(it)
+//            }
+//            Utils.fadeTransaction(activity)
         }
     }
 

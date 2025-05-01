@@ -349,6 +349,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         if (isGstDialog) {
             isGstDialog = false
             gstDialog!!.dismiss()
@@ -435,16 +436,16 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                 when (resultCode) {
                     RESULT_OK -> {
                         // All required changes were successfully made
-                        LocationServices.FusedLocationApi.requestLocationUpdates(
-                            mGoogleApiClient,
-                            locationRequest, this
-                        )
-                        if (location != null) {
-                            shopLat = location?.latitude!!
-                            shopLng = location?.longitude!!
-                        } else {
-                            getPreciseLocation()
-                        }
+//                        LocationServices.FusedLocationApi.requestLocationUpdates(
+//                            mGoogleApiClient,
+//                            locationRequest, this
+//                        )
+//                        if (location != null) {
+//                            shopLat = location?.latitude!!
+//                            shopLng = location?.longitude!!
+//                        } else {
+//                            getPreciseLocation()
+//                        }
                     }
 
                     RESULT_CANCELED -> {
@@ -465,18 +466,18 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUESTLOCATION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                requestLocation()
-            }
-        }
-    }
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<String?>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == REQUESTLOCATION) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                requestLocation()
+//            }
+//        }
+//    }
 
 
     override fun onConnected(bundle: Bundle?) {

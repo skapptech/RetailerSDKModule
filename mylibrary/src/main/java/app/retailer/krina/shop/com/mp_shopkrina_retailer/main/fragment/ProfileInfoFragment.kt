@@ -35,8 +35,7 @@ import java.util.*
 
 class ProfileInfoFragment : Fragment(), View.OnClickListener {
     private lateinit var mBinding: FragmentProfileInfoBinding
-
-    private var activity: EditProfileActivity? = null
+    var editProfileActivity = activity as? EditProfileActivity
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
     private var editProfileModel: EditProfileModel? = null
@@ -63,13 +62,13 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as EditProfileActivity
+        editProfileActivity = context as EditProfileActivity
     }
 
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            editProfileActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -128,7 +127,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                             "cityName",
                             SharePrefs.getInstance(activity).getString(SharePrefs.CITY_NAME)
                         )
-                        intent.putExtra("CUSTOMER_DETAILS", activity!!.editProfileModel)
+                        intent.putExtra("CUSTOMER_DETAILS", editProfileActivity!!.editProfileModel)
                         startActivityForResult(intent, REQUST_FOR_ADDRESS)
                         Utils.leftTransaction(activity)
                     } else {
@@ -349,11 +348,11 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initView() {
-        activity!!.tv_title!!.text =
+        editProfileActivity!!.tv_title!!.text =
             MyApplication.getInstance().dbHelper.getString(R.string.txt_personal_informations)
         utils = Utils(activity)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
-        editProfileModel = activity!!.editProfileModel
+        editProfileModel = editProfileActivity!!.editProfileModel
         sCustDob = editProfileModel!!.dOB
         sCustAnni = editProfileModel!!.anniversaryDate
         mBinding.tilCustName.hint =
@@ -399,7 +398,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
             val mMonth = c[Calendar.MONTH]
             val mDay = c[Calendar.DAY_OF_MONTH]
             val dialog = DatePickerDialog(
-                activity!!,
+                editProfileActivity!!,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 mDateSetListenerForDob(),
                 mYear,
@@ -424,7 +423,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
             val mMonth = c1[Calendar.MONTH]
             val mDay = c1[Calendar.DAY_OF_MONTH]
             val dialog = DatePickerDialog(
-                activity!!,
+                editProfileActivity!!,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 mDateSetListenerForAnni(),
                 mYear,

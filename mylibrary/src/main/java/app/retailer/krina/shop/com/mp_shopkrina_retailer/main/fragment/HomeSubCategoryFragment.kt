@@ -32,7 +32,6 @@ import java.text.DecimalFormat
 
 class HomeSubCategoryFragment : Fragment() {
     private lateinit var mBinding: FragmentHomeSubCategoryBinding
-    private var activity: HomeActivity? = null
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: SubCategoryItemAdapter? = null
     private var utils: Utils? = null
@@ -45,11 +44,12 @@ class HomeSubCategoryFragment : Fragment() {
     private var subSubCatId = 0
     private var warehouseId = 0
     private var mSectionType: String? = ""
+    var homeActivity = activity as? HomeActivity
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -79,8 +79,8 @@ class HomeSubCategoryFragment : Fragment() {
         analyticPost.categoryId = categoryId
         analyticPost.subCatId = subCatId
         MyApplication.getInstance().updateAnalytics("storeDefault", analyticPost)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
 
         // init view
         initialization()
@@ -89,7 +89,7 @@ class HomeSubCategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName, null
         )
     }
@@ -106,13 +106,13 @@ class HomeSubCategoryFragment : Fragment() {
         utils = Utils(activity)
         warehouseId = SharePrefs.getInstance(activity).getInt(SharePrefs.WAREHOUSE_ID)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         layoutManager = LinearLayoutManager(activity)
         mBinding.recyclerCategories.layoutManager = layoutManager
-        adapter = SubCategoryItemAdapter(activity!!, mSectionType!!)
+        adapter = SubCategoryItemAdapter(homeActivity!!, mSectionType!!)
         mBinding.recyclerCategories.adapter = adapter
         if (!TextUtils.isNullOrEmpty(itemImage)) {
-            Glide.with(activity!!).load(itemImage)
+            Glide.with(homeActivity!!).load(itemImage)
                 .placeholder(R.drawable.logo_grey_wide)
                 .error(R.drawable.logo_grey_wide)
                 .into(mBinding.topImage)
@@ -151,7 +151,7 @@ class HomeSubCategoryFragment : Fragment() {
             if (commonClassForAPI != null) {
                 mBinding.progressSubCat.visibility = View.VISIBLE
                 commonClassForAPI!!.fetchSubCategory(
-                    filterCategoryItemdes, subCatId, activity!!.custId,
+                    filterCategoryItemdes, subCatId, homeActivity!!.custId,
                     warehouseId, lang, mSectionType
                 )
             }

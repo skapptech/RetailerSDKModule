@@ -25,7 +25,7 @@ import java.util.*
 
 class TradeOfferFragment : Fragment() {
     private lateinit var mbinding: FragmentTradeOffersBinding
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
     private var itemListAdapter: ItemListAdapter? = null
@@ -38,7 +38,7 @@ class TradeOfferFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -48,8 +48,8 @@ class TradeOfferFragment : Fragment() {
     ): View {
         mbinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_trade_offers, container, false)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         // init view
         initView()
         return mbinding.root
@@ -58,7 +58,7 @@ class TradeOfferFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -78,11 +78,11 @@ class TradeOfferFragment : Fragment() {
         mbinding.rvOffers.setHasFixedSize(true)
         itemListAdapter =
             ItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 list
             )
         mbinding.rvOffers.adapter = itemListAdapter
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mbinding.noOfferAvailable.text =
             MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available)
         allOffer()

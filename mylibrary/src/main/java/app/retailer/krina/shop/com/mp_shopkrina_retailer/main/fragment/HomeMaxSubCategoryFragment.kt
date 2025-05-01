@@ -18,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 class HomeMaxSubCategoryFragment : Fragment() {
     private lateinit var mBinding: FragmentMaxHomeSubCategoryBinding
 
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
 
     private var subCateDataModel: HomeDataModel? = null
     private var sSectionType: String? = null
@@ -27,7 +27,7 @@ class HomeMaxSubCategoryFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -53,8 +53,8 @@ class HomeMaxSubCategoryFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         // init view
         initialization()
     }
@@ -62,17 +62,17 @@ class HomeMaxSubCategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName, null
         )
     }
 
     fun initialization() {
         mBinding.title.text = sectionName
-        activity?.bottomNavigationView?.visibility = View.VISIBLE
+        homeActivity?.bottomNavigationView?.visibility = View.VISIBLE
         mBinding.rvSubCat.layoutManager = GridLayoutManager(activity, 2)
         val adapter = SubCategoryMaxItemAdapter(
-            activity!!,
+            homeActivity!!,
             subCateDataModel!!.appItemsList, sSectionType!!
         )
         mBinding.rvSubCat.adapter = adapter

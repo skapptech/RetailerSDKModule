@@ -42,8 +42,6 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
     NewSubCategoryFilterAdapter.SubCategoryInterface {
     private val handler = Handler()
     private lateinit var mBinding: NewSubSubCategoryFragmentBinding
-
-    private lateinit var activity: HomeActivity
     private lateinit var utils: Utils
     private lateinit var commonClassForAPI: CommonClassForAPI
 
@@ -69,11 +67,12 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
     private var subCatId = 0
     private var subSubCattId = 0
     private var mSectionType: String? = ""
+    var homeActivity = activity as? HomeActivity
 
 
     override fun onAttach(_context: Context) {
         super.onAttach(_context)
-        activity = _context as HomeActivity
+        homeActivity = _context as HomeActivity
     }
 
     override fun onCreateView(
@@ -105,8 +104,8 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         initialization()
         viewHideUnHide()
         //search icon clicked
-        activity.SearchIcon!!.setOnClickListener {
-            activity.pushFragments(
+        homeActivity!!.SearchIcon!!.setOnClickListener {
+            homeActivity!!.pushFragments(
                 SearchItemFragment.newInstance(),
                 true,
                 true,
@@ -117,7 +116,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         //items filter
         mBinding.filter.setOnClickListener {
             val shortBottomDialog =
-                BottomSheetDialog(activity, R.style.Theme_Design_BottomSheetDialog)
+                BottomSheetDialog(homeActivity!!, R.style.Theme_Design_BottomSheetDialog)
             val mFilterDialogBinding: FiltePopupDilogBinding =
                 DataBindingUtil.inflate(layoutInflater, R.layout.filte_popup_dilog, null, false)
             shortBottomDialog.setContentView(mFilterDialogBinding.root)
@@ -181,7 +180,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -255,7 +254,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
 
         utils = Utils(activity)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding!!.filterSort.text = MyApplication.getInstance().dbHelper.getString(R.string.sort)
         mBinding!!.noItems.text =
             MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
@@ -266,21 +265,21 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding!!.rvSubSubCategory.setHasFixedSize(true)
         mBinding!!.rvSubSubCategory.isNestedScrollingEnabled = false
-        subSubCategoryAdapter = SubSubCategoryAdapter(activity!!, FilterSubSubCategoriesList, this)
+        subSubCategoryAdapter = SubSubCategoryAdapter(homeActivity!!, FilterSubSubCategoriesList, this)
         mBinding!!.rvSubSubCategory.adapter = subSubCategoryAdapter
 
         val mLinearLayoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvCategoryItem.layoutManager = mLinearLayoutManager
         mBinding!!.rvCategoryItem.isNestedScrollingEnabled = false
-        itemListAdapter = ItemListAdapter(activity!!, list)
+        itemListAdapter = ItemListAdapter(homeActivity!!, list)
         mBinding!!.rvCategoryItem.adapter = itemListAdapter
 
         mBinding!!.rvSubCategory.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding!!.rvSubCategory.setHasFixedSize(true)
         subCategoryFilterAdapter =
-            NewSubCategoryFilterAdapter(activity!!, FilterSubCategoryList, this)
+            NewSubCategoryFilterAdapter(homeActivity!!, FilterSubCategoryList, this)
         mBinding!!.rvSubCategory.adapter = subCategoryFilterAdapter
         mBinding!!.rvSubCategory.isNestedScrollingEnabled = false
 
@@ -289,9 +288,9 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
 
     private fun viewHideUnHide() {
         lang = LocaleHelper.getLanguage(activity)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
-        activity!!.topToolbarTitle!!.visibility = View.GONE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.topToolbarTitle!!.visibility = View.GONE
     }
 
     private fun subCategoryAPICall() {
@@ -541,7 +540,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
                                 list.size.toString() + " " + MyApplication.getInstance().dbHelper.getString(
                                     R.string.Items
                                 )
-                            itemListAdapter = ItemListAdapter(activity!!, list)
+                            itemListAdapter = ItemListAdapter(homeActivity!!, list)
                             mBinding!!.rvCategoryItem.adapter = itemListAdapter
                             mBinding!!.nestedScroll.fullScroll(NestedScrollView.FOCUS_UP)
                         }
@@ -565,7 +564,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
             }
 
             override fun onComplete() {
-                mBinding!!.proRelatedItem.visibility = View.GONE
+                mBinding.proRelatedItem.visibility = View.GONE
             }
         }
 

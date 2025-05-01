@@ -24,7 +24,7 @@ import java.util.*
 
 class ShopbyBrandFragment : Fragment() {
     private lateinit var mBinding: FragmentShopByBrandBinding
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
 
     private val list = ArrayList<ItemListModel>()
     private val inactiveItemList = ArrayList<ItemListModel>()
@@ -41,7 +41,7 @@ class ShopbyBrandFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -57,12 +57,12 @@ class ShopbyBrandFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (arguments != null) {
-            BaseCategoryId = arguments!!.getString("ItemId")!!.toInt()
-            sBrandNames = arguments!!.getString("BRAND_NAME")
-            mSectionType = arguments!!.getString("SectionType")
+            BaseCategoryId = arguments?.getString("ItemId")!!.toInt()
+            sBrandNames = arguments?.getString("BRAND_NAME")
+            mSectionType = arguments?.getString("SectionType")
         }
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
 
         // Init view
         initialization()
@@ -71,7 +71,7 @@ class ShopbyBrandFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -152,11 +152,11 @@ class ShopbyBrandFragment : Fragment() {
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
         itemListAdapter =
             ItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 list
             )
         mBinding.rvBrandItem.adapter = itemListAdapter
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding.noItem.text =
             MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
 

@@ -30,7 +30,6 @@ import org.json.JSONObject
 
 class AppHomeItemFragment : Fragment() {
     private lateinit var mBinding: FragmentAppHomeItemBinding
-    private var activity: HomeActivity? = null
     private val list = ArrayList<ItemListModel>()
     private var commonClassForAPI: CommonClassForAPI? = null
     private var utils: Utils? = null
@@ -45,10 +44,11 @@ class AppHomeItemFragment : Fragment() {
     private var skipCount = 0
     private val takeCount = 10
     private var loading = true
+    var homeActivity = activity as? HomeActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -58,12 +58,12 @@ class AppHomeItemFragment : Fragment() {
     ): View {
         mBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_app_home_item, container, false)
-        sSectionId = arguments!!.getString("SECTION_ID")
-        sSectionSubType = arguments!!.getString("SECTION_SUB_TYPE")
-        sURL = arguments!!.getString("URL")
-        sTITLE = arguments!!.getString("TITLE")
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        sSectionId = arguments?.getString("SECTION_ID")
+        sSectionSubType = arguments?.getString("SECTION_SUB_TYPE")
+        sURL = arguments?.getString("URL")
+        sTITLE = arguments?.getString("TITLE")
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         if (!TextUtils.isNullOrEmpty(sTITLE)) {
             mBinding.title.text = sTITLE
         } else {
@@ -77,7 +77,7 @@ class AppHomeItemFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName, null
         )
         //skipCount = 0;
@@ -99,12 +99,12 @@ class AppHomeItemFragment : Fragment() {
         itemrecycleView.setHasFixedSize(true)
         appHomeItemAdapter =
             AppHomeItemAdapter(
-                activity!!,
+                homeActivity!!,
                 list,
                 list.size
             )
         itemrecycleView.adapter = appHomeItemAdapter
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
 
         if (sSectionSubType.equals("Other", ignoreCase = true)) {
             itemrecycleView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

@@ -80,17 +80,17 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     private lateinit var mBinding: FragmentEditProfileBinding
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
-    private lateinit var activity: EditProfileActivity
     private var custId = 0
     private var lat = ""
     private var lg = ""
     private var fProfile: String? = ""
     private var uploadFilePath: String? = null
+    var editProfileActivity = activity as? EditProfileActivity
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as EditProfileActivity
+        editProfileActivity = context as EditProfileActivity
     }
 
     override fun onCreateView(
@@ -106,12 +106,12 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            editProfileActivity!!,
             this.javaClass.simpleName,
             null
         )
         mBinding.btnAddress.isClickable = true
-        activity!!.tv_title!!.text =
+        editProfileActivity!!.tv_title!!.text =
             MyApplication.getInstance().dbHelper.getString(R.string.profile)
     }
 
@@ -122,18 +122,18 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 val isGPS = Utils.gpsPermission(activity, "clicktime")
                 if (isGPS) {
                     fragment = ProfileInfoFragment()
-                    activity!!.switchContentWithStack(fragment)
+                    editProfileActivity!!.switchContentWithStack(fragment)
                 } else {
                     Utils.setToast(
-                        activity,
+                        editProfileActivity,
                         MyApplication.getInstance().dbHelper.getData("gps_permission")
                     )
                 }
             }
 
             R.id.btn_shop_detail -> {
-                startActivity(Intent(activity, ShopDetailsActivity::class.java))
-                Utils.fadeTransaction(activity)
+                startActivity(Intent(editProfileActivity, ShopDetailsActivity::class.java))
+                Utils.fadeTransaction(editProfileActivity)
             }
 
             R.id.btnHoliday -> {
@@ -141,8 +141,8 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_rate_app -> {
-                startActivity(Intent(activity, RateAppActivity::class.java))
-                Utils.fadeTransaction(activity)
+                startActivity(Intent(editProfileActivity, RateAppActivity::class.java))
+                Utils.fadeTransaction(editProfileActivity)
             }
 
             R.id.iv_edit_profile_plus_icon -> {
@@ -151,7 +151,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_address -> {
-                val isGPS = Utils.gpsPermission(activity, "clicktime")
+                val isGPS = Utils.gpsPermission(editProfileActivity, "clicktime")
                 if (isGPS) {
                     val IsVerified =
                         SharePrefs.getInstance(activity).getString(SharePrefs.CUSTOMER_VERIFY)
@@ -163,7 +163,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                             "cityName",
                             SharePrefs.getInstance(activity).getString(SharePrefs.CITY_NAME)
                         )
-                        intent.putExtra("CUSTOMER_DETAILS", activity!!.editProfileModel)
+                        intent.putExtra("CUSTOMER_DETAILS", editProfileActivity!!.editProfileModel)
                         startActivityForResult(intent, REQUST_FOR_ADDRESS)
                         Utils.leftTransaction(activity)
                     } else {
@@ -211,7 +211,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
             } else if (requestCode == GALLERY_REQUST && resultCode == Activity.RESULT_OK && null != data) {
                 val selectedImageUri = data.data
                 val projection = arrayOf(MediaStore.MediaColumns.DATA)
-                val cursor = activity!!.managedQuery(selectedImageUri, projection, null, null, null)
+                val cursor = editProfileActivity!!.managedQuery(selectedImageUri, projection, null, null, null)
                 val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
                 cursor.moveToFirst()
                 val selectedImagePath = cursor.getString(column_index)
@@ -234,13 +234,13 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                         data.getParcelableExtra<AddressModel>(Constant.CUSTOMER_ADDRESS)
                     mBinding.tvCustAddress.text = addressModel!!.address
                     if (addressModel.address != null) {
-                        activity!!.editProfileModel!!.shippingAddress = addressModel.address
-                        activity!!.editProfileModel!!.lat = addressModel.latitude.toString()
-                        activity!!.editProfileModel!!.lg = addressModel.longitude.toString()
-                        activity!!.editProfileModel!!.zipCode = addressModel.pincode
-                        activity!!.editProfileModel!!.shippingAddress1 =
+                        editProfileActivity!!.editProfileModel!!.shippingAddress = addressModel.address
+                        editProfileActivity!!.editProfileModel!!.lat = addressModel.latitude.toString()
+                        editProfileActivity!!.editProfileModel!!.lg = addressModel.longitude.toString()
+                        editProfileActivity!!.editProfileModel!!.zipCode = addressModel.pincode
+                        editProfileActivity!!.editProfileModel!!.shippingAddress1 =
                             addressModel.flateOrFloorNumber
-                        activity!!.editProfileModel!!.landMark = addressModel.landmark
+                        editProfileActivity!!.editProfileModel!!.landMark = addressModel.landmark
                         updateProfileCall()
                     }
                 }
@@ -283,7 +283,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 MyApplication.getInstance().dbHelper.getString(R.string.txt_note_verified)
             mBinding.txtNote.visibility = View.VISIBLE
         }
-        if (activity.editProfileModel!!.mobile == null) {
+        if (editProfileActivity!!.editProfileModel!!.mobile == null) {
             mBinding.shimmerViewContainer.startShimmer()
             mBinding.shimmerViewContainer.visibility = View.VISIBLE
             mBinding.scrollView.visibility = View.INVISIBLE
@@ -291,10 +291,10 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         } else {
             mBinding.tvCustSkcode.text =
                 SharePrefs.getInstance(activity).getString(SharePrefs.SK_CODE)
-            mBinding.tvCustName.text = activity!!.editProfileModel!!.name
-            mBinding.tvCustEmail.text = activity!!.editProfileModel!!.emailid
-            mBinding.tvCustMobile.text = activity!!.editProfileModel!!.mobile
-            mBinding.tvCustAddress.text = activity!!.editProfileModel!!.shippingAddress
+            mBinding.tvCustName.text = editProfileActivity!!.editProfileModel!!.name
+            mBinding.tvCustEmail.text = editProfileActivity!!.editProfileModel!!.emailid
+            mBinding.tvCustMobile.text = editProfileActivity!!.editProfileModel!!.mobile
+            mBinding.tvCustAddress.text = editProfileActivity!!.editProfileModel!!.shippingAddress
         }
         if (!TextUtils.isNullOrEmpty(
                 SharePrefs.getInstance(activity).getString(SharePrefs.USER_PROFILE_IMAGE)
@@ -403,7 +403,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     // capture popup
     private fun capturePhoto() {
         if (activity != null) {
-            val dialog = BottomSheetDialog(activity)
+            val dialog = BottomSheetDialog(editProfileActivity!!)
             dialog.setContentView(R.layout.capture_photo_view)
             dialog.window!!.findViewById<View>(R.id.design_bottom_sheet)
                 .setBackgroundColor(Color.TRANSPARENT)
@@ -467,7 +467,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun createImageFile(): File {
-        val storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir = editProfileActivity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val file = File(storageDir, fProfile)
         uploadFilePath = file.absolutePath
         return file
@@ -481,7 +481,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         val directory = Environment.DIRECTORY_PICTURES
         return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             try {
-                val resolver = activity.contentResolver
+                val resolver = editProfileActivity!!.contentResolver
                 val contentValues = ContentValues()
                 contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fProfile)
                 contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image")
@@ -523,7 +523,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         val fileToUpload = File(uploadFilePath)
         lifecycleScope.launch {
             try {
-                val compressedFile = Compressor.compress(activity, fileToUpload) {
+                val compressedFile = Compressor.compress(editProfileActivity!!, fileToUpload) {
                     quality(90)
                     format(Bitmap.CompressFormat.JPEG)
                 }
@@ -553,7 +553,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 Utils.showProgressDialog(activity)
                 commonClassForAPI!!.editProfile(
                     editProfile,
-                    activity.editProfileModel,
+                    editProfileActivity!!.editProfileModel,
                     "Profile photo and address update"
                 )
             }
@@ -612,7 +612,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                     } else {
                         mBinding.ivCustProfile.setImageResource(R.drawable.profile_round)
                     }
-                    activity!!.editProfileModel = EditProfileModel(
+                    editProfileActivity!!.editProfileModel = EditProfileModel(
                         custId,
                         sCustEmail,
                         sContactNumber,
@@ -647,7 +647,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                         customer.customerDocTypeId,
                         customer.licenseExpiryDate
                     )
-                    activity!!.customerModel = customer
+                    editProfileActivity!!.customerModel = customer
                     if (TextUtils.isNullOrEmpty(fLicence) || TextUtils.isNullOrEmpty(sGstNumber)) if (utils!!.getDay(
                             SharePrefs.getInstance(activity).getBoolean(SharePrefs.DOC_EMPTY)
                         )
@@ -666,7 +666,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showProfileDialog() {
-        val dialog = Dialog(activity!!)
+        val dialog = Dialog(editProfileActivity!!)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_edit_info)
         dialog.setCancelable(false)
@@ -702,7 +702,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showShopHolidayDialog() {
-        val dialog = BottomSheetDialog(activity)
+        val dialog = BottomSheetDialog(editProfileActivity)
         dialog.setContentView(R.layout.dialog_shop_holiday)
         dialog.window?.findViewById<View>(R.id.design_bottom_sheet)
             ?.setBackgroundColor(Color.TRANSPARENT)
@@ -820,7 +820,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                     if (response != null) {
                         SharePrefs.getInstance(activity)
                             .putString(SharePrefs.USER_PROFILE_IMAGE, response.name)
-                        activity!!.editProfileModel!!.profilePicture = response.name
+                        editProfileActivity!!.editProfileModel!!.profilePicture = response.name
                         updateProfileCall()
                     } else {
                         Toast.makeText(activity, "Image Not Uploaded", Toast.LENGTH_SHORT).show()

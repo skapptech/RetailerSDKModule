@@ -15,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,7 +46,6 @@ public class SubCategoryFragment extends Fragment {
     private HomeActivity activity;
     private Utils utils;
     private CommonClassForAPI commonClassForAPI;
-    private CirclePageIndicator circlePageIndicator;
     private AutoScrollViewPager viewPager;
     private SubCategoryAdapter adapterCategorie;
 
@@ -126,7 +124,6 @@ public class SubCategoryFragment extends Fragment {
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
         activity.bottomNavigationView.setVisibility(View.VISIBLE);
-        circlePageIndicator = mBinding.indicator;
         mBinding.gridview.setLayoutManager(new GridLayoutManager(activity, 2));
         adapterCategorie = new SubCategoryAdapter(activity, basecatlist, baseCatId, mSectionType);
         mBinding.gridview.setAdapter(adapterCategorie);
@@ -143,9 +140,9 @@ public class SubCategoryFragment extends Fragment {
             ViewPagerAdapter adapter = new ViewPagerAdapter(activity, list);
             viewPager.setAdapter(adapter);
             final float density = activity.getResources().getDisplayMetrics().density;
-            circlePageIndicator.setRadius(3 * density);
-            circlePageIndicator.setFillColor(0x99FF4500);
-            circlePageIndicator.setViewPager(viewPager);
+           // circlePageIndicator.setRadius(3 * density);
+           // circlePageIndicator.setFillColor(0x99FF4500);
+           // mBinding.indicator.setViewPager(viewPager);
         }
     }
 

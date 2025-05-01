@@ -25,7 +25,8 @@ import java.util.*
 
 class SubCategoryItemListFragment : Fragment() {
     private lateinit var mBinding: SubCategoryItemListFragmentBinding
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
+
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
     private var itemListAdapter: ItemListAdapter? = null
@@ -39,7 +40,7 @@ class SubCategoryItemListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
+        homeActivity = context as HomeActivity
     }
 
     override fun onCreateView(
@@ -88,7 +89,7 @@ class SubCategoryItemListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -114,7 +115,7 @@ class SubCategoryItemListFragment : Fragment() {
         mBinding.rvCategoryItem.isNestedScrollingEnabled = false
         itemListAdapter =
             ItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 list
             )
         mBinding.rvCategoryItem.adapter = itemListAdapter
@@ -176,7 +177,7 @@ class SubCategoryItemListFragment : Fragment() {
                         if (list.size != 0) {
                             itemListAdapter =
                                 ItemListAdapter(
-                                    activity!!,
+                                    homeActivity!!,
                                     list
                                 )
                             mBinding.rvCategoryItem.adapter = itemListAdapter

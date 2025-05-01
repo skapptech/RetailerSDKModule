@@ -21,13 +21,13 @@ import com.google.gson.JsonObject
 import io.reactivex.observers.DisposableObserver
 
 class RateAppFragment : Fragment() {
-    private var activity: EditProfileActivity? = null
+    var editProfileActivity = activity as? EditProfileActivity
     private lateinit var mBinding: FragmentRateAppBinding
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as EditProfileActivity
+        editProfileActivity = context as EditProfileActivity
     }
 
     override fun onCreateView(
@@ -49,7 +49,7 @@ class RateAppFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            editProfileActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -57,7 +57,7 @@ class RateAppFragment : Fragment() {
 
 
     fun initialization() {
-        activity!!.tv_title!!.text =
+        editProfileActivity!!.tv_title!!.text =
             MyApplication.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
         val utils = Utils(activity)
         val commonClassForAPI = CommonClassForAPI.getInstance(activity)

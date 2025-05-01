@@ -45,7 +45,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
     NewSubCategoryFilterAdapter.SubCategoryInterface {
 
     private lateinit var mBinding: NewSubSubCategoryFragmentBinding
-    private lateinit var activity: HomeActivity
+    var homeActivity = activity as? HomeActivity
     private lateinit var utils: Utils
     private lateinit var commonClassForAPI: CommonClassForAPI
 
@@ -75,7 +75,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
 
     override fun onAttach(_context: Context) {
         super.onAttach(_context)
-        activity = _context as HomeActivity
+        homeActivity = _context as HomeActivity
     }
 
     override fun onCreateView(
@@ -103,8 +103,8 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
         initialization()
         viewHideUnHide()
         //search icon clicked
-        activity.SearchIcon!!.setOnClickListener {
-            activity.pushFragments(
+        homeActivity!!.SearchIcon!!.setOnClickListener {
+            homeActivity!!.pushFragments(
                 SearchItemFragment.newInstance(),
                 true,
                 true,
@@ -115,7 +115,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
         //items filter
         mBinding.filter.setOnClickListener {
             val shortBottomDialog =
-                BottomSheetDialog(activity, R.style.Theme_Design_BottomSheetDialog)
+                BottomSheetDialog(homeActivity!!, R.style.Theme_Design_BottomSheetDialog)
             val mFilterDialogBinding: FiltePopupDilogBinding =
                 DataBindingUtil.inflate(layoutInflater, R.layout.filte_popup_dilog, null, false)
             shortBottomDialog.setContentView(mFilterDialogBinding.root)
@@ -181,7 +181,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
 
         utils = Utils(activity)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding!!.noItems.text =
             MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
         mBinding!!.DataNotFound.text =
@@ -192,7 +192,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding!!.rvSubSubCategory.setHasFixedSize(true)
         mBinding!!.rvSubSubCategory.isNestedScrollingEnabled = false
-        subSubCategoryAdapter = SubSubCategoryAdapter(activity!!, FilterSubSubCategoriesList, this)
+        subSubCategoryAdapter = SubSubCategoryAdapter(homeActivity!!, FilterSubSubCategoriesList, this)
         mBinding!!.rvSubSubCategory.adapter = subSubCategoryAdapter
 
 
@@ -200,7 +200,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvCategoryItem.layoutManager = mLinearLayoutManager
         mBinding!!.rvCategoryItem.isNestedScrollingEnabled = false
-        itemListAdapter = ItemListAdapter(activity!!, list)
+        itemListAdapter = ItemListAdapter(homeActivity!!, list)
         mBinding!!.rvCategoryItem.adapter = itemListAdapter
 
 
@@ -208,7 +208,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding!!.rvSubCategory.setHasFixedSize(true)
         subCategoryFilterAdapter =
-            NewSubCategoryFilterAdapter(activity!!, FilterSubCategoryList, this)
+            NewSubCategoryFilterAdapter(homeActivity!!, FilterSubCategoryList, this)
         mBinding!!.rvSubCategory.adapter = subCategoryFilterAdapter
         mBinding!!.rvSubCategory.isNestedScrollingEnabled = false
 
@@ -217,9 +217,9 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
 
     private fun viewHideUnHide() {
         lang = LocaleHelper.getLanguage(activity)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
-        activity!!.topToolbarTitle!!.visibility = View.GONE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.topToolbarTitle!!.visibility = View.GONE
     }
 
     private fun subCategoryAPICall() {
@@ -372,7 +372,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
     override fun onResume() {
         super.onResume()
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -543,7 +543,7 @@ class NewSubCategoryWebFragment : Fragment(), SubSubCategoryFilterInterface,
                             mBinding!!.filterTitle.text =
                                 list.size.toString() + " " + MyApplication.getInstance()
                                     .dbHelper.getString(R.string.Items)
-                            itemListAdapter = ItemListAdapter(activity!!, list)
+                            itemListAdapter = ItemListAdapter(homeActivity!!, list)
                             mBinding!!.rvCategoryItem.adapter = itemListAdapter
                             mBinding!!.nestedScroll.fullScroll(NestedScrollView.FOCUS_UP)
                             updateAnalytics(list)

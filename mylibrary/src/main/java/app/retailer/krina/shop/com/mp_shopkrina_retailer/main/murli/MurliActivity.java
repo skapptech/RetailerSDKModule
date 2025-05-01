@@ -54,7 +54,8 @@ public class MurliActivity extends Activity implements AnimationListener, MediaP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_murli);
+        mBinding = ActivityMurliBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         player = new MediaPlayer();
         mBinding.ibClose.setOnClickListener(v -> onBackPressed());
         commonAPICall = CommonClassForAPI.getInstance(MyApplication.getInstance().activity);

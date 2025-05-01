@@ -1014,8 +1014,10 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
 
                         override fun onPostExecute(result: String?) {
                             super.onPostExecute(result)
-                            ImageProcessing.uploadMultipart(newFilePath, applicationContext)
-                        }
+                            lifecycleScope.launch {
+                                ImageProcessing.uploadMultipart(newFilePath, applicationContext)
+                            }
+                            }
                     }
                     WorkerTask().execute()
 

@@ -45,6 +45,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
@@ -65,8 +66,11 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -488,33 +492,39 @@ class ScaleUpActivity : AppCompatActivity() {
 
     private fun compressImage(result: String?) {
         val fileToUpload = File(result)
-        Compressor(activity).setMaxHeight(512).setMaxWidth(616).setQuality(90)
-            .compressToFileAsFlowable(fileToUpload).subscribeOn(
-                Schedulers.io()
-            ).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                { file: File? ->
-                    mFilePathCallback!!.onReceiveValue(arrayOf(Uri.fromFile(file)))
-                    mFilePathCallback = null
-                }) { throwable: Throwable ->
-                throwable.printStackTrace()
+        lifecycleScope.launch {
+            try {
+                val compressedFile = Compressor.compress(applicationContext, fileToUpload) {
+                    quality(90)
+                    format(Bitmap.CompressFormat.JPEG)
+                }
+                mFilePathCallback!!.onReceiveValue(arrayOf(Uri.fromFile(compressedFile)))
+                mFilePathCallback = null
+            } catch (e: Exception) {
+                e.printStackTrace()
                 mFilePathCallback!!.onReceiveValue(arrayOf(result?.toUri()))
                 mFilePathCallback = null
             }
+        }
     }
 
     private fun compressImage1(result: String?) {
         val fileToUpload = File(result)
         if (fileToUpload.name.contains("pdf"))
-            Compressor(activity).compressToFileAsFlowable(fileToUpload).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(
-                    { file: File? ->
-                        mUploadMessage!!.onReceiveValue(Uri.fromFile(file))
-                        mUploadMessage = null
-                    }) { throwable: Throwable ->
-                    throwable.printStackTrace()
-                    mUploadMessage!!.onReceiveValue(null)
-                    mUploadMessage = null
+            lifecycleScope.launch {
+                try {
+                    val compressedFile = Compressor.compress(applicationContext, fileToUpload) {
+                        quality(90)
+                        format(Bitmap.CompressFormat.JPEG)
+                    }
+                    mFilePathCallback!!.onReceiveValue(arrayOf(Uri.fromFile(compressedFile)))
+                    mFilePathCallback = null
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    mFilePathCallback!!.onReceiveValue(arrayOf(result?.toUri()))
+                    mFilePathCallback = null
                 }
+            }
     }
 
     private fun showExitDialog() {

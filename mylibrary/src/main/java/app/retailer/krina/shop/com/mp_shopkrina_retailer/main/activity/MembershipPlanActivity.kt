@@ -200,8 +200,8 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
         bannerAdapter = PrimeBannerAdapter(this, list)
         mBinding.viewPager.adapter = bannerAdapter
         mBinding.indicator.setViewPager(mBinding.viewPager)
-        mBinding.indicator.strokeColor = applicationContext.resources.getColor(R.color.hint_color)
-        mBinding.indicator.fillColor = applicationContext.resources.getColor(R.color.black)
+      //  mBinding.indicator.strokeColor = applicationContext.resources.getColor(R.color.hint_color)
+       // mBinding.indicator.fillColor = applicationContext.resources.getColor(R.color.black)
         mBinding.rvPlan.addItemDecoration(DividerItemDecoration(applicationContext, 1))
         planAdapter = PrimePlanAdapter(this, list!!, this)
         mBinding.rvPlan.adapter = planAdapter

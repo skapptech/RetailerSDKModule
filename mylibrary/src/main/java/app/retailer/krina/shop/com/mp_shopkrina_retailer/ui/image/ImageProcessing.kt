@@ -39,6 +39,7 @@ class ImageProcessing {
         @SuppressLint("CheckResult")
         suspend fun uploadMultipart(filePath: String, context: Context) {
            // id.zelory:compressor:3.0.1
+            try {
             val compressedImageFile = compress(context, File(filePath)) {
                  quality(90)
                  format(Bitmap.CompressFormat.JPEG)
@@ -52,6 +53,14 @@ class ImageProcessing {
                     requestFile
                 )
             )
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(
+                        context,
+                        "" + e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+            }
 //            Compressor(context)
 //                .compressToFileAsFlowable(File(filePath))
 //                .subscribeOn(Schedulers.io())

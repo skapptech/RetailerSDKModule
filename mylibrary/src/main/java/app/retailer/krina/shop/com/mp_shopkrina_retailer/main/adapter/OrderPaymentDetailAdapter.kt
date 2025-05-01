@@ -49,7 +49,7 @@ class OrderPaymentDetailAdapter(
             when (model.statusDesc) {
                 "Refund Initiated" -> {
                     holder.binding.tvTransDate.visibility = View.INVISIBLE
-                    holder.binding.tvAmount.setTextColor(context.resources.getColor(R.color.bright_blue))
+                    holder.binding.tvAmount.setTextColor(context.resources.getColor(R.color.color_blue_veriant))
                 }
                 "Refund Failed" -> {
                     holder.binding.tvTransDate.visibility = View.INVISIBLE

@@ -104,9 +104,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.OfferCheck
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
-import com.chqbook.vypaar.ChqbookVypaarCallback
-import com.chqbook.vypaar.ChqbookVypaarClient
-import com.chqbook.vypaar.ChqbookVypaarKeys
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -114,19 +111,9 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.payphi.customersdk.utils.HmacUtility
-import com.payphi.customersdk.views.Application
-import com.payphi.customersdk.views.PayPhiSdk
-import com.payphi.customersdk.views.PaymentOptionsActivity
 import com.razorpay.Checkout
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
-import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.embedding.engine.FlutterEngineCache
-import io.flutter.embedding.engine.dart.DartExecutor
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -231,14 +218,13 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
     private var prepaidOrderModel: PrepaidOrderModel? = null
     private var mGuideView: GuideView? = null
     private var builder: GuideView.Builder? = null
-    private var chqbookInitialize: ChqbookVypaarClient? = null
     private var skCreditRes: CreditLimit? = null
     private var chqbookTransactionId = ""
     private var isUdharOrderOverDue = false
     private val FLUTTER_ENGINE_ID = "my_flutter_engine"
     private val CHANNEL = "com.ScaleUP"
-    private var flutterEngine: FlutterEngine? = null
-    private var methodChannel: MethodChannel? = null
+   // private var flutterEngine: FlutterEngine? = null
+   // private var methodChannel: MethodChannel? = null
     private var iCICIMerchantId = ""
     private var updateCashStatus = false
     private var otherCharges = 0.0
@@ -265,8 +251,6 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         calculateBillAmount(mShoppingCart)
-        chqbookInitialize = ChqbookVypaarClient.getInstance()
-        chqbookInitialize!!.init(this)
         // initialize views
         initialization()
         // Shared Data
@@ -502,7 +486,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         observe(viewModel.getOrderPlaceData, ::handleOrderPlaceResult)
         observe(viewModel.getInsertOnlineTransactionData, ::handleInsertTransactionResult)
         observe(viewModel.getUpdateOnlineTransactionData, ::handleUpdateTransactionResult)
-        observe(viewModel.getICICIPaymentCheckData, ::handleICICITransactionResult)
+      //  observe(viewModel.getICICIPaymentCheckData, ::handleICICITransactionResult)
         if (NetworkUtils.isInternetAvailable(applicationContext)) {
             showProgressDialog()
             viewModel.getWalletPoint(custId, "Payment Screen")
@@ -701,7 +685,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                     } else if (creditAmount > 0) {
                                         getHDFCRSAKey(true)
                                     } else if (checkBookAmount > 0) {
-                                        checkBookPayment(checkBookAmount)
+                                        //checkBookPayment(checkBookAmount)
                                     } else if (ePayAmount > 0) {
                                         ePayLater(ePayAmount.toDouble())
                                     } else if (skCreditAmt > 0) {
@@ -729,7 +713,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                     } else if (razorpayAmount > 0) {
                                         getRazorpayOrderId()
                                     } else if (iCICIPayAmount > 0) {
-                                        callICICIPay()
+                                        //callICICIPay()
                                     } else {
                                         if (cashAmount > 0 && remainingAmt == cashAmount.toDouble()) {
                                             IsSuccess = true
@@ -1343,7 +1327,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         ) {
             appStoryView()
         }
-        flutterEngine = FlutterEngine(this)
+      /*  flutterEngine = FlutterEngine(this)
         flutterEngine!!.dartExecutor.executeDartEntrypoint(
             DartExecutor.DartEntrypoint.createDefault()
         )
@@ -1375,7 +1359,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
             } else {
                 result.notImplemented()
             }
-        }
+        }*/
     }
 
     private fun setWalletPoint(amount: String) {
@@ -1548,25 +1532,6 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
             mBinding.rlScaleUp.visibility = View.GONE
             mBinding.rlRazorpay.visibility = View.GONE
             mBinding.rlICICIPay.visibility = View.GONE
-        }
-        if (mBinding.rlICICIPay.visibility == View.VISIBLE) {
-            iCICIMerchantId =
-                SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_MERCHANT_ID)
-            val application = Application()
-            if (BuildConfig.DEBUG) {
-                application.setEnv(application.QA)
-            } else {
-                application.setEnv(application.PROD)
-            }
-            application.setMerchantName("ShopKirana", this)
-            application.setAppInfo(
-                iCICIMerchantId,
-                SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_APP_ID),
-                this,
-                object : Application.IAppInitializationListener {
-                    override fun onFailure(errorCode: String?) {}
-                    override fun onSuccess(status: String?) {}
-                })
         }
     }
 
@@ -2266,81 +2231,6 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         startActivityForResult(intent, E_PAY_LATER_REQUEST)
     }
 
-    private fun checkBookPayment(checkBookAmount: Long) {
-        gatewayOrderId = orderId.toString()
-        val orderRequest = JSONObject()
-        try {
-            orderRequest.put(ChqbookVypaarKeys.AMOUNT, checkBookAmount)
-            orderRequest.put(ChqbookVypaarKeys.ACCOUNT_NO, skCode) //sk code in futher
-            orderRequest.put(
-                ChqbookVypaarKeys.API_KEY,
-                SharePrefs.getInstance(this).getString(SharePrefs.CHECKBOOK_API_KEY)
-            )
-            orderRequest.put(ChqbookVypaarKeys.MOBILE_NO, custMobile)
-            orderRequest.put(ChqbookVypaarKeys.STORE_CODE, 1) //wareHouseId
-            orderRequest.put(ChqbookVypaarKeys.PARTNER_TX_NO, orderId)
-            orderRequest.put(ChqbookVypaarKeys.ACCOUNT_PROVIDER, "SHOP_KIRANA")
-            orderRequest.put(ChqbookVypaarKeys.DEBUG, if (BuildConfig.DEBUG) "true" else "false")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        chqbookInitialize!!.initiatePayment(orderRequest, object : ChqbookVypaarCallback {
-            override fun onSuccess(code: String, transactionId: String) {
-                Log.e("code", "code$code")
-                Log.e("transactionId", "transactionId$transactionId")
-                val jsonResponce = JSONObject()
-                try {
-                    jsonResponce.put("code", code)
-                    jsonResponce.put("transactionId", transactionId)
-                    if (!transactionId.equals(chqbookTransactionId, ignoreCase = true)) {
-                        chqbookTransactionId = transactionId
-                        if (code.equals("200", ignoreCase = true)) {
-                            holePaymentSucceedCheck = true
-                            insertPaymentStatusAPICall(
-                                "Success",
-                                code,
-                                "chqbook",
-                                transactionId,
-                                checkBookAmount.toDouble(),
-                                orderRequest.toString(),
-                                jsonResponce.toString(),
-                                ""
-                            )
-                        } else {
-                            holePaymentSucceedCheck = false
-                            insertPaymentStatusAPICall(
-                                "Failed",
-                                code,
-                                "chqbook",
-                                transactionId,
-                                checkBookAmount.toDouble(),
-                                orderRequest.toString(),
-                                jsonResponce.toString(),
-                                ""
-                            )
-                        }
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun onFailed(code: String, error: String) {
-                Log.e("onFailed", "onFailed")
-                insertPaymentStatusAPICall(
-                    "Failed",
-                    code,
-                    "chqbook",
-                    "",
-                    checkBookAmount.toDouble(),
-                    orderRequest.toString(),
-                    "",
-                    ""
-                )
-            }
-        })
-    }
-
     private fun creditPayment() {
         if (skCreditRes != null) {
             viewModel.creditPayment(
@@ -2356,7 +2246,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
 
         } else {
             Utils.setToast(
-                applicationContext, getString(R.string.places_try_again)
+                applicationContext, getString(R.string.please_try_again)
             )
         }
     }
@@ -3713,7 +3603,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         checkout.setKeyID(
             SharePrefs.getInstance(applicationContext).getString(SharePrefs.RAZORPAY_KEY_ID)
         )
-        checkout.setImage(R.mipmap.ic_launcher)
+        checkout.setImage(R.drawable.direct_sign)
         try {
             val options = JSONObject()
             options.put(
@@ -3742,133 +3632,6 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } catch (e: Exception) {
             Log.e(TAG, "Error in starting Razorpay Checkout", e)
         }
-    }
-
-    private fun callICICIPay() {
-        val rnd = Random()
-        gatewayOrderId = (orderId + rnd.nextInt(900768000)).toString()
-        val secureToken: String? = getSecureToken()
-        val intent = Intent(applicationContext, PaymentOptionsActivity::class.java)
-        intent.putExtra("SecureToken", secureToken)
-        intent.putExtra("MerchantID", iCICIMerchantId)
-        // intent.putExtra("aggregatorID", "J_34407")
-        intent.putExtra("Amount", iCICIFinaPayAmount)
-        intent.putExtra("MerchantTxnNo", gatewayOrderId)
-        intent.putExtra("invoiceNo", gatewayOrderId)
-        intent.putExtra("CurrencyCode", 356)
-        intent.putExtra(
-            "CustomerEmailID",
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.CUSTOMER_EMAIL)
-        )
-        intent.putExtra("allowDisablePaymentMode", "CARD")
-        intent.putExtra("CustomerID", custId)
-        intent.putExtra("addlParam1", "7304828261")
-        intent.putExtra("addlParam2", "7304828262")
-        iciciPayRequest = intent.extras.toString()
-
-        println("Request>>>>>>>>>" + iciciPayRequest)
-
-        PayPhiSdk.makePayment(
-            applicationContext,
-            intent,
-            PayPhiSdk.DIALOG,
-            object : PayPhiSdk.IAppPaymentResponseListenerEx {
-                override fun onPaymentResponse(
-                    resultCode: Int, data: Intent?, additionalInfo: Map<String?, String?>?
-                ) {/*  println("data>>"+data.toString())
-                      val bundle1: Bundle? = data!!.extras
-                      if (bundle1 != null) {
-                          for (key in bundle1.keySet()) {
-                              val value = bundle1[key]
-                              println("Data from main app key=" + key + "Data from main app value=" + value)
-                          }
-                      }*/
-                    if (resultCode == RESULT_OK) {
-                        val bundle = data?.extras
-                        if (bundle != null) {
-                            val merchantTxnNo = bundle.getString("merchantTxnNo")
-                            val responseCode = bundle.getString("responseCode")
-                            val txnID = bundle.getString("txnID")
-                            val respDescription = bundle.getString("respDescription")
-                            println("DaTA>>> $bundle")
-                            println("txnID>>> $txnID")
-                            println("respDescription>>> $respDescription")
-                            if (responseCode == "0000" || responseCode == "000") {
-                                // Transaction success
-                                gatewayOrderId = merchantTxnNo!!
-                                holePaymentSucceedCheck = true
-                                insertPaymentStatusAPICall(
-                                    "Success",
-                                    "200",
-                                    "icici",
-                                    txnID,
-                                    iCICIPayAmount.toDouble(),
-                                    iciciPayRequest!!,
-                                    data.extras.toString(),
-                                    "icici"
-                                )
-                            } else {
-                                iCICIPaymentFailed(responseCode.toString())
-                            }
-                        }
-                    }/*else if (resultCode == RESULT_CANCELED) {
-                        iCICIPaymentFailed("0")
-                    }*/ else {
-                        callICICIPaymentResult()
-                    }
-                }
-
-                override fun onPaymentResponse1(resultCode: Int, data: Intent?) {}
-            })
-    }
-
-    private fun callICICIPaymentResult() {
-        val value = iCICIMerchantId + gatewayOrderId + gatewayOrderId + "STATUS"
-        val secureHash = generateHMAC(value)
-        viewModel.getICICIPaymentCheck(
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_RESULT_URL),
-            iCICIMerchantId,
-            gatewayOrderId,
-            gatewayOrderId,
-            "STATUS",
-            secureHash!!
-        )
-    }
-
-    private fun iCICIPaymentFailed(status: String) {
-        mBinding.placeBtn.isClickable = true
-        insertPaymentStatusAPICall(
-            "Failed", status, "icici", "", iCICIPayAmount.toDouble(), iciciPayRequest!!, "", "icici"
-        )
-    }
-
-    private fun getSecureToken(): String? {
-        val df = DecimalFormat()
-        df.minimumFractionDigits = 2
-        val f = iCICIPayAmount.toFloat()
-        df.format(f)
-        iCICIFinaPayAmount = String.format("%.2f", f)
-        val value = iCICIFinaPayAmount + 356 + iCICIMerchantId + gatewayOrderId
-        println("TokeString==$`value`")
-        // 0d50a3f9aec3492cba25fef9b3c1a3c1
-        return generateHMAC(value)
-    }
-
-    fun generateHMAC(message: String): String? {
-        val secretKey =
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_SECRET_KEY)
-        val sha256_HMAC: Mac
-        val hashedBytes: ByteArray
-        try {
-            sha256_HMAC = Mac.getInstance("HmacSHA256")
-            val secret_key = SecretKeySpec(secretKey.toByteArray(), "HmacSHA256")
-            sha256_HMAC.init(secret_key)
-            hashedBytes = sha256_HMAC.doFinal(message.toByteArray())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return null
-        }
-        return HmacUtility.bytesToHex(hashedBytes)
     }
 
     override fun onPaymentSuccess(s: String, paymentData: PaymentData) {
@@ -4433,20 +4196,20 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                         if (EndPointPref.getInstance(applicationContext)
                                 .getBoolean(EndPointPref.IS_SCALE_UP_SDK)
                         ) {
-                            val json = JSONObject()
-                            try {
-                                json.put("isPayNow", true)
-                                json.put("transactionId", transactionId)
-                                json.put("baseUrl", baseUrl)
-                                Log.e(TAG, "onNext Payment Optin transactionId: $transactionId")
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
-                            }
-                            methodChannel!!.invokeMethod("ScaleUP", json.toString())
-                            startActivity(
-                                FlutterActivity.withCachedEngine(FLUTTER_ENGINE_ID)
-                                    .build(applicationContext)
-                            )
+//                            val json = JSONObject()
+//                            try {
+//                                json.put("isPayNow", true)
+//                                json.put("transactionId", transactionId)
+//                                json.put("baseUrl", baseUrl)
+//                                Log.e(TAG, "onNext Payment Optin transactionId: $transactionId")
+//                            } catch (e: JSONException) {
+//                                e.printStackTrace()
+//                            }
+//                            methodChannel!!.invokeMethod("ScaleUP", json.toString())
+//                            startActivity(
+//                                FlutterActivity.withCachedEngine(FLUTTER_ENGINE_ID)
+//                                    .build(applicationContext)
+//                            )
                         } else {
                             if (!TextUtils.isNullOrEmpty(it.url)) {
                                 startActivityForResult(
@@ -4511,7 +4274,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                                 } else if (creditAmount > 0) {
                                     getHDFCRSAKey(true)
                                 } else if (checkBookAmount > 0) {
-                                    checkBookPayment(checkBookAmount)
+                                    //checkBookPayment(checkBookAmount)
                                 } else if (ePayAmount > 0) {
                                     ePayLater(ePayAmount.toDouble())
                                 } else if (skCreditAmt > 0) {
@@ -4530,7 +4293,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                                 } else if (razorpayAmount > 0) {
                                     getRazorpayOrderId()
                                 } else if (iCICIPayAmount > 0) {
-                                    callICICIPay()
+                                    //callICICIPay()
                                 } else {
                                     if (orderPlacedNewResponse!!.orderMaster!!.wheelcount != 0) {
                                         orderConformationPopup(
@@ -4706,54 +4469,4 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         }
     }
 
-    private fun handleICICITransactionResult(it: Response<JsonObject>) {
-        when (it) {
-            is Response.Loading -> {
-                showProgressDialog()
-            }
-
-            is Response.Success -> {
-                it.data?.let {
-                    hideProgressDialog()
-                    val responseCode = it["responseCode"].asString
-                    if (responseCode == "0000" || responseCode == "000") {
-                        if (it.has("txnResponseCode")) {
-                            val txnStatus = it["txnStatus"].asString   //REQ ,SUC,REJ
-                            val txnResponseCode = it["txnResponseCode"].asString
-                            if (txnResponseCode == "0000" || txnResponseCode == "000" && txnStatus == "SUC") {
-                                val txnRespDescription = it["txnRespDescription"].asString
-                                val merchantTxnNo = it["merchantTxnNo"].asString
-                                val txnID = it["txnID"].asString
-                                //Transaction success
-                                gatewayOrderId = merchantTxnNo!!
-                                holePaymentSucceedCheck = true
-                                println("txnRespDescription>>$txnRespDescription<<txnResponseCode>>>$txnResponseCode<<txnID>>>$txnID")
-                                insertPaymentStatusAPICall(
-                                    "Success",
-                                    "200",
-                                    "icici",
-                                    txnID,
-                                    iCICIPayAmount.toDouble(),
-                                    iciciPayRequest!!,
-                                    it.toString(),
-                                    "icici"
-                                )
-                            } else {
-                                iCICIPaymentFailed(txnResponseCode)
-                            }
-                        } else {
-                            iCICIPaymentFailed(responseCode.toString())
-                        }
-                    } else {
-                        iCICIPaymentFailed(responseCode)
-                    }
-                }
-            }
-
-            is Response.Error -> {
-                hideProgressDialog()
-                Utils.setToast(applicationContext, it.errorMesssage.toString())
-            }
-        }
-    }
 }

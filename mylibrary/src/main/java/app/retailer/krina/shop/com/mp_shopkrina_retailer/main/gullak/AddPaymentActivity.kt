@@ -41,10 +41,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonObject
-import com.payphi.customersdk.utils.HmacUtility
-import com.payphi.customersdk.views.Application
-import com.payphi.customersdk.views.PayPhiSdk
-import com.payphi.customersdk.views.PaymentOptionsActivity
 import com.razorpay.Checkout
 import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
@@ -376,29 +372,6 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
             binding.btnDUdhaar.visibility = View.GONE
             binding.btnRazorpy.visibility = View.GONE
         }
-        if (binding.btnICICI.visibility == View.VISIBLE) {
-            iCICIMerchantId =
-                SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_MERCHANT_ID)
-            val application = Application()
-            if (BuildConfig.DEBUG) {
-                application.setEnv(application.QA)
-            } else {
-                application.setEnv(application.PROD)
-            }
-            application.setMerchantName("ShopKirana", this)
-            application.setAppInfo(iCICIMerchantId,
-                SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_APP_ID),
-                this,
-                object : Application.IAppInitializationListener {
-                    override fun onFailure(errorCode: String?) {
-                        runOnUiThread {
-                            binding.btnICICI.visibility = View.GONE
-                        }
-                    }
-
-                    override fun onSuccess(status: String?) {}
-                })
-        }
     }
 
     private fun addPaymentReq() {
@@ -498,110 +471,6 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         startActivityForResult(intent, HDFC_REQUEST)
     }
 
-    private fun callICICIPay(orderId: String) {
-        val rnd = Random()
-       // orderId = (orderId1 + rnd.nextInt(900768000)).toString()
-        val secureToken: String? = getSecureToken()
-        val intent = Intent(applicationContext, PaymentOptionsActivity::class.java)
-        intent.putExtra("SecureToken", secureToken)
-        intent.putExtra("MerchantID", iCICIMerchantId)
-        // intent.putExtra("aggregatorID", "J_34407")
-        intent.putExtra("Amount", amount)
-        intent.putExtra("MerchantTxnNo", orderId)
-        intent.putExtra("invoiceNo", orderId)
-        intent.putExtra("CurrencyCode", 356)
-        intent.putExtra(
-            "CustomerEmailID",
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.CUSTOMER_EMAIL)
-        )
-        intent.putExtra("allowDisablePaymentMode", "CARD")
-        intent.putExtra(
-            "CustomerID",
-            SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
-        )
-        intent.putExtra("addlParam1", "7304828261")
-        intent.putExtra("addlParam2", "7304828262")
-        iciciPayRequest = intent.extras.toString()
-
-        println("Request> " + iciciPayRequest)
-
-        PayPhiSdk.makePayment(applicationContext,
-            intent,
-            PayPhiSdk.DIALOG,
-            object : PayPhiSdk.IAppPaymentResponseListenerEx {
-                override fun onPaymentResponse(
-                    resultCode: Int, data: Intent?, additionalInfo: Map<String?, String?>?
-                ) {/*  println("data>>"+data.toString())
-                      val bundle1: Bundle? = data!!.extras
-                      if (bundle1 != null) {
-                          for (key in bundle1.keySet()) {
-                              val value = bundle1[key]
-                              println("Data from main app key=" + key + "Data from main app value=" + value)
-                          }
-                      }*/
-
-                    showProgressDialog()
-                    if (resultCode == RESULT_OK) {
-                        val bundle = data?.extras
-                        if (bundle != null) {
-                            val merchantTxnNo = bundle.getString("merchantTxnNo")
-                            val responseCode = bundle.getString("responseCode")
-                            val txnID = bundle.getString("txnID")
-                            val respDescription = bundle.getString("respDescription")
-                            println("DaTA>>>>>>>${bundle.toString()}")
-                            println("txnID>>>>>>>$txnID")
-                            println("respDescription>>>>>>>$respDescription")
-                            Utils.setToast(
-                                applicationContext,
-                                respDescription+""
-                            )
-                            if (responseCode == "0000" || responseCode == "000") {
-                                //Transaction success
-                                val transactionModel = PostUPIPaymentResponse(
-                                    merchantTxnNo!!,
-                                    sharePrefs.getInt(SharePrefs.CUSTOMER_ID),
-                                    merchantTxnNo,
-                                    iciciPayRequest,
-                                    bundle.toString(),
-                                    "icici",
-                                    "Success"
-                                )
-                                commonAPICall.postPaymentResponse(
-                                    postPaymentResponseObserver,
-                                    transactionModel
-                                )
-                            } else {
-                                iCICIPaymentFailed("icici")
-                            }
-                        }
-                    }/*else if (resultCode == RESULT_CANCELED) {
-                        iCICIPaymentFailed("0")
-                    }*/ else {
-                        Utils.setToast(
-                            applicationContext,
-                            "Transaction failed"
-                        )
-                        callICICIPaymentResult()
-                    }
-                }
-
-                override fun onPaymentResponse1(resultCode: Int, data: Intent?) {}
-            })
-    }
-
-    private fun callICICIPaymentResult() {
-        val value = iCICIMerchantId + orderId + "STATUS"
-        val secureHash = generateHMAC(value)
-        viewModel.getICICIPaymentCheck(
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_RESULT_URL),
-            iCICIMerchantId,
-            orderId.toString(),
-            orderId.toString(),
-            "STATUS",
-            secureHash!!
-        )
-    }
-
     private fun iCICIPaymentFailed(paymentFrom: String) {
         val transactionModel = PostUPIPaymentResponse(
             orderId.toString(),
@@ -616,35 +485,6 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
             postPaymentResponseObserver,
             transactionModel
         )
-    }
-
-    private fun getSecureToken(): String? {
-        val df = DecimalFormat()
-        df.minimumFractionDigits = 2
-        val f = amount.toFloat()
-        df.format(f)
-        amount = String.format("%.2f", f)
-        val value = amount + 356 + iCICIMerchantId + orderId
-        println("TokeString== $`value`")
-        // 0d50a3f9aec3492cba25fef9b3c1a3c1
-        return generateHMAC(value)
-    }
-
-    private fun generateHMAC(message: String): String? {
-        val secretKey =
-            SharePrefs.getInstance(applicationContext).getString(SharePrefs.ICICI_SECRET_KEY)
-        val sha256_HMAC: Mac
-        val hashedBytes: ByteArray
-        try {
-            sha256_HMAC = Mac.getInstance("HmacSHA256")
-            val secret_key = SecretKeySpec(secretKey.toByteArray(), "HmacSHA256")
-            sha256_HMAC.init(secret_key)
-            hashedBytes = sha256_HMAC.doFinal(message.toByteArray())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return null
-        }
-        return HmacUtility.bytesToHex(hashedBytes)
     }
 
 
@@ -729,7 +569,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                 )
             )
         } else {
-            Utils.setToast(applicationContext, getString(R.string.places_try_again))
+            Utils.setToast(applicationContext, getString(R.string.please_try_again))
         }
     }
 
@@ -738,7 +578,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         checkout.setKeyID(
             SharePrefs.getInstance(applicationContext).getString(SharePrefs.RAZORPAY_KEY_ID)
         )
-        checkout.setImage(R.mipmap.ic_launcher)
+        checkout.setImage(R.drawable.direct_sign)
         try {
             val options = JSONObject()
             options.put(
@@ -791,7 +631,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                                 "Payment Screen"
                             )
                         } else if (clickedPos == 3) {
-                            callICICIPay(txnId.toString())
+                            //callICICIPay(txnId.toString())
                         }
                     } else {
                         Utils.setToast(

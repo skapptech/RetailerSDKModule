@@ -31,6 +31,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
@@ -55,9 +56,12 @@ import com.google.firebase.messaging.Constants
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -762,14 +766,18 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun uploadMultipart() {
         val fileToUpload = File(uploadFilePath)
-        val subscribe = Compressor(this)
-            .compressToFileAsFlowable(fileToUpload)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ file: File -> uploadImagePath(file) }) { throwable: Throwable ->
-                throwable.printStackTrace()
-                Toast.makeText(this, throwable.message, Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            try {
+                val compressedFile = Compressor.compress(applicationContext, fileToUpload) {
+                    quality(90)
+                    format(Bitmap.CompressFormat.JPEG)
+                }
+                uploadImagePath(compressedFile)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                //Toast.makeText(this, throwable.message, Toast.LENGTH_SHORT).show()
             }
+        }
     }
 
     private fun uploadImagePath(file: File) {

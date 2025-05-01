@@ -126,8 +126,8 @@ class BrandOrderFragment : Fragment() {
                 adapter = ViewPagerAdapter(activity, sliderList)
                 mBinding.pager.adapter = adapter
                 val density = resources.displayMetrics.density
-                mBinding.indicator.radius = 3 * density
-                mBinding.indicator.fillColor = -0x6600bb00
+                //mBinding.indicator.radius = 3 * density
+                //mBinding.indicator.fillColor = -0x6600bb00
                 mBinding.indicator.setViewPager(mBinding.pager)
             }
         } catch (e: Exception) {

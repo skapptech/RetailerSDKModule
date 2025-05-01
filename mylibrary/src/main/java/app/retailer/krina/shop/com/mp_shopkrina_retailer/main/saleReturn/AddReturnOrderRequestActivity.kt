@@ -1,11 +1,10 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.main.saleReturn
-
-import ReturnOrderViewModel
 import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -33,6 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddReturnOrderRequestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.DialogClearImageInfoBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.flip.AphidLog.format
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.KKReturnReplaceDetailDC
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.PostKKReturnReplaceRequestDc
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.ReturnItemModel
@@ -49,6 +49,8 @@ import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import com.sk.user.agent.ui.component.returnOrder.OnCheckboxClick
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -194,18 +196,19 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
                     val filePath = data?.getStringExtra(Constant.FILE_PATH).toString()
                     lifecycleScope.launch {
                         val fileToUpload = File(uploadFilePath)
-                        Compressor(this@AddReturnOrderRequestActivity)
-                            .compressToFileAsFlowable(fileToUpload)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                Consumer { file: File -> uploadImagePath(file) },
-                                Consumer { throwable: Throwable ->
-                                    throwable.printStackTrace()
-                                    Toast.makeText(this@AddReturnOrderRequestActivity, throwable.message, Toast.LENGTH_SHORT).show()
-                                })
-                    }
-
+                        lifecycleScope.launch {
+                            try {
+                                val compressedFile =
+                                    Compressor.compress(applicationContext, fileToUpload) {
+                                        quality(90)
+                                        format(Bitmap.CompressFormat.JPEG)
+                                    }
+                                uploadImagePath(compressedFile)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                               // showError(e.message)
+                            }
+                        }}
                 } else if (result.resultCode == RESULT_CANCELED) {
                     Log.d("Image Result:", "Canceled Result")
                 }

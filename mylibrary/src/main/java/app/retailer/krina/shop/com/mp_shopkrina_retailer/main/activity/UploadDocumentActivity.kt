@@ -20,6 +20,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
@@ -36,9 +37,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.Constants
 import com.google.gson.Gson
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -659,14 +663,18 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun uploadMultipart() {
         val fileToUpload = File(uploadFilePath)
-        Compressor(applicationContext)
-            .compressToFileAsFlowable(fileToUpload)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ file: File -> uploadImagePath(file) }) { throwable: Throwable ->
-                throwable.printStackTrace()
-                showError(throwable.message)
+        lifecycleScope.launch {
+            try {
+                val compressedFile = Compressor.compress(applicationContext, fileToUpload) {
+                    quality(90)
+                    format(Bitmap.CompressFormat.JPEG)
+                }
+                uploadImagePath(compressedFile)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                showError(e.message)
             }
+        }
     }
 
     private fun showError(errorMessage: String?) {

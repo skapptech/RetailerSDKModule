@@ -65,6 +65,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.C
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.ShopingCartItemDetailsResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
@@ -122,7 +123,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonObject
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
-import com.sk.mylibrary.databinding.ActivityHomeBinding
 import com.squareup.picasso.Picasso
 import okhttp3.ResponseBody
 import org.json.JSONException
@@ -666,6 +666,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun initialization() {
         utils = Utils(this)
         lang = LocaleHelper.getLanguage(this)
@@ -1996,19 +1997,19 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                                         .putExtra("url", url)
                                 )
                             } else {
-                                flutterEngine = FlutterEngine(applicationContext)
-                                flutterEngine!!.dartExecutor.executeDartEntrypoint(
-                                    DartExecutor.DartEntrypoint.createDefault()
-                                )
-
-                                methodChannel = MethodChannel(
-                                    flutterEngine!!.dartExecutor.binaryMessenger,
-                                    CHANNEL
-                                )
-
-                                FlutterEngineCache
-                                    .getInstance()
-                                    .put(FLUTTER_ENGINE_ID, flutterEngine)
+//                                flutterEngine = FlutterEngine(applicationContext)
+//                                flutterEngine!!.dartExecutor.executeDartEntrypoint(
+//                                    DartExecutor.DartEntrypoint.createDefault()
+//                                )
+//
+//                                methodChannel = MethodChannel(
+//                                    flutterEngine!!.dartExecutor.binaryMessenger,
+//                                    CHANNEL
+//                                )
+//
+//                                FlutterEngineCache
+//                                    .getInstance()
+//                                    .put(FLUTTER_ENGINE_ID, flutterEngine)
 
                                 val json = JSONObject()
                                 try {
@@ -2020,12 +2021,12 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                                 } catch (e: JSONException) {
                                     e.printStackTrace()
                                 }
-                                methodChannel!!.invokeMethod("ScaleUP", json.toString())
-                                startActivity(
-                                    FlutterActivity
-                                        .withCachedEngine(FLUTTER_ENGINE_ID)
-                                        .build(applicationContext)
-                                )
+//                                methodChannel!!.invokeMethod("ScaleUP", json.toString())
+//                                startActivity(
+//                                    FlutterActivity
+//                                        .withCachedEngine(FLUTTER_ENGINE_ID)
+//                                        .build(applicationContext)
+//                                )
                             }
                         } else {
                             startActivity(

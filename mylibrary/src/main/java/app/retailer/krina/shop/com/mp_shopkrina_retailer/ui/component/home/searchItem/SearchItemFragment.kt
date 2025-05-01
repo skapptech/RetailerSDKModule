@@ -57,7 +57,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import org.florescu.android.rangeseekbar.RangeSeekBar
 import org.json.JSONObject
 import java.util.Collections
 import java.util.Locale

@@ -31,6 +31,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
@@ -55,10 +56,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.Constants
 import com.squareup.picasso.Picasso
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -517,16 +521,18 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     // upload photo
     private fun uploadMultipart() {
         val fileToUpload = File(uploadFilePath)
-        Compressor(activity)
-            .compressToFileAsFlowable(fileToUpload)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                Consumer { file: File -> uploadImagePath(file) },
-                Consumer { throwable: Throwable ->
-                    throwable.printStackTrace()
-                    showError(throwable.message)
-                })
+        lifecycleScope.launch {
+            try {
+                val compressedFile = Compressor.compress(activity, fileToUpload) {
+                    quality(90)
+                    format(Bitmap.CompressFormat.JPEG)
+                }
+                uploadImagePath(compressedFile)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                showError(e.message)
+            }
+        }
     }
 
     private fun showError(errorMessage: String?) {
@@ -547,7 +553,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 Utils.showProgressDialog(activity)
                 commonClassForAPI!!.editProfile(
                     editProfile,
-                    activity!!.editProfileModel,
+                    activity.editProfileModel,
                     "Profile photo and address update"
                 )
             }

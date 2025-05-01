@@ -164,8 +164,8 @@ class FeedAdapter(
                     val adapter = ImageAdapter(context, feedListModel.imageObj)
                     holder.binding.viewPager.adapter = adapter
                     val density: Float = context.resources.displayMetrics.density
-                    holder.binding.indicator.radius = 3 * density
-                    holder.binding.indicator.fillColor = -10110011
+                   // holder.binding.indicator.radius = 3 * density
+                   // holder.binding.indicator.fillColor = -10110011
                     if (feedListModel.imageObj!!.size > 1)
                         holder.binding.indicator.setViewPager(holder.binding.viewPager)
                 } else {
@@ -328,7 +328,7 @@ class FeedAdapter(
                 }
                 if (feedListModel.imageObj != null && feedListModel.imageObj!!.size > 0) {
                     Glide.with(context)
-                        .load(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
+                        .load(SharePrefs.getInstance(context).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
                         .placeholder(R.drawable.logo_grey)
                         .into(holder.binding.ivImage)
                 } else {

@@ -42,7 +42,7 @@ compressor = "3.0.1"
 circleimageview = "3.1.0"
 picasso = "2.71828"
 glide = "4.11.0"
-viewpagerindicator = "2.4.1"
+viewpagerindicator = "4.3"
 rangeseekbar = "0.3.0"
 arclayout = "1.0.0"
 shimmer = "0.5.0"
@@ -59,6 +59,7 @@ razorpay = "1.6.39"
 ucrop = "2.2.8"
 playServicesMeasurementApi = "21.0.0"
 swiperefreshlayout = "1.1.0"
+firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -111,7 +112,6 @@ picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "pic
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 
-viewpagerindicator = { group = "com.mcxiaoke.viewpagerindicator", name = "library", version.ref = "viewpagerindicator" }
 rangeseekbar = { group = "org.florescu.android.rangeseekbar", name = "rangeseekbar-library", version.ref = "rangeseekbar" }
 arclayout = { group = "com.ogaclejapan.arclayout", name = "library", version.ref = "arclayout" }
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
@@ -132,8 +132,10 @@ fab-expand = { group = "com.github.imtuann", name = "FloatingActionButtonExpanda
 jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 razorpay = { group = "com.razorpay", name = "checkout", version.ref = "razorpay" }
 ucrop = { group = "com.github.yalantis", name = "ucrop", version.ref = "ucrop" }
+viewpagerindicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "viewpagerindicator" }
 play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -23,14 +23,11 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
-import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.embedding.engine.dart.DartExecutor
-import io.flutter.plugin.common.MethodChannel
 
 class SettingActivity : AppCompatActivity(), View.OnClickListener {
     private var mBinding: ActivitySettingBinding? = null
     private val CHANNEL = "com.ScaleUP"
-    private var flutterEngine: FlutterEngine? = null
+ //   private var flutterEngine: FlutterEngine? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,27 +128,27 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun callFlutterFunction() {
-        flutterEngine?.getDartExecutor()?.let {
-            MethodChannel(it.binaryMessenger, CHANNEL)
-                .invokeMethod("logout", null, object : MethodChannel.Result {
-                    override fun success(result: Any?) {
-                        println("Result from Flutter: $result")
-
-                    }
-
-                    override fun error(
-                        errorCode: String,
-                        errorMessage: String?,
-                        errorDetails: Any?
-                    ) {
-                        System.err.println("Error: $errorMessage")
-                    }
-
-                    override fun notImplemented() {
-                        System.err.println("Method not implemented")
-                    }
-                })
-        }
+//        flutterEngine?.getDartExecutor()?.let {
+//            MethodChannel(it.binaryMessenger, CHANNEL)
+//                .invokeMethod("logout", null, object : MethodChannel.Result {
+//                    override fun success(result: Any?) {
+//                        println("Result from Flutter: $result")
+//
+//                    }
+//
+//                    override fun error(
+//                        errorCode: String,
+//                        errorMessage: String?,
+//                        errorDetails: Any?
+//                    ) {
+//                        System.err.println("Error: $errorMessage")
+//                    }
+//
+//                    override fun notImplemented() {
+//                        System.err.println("Method not implemented")
+//                    }
+//                })
+//        }
     }
 
     override fun onBackPressed() {
@@ -225,9 +222,9 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             mBinding!!.profileImageSetting.setImageResource(R.drawable.profile_round)
         }
 
-        flutterEngine = FlutterEngine(this);
-        flutterEngine!!.getDartExecutor().executeDartEntrypoint(
-            DartExecutor.DartEntrypoint.createDefault()
-        );
+//        flutterEngine = FlutterEngine(this);
+//        flutterEngine!!.getDartExecutor().executeDartEntrypoint(
+//            DartExecutor.DartEntrypoint.createDefault()
+//        );
     }
 }

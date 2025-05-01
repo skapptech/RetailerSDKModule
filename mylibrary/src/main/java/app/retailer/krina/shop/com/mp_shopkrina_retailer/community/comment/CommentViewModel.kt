@@ -42,7 +42,7 @@ class CommentViewModel constructor(private val repository: CommentRepository) : 
 
 
     fun getCommentList(postId: String, userId: Int) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(MyApplication.getInstance())) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getCommentList(postId, userId).collect() {
                     _commentListResponse.postValue(it)

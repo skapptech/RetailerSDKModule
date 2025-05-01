@@ -32,7 +32,7 @@ class ImageAdapter(
         val model = list!![position]
         if (!TextUtils.isNullOrEmpty(model.imgFileFullPath)) {
             Glide.with(context)
-                .load(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
+                .load(SharePrefs.getInstance(context).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
                 .placeholder(R.drawable.logo_grey)
                 .error(R.drawable.logo_grey)
                 .into(imageView)

@@ -14,6 +14,9 @@ import android.widget.Toast
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SingleLiveEvent
 import com.google.android.gms.maps.model.LatLng
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.Compressor.compress
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -34,38 +37,42 @@ class ImageProcessing {
 
 
         @SuppressLint("CheckResult")
-        fun uploadMultipart(filePath: String, context: Context) {
+        suspend fun uploadMultipart(filePath: String, context: Context) {
            // id.zelory:compressor:3.0.1
-           /* val compressedImageFile = Compressor.compress(context, File(filePath)) {
+            val compressedImageFile = compress(context, File(filePath)) {
                  quality(90)
                  format(Bitmap.CompressFormat.JPEG)
                  }
                 val requestFile: RequestBody = compressedImageFile.asRequestBody("image/*".toMediaTypeOrNull())
-             val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", file1.name, requestFile)
-             */
-            */
-
-            Compressor(context)
-                .compressToFileAsFlowable(File(filePath))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ file: File ->
-                    val requestFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-                    postbody.postValue(
-                        MultipartBody.Part.createFormData(
-                            "file",
-                            file.name,
-                            requestFile
-                        )
-                    )
-                }) { throwable: Throwable ->
-                    throwable.printStackTrace()
-                    Toast.makeText(
-                        context,
-                        "" + throwable.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+           //  val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", file1.name, requestFile)
+            postbody.postValue(
+                MultipartBody.Part.createFormData(
+                    "file",
+                    compressedImageFile.name,
+                    requestFile
+                )
+            )
+//            Compressor(context)
+//                .compressToFileAsFlowable(File(filePath))
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ file: File ->
+//                    val requestFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+//                    postbody.postValue(
+//                        MultipartBody.Part.createFormData(
+//                            "file",
+//                            file.name,
+//                            requestFile
+//                        )
+//                    )
+//                }) { throwable: Throwable ->
+//                    throwable.printStackTrace()
+//                    Toast.makeText(
+//                        context,
+//                        "" + throwable.message,
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
         }
 
         fun addWaterMark(context: Context, fileName: String, bm: Bitmap, latLng: LatLng): String {

@@ -14,7 +14,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <com.viewpagerindicator.CirclePageIndicator
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

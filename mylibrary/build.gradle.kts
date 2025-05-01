@@ -28,6 +28,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -85,6 +86,7 @@ dependencies {
     implementation(libs.arclayout)
     implementation(libs.shimmer)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.firebase.database.ktx)
     kapt(libs.glide.compiler)
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)

@@ -40,12 +40,12 @@ class TermOfServicesActivity : AppCompatActivity() {
         val termsAndCondition = intent.getStringExtra("isTermsAndCondition")
         if (termsAndCondition != null) {
             if (termsAndCondition == "isTermsAndCondition") {
-                mBinding!!.webView.loadUrl(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/policy/privacy.html")
+                mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/privacy.html")
             } else if (termsAndCondition == "isPrivacyPolicy") {
                 title = MyApplication.getInstance().dbHelper.getString(R.string.txt_privacy_policy)
-                mBinding!!.webView.loadUrl(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/policy/termsUse.html")
+                mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/termsUse.html")
             } else {
-                mBinding!!.webView.loadUrl(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/policy/termsUseAndPrivacy.html")
+                mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/termsUseAndPrivacy.html")
             }
         } else {
             mBinding!!.webView.loadUrl(intent.getStringExtra("url")!!)

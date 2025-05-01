@@ -586,19 +586,31 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         val tvMin = mBindingFilter.tvMinrange
         val tvMax = mBindingFilter.tvMaxrange
         val tvprice = mBindingFilter.tvPrice
-        rangeSeekbar.setRangeValues(minprice, maxprice)
-        // set listener
-        rangeSeekbar.setOnRangeSeekBarChangeListener(fun(
-            bar: RangeSeekBar<*>,
-            minValue: Any,
-            maxValue: Any
-        ) {
-            tvMin.text = "" + minValue
-            tvMax.text = "" + maxValue
-            maxprice = maxValue as Int
-            minprice = minValue as Int
-            tvprice.text = "$minprice-$maxprice"
-        })
+        // Set initial range
+        rangeSeekbar.values = listOf(minprice.toFloat(), maxprice.toFloat())
+
+        rangeSeekbar.addOnChangeListener { slider, _, _ ->
+            val values = slider.values
+            val min = values[0].toInt()
+            val max = values[1].toInt()
+
+            tvMin.text = "$min"
+            tvMax.text = "$max"
+            tvprice.text = "$min - $max"
+        }
+//        rangeSeekbar.setRangeValues(minprice, maxprice)
+//        // set listener
+//        rangeSeekbar.setOnRangeSeekBarChangeListener(fun(
+//            bar: RangeSeekBar<*>,
+//            minValue: Any,
+//            maxValue: Any
+//        ) {
+//            tvMin.text = "" + minValue
+//            tvMax.text = "" + maxValue
+//            maxprice = maxValue as Int
+//            minprice = minValue as Int
+//            tvprice.text = "$minprice-$maxprice"
+//        })
     }
 
     private fun setCategory(pos: Int) {

@@ -94,52 +94,50 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.menuButton:
-                onBackPressed();
-                break;
-            case R.id.startImage:
-                StartDate();
-                break;
-            case R.id.endImage:
-                EndDate();
-                break;
-            case R.id.get_data:
-                if (details.equalsIgnoreCase("Pending Payment")) {
-                    if (utils.isNetworkAvailable()) {
-                        if (commonClassForAPI != null) {
-                            Utils.showProgressDialog(this);
-                            commonClassForAPI.CustomerPendingPayment(pedingobj, customerId);
-                        }
-                    } else {
-                        Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+        int id = v.getId();
+        if (id == R.id.menuButton) {
+            onBackPressed();
+        } else if (id == R.id.startImage) {
+            StartDate();
+        }else if (id == R.id.endImage) {
+            EndDate();
+        }else if (id == R.id.get_data) {
+            if (details.equalsIgnoreCase("Pending Payment")) {
+                if (utils.isNetworkAvailable()) {
+                    if (commonClassForAPI != null) {
+                        Utils.showProgressDialog(this);
+                        commonClassForAPI.CustomerPendingPayment(pedingobj, customerId);
                     }
                 } else {
-                    if (CheckDates(startDate, endDate)) {
-                        if (details.equalsIgnoreCase("Please select Option")) {
-                            Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_ledger_type), Toast.LENGTH_SHORT).show();
-                            return;
-                        } else {
-                            if (utils.isNetworkAvailable()) {
-                                SupplierPaymentModel supplierPaymentModel = new SupplierPaymentModel(customerId, BaseStartDate, BaseEndDate, 1, true, details);
-                                if (commonClassForAPI != null) {
-                                    Utils.showProgressDialog(this);
-                                    commonClassForAPI.CustomerLedgerForRetailerApp(customerLedger, supplierPaymentModel);
-                                }
-                            } else {
-                                Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
-                            }
-                        }
-                    } else {
-                        Utils.setToast(getApplicationContext(), "please select valid date");
-                    }
+                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
                 }
-                break;
+            } else {
+                if (CheckDates(startDate, endDate)) {
+                    if (details.equalsIgnoreCase("Please select Option")) {
+                        Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_ledger_type), Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        if (utils.isNetworkAvailable()) {
+                            SupplierPaymentModel supplierPaymentModel = new SupplierPaymentModel(customerId, BaseStartDate, BaseEndDate, 1, true, details);
+                            if (commonClassForAPI != null) {
+                                Utils.showProgressDialog(this);
+                                commonClassForAPI.CustomerLedgerForRetailerApp(customerLedger, supplierPaymentModel);
+                            }
+                        } else {
+                            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                        }
+                    }
+                } else {
+                    Utils.setToast(getApplicationContext(), "please select valid date");
+                }
+            }
         }
     }
 

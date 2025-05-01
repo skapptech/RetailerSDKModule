@@ -1,5 +1,6 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -24,7 +25,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.saleReturn.ReturnO
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.webView.HishabKitabActivity
 
 class HomeMenuChildAdapter(
     private val activity: HomeActivity,
@@ -91,6 +91,7 @@ class HomeMenuChildAdapter(
         return listDataChild.size
     }
 
+    @SuppressLint("WrongConstant")
     fun setData(position: Int, holder: ViewHolder) {
         if (listDataChild[position] == MyApplication.getInstance().dbHelper.getString(R.string.myAccount)) {
             MyApplication.getInstance().updateAnalytics("my_account_click")
@@ -98,9 +99,6 @@ class HomeMenuChildAdapter(
         } else if (listDataChild[position] == MyApplication.getInstance().dbHelper.getString(R.string.txt_My_Udhaar)) {
             MyApplication.getInstance().updateAnalytics("my_udhaar_click")
             activity.startActivity(Intent(activity, MyUdharActivity::class.java))
-        } else if (listDataChild[position] == MyApplication.getInstance().dbHelper.getString(R.string.hishab_kitab_wudu)) {
-            MyApplication.getInstance().updateAnalytics("wuduClick")
-            activity.startActivity(Intent(activity, HishabKitabActivity::class.java))
         } else if (listDataChild[position] == MyApplication.getInstance().dbHelper.getString(R.string.kisan_dan)) {
             MyApplication.getInstance().updateAnalytics("kisaan_daan_click")
             activity.startActivity(Intent(activity, KissanDaanActivity::class.java))

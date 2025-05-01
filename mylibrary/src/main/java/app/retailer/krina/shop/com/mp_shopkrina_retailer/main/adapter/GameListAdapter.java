@@ -70,7 +70,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                         if (list.get(getAdapterPosition()).getGameName().equalsIgnoreCase("solitare")) {
                             MyApplication.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
                             Intent intent = new Intent();
-                            intent.setClassName(applicationContext.packageName , "com.sk.solitare.SolitaireActivity");
+                            intent.setClassName("app.retailer.krina.shop.com.mp_shopkrina_retailer" , "com.sk.solitare.SolitaireActivity");
                             try {
                                 activity.startActivity(intent);
                             } catch (Exception e) {
@@ -79,7 +79,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                         } else if (list.get(getAdapterPosition()).getGameName().equalsIgnoreCase("block builder")) {
                             MyApplication.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
                             Intent intent = new Intent();
-                            intent.setClassName(applicationContext.packageName , "com.sk.blocks.activities.MainActivity");
+                            intent.setClassName("app.retailer.krina.shop.com.mp_shopkrina_retailer" , "com.sk.blocks.activities.MainActivity");
                             try {
                                 activity.startActivity(intent);
                             } catch (Exception e) {

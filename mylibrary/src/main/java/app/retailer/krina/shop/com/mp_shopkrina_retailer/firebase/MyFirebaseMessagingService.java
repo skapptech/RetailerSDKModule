@@ -1,11 +1,13 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,6 +19,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -71,8 +74,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.services.NotificationTi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CreateContact;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.webView.HisabDetailActivity;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.webView.HishabKitabActivity;
 import io.reactivex.observers.DisposableObserver;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -294,11 +295,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     case "tradeOrder":
                         showTradeNotification("Order status changed",
                                 object.getString("body"), object.getString("link"));
-                        break;
-                    case "wudu":
-                    case "HisabKitab":
-                        showHisabKitabNotification(object.getString("title"),
-                                object.getString("body"), object.getString("id"));
                         break;
                     case "game":
                         intent = new Intent(getApplicationContext(), GamesListActivity.class);
@@ -551,6 +547,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             NotificationManagerCompat notificationManagerCompat =
                     NotificationManagerCompat.from(getApplicationContext());
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(id, builder.build());
         } catch (Exception e) {
             e.printStackTrace();
@@ -597,6 +603,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setContentIntent(pendingIntent);
             NotificationManagerCompat notificationManagerCompat =
                     NotificationManagerCompat.from(getApplicationContext());
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(id, notificationBuilder.build());
         } catch (Exception e) {
             e.printStackTrace();
@@ -661,6 +677,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             NotificationManagerCompat notificationManagerCompat =
                     NotificationManagerCompat.from(getApplicationContext());
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(id, builder.build());
         } catch (Exception e) {
             e.printStackTrace();
@@ -742,6 +768,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             NotificationManagerCompat notificationManagerCompat =
                     NotificationManagerCompat.from(getApplicationContext());
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             notificationManagerCompat.notify(id, builder.build());
         } catch (Exception e) {
             e.printStackTrace();
@@ -790,53 +826,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setChannelId(channelId)
                 .setContentIntent(pendingIntent);
 
-        NotificationManagerCompat notificationManagerCompat =
-                NotificationManagerCompat.from(getApplicationContext());
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         notificationManagerCompat.notify(id, notificationBuilder.build());
     }
-
-    private void showHisabKitabNotification(String title, String body, String orderId) {
-        try {
-            int id = (int) System.currentTimeMillis();
-            // convert image bitmap
-            Intent backIntent = new Intent(getApplicationContext(), HishabKitabActivity.class);
-            Intent intent = new Intent(getApplicationContext(), HisabDetailActivity.class);
-            intent.putExtra("id", orderId);
-            intent.putExtra("list", "");
-
-            PendingIntent pendingIntent = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                pendingIntent = PendingIntent.getActivities(getApplicationContext(), id,
-                        new Intent[]{backIntent, intent}, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_ONE_SHOT);
-            } else {
-                pendingIntent = PendingIntent.getActivities(getApplicationContext(), id,
-                        new Intent[]{backIntent, intent}, PendingIntent.FLAG_ONE_SHOT);
-            }
-            // create channel
-            String channelId = getChannel(getResources().getString(R.string.wudu));
-
-            NotificationCompat.Builder notificationBuilder;
-            notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
-                    .setSmallIcon(R.drawable.hisab_khata_icon)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
-                    .setContentTitle(title)
-                    .setContentText(body)
-                    .setContentInfo(body)
-                    .setAutoCancel(true)
-                    .setColor(ContextCompat.getColor(getApplicationContext(), R.color.primary))
-                    .setPriority(Notification.PRIORITY_MAX)
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setChannelId(channelId)
-                    .setContentIntent(pendingIntent);
-
-            NotificationManagerCompat notificationManagerCompat =
-                    NotificationManagerCompat.from(getApplicationContext());
-            notificationManagerCompat.notify(id, notificationBuilder.build());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public Bitmap getBitmapFromURL(String strURL) {
         try {

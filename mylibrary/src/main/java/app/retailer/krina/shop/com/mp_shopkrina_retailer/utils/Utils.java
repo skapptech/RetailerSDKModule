@@ -588,12 +588,6 @@ public class Utils {
         }
     }
 
-    public static void setSnackBar(Context context, View view) {
-        Snackbar snackbar = Snackbar.make(view, context.getString(R.string.cam_str_permissions), Snackbar.LENGTH_LONG)
-                .setAction("enable", view1 -> context.startActivity(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + BuildConfig.APPLICATION_ID))));
-        snackbar.show();
-    }
-
     public static void showSnackBar(View view, String text, boolean isShowAction, String actionText) {
         Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG);
         if (isShowAction)

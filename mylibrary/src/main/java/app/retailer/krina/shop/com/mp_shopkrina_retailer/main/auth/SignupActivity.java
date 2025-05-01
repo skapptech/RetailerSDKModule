@@ -100,30 +100,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.et_city:
-//                mBinding.etAddress.setText("");
-//                startActivityForResult(new Intent(getApplicationContext(), CustomerAddressActivity.class)
-//                        .putExtra("cityname", "")
-//                        .putExtra("searchCity", true), REQUST_FOR_CITY);
-//                Utils.leftTransaction(this);
-                onBackPressed();
-                break;
-            case R.id.et_address:
-//                String cityName = mBinding.etCity.getText().toString();
-//                if (mBinding.etCity.getText().toString().isEmpty()) {
-//                    Utils.setToast(getApplicationContext(), getString(R.string.select_city_validation));
-//                } else {
-//                    startActivityForResult(new Intent(getApplicationContext(), CustomerAddressActivity.class)
-//                            .putExtra("REDIRECT_FLAG", 1)
-//                            .putExtra("cityName", cityName), REQUST_FOR_ADDRESS);
-//                    Utils.leftTransaction(this);
-//                }
-                onBackPressed();
-                break;
-            default:
-                validateFields();
-                break;
+        int id = v.getId();
+        if (id == R.id.et_city) {
+            onBackPressed();
+        } else if (id == R.id.et_address) {
+            onBackPressed();
+        }else{
+            validateFields();
         }
     }
 
@@ -316,7 +299,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             SignupModel signupModel = new SignupModel(SharePrefs.getInstance(getApplicationContext()).getInt(SharePrefs.CUSTOMER_ID),
                     mobile, name, shopName, shippingAddress,
                     addressModel == null ? "" : addressModel.getAreaName(),
-                    "123456", cityId, skcode, BuildConfig.VERSION_NAME, Build.VERSION.RELEASE,
+                    "123456", cityId, skcode, Constant.VERSION_NAME, Build.VERSION.RELEASE,
                     Build.MODEL, Utils.getDeviceUniqueID(this),
                     Utils.getDeviceUniqueID(this), city, addressModel == null ? 0 : addressModel.getLatitude(),
                     addressModel == null ? 0 : addressModel.getLongitude(), EndPointPref.getInstance(getApplicationContext()).getFcmToken(EndPointPref.FCM_TOKEN),

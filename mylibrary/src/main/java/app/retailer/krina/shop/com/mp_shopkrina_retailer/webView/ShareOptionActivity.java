@@ -77,53 +77,52 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_mini_state_ment:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        } else {
-                            ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        }
+        int id = v.getId();
+
+        if (id == R.id.ll_mini_state_ment) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     } else {
-                        callMiniStateMeant("Top10");
+                        ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     }
                 } else {
                     callMiniStateMeant("Top10");
                 }
-                break;
-            case R.id.LL_ReminderonWhatsapp:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        } else {
-                            ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        }
+            } else {
+                callMiniStateMeant("Top10");
+            }
+        } else if (id == R.id.LL_ReminderonWhatsapp) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     } else {
-                        paymentReminder();
+                        ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     }
                 } else {
                     paymentReminder();
                 }
-                break;
-            case R.id.ll_month_statememt:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        } else {
-                            ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
-                        }
+            } else {
+                paymentReminder();
+            }
+        } else if (id == R.id.ll_month_statememt) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(ShareOptionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     } else {
-                        callMiniStateMeant("Month");
+                        ActivityCompat.requestPermissions(ShareOptionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_READ_CONTACTS);
                     }
                 } else {
                     callMiniStateMeant("Month");
                 }
-                break;
+            } else {
+                callMiniStateMeant("Month");
+            }
         }
+
     }
 
     @Override
@@ -170,7 +169,9 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
 
     private void downloadFileFromUrl(String url, String FilePath) {
         DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED);
+        }
         String fileName = url.substring(url.lastIndexOf("/") + 1);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setVisibleInDownloadsUi(true);

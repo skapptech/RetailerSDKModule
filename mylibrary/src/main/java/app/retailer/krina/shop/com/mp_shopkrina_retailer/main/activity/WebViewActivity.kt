@@ -22,7 +22,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.CheckoutCartResponse
@@ -38,7 +37,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.webView.HishabKitabActivity
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import io.reactivex.observers.DisposableObserver
@@ -416,16 +414,6 @@ class WebViewActivity : AppCompatActivity() {
         @JavascriptInterface
         fun openProfile() {
             startActivity(Intent(applicationContext, EditProfileActivity::class.java))
-        }
-
-        @JavascriptInterface
-        fun openWudu() {
-            startActivity(Intent(applicationContext, HishabKitabActivity::class.java))
-        }
-
-        @JavascriptInterface
-        fun openKisanDaan() {
-            startActivity(Intent(applicationContext, HishabKitabActivity::class.java))
         }
 
         @JavascriptInterface

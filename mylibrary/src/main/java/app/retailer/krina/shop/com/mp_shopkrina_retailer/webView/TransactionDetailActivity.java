@@ -90,10 +90,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_whatsapp:
+        if (v.getId() == R.id.bt_whatsapp) {
                 shareWhatsapp();
-                break;
         }
     }
 

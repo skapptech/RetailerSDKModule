@@ -80,6 +80,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomSearchPlaceActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.NewSignupActivity;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
@@ -578,7 +579,7 @@ public class UpdateAddressActivity extends AppCompatActivity implements Location
                         "", "", SharePrefs.getInstance(getApplicationContext()).getString(SharePrefs.MOBILE_NUMBER),
                         "", address, areaName, "", landmark, zipCode, "", selectCityId, city,
                         SharePrefs.getInstance(getApplicationContext()).getString(SharePrefs.SK_CODE),
-                        "", "", shopName, "", BuildConfig.VERSION_NAME,
+                        "", "", shopName, "", Constant.VERSION_NAME,
                         Build.VERSION.RELEASE, Build.MODEL, Utils.getDeviceUniqueID(this),
                         Utils.getDeviceUniqueID(this), location.getLatitude(), location.getLongitude(),
                         "", "",

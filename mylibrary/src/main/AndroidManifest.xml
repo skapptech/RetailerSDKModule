@@ -70,16 +70,9 @@
         tools:replace="android:allowBackup,android:theme">
         <activity
             android:name=".ui.component.splash.SplashScreenActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -324,32 +317,10 @@
         <activity
             android:name=".main.activity.DeliveryFeedbackActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".webView.HishabKitabActivity"
-            android:parentActivityName=".ui.component.home.HomeActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.component.home.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".webView.HisabDetailActivity"
-            android:parentActivityName=".webView.HishabKitabActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".webView.HishabKitabActivity" />
-        </activity>
+
         <activity
             android:name=".webView.ShareOptionActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".webView.AddCreditActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".main.direct.TradeActivity"
             android:exported="true"
@@ -369,9 +340,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.component.home.HomeActivity" />
         </activity>
-        <activity
-            android:name=".webView.CustomerListActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".main.activity.FullNotificationActivity"
             android:excludeFromRecents="true"
@@ -523,9 +491,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".webView.TransactionDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".webView.HisabCollectionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.component.home.store.StoreFreebiesActivity"
@@ -808,14 +773,6 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-<!--        <activity-->
-<!--            android:name="io.flutter.embedding.android.FlutterActivity"-->
-<!--            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"-->
-<!--            android:hardwareAccelerated="true"-->
-<!--            android:windowSoftInputMode="adjustResize" />-->
-        <activity
-            android:name=".main.activity.PhiPayActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

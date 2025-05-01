@@ -76,6 +76,7 @@ class Constant {
         var PLACE_RESULT = "PlaceResult"
         var ADDRESS = "Address"
         var AREA = "area"
+        @kotlin.jvm.JvmField
         var VERSION_NAME = "1.0"
 
     }

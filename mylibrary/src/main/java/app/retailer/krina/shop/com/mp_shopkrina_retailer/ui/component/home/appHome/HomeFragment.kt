@@ -1,9 +1,11 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.appHome
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.location.Location
@@ -23,6 +25,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -106,7 +109,6 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     private lateinit var appCtx: MyApplication
     private var mBinding: FragmentHome1Binding? = null
     private lateinit var appHomeViewModel: AppHomeViewModel
-    private var activity: HomeActivity? = null
     private var rlHeader: RelativeLayout? = null
     private var llLoadMore: ImageView? = null
     private var progressBar: ProgressBar? = null
@@ -129,18 +131,18 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     private var commonClassForAPI: CommonClassForAPI? = null
     private var appHomeItemAdapter1: AppHomeItemAdapter? = null
     private var viewHolder:RecyclerView.ViewHolder?=null
-
+    var homeActivity = activity as? HomeActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        homeActivity = context as? HomeActivity
+        appCtx = homeActivity?.application as MyApplication
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            sectionName = arguments!!.getString("sectionName")
+            sectionName = arguments?.getString("sectionName")
         }
     }
 
@@ -150,10 +152,10 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         savedInstanceState: Bundle?
     ): View {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home1, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         appHomeViewModel =
             ViewModelProvider(
-                activity!!,
+                homeActivity!!,
                 AppHomeViewModelFactory(appCtx, appRepository)
             )[AppHomeViewModel::class.java]
         initialization()
@@ -168,11 +170,11 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         super.onResume()
         MyApplication.getInstance().logScreenAnalytics(this.javaClass)
         MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             this.javaClass.simpleName
         )
-        activity!!.bottomNavigationView!!.menu.findItem(R.id.home).setChecked(true)
+        homeActivity?.bottomNavigationView!!.menu.findItem(R.id.home).setChecked(true)
         if (mFlashHome) {
             if (mFlashDealItemListAdapter != null) {
                 mFlashDealItemListAdapter!!.notifyDataSetChanged()
@@ -185,14 +187,14 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
             MyApplication.getInstance().isReloadCart = false
             updateCartInList()
         }
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.spLayout!!.visibility = View.GONE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity?.searchText!!.visibility = View.VISIBLE
+        homeActivity?.spLayout!!.visibility = View.GONE
+        homeActivity?.rightSideIcon!!.visibility = View.VISIBLE
         if (SharePrefs.getInstance(activity)
                 .getBoolean(SharePrefs.IS_SELLER_AVAIL)
-        ) activity!!.mBinding!!.toolbarH.liStoreH.visibility = View.VISIBLE
+        ) homeActivity?.mBinding!!.toolbarH.liStoreH.visibility = View.VISIBLE
         if (!EndPointPref.getInstance(activity).getBoolean(EndPointPref.IS_SHOW_SELLER)) {
-            activity!!.mBinding!!.toolbarH.liStoreH.visibility = View.GONE
+            homeActivity?.mBinding!!.toolbarH.liStoreH.visibility = View.GONE
         }
     }
 
@@ -204,7 +206,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         super.onStop()
         if (SharePrefs.getInstance(activity)
                 .getBoolean(SharePrefs.IS_SELLER_AVAIL)
-        ) activity!!.mBinding!!.toolbarH.liStoreH.visibility = View.GONE
+        ) homeActivity?.mBinding!!.toolbarH.liStoreH.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -242,7 +244,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         marginLayoutParams.topMargin = 50
         mFlashDealItemListAdapter =
             FlashDealItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 mFlashDealArrayList,
                 listSizeFlashDeal,
                 flashDealBackImages
@@ -265,7 +267,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
             webView.settings.useWideViewPort = false
             webView.settings.javaScriptEnabled = true
             webView.settings.pluginState = WebSettings.PluginState.ON
-            webView.addJavascriptInterface(JavaScriptInterface(activity), "Android")
+            webView.addJavascriptInterface(JavaScriptInterface( homeActivity!!), "Android")
             webView.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
         } else {
             commonClassForAPI!!.fetchDynamicHtml(object : DisposableObserver<String?>() {
@@ -280,7 +282,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                             webView.settings.useWideViewPort = false
                             webView.settings.javaScriptEnabled = true
                             webView.settings.pluginState = WebSettings.PluginState.ON
-                            webView.addJavascriptInterface(JavaScriptInterface(activity), "Android")
+                            webView.addJavascriptInterface(JavaScriptInterface( homeActivity!!), "Android")
                             webView.loadDataWithBaseURL(null, response, "text/html", "UTF-8", null)
                             SectionPref.getInstance(activity)
                                 .putString(SectionPref.PRODUCT_LIST + url, response)
@@ -748,7 +750,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         url: String
     ) {
         appHomeViewModel.getGameBanners(customerId)
-        appHomeViewModel.getGameBannersData.observe(activity!!) {
+        appHomeViewModel.getGameBannersData.observe(homeActivity!!) {
             when (it) {
                 is Response.Loading -> {}
                 is Response.Success -> {
@@ -768,12 +770,12 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     private fun initialization() {
         // view
         commonClassForAPI = CommonClassForAPI.getInstance(activity);
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         warehouseId = SharePrefs.getInstance(activity).getInt(SharePrefs.WAREHOUSE_ID)
         customerId = SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID)
         lang = LocaleHelper.getLanguage(activity)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         val layoutManager = LinearLayoutManager(activity)
         mBinding!!.rvHome.layoutManager = layoutManager
         mBinding!!.thisSiteIsUnderMaintenance.text =
@@ -781,7 +783,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         mBinding!!.weArePreparingToServeYouBetter.text =
             MyApplication.getInstance().dbHelper.getString(R.string.we_are_preparing_to_serve_you_better)
         mHomeAdapter = HomeAdapter(
-            activity!!, homeDataList, this,
+            homeActivity!!, homeDataList, this,
             this, this, this, this
         )
         mBinding!!.rvHome.adapter = mHomeAdapter
@@ -807,11 +809,28 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
             cancellationTokenSource = CancellationTokenSource()
             // check GPS
             val locationManager =
-                activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                homeActivity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 val client = LocationServices.getFusedLocationProviderClient(
-                    activity!!
+                    homeActivity!!
                 )
+                if (ActivityCompat.checkSelfPermission(
+                        homeActivity,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        homeActivity,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return
+                }
                 client.getCurrentLocation(
                     LocationRequest.PRIORITY_HIGH_ACCURACY,
                     cancellationTokenSource!!.token
@@ -821,7 +840,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                             lat = location.latitude
                             lng = location.longitude
                         } else {
-                            val gpsTracker = GPSTracker(activity)
+                            val gpsTracker = GPSTracker(homeActivity)
                             lat = gpsTracker.latitude
                             lng = gpsTracker.longitude
                         }
@@ -895,7 +914,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     model.appItemsList!![0].bannerImage
                 )
             ) {
-                val dialog = Dialog(activity!!)
+                val dialog = Dialog(homeActivity!!)
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.setContentView(R.layout.dialog_offer)
@@ -989,21 +1008,21 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                                 activity,
                                 FeedActivity::class.java
                             )
-                        ) else startActivity(Intent(activity, TradeActivity::class.java))
-                        Utils.leftTransaction(activity)
+                        ) else startActivity(Intent(homeActivity, TradeActivity::class.java))
+                        Utils.leftTransaction(homeActivity)
                     } else {
                         val bundle = Bundle()
                         bundle.putString("url", model.webViewUrl)
-                        activity!!.startActivity(
+                        homeActivity!!.startActivity(
                             Intent(
-                                activity,
+                                homeActivity,
                                 WebViewActivity::class.java
                             ).putExtras(bundle)
                         )
                     }
                 } else {
                     args.putString("cetegoryTittle", appItemModel.tileName)
-                    activity!!.pushFragments(SubCategoryFragment.newInstance(), false, true, args)
+                    homeActivity!!.pushFragments(SubCategoryFragment.newInstance(), false, true, args)
                 }
                 // update analytics
                 MyApplication.getInstance().updateAnalytics("appHome_basCat_click", analyticPost)
@@ -1022,13 +1041,13 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     )
                     Utils.leftTransaction(activity)
                 } else if (model.webViewUrl!!.startsWith("vAtm") || model.webViewUrl!!.startsWith("vatm")) {
-                    activity!!.callVAtmApi()
+                    homeActivity!!.callVAtmApi()
                 } else if (model.webViewUrl!!.contains("Udhar/GenerateLead")) {
-                    activity!!.callLeadApi(model.webViewUrl!!)
+                    homeActivity!!.callLeadApi(model.webViewUrl!!)
                 } else {
                     val bundle = Bundle()
                     bundle.putString("url", model.webViewUrl)
-                    activity!!.startActivity(
+                    homeActivity!!.startActivity(
                         Intent(
                             activity,
                             WebViewActivity::class.java
@@ -1039,7 +1058,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                 if (!appItemModel.redirectionID.toString()
                         .equals("0", ignoreCase = true) && appItemModel.redirectionID != 0
                 ) {
-                    activity!!.pushFragments(
+                    homeActivity!!.pushFragments(
                         SubSubCategoryFragment.newInstance(),
                         false,
                         true,
@@ -1047,7 +1066,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     )
                 } else {
                     args.putString("BRAND_NAME", "Brand")
-                    activity!!.pushFragments(ShopbyBrandFragment.newInstance(), false, true, args)
+                    homeActivity!!.pushFragments(ShopbyBrandFragment.newInstance(), false, true, args)
                 }
             }
 
@@ -1059,28 +1078,28 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     )
                 ) {
                     if (model.webViewUrl!!.startsWith("https://trade.er15.xyz:4436")) {
-                        if (EndPointPref.getInstance(activity)
+                        if (EndPointPref.getInstance(homeActivity)
                                 .getBoolean(EndPointPref.showNewSocial)
                         ) startActivity(
                             Intent(
-                                activity,
+                                homeActivity,
                                 FeedActivity::class.java
                             )
-                        ) else startActivity(Intent(activity, TradeActivity::class.java))
-                        Utils.leftTransaction(activity)
+                        ) else startActivity(Intent(homeActivity, TradeActivity::class.java))
+                        Utils.leftTransaction(homeActivity)
                     } else {
                         val bundle = Bundle()
                         bundle.putString("url", model.webViewUrl)
-                        activity!!.startActivity(
+                        homeActivity!!.startActivity(
                             Intent(
-                                activity,
+                                homeActivity,
                                 WebViewActivity::class.java
                             ).putExtras(bundle)
                         )
                     }
                 } else {
                     if (appItemModel.redirectionID != 0) {
-                        activity!!.pushFragments(
+                        homeActivity!!.pushFragments(
                             SubSubCategoryFragment.newInstance(),
                             false,
                             true,
@@ -1088,7 +1107,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         )
                     } else {
                         args.putString("BRAND_NAME", "Brand")
-                        activity!!.pushFragments(
+                        homeActivity!!.pushFragments(
                             ShopbyBrandFragment.newInstance(),
                             false,
                             true,
@@ -1116,13 +1135,13 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     args.putString("SECTION_ID", "-1")
                     args.putInt("subCategoryId", id)
                     args.putBoolean("isStore", true)
-                    activity!!.pushFragments(FlashDealOfferFragment.newInstance(), true, true, args)
+                    homeActivity!!.pushFragments(FlashDealOfferFragment.newInstance(), true, true, args)
                 } else {
                     val bundle = Bundle()
                     bundle.putString("url", model.webViewUrl)
-                    activity!!.startActivity(
+                    homeActivity!!.startActivity(
                         Intent(
-                            activity,
+                            homeActivity,
                             WebViewActivity::class.java
                         ).putExtras(bundle)
                     )
@@ -1132,7 +1151,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         .equals("0", ignoreCase = true) && appItemModel.redirectionID != 0
                 ) {
                     args.putString("ITEM_IMAGE", appItemModel.tileImage)
-                    activity!!.pushFragments(
+                    homeActivity!!.pushFragments(
                         HomeSubCategoryFragment.newInstance(),
                         false,
                         true,
@@ -1140,7 +1159,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     )
                 } else {
                     args.putString("BRAND_NAME", "Brand")
-                    activity!!.pushFragments(ShopbyBrandFragment.newInstance(), false, true, args)
+                    homeActivity!!.pushFragments(ShopbyBrandFragment.newInstance(), false, true, args)
                 }
             }
 
@@ -1150,18 +1169,18 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                 )
             ) {
                 if (model.webViewUrl!!.startsWith("https://trade.er15.xyz:4436")) {
-                    if (EndPointPref.getInstance(activity)
+                    if (EndPointPref.getInstance(homeActivity)
                             .getBoolean(EndPointPref.showNewSocial)
-                    ) startActivity(Intent(activity, FeedActivity::class.java)) else startActivity(
-                        Intent(activity, TradeActivity::class.java)
+                    ) startActivity(Intent(homeActivity, FeedActivity::class.java)) else startActivity(
+                        Intent(homeActivity, TradeActivity::class.java)
                     )
-                    Utils.leftTransaction(activity)
+                    Utils.leftTransaction(homeActivity)
                 } else {
                     val bundle = Bundle()
                     bundle.putString("url", model.webViewUrl)
-                    activity!!.startActivity(
+                    homeActivity!!.startActivity(
                         Intent(
-                            activity,
+                            homeActivity,
                             WebViewActivity::class.java
                         ).putExtras(bundle)
                     )
@@ -1177,21 +1196,21 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     )
                 ) {
                     if (model.webViewUrl!!.startsWith("https://trade.er15.xyz:4436")) {
-                        if (EndPointPref.getInstance(activity)
+                        if (EndPointPref.getInstance(homeActivity)
                                 .getBoolean(EndPointPref.showNewSocial)
                         ) startActivity(
                             Intent(
-                                activity,
+                                homeActivity,
                                 FeedActivity::class.java
                             )
-                        ) else startActivity(Intent(activity, TradeActivity::class.java))
-                        Utils.leftTransaction(activity)
+                        ) else startActivity(Intent(homeActivity, TradeActivity::class.java))
+                        Utils.leftTransaction(homeActivity)
                     } else {
                         val bundle = Bundle()
                         bundle.putString("url", model.webViewUrl)
-                        activity!!.startActivity(
+                        homeActivity!!.startActivity(
                             Intent(
-                                activity,
+                                homeActivity,
                                 WebViewActivity::class.java
                             ).putExtras(bundle)
                         )
@@ -1200,7 +1219,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     if (!appItemModel.redirectionID.toString()
                             .equals("0", ignoreCase = true) && appItemModel.redirectionID != 0
                     ) {
-                        activity!!.pushFragments(
+                        homeActivity!!.pushFragments(
                             SubSubCategoryFragment.newInstance(),
                             false,
                             true,
@@ -1208,7 +1227,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         )
                     } else {
                         args.putString("BRAND_NAME", "Brand")
-                        activity!!.pushFragments(
+                        homeActivity!!.pushFragments(
                             ShopbyBrandFragment.newInstance(),
                             false,
                             true,
@@ -1225,75 +1244,75 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     private fun callActivities(bannerActivity: String?, url: String?) {
         var i: Intent? = null
         if (bannerActivity.equals("games", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, GamesListActivity::class.java))
-            Utils.fadeTransaction(activity)
+            homeActivity!!.startActivity(Intent(homeActivity, GamesListActivity::class.java))
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("target", ignoreCase = true)) {
-            activity!!.startActivity(
+            homeActivity!!.startActivity(
                 Intent(
-                    activity,
+                    homeActivity,
                     CustomerSubCategoryTargetActivity::class.java
                 )
             )
-            Utils.fadeTransaction(activity)
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("prime", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, MembershipPlanActivity::class.java))
-            Utils.fadeTransaction(activity)
+            homeActivity!!.startActivity(Intent(homeActivity, MembershipPlanActivity::class.java))
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("shoppingcart", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, ShoppingCartActivity::class.java))
-            Utils.fadeTransaction(activity)
+            homeActivity!!.startActivity(Intent(homeActivity, ShoppingCartActivity::class.java))
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("wallet", ignoreCase = true)) {
-            i = Intent(activity, MyWalletActivity::class.java)
-            activity!!.startActivity(i)
-            Utils.fadeTransaction(activity)
+            i = Intent(homeActivity, MyWalletActivity::class.java)
+            homeActivity!!.startActivity(i)
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("category", ignoreCase = true)) {
-            activity!!.pushFragments(
+            homeActivity!!.pushFragments(
                 HomeCategoryFragment(),
                 false,
                 true,
                 null
             )
         } else if (bannerActivity.equals("tradeoffer", ignoreCase = true)) {
-            activity!!.pushFragments(
+            homeActivity!!.pushFragments(
                 TradeOfferFragment.newInstance(),
                 false,
                 true,
                 null
             )
         } else if (bannerActivity.equals("allbrands", ignoreCase = true)) {
-            activity!!.pushFragments(
+            homeActivity!!.pushFragments(
                 AllBrandFragItemList.newInstance(),
                 true,
                 true,
                 null
             )
         } else if (bannerActivity.equals("freebies", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, FreebiesOfferActivity::class.java))
-            Utils.fadeTransaction(activity)
+            homeActivity!!.startActivity(Intent(homeActivity, FreebiesOfferActivity::class.java))
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("myorder", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, MyOrderActivity::class.java))
-            Utils.fadeTransaction(activity)
+            homeActivity!!.startActivity(Intent(homeActivity, MyOrderActivity::class.java))
+            Utils.fadeTransaction(homeActivity)
         } else if (bannerActivity.equals("direct", ignoreCase = true)) {
-            if (EndPointPref.getInstance(activity)
+            if (EndPointPref.getInstance(homeActivity)
                     .getBoolean(EndPointPref.showNewSocial)
-            ) startActivity(Intent(activity, FeedActivity::class.java)) else startActivity(
+            ) startActivity(Intent(homeActivity, FeedActivity::class.java)) else startActivity(
                 Intent(
-                    activity,
+                    homeActivity,
                     TradeActivity::class.java
                 )
             )
             Utils.fadeTransaction(activity)
         } else if (bannerActivity.equals("Clearance", ignoreCase = true)) {
-            activity!!.startActivity(Intent(activity, ClearanceActivity::class.java))
+            homeActivity!!.startActivity(Intent(homeActivity, ClearanceActivity::class.java))
             Utils.fadeTransaction(activity)
         } else if (bannerActivity.equals("ExternalURL", ignoreCase = true)) {
             try {
                 val uri = Uri.parse(url) // missing 'http://' will cause crashed
                 val intent = Intent(Intent.ACTION_VIEW, uri)
-                activity!!.startActivity(intent)
+                homeActivity!!.startActivity(intent)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            Utils.fadeTransaction(activity)
+            Utils.fadeTransaction(homeActivity)
         }
     }
 
@@ -1340,7 +1359,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     cartData.removeObserver(this)
                 }
             }
-            cartData.observe(activity!!, observer)
+            cartData.observe(homeActivity!!, observer)
         }
     }
 
@@ -1374,7 +1393,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     cartData.removeObserver(this)
                 }
             }
-            cartData.observe(activity!!, observer)
+            cartData.observe(homeActivity!!, observer)
         }
     }
 
@@ -1414,7 +1433,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         searchData.removeObserver(this)
                     }
                 }
-            searchData.observe(activity!!, searchObserver)
+            searchData.observe(homeActivity!!, searchObserver)
         }
     }
 
@@ -1459,7 +1478,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                             mBinding!!.rvHome.scrollToPosition(pos)
                             val finalPos = pos
                             Handler(Looper.getMainLooper()).postDelayed({
-                                activity!!.runOnUiThread {
+                                homeActivity!!.runOnUiThread {
                                     mBinding!!.rvHome.scrollToPosition(
                                         finalPos
                                     )
@@ -1468,7 +1487,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         }
                         addCartToList()
                         addRecentSearchToList()
-                        SectionPref.getInstance(activity)
+                        SectionPref.getInstance(homeActivity)
                             .putString(SectionPref.APP_HOME, Gson().toJson(it))
 
                     }

@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="app.retailer.krina.shop.com.mp_shopkrina_retailer" />
+                  <option name="appId" value="app.retailer.krina.shop.com.shopkrina_retailer" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="app.retailer.krina.shop.com.shopkrina_retailer" />
+                  <option name="mobileSdkAppId" value="1:921589543133:android:da37214b30a35292" />
+                  <option name="projectId" value="retailerapp-cff3b" />
+                  <option name="projectNumber" value="921589543133" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

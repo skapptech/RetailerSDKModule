@@ -45,6 +45,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.H
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.store.StoreItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.BucketGameInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.DynamicHtmlInterface
@@ -151,7 +152,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home1, container, false)
+        mBinding = FragmentHome1Binding.inflate(inflater, container, false)
         val appRepository = AppRepository(homeActivity!!.applicationContext)
         appHomeViewModel =
             ViewModelProvider(

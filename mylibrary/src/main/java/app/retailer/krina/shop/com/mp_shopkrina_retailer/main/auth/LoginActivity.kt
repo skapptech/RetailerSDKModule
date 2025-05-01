@@ -21,7 +21,6 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.CustomerResponse
@@ -29,6 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.OTPRespon
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.TokenResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.UserAuth
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityTestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ContactUsActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.LoginModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.LoginResponse
@@ -60,7 +60,7 @@ import kotlin.Throwable
 import kotlin.toString
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener{
-    private var mBinding: ActivityLoginBinding? = null
+    private lateinit var mBinding: ActivityLoginBinding
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
     private var customDialog: Dialog? = null
@@ -74,9 +74,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding =
-            DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
-        // init
+        mBinding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         initialization()
     }
 

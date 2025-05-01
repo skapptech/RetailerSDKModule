@@ -24,6 +24,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.OTPResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMobileSignUpBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.auth.LoginActivity
@@ -55,7 +56,8 @@ class MobileSignUpActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_mobile_sign_up)
+        mBinding = ActivityMobileSignUpBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

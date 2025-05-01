@@ -32,6 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.splash.Company
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.splash.CompanyInfoResponse.CompanyDetails
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivitySplashScreenBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ContactUsActivity
@@ -58,6 +59,7 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import java.text.DateFormat
@@ -67,9 +69,8 @@ import java.util.Locale
 class SplashScreenActivity : AppCompatActivity() {
     private val APP_PACKAGE_COUNT = 6
     private var REQUEST_FROM = 101
-    private var mBinding: ActivitySplashScreenBinding? = null
+    private lateinit var mBinding: ActivitySplashScreenBinding
     private lateinit var viewModel: SplashViewModel
-
     private var mAppVersion: String? = null
     private var isCompulsory = false
     private var isPresent = false
@@ -85,7 +86,8 @@ class SplashScreenActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash_screen)
+        mBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,
@@ -109,8 +111,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        mBinding!!.tvVersion.text = "App version " + Constant.VERSION_NAME
-        mBinding!!.btnTryAgain.setOnClickListener { loadingData() }
+       FirebaseApp.initializeApp(this)
+        mBinding.tvVersion.text = "App version " + Constant.VERSION_NAME
+        mBinding.btnTryAgain.setOnClickListener { loadingData() }
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
             .setMinimumFetchIntervalInSeconds(2)
@@ -251,7 +254,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     // for testing comment above & unComment below - dev
                     if (BuildConfig.DEBUG) {
 //                        EndPointPref.getInstance(applicationContext).putString(EndPointPref.API_ENDPOINT, "https://das.er15.xyz")
-                        EndPointPref.getInstance(applicationContext).putString(EndPointPref.API_ENDPOINT, "https://internal.er15.xyz")
+ //                       EndPointPref.getInstance(applicationContext).putString(EndPointPref.API_ENDPOINT, "https://internal.er15.xyz")
 //                        EndPointPref.getInstance(applicationContext).putString(EndPointPref.TRADE_ENDPOINT, "https://tradeservice.er15.xyz:4436")
 //                        EndPointPref.getInstance(applicationContext).putString(EndPointPref.EPAY_ENDPOINT, "https://api2.epaylater.in:443")
 //                        EndPointPref.getInstance(applicationContext).putString(EndPointPref.CHECKBOOK_ENDPOINT, "https://www.chqbook.com/api/cl/pg/account")

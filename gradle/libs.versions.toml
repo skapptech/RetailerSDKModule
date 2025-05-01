@@ -60,6 +60,10 @@ ucrop = "2.2.8"
 playServicesMeasurementApi = "21.0.0"
 swiperefreshlayout = "1.1.0"
 firebaseDatabaseKtx = "20.3.0"
+firebaseCommon = "21.0.0"
+google-services = "4.4.1"
+firebase-bom = "33.12.0"
+firebase-crashlytics-gradle = "2.9.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -136,9 +140,13 @@ ucrop = { group = "com.github.yalantis", name = "ucrop", version.ref = "ucrop" }
 viewpagerindicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "viewpagerindicator" }
 play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+firebase-common = { group = "com.google.firebase", name = "firebase-common", version.ref = "firebaseCommon" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-gradle" }
 

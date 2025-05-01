@@ -59,7 +59,7 @@ razorpay = "1.6.39"
 ucrop = "2.2.8"
 playServicesMeasurementApi = "21.0.0"
 swiperefreshlayout = "1.1.0"
-firebaseDatabaseKtx = "21.0.0"
+firebaseDatabaseKtx = "20.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -85,6 +85,7 @@ firebase-config = { group = "com.google.firebase", name = "firebase-config", ver
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-analytics" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebase-firestore" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebase-crashlytics" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabaseKtx" }
 
 play-analytics = { group = "com.google.android.gms", name = "play-services-analytics", version.ref = "play-analytics" }
 play-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-auth" }
@@ -135,7 +136,6 @@ ucrop = { group = "com.github.yalantis", name = "ucrop", version.ref = "ucrop" }
 viewpagerindicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "viewpagerindicator" }
 play-services-measurement-api = { group = "com.google.android.gms", name = "play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
-firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

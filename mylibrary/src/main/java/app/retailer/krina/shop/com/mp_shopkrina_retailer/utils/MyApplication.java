@@ -59,6 +59,7 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleHelper.onAttach(base, "hi"));
 //        MultiDex.install(this);
+       // DirectSDK.initialize(this);
     }
 
     @Override

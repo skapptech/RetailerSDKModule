@@ -702,7 +702,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showShopHolidayDialog() {
-        val dialog = BottomSheetDialog(editProfileActivity)
+        val dialog = BottomSheetDialog(editProfileActivity!!)
         dialog.setContentView(R.layout.dialog_shop_holiday)
         dialog.window?.findViewById<View>(R.id.design_bottom_sheet)
             ?.setBackgroundColor(Color.TRANSPARENT)

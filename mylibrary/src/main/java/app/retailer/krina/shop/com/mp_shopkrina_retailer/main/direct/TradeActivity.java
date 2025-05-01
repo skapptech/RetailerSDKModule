@@ -626,7 +626,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/*");
         share.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-                BuildConfig.APPLICATION_ID + ".provider", new File(Environment.getExternalStorageDirectory()
+                applicationContext.packageName  + ".provider", new File(Environment.getExternalStorageDirectory()
                         + Constant.PRODUCT_IMAGE_FOLDER + "image.png")));
         share.putExtra(Intent.EXTRA_TEXT, body + "\n http://dl.trade.er15.xyz/" + returnPath);
         startActivity(Intent.createChooser(share, "Share Product"));

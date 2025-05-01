@@ -76,5 +76,7 @@ class Constant {
         var PLACE_RESULT = "PlaceResult"
         var ADDRESS = "Address"
         var AREA = "area"
+        var VERSION_NAME = "1.0"
+
     }
 }

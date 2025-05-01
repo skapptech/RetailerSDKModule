@@ -379,7 +379,7 @@ class CustomerAddressActivity : AppCompatActivity() {
                         "",
                         "",
                         "",
-                        BuildConfig.VERSION_NAME,
+                        Constant.VERSION_NAME,
                         Build.VERSION.RELEASE,
                         Build.MODEL,
                         Utils.getDeviceUniqueID(this),

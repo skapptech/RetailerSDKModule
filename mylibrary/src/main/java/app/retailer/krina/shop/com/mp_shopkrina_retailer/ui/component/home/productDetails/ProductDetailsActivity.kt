@@ -295,7 +295,7 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
         share.putExtra(
             Intent.EXTRA_STREAM, FileProvider.getUriForFile(
                 applicationContext,
-                BuildConfig.APPLICATION_ID + ".provider",
+                applicationContext.packageName  + ".provider",
                 File(
                     Environment.getExternalStorageDirectory().toString() + File.separator
                             + Environment.DIRECTORY_PICTURES + File.separator + "image.png"

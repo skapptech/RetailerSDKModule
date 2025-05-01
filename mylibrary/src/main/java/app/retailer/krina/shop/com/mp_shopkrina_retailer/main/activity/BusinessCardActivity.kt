@@ -224,7 +224,7 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
     private fun shareOnWhatsapp() {
         val uri = FileProvider.getUriForFile(
             applicationContext,
-            BuildConfig.APPLICATION_ID + ".provider",
+            applicationContext.packageName + ".provider",
             File(
                 Environment.getExternalStorageDirectory().toString() +
                         File.separator + Environment.DIRECTORY_PICTURES + File.separator + "card.jpg"
@@ -259,7 +259,7 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
     private fun shareImage() {
         val uri = FileProvider.getUriForFile(
             applicationContext,
-            BuildConfig.APPLICATION_ID + ".provider",
+            applicationContext.packageName  + ".provider",
             File(
                 Environment.getExternalStorageDirectory().toString() +
                         File.separator + Environment.DIRECTORY_PICTURES + File.separator + "card.jpg"

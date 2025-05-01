@@ -36,6 +36,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.receiver.SmsBroadcastRe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AppSignatureHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AutomaticallyEnableGPSLocation
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
@@ -153,7 +154,7 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
     fun initialization() {
         val automaticallyEnableGPSLocation = AutomaticallyEnableGPSLocation()
         automaticallyEnableGPSLocation.EnableGPSAutoMatically(this)
-        versionName = BuildConfig.VERSION_NAME
+        versionName = Constant.VERSION_NAME
         deviceOs = Build.VERSION.RELEASE
         deviceName = Build.MODEL
         mBinding!!.tvEnterMobileT.text =

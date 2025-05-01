@@ -841,7 +841,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         val photoFile: File = createImageFile()
         val photoUri = FileProvider.getUriForFile(
             this,
-            BuildConfig.APPLICATION_ID + ".provider",
+            applicationContext.packageName  + ".provider",
             photoFile
         )
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)

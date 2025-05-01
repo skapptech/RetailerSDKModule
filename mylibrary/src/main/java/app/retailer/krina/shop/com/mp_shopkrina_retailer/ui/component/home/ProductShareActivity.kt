@@ -372,7 +372,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 Objects.requireNonNull(
                     applicationContext
                 ),
-                BuildConfig.APPLICATION_ID + ".provider",
+                applicationContext.packageName  + ".provider",
                 File(
                     Environment.getExternalStorageDirectory()
                         .toString() + Constant.PRODUCT_IMAGE_FOLDER + "image.png"

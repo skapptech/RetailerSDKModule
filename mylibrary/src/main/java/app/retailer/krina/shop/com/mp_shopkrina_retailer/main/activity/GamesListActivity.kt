@@ -194,7 +194,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
             if (list!![pos].gameName.equals("solitare", ignoreCase = true)) {
                 MyApplication.getInstance().updateAnalytics(list!![pos].gameName)
                 val intent = Intent()
-                intent.setClassName(BuildConfig.APPLICATION_ID, "com.sk.solitare.SolitaireActivity")
+                intent.setClassName(applicationContext.packageName , "com.sk.solitare.SolitaireActivity")
                 try {
                     startActivity(intent)
                 } catch (e: Exception) {
@@ -204,7 +204,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                 MyApplication.getInstance().updateAnalytics(list!![pos].gameName)
                 val intent = Intent()
                 intent.setClassName(
-                    BuildConfig.APPLICATION_ID,
+                    applicationContext.packageName ,
                     "com.sk.blocks.activities.MainActivity"
                 )
                 try {

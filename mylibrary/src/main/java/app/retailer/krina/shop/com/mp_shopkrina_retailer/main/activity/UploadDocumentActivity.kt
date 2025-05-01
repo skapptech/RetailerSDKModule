@@ -516,7 +516,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         val photoFile = createImageFile()
         val photoUri = FileProvider.getUriForFile(
             this,
-            BuildConfig.APPLICATION_ID + ".provider",
+            applicationContext.packageName  + ".provider",
             photoFile
         )
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
@@ -544,7 +544,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
             val photoFile = createImageFile()
             val photoUri = FileProvider.getUriForFile(
                 this,
-                BuildConfig.APPLICATION_ID + ".provider",
+                applicationContext.packageName  + ".provider",
                 photoFile
             )
             pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)

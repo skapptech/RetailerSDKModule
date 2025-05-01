@@ -456,7 +456,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         photoFile = createImageFile()
         val photoUri = FileProvider.getUriForFile(
             activity,
-            BuildConfig.APPLICATION_ID + ".provider",
+            editProfileActivity!!.packageName  + ".provider",
             photoFile
         )
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)

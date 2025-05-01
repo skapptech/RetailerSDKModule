@@ -216,7 +216,7 @@ class ImageCaptureActivity : AppCompatActivity() {
                 photoFile?.also {
                     val photoURI = FileProvider.getUriForFile(
                         applicationContext,
-                        BuildConfig.APPLICATION_ID + ".provider",
+                        applicationContext.packageName  + ".provider",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -238,7 +238,7 @@ class ImageCaptureActivity : AppCompatActivity() {
               }
               val photoUri = FileProvider.getUriForFile(
                   applicationContext,
-                  BuildConfig.APPLICATION_ID + ".provider",
+                  applicationContext.packageName  + ".provider",
                   photoFile
               )
               pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)

@@ -597,7 +597,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                 val saveAppVer = SharePrefs.getStringSharedPreferences(
                     applicationContext, SharePrefs.APP_VERSION
                 )
-                if (BuildConfig.VERSION_NAME.equals(saveAppVer, ignoreCase = true)) {
+                if (Constant.VERSION_NAME.equals(saveAppVer, ignoreCase = true)) {
                     ePayLaterLimit = if (ePayAmount > 0) {
                         ePayLimit == 0.0 || !(ePayAmount <= ePayLimit)
                     } else {
@@ -1964,7 +1964,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             gullakAmount.toDouble(),
             cashAmount.toDouble(),
             "Retailer",
-            BuildConfig.VERSION_NAME,
+            Constant.VERSION_NAME,
             lat,
             lng,
             if (mShoppingCart!!.isConvenienceFee) mShoppingCart!!.convenienceFees else 0.0,

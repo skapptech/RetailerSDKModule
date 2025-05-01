@@ -202,7 +202,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             SharePrefs.getInstance(applicationContext).getString(SharePrefs.CUSTOMER_NAME)
         mBinding!!.userSkcode.text =
             SharePrefs.getInstance(applicationContext).getString(SharePrefs.SK_CODE)
-        mBinding!!.txtAppVersion.text = "App ver " + BuildConfig.VERSION_NAME
+        mBinding!!.txtAppVersion.text = "App ver " + Constant.VERSION_NAME
 
         if (SharePrefs.getInstance(applicationContext)
                 .getString(SharePrefs.USER_PROFILE_IMAGE) != null && SharePrefs.getInstance(

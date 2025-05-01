@@ -761,7 +761,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
             outStream.flush()
             outStream.close()
             bmpUri =
-                FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file)
+                FileProvider.getUriForFile(this, applicationContext.packageName + ".provider", file)
         } catch (e: Exception) {
             e.printStackTrace()
         }

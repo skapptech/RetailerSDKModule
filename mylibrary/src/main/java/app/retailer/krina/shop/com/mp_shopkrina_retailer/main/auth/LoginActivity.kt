@@ -39,6 +39,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Mobil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.OtpVerifyActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AppSignatureHelper
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
@@ -108,7 +109,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
     fun initialization() {
         utils = Utils(this)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
-        versionName = BuildConfig.VERSION_NAME
+        versionName = Constant.VERSION_NAME
         deviceOs = Build.VERSION.RELEASE
         deviceName = Build.MODEL
         val value: String =

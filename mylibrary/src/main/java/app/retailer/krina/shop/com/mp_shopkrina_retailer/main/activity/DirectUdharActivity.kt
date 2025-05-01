@@ -354,7 +354,7 @@ class DirectUdharActivity : AppCompatActivity() {
                 if (photoFile != null) {
                     mCameraPhotoPath = "file:" + photoFile.absolutePath
                     val photoUri = FileProvider.getUriForFile(
-                        applicationContext, BuildConfig.APPLICATION_ID + ".provider", photoFile
+                        applicationContext, applicationContext.packageName  + ".provider", photoFile
                     )
                     takePictureIntent!!.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 } else {
@@ -461,7 +461,7 @@ class DirectUdharActivity : AppCompatActivity() {
             Intent.EXTRA_STREAM, FileProvider.getUriForFile(
                 Objects.requireNonNull(
                     applicationContext
-                ), BuildConfig.APPLICATION_ID + ".provider", File(
+                ), applicationContext.packageName  + ".provider", File(
                     Environment.getExternalStorageDirectory()
                         .toString() + Constant.PRODUCT_IMAGE_FOLDER + "image.png"
                 )

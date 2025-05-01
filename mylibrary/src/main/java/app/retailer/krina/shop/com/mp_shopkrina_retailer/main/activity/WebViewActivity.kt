@@ -160,7 +160,7 @@ class WebViewActivity : AppCompatActivity() {
                 if (photoFile != null) {
                     mCameraPhotoPath = "file:" + photoFile.absolutePath
                     val photoUri = FileProvider.getUriForFile(
-                        applicationContext, BuildConfig.APPLICATION_ID + ".provider", photoFile
+                        applicationContext, applicationContext.packageName  + ".provider", photoFile
                     )
                     takePictureIntent!!.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 } else {

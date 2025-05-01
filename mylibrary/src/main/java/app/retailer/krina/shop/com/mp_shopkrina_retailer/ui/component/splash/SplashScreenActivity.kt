@@ -43,6 +43,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.services.ContactService
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
@@ -108,7 +109,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        mBinding!!.tvVersion.text = "App version " + BuildConfig.VERSION_NAME
+        mBinding!!.tvVersion.text = "App version " + Constant.VERSION_NAME
         mBinding!!.btnTryAgain.setOnClickListener { loadingData() }
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -463,7 +464,7 @@ class SplashScreenActivity : AppCompatActivity() {
                             for (i in it.indices) {
                                 mAppVersion = it[i].app_version
                                 isCompulsory = it[i].isCompulsory
-                                if (BuildConfig.VERSION_NAME.equals(
+                                if (Constant.VERSION_NAME.equals(
                                         mAppVersion,
                                         ignoreCase = true
                                     ) && isCompulsory

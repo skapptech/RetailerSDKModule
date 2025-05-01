@@ -66,7 +66,7 @@ class BucketGameViewPagerAdapter : RecyclerView.Adapter<BucketGameViewPagerAdapt
 
         holder.binding.root.setOnClickListener {
 //            Intent().setClassName(
-//                BuildConfig.APPLICATION_ID,
+//                applicationContext.packageName ,
 //                "com.sk.bucketgame.BucketGameActivity"
 //            ).also {
 //                activity.startActivity(it)

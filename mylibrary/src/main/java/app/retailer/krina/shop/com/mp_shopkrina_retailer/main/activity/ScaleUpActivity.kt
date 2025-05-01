@@ -308,7 +308,7 @@ class ScaleUpActivity : AppCompatActivity() {
                 if (photoFile != null) {
                     mCameraPhotoPath = "file:" + photoFile.absolutePath
                     val photoUri = FileProvider.getUriForFile(
-                        applicationContext, BuildConfig.APPLICATION_ID + ".provider", photoFile
+                        applicationContext, applicationContext.packageName  + ".provider", photoFile
                     )
                     takePictureIntent!!.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 } else {
@@ -411,7 +411,7 @@ class ScaleUpActivity : AppCompatActivity() {
                 Objects.requireNonNull(
                     applicationContext
                 ),
-                BuildConfig.APPLICATION_ID + ".provider",
+                applicationContext.packageName  + ".provider",
                 File(
                     Environment.getExternalStorageDirectory()
                         .toString() + Constant.PRODUCT_IMAGE_FOLDER + "image.png"

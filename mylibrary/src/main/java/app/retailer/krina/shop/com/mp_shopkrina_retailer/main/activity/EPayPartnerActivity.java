@@ -70,25 +70,21 @@ public class EPayPartnerActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.et_dob:
-                clickDOB();
-                break;
-            case R.id.btn_partner1:
-                startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
-                break;
-            case R.id.btn_partner2:
-                startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
-                break;
-            case R.id.btn_partner3:
-                startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
-                break;
-            case R.id.btn_partner4:
-                startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
-                break;
-            case R.id.btn_submit:
-                checkFormData();
-                break;
+        int id = v.getId();
+        if (id == R.id.et_dob) {
+            clickDOB();
+        } else if (id == R.id.btn_partner1) {
+            startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
+        } else if (id == R.id.btn_partner1) {
+            startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
+        } else if (id == R.id.btn_partner2) {
+            startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
+        } else if (id == R.id.btn_partner3) {
+            startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
+        } else if (id == R.id.btn_partner4) {
+            startActivity(new Intent(getApplicationContext(), EPayPartnerActivity.class));
+        } else if (id == R.id.btn_submit) {
+            checkFormData();
         }
     }
 

@@ -26,7 +26,8 @@ class MyGullakActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_my_gullak)
+        binding = ActivityMyGullakBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarG.title.text =

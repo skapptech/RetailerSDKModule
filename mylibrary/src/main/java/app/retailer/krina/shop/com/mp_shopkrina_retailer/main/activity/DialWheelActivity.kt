@@ -49,7 +49,8 @@ class DialWheelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_dial_wheel)
+        mBinding = ActivityDialWheelBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         utils = Utils(this)
 
         // get value using bundle

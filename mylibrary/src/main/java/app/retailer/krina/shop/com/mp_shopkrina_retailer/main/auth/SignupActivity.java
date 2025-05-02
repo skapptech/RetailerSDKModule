@@ -82,8 +82,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
-
+        mBinding = ActivitySignupBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         if (getIntent().getExtras() != null) {
             customerAddressModel = (CustomerAddressModel) getIntent().getSerializableExtra("model");
         }

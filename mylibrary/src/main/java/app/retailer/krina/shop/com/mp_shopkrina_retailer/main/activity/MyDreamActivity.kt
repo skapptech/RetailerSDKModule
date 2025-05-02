@@ -14,6 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.MyDreamAda
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MyDreamModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.DreamModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.wallet.WalletResponse
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyAccountBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -29,7 +30,8 @@ class MyDreamActivity : AppCompatActivity(), MyDreamInterface {
     private var list: ArrayList<MyDreamModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_dream)
+        mBinding = ActivityMyDreamBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         // init views
         initialization()
     }

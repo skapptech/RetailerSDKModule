@@ -99,7 +99,8 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_epay_later)
+        mBinding = ActivityEpayLaterBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         buildGoogleApiClient()
         initializeViews()

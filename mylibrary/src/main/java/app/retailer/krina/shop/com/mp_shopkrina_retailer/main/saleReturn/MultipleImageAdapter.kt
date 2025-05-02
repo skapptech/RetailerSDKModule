@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.AddRequestItemsBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ReturnItemImageViewBinding
 
 class MultipleImageAdapter(
@@ -18,9 +19,8 @@ class MultipleImageAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder {
             return ViewHolder(
-                DataBindingUtil.inflate(
+                ReturnItemImageViewBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.return_item_image_view,
                     parent,
                     false
                 )

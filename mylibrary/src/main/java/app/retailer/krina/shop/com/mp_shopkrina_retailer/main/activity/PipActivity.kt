@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityPendingPaymentBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityPipBinding
 
 class PipActivity : AppCompatActivity() {
@@ -34,7 +35,8 @@ class PipActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         }
-        mBinding = DataBindingUtil.setContentView(this@PipActivity, R.layout.activity_pip)
+        mBinding = ActivityPipBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding.progress.visibility = View.VISIBLE
         try {
             videoView = mBinding.videoView

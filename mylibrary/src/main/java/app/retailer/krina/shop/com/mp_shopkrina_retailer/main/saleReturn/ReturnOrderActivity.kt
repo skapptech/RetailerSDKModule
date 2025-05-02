@@ -10,6 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddReturnOrderRequestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReturnOrderBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.SalesReturnRequestListModel
@@ -25,7 +26,8 @@ class ReturnOrderActivity : AppCompatActivity() {
     private var wareHouseId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_return_order)
+        binding = ActivityReturnOrderBinding.inflate(layoutInflater);
+        setContentView(binding.getRoot());
         val appRepository = AppRepository(applicationContext)
         returnOrderViewModel = ViewModelProvider(
             this,

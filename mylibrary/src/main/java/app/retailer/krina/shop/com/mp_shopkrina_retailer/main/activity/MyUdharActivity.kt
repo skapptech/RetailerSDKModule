@@ -10,6 +10,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyDreamBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyUdharBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -22,8 +23,8 @@ class MyUdharActivity : AppCompatActivity(), View.OnClickListener {
     private var incomeRateSP: Spinner? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_udhar)
-        // init view
+        mBinding = ActivityMyUdharBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)        // init view
         initView()
     }
 

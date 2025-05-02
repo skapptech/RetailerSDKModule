@@ -21,7 +21,8 @@ class ReturnOrderDetailsActivity : AppCompatActivity() {
     private var orderId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_return_order_details)
+        binding = ActivityReturnOrderDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.getRoot())
         val appRepository = AppRepository(applicationContext)
         returnOrderViewModel = ViewModelProvider(
             this,

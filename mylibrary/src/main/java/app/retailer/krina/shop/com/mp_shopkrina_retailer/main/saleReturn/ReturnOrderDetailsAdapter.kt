@@ -22,9 +22,8 @@ class ReturnOrderDetailsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ReturnOrderDetailsBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.return_order_details,
                 parent,
                 false
             )

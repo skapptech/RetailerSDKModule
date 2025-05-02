@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityFullNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityGamesListBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.GameListAdapter
@@ -65,7 +66,8 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
             startActivity(Intent(applicationContext, TradeActivity::class.java))
             finish()
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_games_list)
+        mBinding = ActivityGamesListBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         setSupportActionBar(mBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_game)

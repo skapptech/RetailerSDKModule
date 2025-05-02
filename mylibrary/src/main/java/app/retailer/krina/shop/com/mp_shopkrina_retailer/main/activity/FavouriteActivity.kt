@@ -48,7 +48,8 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_favourite)
+        mBinding = ActivityMyFavouriteBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         mBinding.toolbarFav.title.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.myFavourite)
         mBinding.fragSearchEdt.hint =

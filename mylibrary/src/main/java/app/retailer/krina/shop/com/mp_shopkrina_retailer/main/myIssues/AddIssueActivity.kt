@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddIssueBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityStoryBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AddIssueInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.IssueOptionAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.GenerateTicketPostModel
@@ -63,8 +64,8 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_issue)
-
+        mBinding = ActivityAddIssueBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding.toolbar.title.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_direct_support)
         mBinding.tvNoIssues.text =

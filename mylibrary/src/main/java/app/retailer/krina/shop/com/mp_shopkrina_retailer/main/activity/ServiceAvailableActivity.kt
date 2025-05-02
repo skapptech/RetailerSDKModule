@@ -16,7 +16,8 @@ class ServiceAvailableActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_service_available)
+        binding = ActivityServiceAvailableBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
         val phone = SharePrefs.getInstance(applicationContext).getString(SharePrefs.COMPANY_CONTACT)
 

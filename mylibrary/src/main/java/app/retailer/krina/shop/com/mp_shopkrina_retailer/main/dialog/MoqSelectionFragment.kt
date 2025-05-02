@@ -11,28 +11,29 @@ import androidx.appcompat.app.AppCompatActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AdapterInterface
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MoqSelectionFragment : BottomSheetDialogFragment() {
-    private var activity: AppCompatActivity? = null
     private var model: ItemListModel? = null
     private var listener: AdapterInterface? = null
     private var position = 0
 
+    var appCompatActivity = activity as? AppCompatActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as AppCompatActivity
+        appCompatActivity = context as AppCompatActivity
         listener = context as AdapterInterface
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            position = arguments!!.getInt("position")
-            model = arguments!!.getSerializable("list") as ItemListModel
+            position = arguments?.getInt("position")!!
+            model = arguments?.getSerializable("list") as ItemListModel
         }
     }
 
@@ -64,7 +65,7 @@ class MoqSelectionFragment : BottomSheetDialogFragment() {
         val mMoqPriceList: ListView = view.findViewById(R.id.listview_moq_price)
         val adapter =
             MoqAdapter(
-                activity!!,
+                appCompatActivity!!,
                 model!!.moqList,
                 listener
             )

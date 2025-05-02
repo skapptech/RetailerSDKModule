@@ -49,6 +49,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityResetPassBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActvityTradeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.direct.TradeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -99,7 +100,8 @@ class ScaleUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.actvity_trade)
+        mBinding = ActvityTradeBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         activity = this
         initialization()
     }

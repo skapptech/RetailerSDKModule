@@ -33,7 +33,8 @@ public class ScratchCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_scratch_card);
+        mBinding = ActivityScratchCardBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         if (getIntent().getExtras() != null) {
             model = getIntent().getParcelableExtra("list");
             total = getIntent().getDoubleExtra("total", -1);

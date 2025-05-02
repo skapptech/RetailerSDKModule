@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityContactUsBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityDeliveryConcernBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.DeliveryConcern
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -21,7 +22,8 @@ class DeliveryConcernActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_delivery_concern)
+        mBinding = ActivityDeliveryConcernBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (intent.extras != null) {

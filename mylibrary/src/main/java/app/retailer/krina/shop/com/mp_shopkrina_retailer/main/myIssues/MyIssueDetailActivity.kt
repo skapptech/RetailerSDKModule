@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddIssueBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.MyIssueDetailBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.IssueDetailAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.MyIssueDetailModel
@@ -30,7 +31,8 @@ class MyIssueDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.my_issue_detail)
+        mBinding = MyIssueDetailBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         if (intent.extras != null)
             model = intent.getSerializableExtra("model") as MyIssuesResponseModel?

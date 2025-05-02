@@ -20,10 +20,8 @@ class NoInternetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val mBinding = DataBindingUtil.setContentView<LayoutNoInternetBinding>(
-            this,
-            R.layout.layout_no_internet
-        )
+        val mBinding = LayoutNoInternetBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_internet)
         mBinding.tvNotConnected.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_connected_to_internet)

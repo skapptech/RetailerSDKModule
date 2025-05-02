@@ -74,6 +74,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityRazorPayPaymentBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActvityTradeBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.Listener;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.EditProfileActivity;
@@ -112,7 +113,8 @@ public class TradeActivity extends AppCompatActivity implements Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.actvity_trade);
+        mBinding = ActvityTradeBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         activity = this;
         if (RetailerSDKApp.getInstance().prefManager.isLoggedIn()) {
             initialization();

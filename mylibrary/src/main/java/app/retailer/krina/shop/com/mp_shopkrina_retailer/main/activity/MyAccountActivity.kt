@@ -17,7 +17,8 @@ class MyAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_account)
+        mBinding = ActivityMyAccountBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         initView()
     }
 

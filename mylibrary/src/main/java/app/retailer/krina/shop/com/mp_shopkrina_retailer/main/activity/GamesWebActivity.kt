@@ -45,7 +45,8 @@ class GamesWebActivity : AppCompatActivity() {
         )
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_games_web)
+        mBinding = ActivityGamesWebBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         setSupportActionBar(mBinding.toolbar)
 
         try {

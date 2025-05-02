@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityFeedbackBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyFavouriteBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.FeedbackModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.FeedBackResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -40,8 +41,8 @@ class FeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_feedback)
-        // init view
+        mBinding = ActivityFeedbackBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)        // init view
         initialization()
         // back BTn
         mBinding.toolbarFeedback.back.setOnClickListener { v: View? -> onBackPressed() }

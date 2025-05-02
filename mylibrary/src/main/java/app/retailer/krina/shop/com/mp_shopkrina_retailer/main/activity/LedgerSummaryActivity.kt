@@ -59,7 +59,8 @@ class LedgerSummaryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_ledger_summary)
+        mBinding = ActivityLedgerSummaryBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val args = intent.getBundleExtra("BUNDLE")
         ladgerEntryList = args!!.getSerializable("data") as ArrayList<LadgerEntryListModel>?
@@ -152,7 +153,9 @@ class LedgerSummaryActivity : AppCompatActivity() {
         utils = Utils(this)
         mBinding.rvSupplierPayment.layoutManager = LinearLayoutManager(applicationContext)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
-        registerReceiver(onComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(onComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_NOT_EXPORTED)
+        }
         if (ladgerEntryList!!.size > 0) {
             val supplierPaymentAdapter = SupplierPaymentAdapter(this, ladgerEntryList)
             mBinding.rvSupplierPayment.adapter = supplierPaymentAdapter

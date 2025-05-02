@@ -58,7 +58,8 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_clearance)
+        mBinding = ActivityClearanceBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = RetailerSDKApp.getInstance().noteRepository
             .getString(R.string.clearance)

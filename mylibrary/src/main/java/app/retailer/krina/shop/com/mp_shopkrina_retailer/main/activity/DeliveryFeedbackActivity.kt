@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityDeliveryConcernBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityDeliveryFeedbackBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.DeliveryFeedbackModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.FeedbackQuestionsModel
@@ -36,7 +37,8 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_delivery_feedback)
+        mBinding = ActivityDeliveryFeedbackBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         initialization()
         val extras = intent.extras
         if (extras != null) {

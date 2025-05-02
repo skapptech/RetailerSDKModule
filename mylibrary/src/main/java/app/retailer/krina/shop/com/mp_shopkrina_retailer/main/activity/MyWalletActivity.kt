@@ -55,7 +55,8 @@ class MyWalletActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_mywallet)
+        mBinding = ActivityMywalletBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         setSupportActionBar(mBinding.toolbarMyWallet.arrowToolbar)
 
         //init view

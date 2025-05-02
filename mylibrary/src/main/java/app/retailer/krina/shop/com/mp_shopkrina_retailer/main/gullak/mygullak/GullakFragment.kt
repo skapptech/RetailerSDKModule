@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentGullakBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.GullakDataListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.GullakModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -54,7 +55,7 @@ class GullakFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gullak, container, false)
+        binding = FragmentGullakBinding.inflate(inflater, container, false)
         return binding.root
     }
 

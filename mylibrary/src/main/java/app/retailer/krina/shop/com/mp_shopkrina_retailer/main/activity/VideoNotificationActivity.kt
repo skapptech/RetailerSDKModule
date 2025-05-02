@@ -36,7 +36,8 @@ class VideoNotificationActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_video_notification)
+        mBinding = ActivityVideoNotificationBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val manager = getSystemService(AUDIO_SERVICE) as AudioManager
         manager.setStreamMute(AudioManager.STREAM_MUSIC, false)
         mBinding.btnAudio.setOnClickListener { view: View? ->

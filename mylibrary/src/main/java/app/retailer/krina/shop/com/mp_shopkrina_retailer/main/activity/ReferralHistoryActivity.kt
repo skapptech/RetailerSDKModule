@@ -20,7 +20,8 @@ class ReferralHistoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_referral_history)
+        binding = ActivityReferralHistoryBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.referral_history)
     }

@@ -24,7 +24,8 @@ class RtgsInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_rtgs_info)
+        binding = ActivityRtgsInfoBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().noteRepository.getString(R.string.rtgs_details)
 

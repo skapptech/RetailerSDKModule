@@ -47,8 +47,11 @@ public class AddressSearchAdapter extends RecyclerView.Adapter<AddressSearchAdap
     @NonNull
     @Override
     public PredictionHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PredictionHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext())
-                , R.layout.item_place_recycler, viewGroup, false));
+        return new PredictionHolder(ItemPlaceRecyclerBinding.inflate(
+                LayoutInflater.from(viewGroup.getContext()),
+                viewGroup,
+                false
+        ));
     }
 
     @Override

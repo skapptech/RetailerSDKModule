@@ -80,8 +80,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_profile_info, container, false)
+        mBinding = FragmentProfileInfoBinding.inflate(inflater, container, false)
         // initialize var
         isGPS = Utils.gpsPermission(activity, "runtime")
         initView()

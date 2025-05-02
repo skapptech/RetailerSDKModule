@@ -25,9 +25,8 @@ class GullakDataListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemGullakBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_gullak,
                 parent,
                 false
             )

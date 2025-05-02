@@ -31,7 +31,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_setting)
+        mBinding = ActivitySettingBinding.inflate(layoutInflater)
         setSupportActionBar(mBinding?.toolbarMyUdhar?.arrowToolbar)
         initView()
     }

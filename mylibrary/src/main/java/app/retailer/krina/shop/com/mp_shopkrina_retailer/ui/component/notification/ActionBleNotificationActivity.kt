@@ -24,6 +24,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAct
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -50,7 +51,7 @@ class ActionBleNotificationActivity : AppCompatActivity(), View.OnClickListener 
     private var onItemClick: OnItemClick? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_action_notification)
+        mBinding = ActivityActionNotificationBinding.inflate(layoutInflater)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

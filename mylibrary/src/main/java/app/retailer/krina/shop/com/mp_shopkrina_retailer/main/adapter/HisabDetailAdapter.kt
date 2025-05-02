@@ -24,9 +24,8 @@ class HisabDetailAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
         return if (i == HisabDetailModel.USER_SIDE) {
             ViewHolder(
-                DataBindingUtil.inflate(
+                ItemHisabDeatailsUserBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_hisab_deatails_user,
                     viewGroup,
                     false
                 )

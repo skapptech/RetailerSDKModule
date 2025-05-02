@@ -19,9 +19,10 @@ class PendingPaymentAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemPaymentAdapterBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_payment_adapter, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

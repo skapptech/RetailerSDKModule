@@ -21,9 +21,8 @@ class MyAgentListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemMyAgentBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_my_agent,
                 parent,
                 false
             )

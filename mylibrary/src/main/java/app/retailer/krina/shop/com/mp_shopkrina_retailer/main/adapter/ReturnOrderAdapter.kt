@@ -27,9 +27,10 @@ class ReturnOrderAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemReturnOrderBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_return_order, parent, false
+                parent,
+                false
             )
         )
     }

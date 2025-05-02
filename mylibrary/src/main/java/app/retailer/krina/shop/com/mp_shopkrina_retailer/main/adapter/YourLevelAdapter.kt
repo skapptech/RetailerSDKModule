@@ -19,9 +19,9 @@ class YourLevelAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemYourLevelBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_your_level, parent, false
+                parent, false
             )
         )
     }

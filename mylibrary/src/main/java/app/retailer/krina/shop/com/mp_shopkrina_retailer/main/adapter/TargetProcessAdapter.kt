@@ -23,9 +23,9 @@ class TargetProcessAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
 
-            DataBindingUtil.inflate(
+            ViewTargetProcessBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.view_target_process, parent, false
+                 parent, false
             )
         )
     }

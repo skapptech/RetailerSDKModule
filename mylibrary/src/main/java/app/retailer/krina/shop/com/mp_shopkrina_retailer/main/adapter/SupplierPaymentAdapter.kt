@@ -18,12 +18,12 @@ class SupplierPaymentAdapter(
     private val ladgerEntryListModel: ArrayList<LadgerEntryListModel>?
 ) : RecyclerView.Adapter<SupplierPaymentAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    viewGroup.context
-                ), R.layout.item_supplier_payment, viewGroup, false
+            ItemSupplierPaymentBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }

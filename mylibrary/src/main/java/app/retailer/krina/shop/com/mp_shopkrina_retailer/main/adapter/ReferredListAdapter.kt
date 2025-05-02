@@ -25,9 +25,8 @@ class ReferredListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemReferredListBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_referred_list,
                 parent,
                 false
             )

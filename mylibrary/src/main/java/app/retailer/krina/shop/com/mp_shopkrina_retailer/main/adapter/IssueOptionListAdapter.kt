@@ -23,11 +23,10 @@ class IssueOptionListAdapter(
             viewGroup: ViewGroup,
             i: Int
     ): ViewHolder {
-        return ViewHolder(DataBindingUtil.inflate(
-                LayoutInflater.from(viewGroup.context),
-                R.layout.item_issue_categories,
-                viewGroup,
-                false
+        return ViewHolder(ItemIssueCategoriesBinding.inflate(
+            LayoutInflater.from(viewGroup.context),
+            viewGroup,
+            false
         ))
     }
 

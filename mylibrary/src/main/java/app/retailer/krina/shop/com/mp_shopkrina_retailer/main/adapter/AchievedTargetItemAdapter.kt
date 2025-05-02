@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemAchievedGiftBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemAchievedTargetBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TargetCustomerDC
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -18,10 +19,10 @@ class AchievedTargetItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    parent.context
-                ), R.layout.item_achieved_target, parent, false
+            ItemAchievedTargetBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }

@@ -75,8 +75,11 @@ public class FavItemListAdapter extends RecyclerView.Adapter<FavItemListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                R.layout.fav_items, viewGroup, false));
+        return new ViewHolder(FavItemsBinding.inflate(
+                LayoutInflater.from(viewGroup.getContext()),
+                viewGroup,
+                false
+        ));
     }
 
     @Override

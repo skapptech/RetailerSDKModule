@@ -21,9 +21,10 @@ class HKImageAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemsDocImageBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.items_doc_image, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

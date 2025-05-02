@@ -36,7 +36,7 @@ class RateAppFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_rate_app, container, false)
+        mBinding = FragmentRateAppBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 

@@ -81,12 +81,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.new_sub_sub_category_fragment,
-            container,
-            false
-        )
+        mBinding = NewSubSubCategoryFragmentBinding.inflate(inflater, container, false)
         val bundle = this.arguments
         if (bundle != null) {
             categoryId = bundle.getInt("CATEGORY_ID")

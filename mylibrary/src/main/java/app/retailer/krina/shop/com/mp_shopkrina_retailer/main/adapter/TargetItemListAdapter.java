@@ -75,11 +75,11 @@ public class TargetItemListAdapter extends RecyclerView.Adapter<TargetItemListAd
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         return new ViewHolder(
                 CategoryOrderItemsBinding.inflate(
-                        LayoutInflater.from(viewGroup.getContext()),
-                        viewGroup,
+                        LayoutInflater.from(parent.getContext()),
+                        parent,
                         false
                 ));
     }

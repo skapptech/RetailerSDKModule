@@ -52,9 +52,7 @@ class TargetItemsFragment : Fragment(), SearchInterface {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_target_items, container, false)
-
+        mBinding = FragmentTargetItemsBinding.inflate(inflater, container, false)
         init()
 
         return mBinding.root

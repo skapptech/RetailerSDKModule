@@ -21,7 +21,7 @@ class RateAppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_rate_app)
+        mBinding = ActivityRateAppBinding.inflate(layoutInflater)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

@@ -46,8 +46,7 @@ class TradeOfferFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mbinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_trade_offers, container, false)
+        mbinding = FragmentTradeOffersBinding.inflate(inflater, container, false)
         homeActivity!!.searchText!!.visibility = View.VISIBLE
         homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         // init view

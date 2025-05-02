@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name="app.retailer.krina.shop.com.mp_shopkrina_retailer.MainActivity"
+            android:name="app.retailer.krina.shop.com.mp_shopkrina_retailer.MainActivityTest"
             android:exported="true"
             android:theme="@style/Theme.RetailerModule">
             <intent-filter>

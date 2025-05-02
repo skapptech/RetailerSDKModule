@@ -33,8 +33,8 @@
                     android:paddingTop="@dimen/size16"
                     android:paddingEnd="@dimen/size30"
                     android:paddingBottom="@dimen/size16"
-                    android:tint="@color/Black"
-                    app:srcCompat="@drawable/ic_cross" />
+                    app:srcCompat="@drawable/ic_cross"
+                    app:tint="@color/Black" />
 
                 <TextView
                     android:id="@+id/title"

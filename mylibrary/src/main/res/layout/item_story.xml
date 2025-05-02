@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".main.fragment.PlaceholderFragment">
-
-    <RelativeLayout
-        android:id="@+id/rl_story"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<RelativeLayout android:id="@+id/rl_story"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image1"
@@ -29,4 +25,3 @@
             android:textSize="13sp"
             android:textStyle="italic" />
     </RelativeLayout>
-</layout>

@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="@dimen/size60"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/size4"
 
-        <variable
-            name="pendingPaymentModel"
-            type="app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.PendingPaymentModel" />
+    app:cardCornerRadius="5dp"
 
-    </data>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size60"
-        android:layout_margin="@dimen/size4"
-
-        app:cardCornerRadius="5dp"
-
-        app:cardElevation="@dimen/size10">
+    app:cardElevation="@dimen/size10"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,4 +106,3 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</layout>

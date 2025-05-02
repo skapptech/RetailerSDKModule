@@ -575,7 +575,6 @@
             android:name=".ui.component.home.offer.OfferDetailFragment"
             android:exported="true"
             tools:ignore="Instantiatable" />
-
         <activity
             android:name=".community.FeedActivity"
             android:exported="true"

@@ -34,7 +34,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAd
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.productDetails.ProductDetailsActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -79,16 +79,16 @@ class NotificationItemListAdapter(
         val model = list!![i]
         //set String
         viewHolder.mBinding.tvMrpText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_mrp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp)
         viewHolder.mBinding.tvRemainingQtyText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
         viewHolder.mBinding.tvItemLeftText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_left)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left)
         viewHolder.mBinding.tvEndInText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.end_in_text)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.end_in_text)
         viewHolder.mBinding.tvFreeItemNotActiveText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
-        viewHolder.btnAdd.text = MyApplication.getInstance().dbHelper.getString(R.string.add_btn)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
+        viewHolder.btnAdd.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn)
 
         // set MOQ
         if (model.moqList != null && model.moqList.size > 0) {
@@ -99,9 +99,9 @@ class NotificationItemListAdapter(
             viewHolder.tvMultiMoq.visibility = View.GONE
         }
         viewHolder.tvMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         viewHolder.tvMultiMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         if (!TextUtils.isNullOrEmpty(model.scheme)) {
             viewHolder.mBinding.tvSchemeText.visibility = View.VISIBLE
             viewHolder.mBinding.tvSchemeText.text = "" + model.scheme
@@ -159,11 +159,11 @@ class NotificationItemListAdapter(
             ivClose.setOnClickListener { dialog.dismiss() }
 
             tvDSelectQty.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for)
-            tvDMoq.text = MyApplication.getInstance().dbHelper.getString(R.string.moq)
-            tvDMrp.text = MyApplication.getInstance().dbHelper.getString(R.string.mrp)
-            tvDRs.text = MyApplication.getInstance().dbHelper.getString(R.string.rs)
-            tvDMargin.text = MyApplication.getInstance().dbHelper.getString(R.string.margins_d)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for)
+            tvDMoq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq)
+            tvDMrp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp)
+            tvDRs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs)
+            tvDMargin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d)
             item_name.text = model.itemname
             val mMoqPriceList = dialogLayout.findViewById<ListView>(R.id.listview_moq_price)
             val listener = AdapterInterface { pos ->
@@ -229,15 +229,15 @@ class NotificationItemListAdapter(
     }
 
     private fun addRemoveFav(model: ItemListModel, viewHolder: ViewHolder) {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
-            MyApplication.getInstance().noteRepository.deleteTask(model)
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(model)
             Utils.addFav(model.itemId, false, activity)
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
-            MyApplication.getInstance().noteRepository.insertTask(model)
+            RetailerSDKApp.getInstance().noteRepository.insertTask(model)
             Utils.addFav(model.itemId, true, activity)
-            MyApplication.getInstance().analyticAddWishList(model)
+            RetailerSDKApp.getInstance().analyticAddWishList(model)
         }
     }
 
@@ -245,7 +245,7 @@ class NotificationItemListAdapter(
         flashofferFlag = false
         try {
             // check item in wishList
-            if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+            if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
                 viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
             } else {
                 viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
@@ -273,7 +273,7 @@ class NotificationItemListAdapter(
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeItemIV.setBackgroundResource(R.drawable.ic_gift_bg)
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.Dp)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp)
                         val sfreewalletDP = DecimalFormat("##.##").format(model.offerWalletPoint)
                         freeOfferTextGet =
                             "<font color=#fe4e4e>Get&nbsp;$sfreewalletDP&nbsp;Free</font><font color=#000000>&nbsp;Dream Points</font>"
@@ -289,7 +289,7 @@ class NotificationItemListAdapter(
                         }
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.free)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.free)
                         // String[] spItemFreeItemName = model.getOfferFreeItemName().split("(?<=\\D)(?=\\d)");
                         freeOfferTextGet =
                             "<font color=#fe4e4e>Get " + model.offerFreeItemQuantity + "&nbsp;Free </font>" + "<font color=#000000>&nbsp;" + model.offerFreeItemName + " </font>"
@@ -360,7 +360,7 @@ class NotificationItemListAdapter(
             }
             val sPRICE = "| &#8377; " + DecimalFormat("##.##").format(model.unitPrice)
             val sMargin =
-                MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                     "##.##"
                 ).format(model.marginPoint!!.toDouble()) + "%"
             val sMRP = DecimalFormat("##.##").format(model.price)
@@ -373,7 +373,7 @@ class NotificationItemListAdapter(
                 viewHolder.mBinding.liPrime.visibility = View.VISIBLE
                 viewHolder.mBinding.tvPPrice.text =
                     (SharePrefs.getInstance(activity).getString(SharePrefs.PRIME_NAME)
-                            + " " + MyApplication.getInstance().dbHelper.getString(R.string.price)
+                            + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.price)
                             + ": ₹" + DecimalFormat("##.##").format(model.primePrice))
                 viewHolder.mBinding.tvPrice.setTextColor(activity.resources.getColor(R.color.grey))
             } else {
@@ -399,11 +399,11 @@ class NotificationItemListAdapter(
                     0
                 )
             }
-            val cartModel = MyApplication.getInstance().noteRepository.getItemByMrpId(
+            val cartModel = RetailerSDKApp.getInstance().noteRepository.getItemByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
-            val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+            val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -426,7 +426,7 @@ class NotificationItemListAdapter(
                 viewHolder.mBinding.availQtyLayout.visibility = View.GONE
             }
             viewHolder.tvDreamPoint.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
             var isItemFound: Boolean
             if (cartModel != null && model.itemId == cartModel.itemId) {
                 isItemFound = true
@@ -707,7 +707,7 @@ class NotificationItemListAdapter(
         add: Boolean
     ): Boolean {
         var addFlag = addFlag
-        val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+        val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
             model.itemId,
             model.itemMultiMRPId
         )
@@ -725,7 +725,7 @@ class NotificationItemListAdapter(
             if (total + itemQuantity > itemlimitqty) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.additemToast_2
                     )
                 )
@@ -752,7 +752,7 @@ class NotificationItemListAdapter(
                 if (itemQuantity > model.itemLimitQty) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.additemToast_2
                         )
                     )
@@ -788,7 +788,7 @@ class NotificationItemListAdapter(
         var addFlag = addFlag
         try {
             val total =
-                MyApplication.getInstance().noteRepository.getQtyByMultiMrp(
+                RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(
                     model.itemId,
                     model.itemMultiMRPId
                 )
@@ -798,7 +798,7 @@ class NotificationItemListAdapter(
                 if (total + itemQuantity > itemlimitqty) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                     )
                 } else {
                     viewHolder.tvselectedItemQuantity.text = "" + itemQuantity
@@ -809,7 +809,7 @@ class NotificationItemListAdapter(
                     if (itemQuantity > model.billLimitQty) {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                         )
                     } else {
                         viewHolder.tvselectedItemQuantity.text = "" + itemQuantity

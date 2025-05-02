@@ -21,11 +21,10 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemProfile
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemProfilePollViewBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemProfileSingleImageBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin.Companion.isValidUrl
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin.Companion.setResizableText
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.bumptech.glide.Glide
 
 class ProfileFeedAdapter(
@@ -321,7 +320,7 @@ class ProfileFeedAdapter(
                 }
                 if (feedListModel.imageObj != null && feedListModel.imageObj!!.size > 0) {
                     Glide.with(context)
-                        .load(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
+                        .load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
                         .placeholder(R.drawable.logo_grey)
                         .into(holder.binding.ivImage)
                 } else {

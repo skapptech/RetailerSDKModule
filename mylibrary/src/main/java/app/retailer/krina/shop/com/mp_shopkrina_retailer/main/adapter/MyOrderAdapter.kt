@@ -26,7 +26,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.RatingMod
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.MyOrderItemInfo
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -55,17 +55,17 @@ class MyOrderAdapter(
     override fun onBindViewHolder(vh: ViewHolder, position: Int) {
         val obj = list[position]
         //set Strings
-        vh.mBinding.tvOrderIdH.text = MyApplication.getInstance().dbHelper.getString(R.string.order_id)
-        vh.mBinding.tvOrderIdH2.text = MyApplication.getInstance().dbHelper.getString(R.string.order_id)
-        vh.mBinding.tvOrderIdH3.text = MyApplication.getInstance().dbHelper.getString(R.string.order_id)
+        vh.mBinding.tvOrderIdH.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
+        vh.mBinding.tvOrderIdH2.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
+        vh.mBinding.tvOrderIdH3.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
         vh.mBinding.tvAmountH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_amount)
         vh.mBinding.tvAmountPayableH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amount1)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount1)
         vh.mBinding.btnPayNow.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.pay_now)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_now)
         vh.mBinding.tvDetailsSelect.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_View_Detail)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_View_Detail)
         vh.mBinding.tvOtp.visibility = View.GONE
         vh.mBinding.tvOrderId.text = "" + obj.orderId
         vh.mBinding.tvOrderId2.text = "" + obj.orderId
@@ -74,10 +74,10 @@ class MyOrderAdapter(
         vh.mBinding.tvPayableAmt.text = "₹" + obj.remainingAmount
         vh.mBinding.tvDBoy.text = obj.deliveryPerson
         vh.mBinding.tvDBoyR.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.delivery_person)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.delivery_person)
         vh.mBinding.tvSalesP.text = obj.salesPerson
         vh.mBinding.tvSalesPR.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.sales_person)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.sales_person)
         if (obj.remainingAmount > 0) {
             vh.mBinding.liAmtP.visibility = View.VISIBLE
         } else {
@@ -100,13 +100,13 @@ class MyOrderAdapter(
         val myOrderItemInfo = MyOrderItemInfo()
         if (obj.orderType == 8) {
             vh.mBinding.tvSelfOrder.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.clearance_order)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.clearance_order)
         } else if (obj.isRebookOrder) {
             vh.mBinding.tvSelfOrder.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.rebook)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.rebook)
         } else {
             vh.mBinding.tvSelfOrder.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.self_order)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.self_order)
         }
         myOrderItemInfo.orderNumber = obj.orderId.toString()
         val text =
@@ -120,7 +120,7 @@ class MyOrderAdapter(
         statusList.add(
             ReturnOrderStatusModel(
                 position,
-                MyApplication.getInstance().dbHelper.getString(R.string.ordered),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.ordered),
                 "",
                 obj.createdDate
             )
@@ -157,7 +157,7 @@ class MyOrderAdapter(
                     override fun onError(e: Throwable) {}
                     override fun onComplete() {}
                 },
-                EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + obj.orderId
+                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + obj.orderId
             )
             if (obj.salesPersonMobile != null && obj.salesPersonMobile!!.isNotEmpty()) {
                 CommonClassForAPI.getInstance(activity).getAppHomeBottomData(
@@ -173,7 +173,7 @@ class MyOrderAdapter(
                         override fun onError(e: Throwable) {}
                         override fun onComplete() {}
                     },
-                    EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + obj.orderId
+                    EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + obj.orderId
                 )
             }
         }
@@ -324,7 +324,7 @@ class MyOrderAdapter(
         val adapter = OrderStatusAdapter(activity, list)
         rvStatus!!.adapter = adapter
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("order_status_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("order_status_dialog")
     }
 
     inner class ViewHolder(var mBinding: ActivityMyOrderItemBinding) : RecyclerView.ViewHolder(
@@ -332,7 +332,7 @@ class MyOrderAdapter(
     ) {
         init {
             mBinding.tvDetailsSelect.setOnClickListener {
-                MyApplication.getInstance().updateAnalytics("order_detail_click")
+                RetailerSDKApp.getInstance().updateAnalytics("order_detail_click")
                 val intent = Intent(activity, OrderDetailsNewActivity::class.java)
                 intent.putExtra("selectedPosition", adapterPosition)
                 intent.putExtra("orderId", list[adapterPosition].orderId)
@@ -343,7 +343,7 @@ class MyOrderAdapter(
                 Utils.fadeTransaction(activity)
             }
             mBinding.btnPayNow.setOnClickListener {
-                MyApplication.getInstance().updateAnalytics("pay_now_click")
+                RetailerSDKApp.getInstance().updateAnalytics("pay_now_click")
                 if (utils.isNetworkAvailable) {
                     if (SharePrefs.getInstance(activity)
                             .getBoolean(SharePrefs.IS_COMPANY_API_CALL)
@@ -372,7 +372,7 @@ class MyOrderAdapter(
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             }
@@ -421,7 +421,7 @@ class MyOrderAdapter(
                     0,
                     ReturnOrderStatusModel(
                         0,
-                        MyApplication.getInstance().dbHelper.getString(R.string.ordered),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.ordered),
                         "",
                         orderDate
                     )

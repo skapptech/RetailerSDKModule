@@ -25,7 +25,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -73,7 +73,7 @@ class DialWheelActivity : AppCompatActivity() {
                 skipSpinPopup()
             } else {
                 Utils.setToast(
-                    applicationContext, MyApplication.getInstance().dbHelper
+                    applicationContext, RetailerSDKApp.getInstance().dbHelper
                         .getString(R.string.internet_connection)
                 )
             }
@@ -100,8 +100,8 @@ class DialWheelActivity : AppCompatActivity() {
 
     private fun init() {
         mBinding.tvSpinToWin.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.spin_to_win)
-        mBinding.skipDial.text = MyApplication.getInstance().dbHelper.getString(R.string.skip)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.spin_to_win)
+        mBinding.skipDial.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.skip)
         btnSpin = mBinding.btnSpin
         imPointer = mBinding.imPointer
         skipDial = mBinding.skipDial
@@ -123,7 +123,7 @@ class DialWheelActivity : AppCompatActivity() {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                 )
             }
         }
@@ -167,7 +167,7 @@ class DialWheelActivity : AppCompatActivity() {
                         isRotating = 0
                         wheelCount--
                         count++
-                        MyApplication.getInstance().updateAnalyticWheel(
+                        RetailerSDKApp.getInstance().updateAnalyticWheel(
                             "wheel_play",
                             orderModel!!.wheelcount,
                             count,
@@ -176,7 +176,7 @@ class DialWheelActivity : AppCompatActivity() {
                         postDial(winPoint)
                         btnSpin!!.isEnabled = true
                         mBinding.tvRemainingDial.text = "$wheelCount " +
-                                MyApplication.getInstance().dbHelper.getString(R.string.dial_remaining)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.dial_remaining)
                         imPointer!!.isEnabled = true
                         skipDial!!.isEnabled = true
                     }
@@ -199,14 +199,14 @@ class DialWheelActivity : AppCompatActivity() {
         val cancelBtn = exitDialog!!.findViewById<TextView>(R.id.cancel_btn)
         val tvExitHere = exitDialog!!.findViewById<TextView>(R.id.tvExitHere)
         val tvSkipSpin = exitDialog!!.findViewById<TextView>(R.id.tvSkipSpin)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
-        cancelBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
+        cancelBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         tvExitHere.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.without_earning_point_title_)
-        tvSkipSpin.text = MyApplication.getInstance().dbHelper.getString(R.string.spin_skip_title)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.without_earning_point_title_)
+        tvSkipSpin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.spin_skip_title)
         cancelBtn.setOnClickListener { exitDialog!!.dismiss() }
         okBtn.setOnClickListener {
-            MyApplication.getInstance()
+            RetailerSDKApp.getInstance()
                 .updateAnalyticWheel("wheel_skip", orderModel!!.wheelcount, count, 0)
             countEndFlag = true
             postDial(0)
@@ -232,7 +232,7 @@ class DialWheelActivity : AppCompatActivity() {
             )
         } else {
             Utils.setToast(
-                applicationContext, MyApplication.getInstance().dbHelper
+                applicationContext, RetailerSDKApp.getInstance().dbHelper
                     .getString(R.string.internet_connection)
             )
         }
@@ -261,8 +261,8 @@ class DialWheelActivity : AppCompatActivity() {
                     if (o.isStatus) {
                         if (!countEndFlag) {
                             val textMeg =
-                                (MyApplication.getInstance().dbHelper.getString(R.string.you_have_won)
-                                        + " " + winPoint + " " + MyApplication.getInstance().dbHelper.getString(
+                                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_have_won)
+                                        + " " + winPoint + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.points
                                 ))
                             Utils.setLongToast(

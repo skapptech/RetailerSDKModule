@@ -42,7 +42,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
@@ -68,7 +67,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.FusedLocation
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -396,45 +395,45 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
         mBinding!!.btnSkip.setOnClickListener(this)
         mBinding!!.btnExpiryDate.setOnClickListener(this)
         mBinding!!.tvPD.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.personal_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.personal_details)
         mBinding!!.tilRefCode.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.referral_code)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.referral_code)
         mBinding!!.tilName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.first_name)
-        mBinding!!.tilEmail.hint = MyApplication.getInstance().dbHelper.getString(R.string.email)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.first_name)
+        mBinding!!.tilEmail.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.email)
         mBinding!!.tilPass.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_passwordr)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_passwordr)
         mBinding!!.tvShopD.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.shop_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_details)
         mBinding!!.tilGst.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_gstin)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_gstin)
         mBinding!!.tilLicence.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_license_no)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_license_no)
         mBinding!!.tilSPName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_shopname)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_shopname)
         mBinding!!.tilCity.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.select_city)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city)
         mBinding!!.tilAdd.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_shipping_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_shipping_address)
         mBinding!!.tilBillingAddress.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_billing_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_billing_address)
         mBinding!!.txtCbCheckSameAddress.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_check_shiping_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_check_shiping_address)
         mBinding!!.tilBankName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.bank_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bank_name)
         mBinding!!.tilAccountNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.account_number)
-        mBinding!!.tilIFSC.hint = MyApplication.getInstance().dbHelper.getString(R.string.ifsc_code)
-        mBinding!!.btnSignup.text = MyApplication.getInstance().dbHelper.getString(R.string.next)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.account_number)
+        mBinding!!.tilIFSC.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ifsc_code)
+        mBinding!!.btnSignup.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.next)
         mBinding!!.etReferralCode.setText(
             SharePrefs.getInstance(applicationContext).getString(SharePrefs.REFERRAL_BY)
         )
         mBinding!!.tilPanNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.pannumber)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pannumber)
         mBinding!!.tilAadharNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.aadhar_number)
-        val text = (MyApplication.getInstance().dbHelper.getString(R.string.already_account)
-                + "<font color=#FF4500>" + MyApplication.getInstance().dbHelper.getString(R.string.login)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.aadhar_number)
+        val text = (RetailerSDKApp.getInstance().dbHelper.getString(R.string.already_account)
+                + "<font color=#FF4500>" + RetailerSDKApp.getInstance().dbHelper.getString(R.string.login)
                 + "</font>")
         mBinding!!.tvLogin.text = Html.fromHtml(text)
         mBinding!!.etGstNo.isFocusable = false
@@ -461,7 +460,7 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
                     mBinding!!.cbBillAddressSame.isChecked = false
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.enter_shipping_address)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_shipping_address)
                     )
                 }
             }
@@ -581,26 +580,26 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
         if (!flag) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.gst_length)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.gst_length)
             )
         } else if (emailFlag) {
             mBinding!!.etEmail.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.valid_email_address)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_email_address)
             mBinding!!.etEmail.requestFocus()
         } else if (TextUtils.isNullOrEmpty(shopName)) {
             mBinding!!.etShopName.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_shop_Name)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_shop_Name)
             mBinding!!.etShopName.requestFocus()
         } else if (mBinding!!.spDocType.selectedItemPosition != 0 && !hasDoc) {
             if (mBinding!!.liGst.visibility == View.VISIBLE) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.gst_length)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.gst_length)
                 )
             }
             if (mBinding!!.liLicense.visibility == View.VISIBLE) {
                 mBinding!!.etLicenseNo.error =
-                    MyApplication.getInstance().dbHelper.getString(R.string.enter_license_number)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_license_number)
                 mBinding!!.etLicenseNo.requestFocus()
             }
             //        } else if (hasDoc && licenseExpiryDate.isEmpty()) {
@@ -611,27 +610,27 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
         } else if (TextUtils.isNullOrEmpty(shippingAddress)) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_shipping_address)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_shipping_address)
             )
         } else if (TextUtils.isNullOrEmpty(gstBillingAddress)) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_billing_address)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_billing_address)
             )
         } else if (panNumber != "" && !Utils.isValidPanCardNo(panNumber.uppercase(Locale.getDefault()))) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.valid_pan_number)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pan_number)
             )
         } else if (RefNoGST && panNumber == "") {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_please_enter_pan_card)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_please_enter_pan_card)
             )
         } else if (aadharNumber != "" && aadharNumber.length < 12) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.valid_aadhar_number)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_aadhar_number)
             )
             //        } else if (!mBinding.checkbox.isChecked()) {
 //            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.check_terms_and_condition));
@@ -802,10 +801,10 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun launchHomeScreen() {
         try {
-            MyApplication.getInstance().clearLocalData()
-            MyApplication.getInstance().clearCartData()
+            RetailerSDKApp.getInstance().clearLocalData()
+            RetailerSDKApp.getInstance().clearCartData()
             // start analytic new session
-            MyApplication.getInstance().startAnalyticSession()
+            RetailerSDKApp.getInstance().startAnalyticSession()
             startActivity(
                 Intent(applicationContext, SplashScreenActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -834,9 +833,9 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 gstSearch = etDialogGstNumber.text.toString().trim { it <= ' ' }
                 if (gstSearch.length >= 15) {
-                    MyApplication.getInstance().updateAnalytics("verify_gst_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("verify_gst_click")
                     pbDProgress!!.visibility = View.VISIBLE
-                    tvDVerifiedMsg!!.text = MyApplication.getInstance().dbHelper.getString(R.string.verifying_gst)
+                    tvDVerifiedMsg!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.verifying_gst)
                     searchGSTInfo(gstSearch)
                 } else {
                     Utils.setToast(
@@ -850,9 +849,9 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
         tvVerify.setOnClickListener { view: View? ->
             gstSearch = etDialogGstNumber.text.toString().trim { it <= ' ' }
             if (gstSearch.length >= 15) {
-                MyApplication.getInstance().updateAnalytics("verify_gst_click")
+                RetailerSDKApp.getInstance().updateAnalytics("verify_gst_click")
                 pbDProgress!!.visibility = View.VISIBLE
-                tvDVerifiedMsg!!.text = MyApplication.getInstance().dbHelper.getString(R.string.verifying_gst)
+                tvDVerifiedMsg!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.verifying_gst)
                 searchGSTInfo(gstSearch)
             } else {
                 Utils.setToast(
@@ -882,23 +881,23 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
         val tvSkCode = dialog.findViewById<TextView>(R.id.tv_sk_code)
         val welComeBtn = dialog.findViewById<Button>(R.id.btn_welcome)
         val tvReferralMsg = dialog.findViewById<TextView>(R.id.tvReferralMsg)
-        welComeBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.welcome)
-        tvDSkCode.text = MyApplication.getInstance().dbHelper.getString(R.string.your_sk_code)
-        tvKnowMore.text = MyApplication.getInstance().dbHelper.getString(R.string.know_about_app)
+        welComeBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.welcome)
+        tvDSkCode.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_sk_code)
+        tvKnowMore.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.know_about_app)
         if (!TextUtils.isNullOrEmpty(ReferralSkCode)) tvReferralMsg.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.signup_refer_use_msg) else tvReferralMsg.visibility =
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.signup_refer_use_msg) else tvReferralMsg.visibility =
             View.GONE
         val text1 = "Call:" + "  " + "<font color=#FF4500> +91 " + "7828112112" + "</font>"
         callus.text = Html.fromHtml(text1)
         callus.autoLinkMask = Linkify.PHONE_NUMBERS
         if (criMSG) {
-            txtMessage.text = MyApplication.getInstance().dbHelper.getString(R.string.sub_prof)
+            txtMessage.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.sub_prof)
         } else {
             titleMsg.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.unregister_member)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.unregister_member)
             txtMessage.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.Congratulation)
-            titleMsg.text = MyApplication.getInstance().dbHelper.getString(R.string.register_member)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.Congratulation)
+            titleMsg.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.register_member)
         }
         tvSkCode.text = skCode
         welComeBtn.setOnClickListener { v: View? ->
@@ -992,7 +991,7 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
                         ImageProcessing.getBody.observe(this@NewSignupActivity) {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.txt_capture)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_capture)
                             )
                             viewModel.uploadImage(it)
                         }
@@ -1117,15 +1116,15 @@ class NewSignupActivity : AppCompatActivity(), View.OnClickListener {
                     if (customer != null) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.signup_successfully_done)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.signup_successfully_done)
                         )
-                        MyApplication.getInstance().prefManager.isLoggedIn = true
+                        RetailerSDKApp.getInstance().prefManager.isLoggedIn = true
                         SaveCustomerLocalInfo.saveCustomerInfo(applicationContext, customer,false)
                         showCongratulationDialog(
                             customer.skcode,
                             TextUtils.isNullOrEmpty(sGstNo) || TextUtils.isNullOrEmpty(sLicenseNo)
                         )
-                        MyApplication.getInstance().updateAnalytics("sign_up_complete")
+                        RetailerSDKApp.getInstance().updateAnalytics("sign_up_complete")
                     } else {
                         launchHomeScreen()
                     }

@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.Profi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityUserNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 
 class UserNotificationActivity : AppCompatActivity(),
@@ -69,7 +69,7 @@ class UserNotificationActivity : AppCompatActivity(),
         //analysis
         analyticPost.eventName = "notificationClickExit"
         analyticPost.source = "Notification"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     private fun initView() {
@@ -220,7 +220,7 @@ class UserNotificationActivity : AppCompatActivity(),
         //analysis
         analyticPost.eventName = "notificationsDetailClick"
         analyticPost.source = "Notification"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
 }

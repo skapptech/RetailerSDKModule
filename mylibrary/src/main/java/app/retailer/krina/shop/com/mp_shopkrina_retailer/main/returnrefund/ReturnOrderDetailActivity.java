@@ -27,7 +27,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrde
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderListModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderStatusModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.stepform.MainStepperAdapter;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -81,10 +81,10 @@ public class ReturnOrderDetailActivity extends AppCompatActivity {
 
     private void initViews() {
         if (model != null) {
-            getSupportActionBar().setTitle(MyApplication.getInstance().dbHelper.getData("order_id"));
+            getSupportActionBar().setTitle(RetailerSDKApp.getInstance().dbHelper.getData("order_id"));
             getSupportActionBar().setSubtitle("" + model.getOrderId());
-            mBinding.tvOrderId.setText(MyApplication.getInstance().dbHelper.getData("order_id_colon")+" " + model.getOrderId());
-            mBinding.tvDate.setText(MyApplication.getInstance().dbHelper.getData("txt_date_colon")+" " + Utils.getChangeDateFormatInProfile(model.getModifiedDate()));
+            mBinding.tvOrderId.setText(RetailerSDKApp.getInstance().dbHelper.getData("order_id_colon")+" " + model.getOrderId());
+            mBinding.tvDate.setText(RetailerSDKApp.getInstance().dbHelper.getData("txt_date_colon")+" " + Utils.getChangeDateFormatInProfile(model.getModifiedDate()));
             mBinding.tvStatus.setText("" + model.getStatus());
             if (model.getRequestType() == 0) {
                 mBinding.tvStatus.setTextColor(Color.RED);
@@ -146,8 +146,8 @@ public class ReturnOrderDetailActivity extends AppCompatActivity {
 
     private void showCancelDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(MyApplication.getInstance().dbHelper.getData("text_calcel_return_replace"));
-        builder.setMessage(MyApplication.getInstance().dbHelper.getData("text_are_you_sure_calcel_return_replace"));
+        builder.setTitle(RetailerSDKApp.getInstance().dbHelper.getData("text_calcel_return_replace"));
+        builder.setMessage(RetailerSDKApp.getInstance().dbHelper.getData("text_are_you_sure_calcel_return_replace"));
 
         builder.setPositiveButton(getResources().getString(R.string.cancel), (dialog, i) -> dialog.cancel());
         builder.setNegativeButton(getResources().getString(R.string.confirm), (dialog, i) -> {
@@ -229,7 +229,7 @@ public class ReturnOrderDetailActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK, intent);
                     onBackPressed();
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("text_some_error_occured"));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("text_some_error_occured"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

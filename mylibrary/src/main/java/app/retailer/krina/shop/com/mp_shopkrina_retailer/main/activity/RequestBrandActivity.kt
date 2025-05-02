@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReq
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.RequestBrandModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonElement
 import io.reactivex.observers.DisposableObserver
@@ -52,13 +52,13 @@ class RequestBrandActivity : AppCompatActivity() {
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.not_empty_brand_name)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_empty_brand_name)
                 )
             }
         }
@@ -71,13 +71,13 @@ class RequestBrandActivity : AppCompatActivity() {
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         brandName = mBinding.brandName
         mBinding.toolbarRequestBrand.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.request_brand)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_brand)
         mBinding.text.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_requestbrand)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_requestbrand)
         mBinding.brandName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enetrbrandname)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enetrbrandname)
         mBinding.submit.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.submit_requestbrand)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit_requestbrand)
     }
 
     /**
@@ -91,7 +91,7 @@ class RequestBrandActivity : AppCompatActivity() {
                     mBinding.brandName.setText("")
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.request_placed_success)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_placed_success)
                     )
                 }
             }

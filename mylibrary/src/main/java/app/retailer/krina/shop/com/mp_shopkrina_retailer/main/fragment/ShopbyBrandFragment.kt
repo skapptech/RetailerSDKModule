@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 import java.util.*
@@ -70,7 +70,7 @@ class ShopbyBrandFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             homeActivity!!,
             this.javaClass.simpleName,
             null
@@ -158,7 +158,7 @@ class ShopbyBrandFragment : Fragment() {
         mBinding.rvBrandItem.adapter = itemListAdapter
         homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding.noItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.items_not_available)
 
         // Swipe refresh
         mBinding.swipeContainer.setOnRefreshListener { brandItemApi() }
@@ -169,7 +169,7 @@ class ShopbyBrandFragment : Fragment() {
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }

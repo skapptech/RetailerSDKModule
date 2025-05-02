@@ -38,7 +38,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AppSignatureHelpe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AutomaticallyEnableGPSLocation
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -158,13 +158,13 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
         deviceOs = Build.VERSION.RELEASE
         deviceName = Build.MODEL
         mBinding!!.tvEnterMobileT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.EnterMobileNumber)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.EnterMobileNumber)
         mBinding!!.tvOtpT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_sent_otp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_sent_otp)
         mBinding!!.btnChngnumber.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.ChangeNumber)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.ChangeNumber)
         mBinding!!.tvResendOtp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.resend_otp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.resend_otp)
         mBinding!!.tvMobileNumber.text = sMobileNumber
         mBinding!!.tvResendOtp.isEnabled = false
         mBinding!!.tvResendOtp.setTextColor(resources.getColor(R.color.grey))
@@ -195,7 +195,7 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
             false
         }
         mBinding!!.btnChngnumber.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalytics("change_no_click")
+            RetailerSDKApp.getInstance().updateAnalytics("change_no_click")
             mBinding!!.etOtp.setText("")
             cancelTimer()
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
@@ -203,11 +203,11 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
             Utils.rightTransaction(this)
         }
         mBinding!!.ivVerifyOtp.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalyticAuth("verify_otp_click", "otp", sMobileNumber)
+            RetailerSDKApp.getInstance().updateAnalyticAuth("verify_otp_click", "otp", sMobileNumber)
             if (mBinding!!.etOtp.text.toString().equals("", ignoreCase = true)) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.enteotp)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.enteotp)
                 )
             } else {
                 SharePrefs.getInstance(applicationContext)
@@ -225,18 +225,18 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
         }
         mBinding!!.tvResendOtp.setOnClickListener { v: View? ->
             mBinding!!.tvResendOtp.isEnabled = false
-            MyApplication.getInstance().updateAnalytics("resend_otp_click")
+            RetailerSDKApp.getInstance().updateAnalytics("resend_otp_click")
             startSMSListener()
             mBinding!!.etOtp.setText("")
             if (sMobileNumber == "") {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.entermobilenumber)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.entermobilenumber)
                 )
             } else if (!TextUtils.isValidMobileNo(sMobileNumber)) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.validMobilenumbe)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.validMobilenumbe)
                 )
             } else {
                 viewModel.genLoginOtp(
@@ -338,11 +338,11 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
                 SharePrefs.LAST_LOGIN_DATE,
                 SimpleDateFormat("dd/MM/yyyy").format(Date())
             )
-        MyApplication.getInstance().clearLocalData()
-        MyApplication.getInstance().clearCartData()
-        MyApplication.getInstance().prefManager.isLoggedIn = true
+        RetailerSDKApp.getInstance().clearLocalData()
+        RetailerSDKApp.getInstance().clearCartData()
+        RetailerSDKApp.getInstance().prefManager.isLoggedIn = true
         // start analytic new session
-        MyApplication.getInstance().startAnalyticSession()
+        RetailerSDKApp.getInstance().startAnalyticSession()
         startActivity(
             Intent(applicationContext, SplashScreenActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -374,7 +374,7 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
                         cancelTimer()
                     } else {
                         mBinding!!.etOtp.setText("")
-                        mBinding!!.root.snackbar(MyApplication.getInstance().dbHelper.getString(R.string.enter_correct_otp))
+                        mBinding!!.root.snackbar(RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_correct_otp))
                     }
                 }
             }
@@ -412,7 +412,7 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
                     }
                     if (it.status.equals("true")) {
                         val regApk = customer!!.registeredApk
-                        MyApplication.getInstance()
+                        RetailerSDKApp.getInstance()
                             .updateAnalyticAuth(FirebaseAnalytics.Event.LOGIN, "otp", sMobileNumber)
                         if (regApk != null) {
                             val password = regApk.password
@@ -524,7 +524,7 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
                     SharePrefs.getInstance(applicationContext)
                         .putBoolean(SharePrefs.CUST_ACTIVE, it.isActive)
                     val regApk = it.registeredApk
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalyticAuth(
                             FirebaseAnalytics.Event.SIGN_UP,
                             "mobile",

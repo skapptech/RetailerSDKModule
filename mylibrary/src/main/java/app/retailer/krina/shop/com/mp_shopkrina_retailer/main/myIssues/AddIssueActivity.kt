@@ -32,7 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.Is
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.IssuesCategoryModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
@@ -66,10 +66,10 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_issue)
 
         mBinding.toolbar.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_activity_direct_support)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_direct_support)
         mBinding.tvNoIssues.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_issues_found)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.title_activity_add_issues)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_issues_found)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_add_issues)
         initialization()
     }
 
@@ -90,9 +90,9 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             startActivity(Intent(applicationContext, MyIssuesActivity::class.java))
         }
         mBinding.tvTitle.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.que_category_do_you_have)
-        mBinding.tvYes.text = MyApplication.getInstance().dbHelper.getString(R.string.yes_title)
-        mBinding.tvNo.text = MyApplication.getInstance().dbHelper.getString(R.string.no_title)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.que_category_do_you_have)
+        mBinding.tvYes.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.yes_title)
+        mBinding.tvNo.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_title)
 
         mBinding.tvYes.setOnClickListener {
             mBinding.liNextQues.visibility = View.GONE
@@ -119,7 +119,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
         currentDateTime = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(Date())
         chatList.add(
             IssueThreadModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.ticket_hello)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.ticket_hello)
                         + SharePrefs.getInstance(applicationContext)
                     .getString(SharePrefs.CUSTOMER_NAME), false,
                 currentDateTime
@@ -127,7 +127,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
         )
         chatList.add(
             IssueThreadModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.que_how_may_i_help),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.que_how_may_i_help),
                 false, currentDateTime
             )
         )
@@ -165,7 +165,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             }
         })
 
-        dialogTv.text = MyApplication.getInstance().dbHelper.getString(R.string.popup_are_u_sure)
+        dialogTv.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.popup_are_u_sure)
 
         yesBtn.setOnClickListener {
             if (!TextUtils.isNullOrEmpty(etDescription.text.toString().trim())) {
@@ -183,7 +183,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             } else {
                 Utils.setToast(
                     this,
-                    MyApplication.getInstance().dbHelper.getString(R.string.plz_enter_des)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.plz_enter_des)
                 )
             }
         }
@@ -191,14 +191,14 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             isFirstCall = true
             chatList.add(
                 IssueThreadModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_title),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_title),
                     true,
                     currentDateTime
                 )
             )
             chatList.add(
                 IssueThreadModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.que_category_then_what_issue),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.que_category_then_what_issue),
                     false,
                     currentDateTime
                 )
@@ -226,7 +226,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
         } else {
             Utils.setToast(
                 this,
-                MyApplication.getInstance().dbHelper.getString(R.string.no_internet)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_internet)
             )
         }
     }
@@ -284,7 +284,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             )
             chatList.add(
                 IssueThreadModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.que_category_what_issue),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.que_category_what_issue),
                     false, currentDateTime
                 )
             )
@@ -302,7 +302,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
             )
             chatList.add(
                 IssueThreadModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.thank_you_msg),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.thank_you_msg),
                     false, currentDateTime
                 )
             )
@@ -355,7 +355,7 @@ class AddIssueActivity : AppCompatActivity(), AddIssueInterface {
                 Utils.hideProgressDialog()
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_try_again),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_try_again),
                     Toast.LENGTH_SHORT
                 ).show()
                 e.printStackTrace()

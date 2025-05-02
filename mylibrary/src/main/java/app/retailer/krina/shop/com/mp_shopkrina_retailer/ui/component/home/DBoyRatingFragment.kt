@@ -16,14 +16,14 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.RatingMod
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.RatingModel.UserRatingDetailDc
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 
 class DBoyRatingFragment : BottomSheetDialogFragment() {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var homeViewModel: HomeViewModel
     private var activity: AppCompatActivity? = null
     private var ratingList: ArrayList<RatingModel>? = null
@@ -35,7 +35,7 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as AppCompatActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
         onButtonClick = context as OnButtonClick
     }
 
@@ -74,10 +74,10 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
         val fbDeliver = view.findViewById<FlexboxLayout>(R.id.fbDeliver)
         val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
         tvPleaseRateH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_rate_delivery_service)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_rate_delivery_service)
         tvOrderId.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + ratingList!![0].orderId
-        btnSubmit.text = MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + ratingList!![0].orderId
+        btnSubmit.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         Picasso.get().load(ratingList!![0].profilePic)
             .placeholder(R.drawable.logo_grey)
             .error(R.drawable.profile_round)
@@ -131,7 +131,7 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
         }
         btnSubmit.setOnClickListener {
             println("" + clickedPos + " " + ratingList!![clickedPos].ratingDetails!!.any { it.isSelect })
-            MyApplication.getInstance().updateAnalytics("delivery_date_change_click")
+            RetailerSDKApp.getInstance().updateAnalytics("delivery_date_change_click")
             if (clickedPos == -1) {
                 Utils.setToast(activity, "Please rate Delivery person's service's")
             } else if (clickedPos < 3 && !ratingList!![clickedPos].ratingDetails!!.any { it.isSelect }) {
@@ -154,7 +154,7 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
         clickedPos = 3
 
         dialog!!.setCanceledOnTouchOutside(false)
-        MyApplication.getInstance().updateAnalytics("delivery_date_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("delivery_date_dialog")
         observe(homeViewModel.getAddRatingData, ::handleAddRatingResult)
 
     }

@@ -10,7 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.fragment.TradeOffe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.target.CustomerSubCategoryTargetActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.freebies.FreebiesOfferActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class BannerHolder internal constructor(
@@ -22,13 +22,13 @@ class BannerHolder internal constructor(
     init {
 
         mBinding.liMenu.tvCategory.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.clearance)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.clearance)
         mBinding.liMenu.tvFreebie.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.freebies)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.freebies)
         mBinding.liMenu.tvTrade.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.trade_offers)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.trade_offers)
         mBinding.liMenu.tvTarget.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_target)
         mBinding.liMenu.ivCategories.setOnClickListener(this)
         mBinding.liMenu.ivFreebiesOffer.setOnClickListener(this)
         mBinding.liMenu.ivTradeOffer.setOnClickListener(this)
@@ -38,12 +38,12 @@ class BannerHolder internal constructor(
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ivCategories -> {
-                MyApplication.getInstance().updateAnalytics("app_home_clearance_click")
+                RetailerSDKApp.getInstance().updateAnalytics("app_home_clearance_click")
                 activity.startActivity(Intent(activity, ClearanceActivity::class.java))
             }
 
             R.id.ivFreebiesOffer -> {
-                MyApplication.getInstance().updateAnalytics("app_home_freebie_click")
+                RetailerSDKApp.getInstance().updateAnalytics("app_home_freebie_click")
                 activity.startActivity(Intent(activity, FreebiesOfferActivity::class.java))
                 Utils.fadeTransaction(
                     activity
@@ -51,12 +51,12 @@ class BannerHolder internal constructor(
             }
 
             R.id.ivTradeOffer -> {
-                MyApplication.getInstance().updateAnalytics("app_home_trade_click")
+                RetailerSDKApp.getInstance().updateAnalytics("app_home_trade_click")
                 activity.pushFragments(TradeOfferFragment.newInstance(), false, true, null)
             }
 
             R.id.liMyTarget -> {
-                MyApplication.getInstance().updateAnalytics("app_home_target_click")
+                RetailerSDKApp.getInstance().updateAnalytics("app_home_target_click")
                 activity.startActivity(
                     Intent(
                         activity,

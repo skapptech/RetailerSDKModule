@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FaqItemBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.PipActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.FaqModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class FaqAdapter(private val context: Context, private val mylist: ArrayList<FaqModel>) :
     RecyclerView.Adapter<FaqAdapter.ViewHolder>() {
@@ -30,7 +30,7 @@ class FaqAdapter(private val context: Context, private val mylist: ArrayList<Faq
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.txt_title.text = mylist[position].title
-        holder.txt_see_video.text = MyApplication.getInstance().dbHelper.getData("text_watch_video")
+        holder.txt_see_video.text = RetailerSDKApp.getInstance().dbHelper.getData("text_watch_video")
         holder.ll_video.setOnClickListener {
             if (mylist[position].videoUrl.isNotEmpty()) {
                 context.startActivity(

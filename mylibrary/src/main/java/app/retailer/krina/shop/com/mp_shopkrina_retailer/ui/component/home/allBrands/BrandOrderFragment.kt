@@ -23,14 +23,14 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
 class BrandOrderFragment : Fragment() {
     private lateinit var mBinding: FragmentOrderBrandsBinding
     private lateinit var viewModel: AllBrandViewModel
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var activity: HomeActivity
     private var adapter: ViewPagerAdapter? = null
     private var itemListAdapter: ItemListAdapter? = null
@@ -45,7 +45,7 @@ class BrandOrderFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity.application as MyApplication
+        appCtx = activity.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -83,7 +83,7 @@ class BrandOrderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity,
             this.javaClass.simpleName,
             null
@@ -105,7 +105,7 @@ class BrandOrderFragment : Fragment() {
 
     fun initialization() {
         mBinding.noItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.items_not_available)
         mBinding.pager.startAutoScroll(4000)
         mBinding.pager.interval = 4000
         mBinding.pager.isCycle = true
@@ -160,7 +160,7 @@ class BrandOrderFragment : Fragment() {
                     val list = viewModel.getMoqList(itemList!!)
                     if (list.size != 0) {
                         itemListAdapter!!.setItemListCategory(list)
-                        MyApplication.getInstance().updateAnalyticVIL("brandItems", list)
+                        RetailerSDKApp.getInstance().updateAnalyticVIL("brandItems", list)
                     }
                 }
             }

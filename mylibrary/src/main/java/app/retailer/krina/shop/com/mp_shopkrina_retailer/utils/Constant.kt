@@ -8,7 +8,7 @@ class Constant {
     companion object {
         @JvmField
         var BASE_URL_PROFILE =
-            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/UploadedImages/"
+            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/UploadedImages/"
 
         @JvmField
         var CUSTOMER_ADDRESS = "customer_address"
@@ -47,7 +47,7 @@ class Constant {
 
         @JvmField
         var CALLBACK_URL =
-            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/api/Transaction/paymentcallback"
+            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/Transaction/paymentcallback"
 
         //Share url
         @JvmField

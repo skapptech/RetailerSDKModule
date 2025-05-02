@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassFor
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCustomerBalnceBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.CustomerBalance;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -63,7 +63,7 @@ public class CustomerBalanceActivity extends AppCompatActivity {
                 Utils.showProgressDialog(this);
                 commonClassForAPI.GetMyBalanceHisab(Getcustomer);
         } else {
-            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
         }
     }
 

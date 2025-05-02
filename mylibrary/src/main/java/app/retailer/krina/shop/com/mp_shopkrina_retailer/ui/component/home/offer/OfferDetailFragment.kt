@@ -42,7 +42,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubCategoryFilterAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -56,7 +56,7 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCategoryInterface {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     lateinit var binding: FragmentOfferDetailBinding
     private lateinit var activity: HomeActivity
     private lateinit var offerViewModel: OfferViewModel
@@ -94,7 +94,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity.application as MyApplication
+        appCtx = activity.application as RetailerSDKApp
 
     }
 
@@ -122,7 +122,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         categoryAPICall()
         setValues()
 
-        MyApplication.getInstance().noteRepository.cartNonZero.observe(this) { cartList: List<ItemListModel>? ->
+        RetailerSDKApp.getInstance().noteRepository.cartNonZero.observe(this) { cartList: List<ItemListModel>? ->
             this.cartList = cartList
             if (step == 1) {
                 updateProgress(step)
@@ -203,7 +203,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
             )
         binding.rvCategoryItem.adapter = itemListAdapter
 
-        binding.noItems.text = MyApplication.getInstance().dbHelper.getString(R.string.no_items_avl)
+        binding.noItems.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_avl)
 
         observe(offerViewModel.categoryData, ::handleCategoryResult)
         observe(offerViewModel.itemData, ::handleItemListResult)
@@ -243,9 +243,9 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
     private fun setValues() {
         binding.tvOffer.text = ""
         binding.tvOfferDes.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + discountModel.billAmount
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + discountModel.billAmount
         binding.tvOfferDesc.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.offer_valid_on_select_products)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.offer_valid_on_select_products)
         binding.llMain.setBackgroundColor(Color.parseColor(discountModel.colorCode ?: "#4D9654"))
         //
         binding.rlApply.visibility = View.GONE
@@ -255,19 +255,19 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         if (discountModel.billDiscountOfferOn.equals("Percentage", ignoreCase = true)) {
             binding.tvOffer.text = DecimalFormat("##.##").format(
                 discountModel.discountPercentage
-            ) + "% " + MyApplication.getInstance().dbHelper.getString(R.string.off)
+            ) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.off)
         } else if (discountModel.billDiscountOfferOn.equals("FreeItem", ignoreCase = true)) {
             binding.tvOffer.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.free_item_offer)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_item_offer)
             binding.rlBillItem.visibility = View.VISIBLE
             binding.recyclerBillDiscountItem.adapter = BillDiscountFreeItemAdapter(
                 activity, discountModel.retailerBillDiscountFreeItemDcs!!
             )
         } else if (discountModel.billDiscountOfferOn.equals("DynamicAmount", ignoreCase = true)) {
             binding.tvOffer.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat("##.##").format(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat("##.##").format(
                     discountModel.billDiscountWallet
-                ) + " " + MyApplication.getInstance().dbHelper.getString(R.string.off)
+                ) + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.off)
         } else {
             val msgPostBill = if (discountModel.applyOn.equals(
                     "PostOffer", ignoreCase = true
@@ -275,14 +275,14 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
             ) " PostOffer" else ""
             if (discountModel.walletType.equals("WalletPercentage", ignoreCase = true)) {
                 binding.tvOffer.text =
-                    DecimalFormat("##.##").format(discountModel.billDiscountWallet) + "%  " + MyApplication.getInstance().dbHelper.getString(
+                    DecimalFormat("##.##").format(discountModel.billDiscountWallet) + "%  " + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.off
                     ) + msgPostBill
             } else {
                 binding.tvOffer.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
                         "##.##"
-                    ).format(convertToAmount(discountModel.billDiscountWallet)) + " " + msgPostBill + MyApplication.getInstance().dbHelper.getString(
+                    ).format(convertToAmount(discountModel.billDiscountWallet)) + " " + msgPostBill + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.off
                     )
             }
@@ -663,15 +663,15 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
 
     private fun showRemoveOfferAlert() {
         val dialog = AlertDialog.Builder(activity)
-        dialog.setMessage(MyApplication.getInstance().dbHelper.getString(R.string.this_offer_can_not_be_clubbed))
+        dialog.setMessage(RetailerSDKApp.getInstance().dbHelper.getString(R.string.this_offer_can_not_be_clubbed))
         dialog.setPositiveButton(
-            MyApplication.getInstance().dbHelper.getString(R.string.replace_offer)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.replace_offer)
         ) { dialog: DialogInterface, i: Int ->
             dialog.dismiss()
             offerViewModel.removeAllOffer(custId, wId)
         }
         dialog.setNegativeButton(
-            MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         ) { dialog: DialogInterface, i: Int ->
             dialog.dismiss()
         }
@@ -688,7 +688,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -710,7 +710,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -722,7 +722,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
             binding.rvCategoryItem.visibility = View.VISIBLE
         } else {
             binding.filterTitle.text =
-                "0 " + MyApplication.getInstance().dbHelper.getString(R.string.Items)
+                "0 " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.Items)
             binding.noItems.visibility = View.VISIBLE
             binding.rvCategoryItem.visibility = View.GONE
         }
@@ -747,7 +747,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
                         false,
                         0,
                         categoryId,
-                        MyApplication.getInstance().dbHelper.getString(R.string.all),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.all),
                         "",
                         10
                     )
@@ -778,7 +778,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
                 layoutHideUnHide(false)
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_data_available)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_data_available)
                 )
                 subCategoryFilterAdapter!!.setSubcategoryOrderList(
                     filterSubCategoryList, subCategoryId
@@ -796,7 +796,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
             filterSubSubCategoriesList.add(
                 0,
                 SubSubCategoriesModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.all),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.all),
                     baseCategoryId,
                     categoryId,
                     subCategoryId,
@@ -901,7 +901,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
                             list = it.itemDataDCs
                             if (list.size != 0) {
                                 binding.filterTitle.text =
-                                    it.totalItem.toString() + " " + MyApplication.getInstance().dbHelper.getString(
+                                    it.totalItem.toString() + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.Items
                                     )
                                 itemListAdapter =
@@ -913,7 +913,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
 
                                 binding.nestedScroll.fullScroll(NestedScrollView.FOCUS_UP)
                                 // update analytic
-                                MyApplication.getInstance().updateAnalyticVIL("categoryItems", list)
+                                RetailerSDKApp.getInstance().updateAnalyticVIL("categoryItems", list)
                             }
                         } else {
                             layoutHideUnHide(false)
@@ -949,7 +949,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
                             if (list.size != 0) {
                                 itemListAdapter!!.notifyDataSetChanged()
                                 // update analytic
-                                MyApplication.getInstance().updateAnalyticVIL("categoryItems", list)
+                                RetailerSDKApp.getInstance().updateAnalyticVIL("categoryItems", list)
                             }
                         }
                     } catch (e: Exception) {
@@ -990,7 +990,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
                         } else {
                             Utils.setToast(
                                 activity,
-                                MyApplication.getInstance().noteRepository.getString(R.string.server_error)
+                                RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error)
                             )
                         }
                     } catch (e: Exception) {

@@ -9,7 +9,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyAccountBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.MyAccountAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class MyAccountActivity : AppCompatActivity() {
@@ -41,16 +41,16 @@ class MyAccountActivity : AppCompatActivity() {
 
     private fun initView() {
         mBinding.toolbarMyAccount.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.myAccount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.myAccount)
         mBinding.toolbarMyAccount.back.setOnClickListener { onBackPressed() }
         val myaccount = ArrayList<String>()
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.myOrder))
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.myWallet))
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.myFavourite))
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.mydream))
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.my_ledger))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.myOrder))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.myWallet))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.myFavourite))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mydream))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_ledger))
         //        myaccount.add(getString(R.string.kissan_dan));
-        myaccount.add(MyApplication.getInstance().dbHelper.getString(R.string.my_target))
+        myaccount.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target))
         //   myaccount.add(getString(R.string.my_issue));
         mBinding.accoutRecycle.adapter = MyAccountAdapter(this, myaccount)
     }

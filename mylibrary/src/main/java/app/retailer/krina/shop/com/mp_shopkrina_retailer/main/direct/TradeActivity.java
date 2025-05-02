@@ -73,7 +73,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActvityTradeBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.Listener;
@@ -86,7 +85,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.EasyWayLocation;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 
@@ -115,7 +114,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.actvity_trade);
         activity = this;
-        if (MyApplication.getInstance().prefManager.isLoggedIn()) {
+        if (RetailerSDKApp.getInstance().prefManager.isLoggedIn()) {
             initialization();
         } else {
             startActivity(new Intent(getApplicationContext(), MobileSignUpActivity.class));
@@ -140,7 +139,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         super.onPostCreate(savedInstanceState);
         if (getIntent().getExtras() != null && getIntent().hasExtra("notificationId")) {
             int notificationId = getIntent().getExtras().getInt("notificationId");
-            MyApplication.getInstance().notificationView(notificationId);
+            RetailerSDKApp.getInstance().notificationView(notificationId);
             getIntent().getExtras().clear();
         }
     }
@@ -574,7 +573,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         request.setVisibleInDownloadsUi(true);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "/Trade");
         downloadManager.enqueue(request);
-        Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper
+        Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper
                 .getString(R.string.document_downloaded_in), Toast.LENGTH_SHORT).show();
     }
 
@@ -648,7 +647,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         share.setType("text/plain");
         share.putExtra(Intent.EXTRA_TEXT, text);
         startActivity(Intent.createChooser(share, "Share"));
-        MyApplication.getInstance().updateAnalyticShare("TradeActivity", text);
+        RetailerSDKApp.getInstance().updateAnalyticShare("TradeActivity", text);
     }
 
     public void Call(String text) {
@@ -892,7 +891,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
         @JavascriptInterface
         public void editcustomer(boolean b) {
             if (b) {
-                Utils.setToast(context, MyApplication.getInstance().dbHelper.getData("please_update_your_profile_to_access_trade"));
+                Utils.setToast(context, RetailerSDKApp.getInstance().dbHelper.getData("please_update_your_profile_to_access_trade"));
                 startActivity(new Intent(context, EditProfileActivity.class));
             } else {
                 startActivity(new Intent(context, EditProfileActivity.class));
@@ -1013,7 +1012,7 @@ public class TradeActivity extends AppCompatActivity implements Listener {
 
         @JavascriptInterface
         public void clearAllDataLogout() {
-            MyApplication.getInstance().logout(TradeActivity.this);
+            RetailerSDKApp.getInstance().logout(TradeActivity.this);
         }
 
         @JavascriptInterface

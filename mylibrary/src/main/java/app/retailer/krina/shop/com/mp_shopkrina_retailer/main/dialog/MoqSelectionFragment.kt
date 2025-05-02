@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AdapterInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MoqSelectionFragment : BottomSheetDialogFragment() {
@@ -54,11 +54,11 @@ class MoqSelectionFragment : BottomSheetDialogFragment() {
         val tvDMargin: TextView = view.findViewById<TextView>(R.id.tvDMargin)
 
         tvDSelectQty.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for)
-        tvDMoq.text = MyApplication.getInstance().dbHelper.getString(R.string.moq)
-        tvDMrp.text = MyApplication.getInstance().dbHelper.getString(R.string.mrp)
-        tvDRs.text = MyApplication.getInstance().dbHelper.getString(R.string.rs)
-        tvDMargin.text = MyApplication.getInstance().dbHelper.getString(R.string.margins_d)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for)
+        tvDMoq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq)
+        tvDMrp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp)
+        tvDRs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs)
+        tvDMargin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d)
 
         tvItemName.text = model?.itemname
         val mMoqPriceList: ListView = view.findViewById(R.id.listview_moq_price)
@@ -70,7 +70,7 @@ class MoqSelectionFragment : BottomSheetDialogFragment() {
             )
         mMoqPriceList.adapter = adapter
 
-        MyApplication.getInstance().updateAnalytics("moq_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("moq_dialog")
     }
 
 

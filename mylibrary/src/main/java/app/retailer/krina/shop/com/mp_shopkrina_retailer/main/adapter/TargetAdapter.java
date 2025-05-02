@@ -20,7 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.TargetAdapt
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.SubCategoryTargetModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TargetCustomerDC;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TargetModel;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 
 public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.ViewHolder> {
     private final ArrayList<TargetModel> msgList;
@@ -52,8 +52,8 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //set Strings
-        holder.mBinding.tvViewMore.setText(" " + MyApplication.getInstance().dbHelper.getData("text_view_more"));
-        holder.mBinding.tvTargetDescription.setText(MyApplication.getInstance().dbHelper.getData("text_click_here_to_check_rest_brands"));
+        holder.mBinding.tvViewMore.setText(" " + RetailerSDKApp.getInstance().dbHelper.getData("text_view_more"));
+        holder.mBinding.tvTargetDescription.setText(RetailerSDKApp.getInstance().dbHelper.getData("text_click_here_to_check_rest_brands"));
 
         if (msgList.size() == 1 || (position == msgList.size() - 1)) {
             holder.mBinding.view.setVisibility(View.INVISIBLE);
@@ -190,7 +190,7 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.ViewHolder
         TextView pdTitle = mView.findViewById(R.id.pd_title);
         TextView alert = mView.findViewById(R.id.tv_alert);
         alert.setVisibility(View.GONE);
-        okBtn.setText(MyApplication.getInstance().dbHelper.getData("ok"));
+        okBtn.setText(RetailerSDKApp.getInstance().dbHelper.getData("ok"));
         pdTitle.setText("You have To Buy " + finalString + " worth RS. " + new DecimalFormat("##.##").format(subCategoryTargetModel.getTarget()) + "/-");
         TextView cancelBtn = mView.findViewById(R.id.cancel_btn);
         okBtn.setOnClickListener(v -> {

@@ -17,20 +17,20 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentAll
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AllBrandsModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class AllBrandFragItemList : Fragment() {
     private lateinit var mBinding: FragmentAllbrandsBinding
     private lateinit var viewModel: AllBrandViewModel
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private var mAllBrandListView: GridView? = null
     private var activity: HomeActivity? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -90,7 +90,7 @@ class AllBrandFragItemList : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName,
             null

@@ -48,7 +48,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.CategoryItemOrderInf
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
@@ -87,24 +87,24 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
         try {
             ItemListModel model = list.get(i);
             //set String
-            viewHolder.mBinding.tvMrpText.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_mrp));
-            viewHolder.mBinding.tvRemainingQtyText.setText(MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty) + " ");
-            viewHolder.mBinding.tvItemLeftText.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_left));
-            viewHolder.mBinding.tvEndInText.setText(MyApplication.getInstance().dbHelper.getString(R.string.end_in_text));
-            viewHolder.mBinding.tvFreeItemNotActiveText.setText(MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg));
-            viewHolder.btnAdd.setText(MyApplication.getInstance().dbHelper.getString(R.string.add_btn));
+            viewHolder.mBinding.tvMrpText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp));
+            viewHolder.mBinding.tvRemainingQtyText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty) + " ");
+            viewHolder.mBinding.tvItemLeftText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left));
+            viewHolder.mBinding.tvEndInText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.end_in_text));
+            viewHolder.mBinding.tvFreeItemNotActiveText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg));
+            viewHolder.btnAdd.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn));
 
             // set MOQ
             if (model.moqList.size() > 0) {
                 viewHolder.tvMoq.setVisibility(View.VISIBLE);
                 viewHolder.tvMultiMoq.setVisibility(View.GONE);
-                viewHolder.tvMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.getMinOrderQty());
+                viewHolder.tvMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.getMinOrderQty());
             } else {
                 viewHolder.tvMoq.setVisibility(View.GONE);
                 viewHolder.tvMultiMoq.setVisibility(View.VISIBLE);
             }
 
-            viewHolder.tvMultiMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.getMinOrderQty());
+            viewHolder.tvMultiMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.getMinOrderQty());
 
             if (!TextUtils.isNullOrEmpty(model.getScheme())) {
                 viewHolder.mBinding.tvSchemeText.setVisibility(View.VISIBLE);
@@ -161,11 +161,11 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                 ImageView ivClose = dialogLayout.findViewById(R.id.ivClose);
                 ivClose.setOnClickListener(v1 -> dialog.dismiss());
 
-                tvDSelectQty.setText(MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for));
-                tvDMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.moq));
-                tvDMrp.setText(MyApplication.getInstance().dbHelper.getString(R.string.mrp));
-                tvDRs.setText(MyApplication.getInstance().dbHelper.getString(R.string.rs));
-                tvDMargin.setText(MyApplication.getInstance().dbHelper.getString(R.string.margins_d));
+                tvDSelectQty.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for));
+                tvDMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq));
+                tvDMrp.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp));
+                tvDRs.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs));
+                tvDMargin.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d));
 
                 item_name.setText(model.itemname);
                 ListView mMoqPriceList = dialogLayout.findViewById(R.id.listview_moq_price);
@@ -222,13 +222,13 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
     }
 
     private void addRemoveFav(ItemListModel model, @NonNull ViewHolder viewHolder) {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.getItemId())) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.getItemId())) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite);
-            MyApplication.getInstance().noteRepository.deleteTask(model);
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(model);
             Utils.addFav(model.getItemId(), false, activity);
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red);
-            MyApplication.getInstance().noteRepository.insertTask(model);
+            RetailerSDKApp.getInstance().noteRepository.insertTask(model);
             Utils.addFav(model.getItemId(), true, activity);
         }
     }
@@ -238,7 +238,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
         flashofferFlag = false;
         try {
             // check item in wishList
-            if (MyApplication.getInstance().noteRepository.isItemWishList(model.getItemId())) {
+            if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.getItemId())) {
                 viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red);
             } else {
                 viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite);
@@ -262,7 +262,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                         // String sfreewalletDP = new DecimalFormat("##.##").format(model.getOfferWalletPoint());
                         viewHolder.freeItemQutTV.setText("0");
                         viewHolder.freeItemIV.setBackgroundResource(R.drawable.ic_gift_bg);
-                        viewHolder.freeDepePointTV.setText(MyApplication.getInstance().dbHelper.getString(R.string.Dp));
+                        viewHolder.freeDepePointTV.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp));
                         String sfreewalletDP = new DecimalFormat("##.##").format(model.getOfferWalletPoint());
                         freeOfferTextGet = "<font color=#fe4e4e>Get&nbsp;" + sfreewalletDP + "&nbsp;Free</font>" + "<font color=#000000>&nbsp;Dream Points</font>";
                         break;
@@ -274,7 +274,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                             viewHolder.freeItemIV.setImageDrawable(vectorDrawable);
                         }
                         viewHolder.freeItemQutTV.setText("0");
-                        viewHolder.freeDepePointTV.setText(MyApplication.getInstance().dbHelper.getString(R.string.free));
+                        viewHolder.freeDepePointTV.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.free));
                         // String[] spItemFreeItemName = model.getOfferFreeItemName().split("(?<=\\D)(?=\\d)");
                         freeOfferTextGet = "<font color=#fe4e4e>Get " + model.getOfferFreeItemQuantity() + "&nbsp;Free </font>" + "<font color=#000000>&nbsp;" + model.getOfferFreeItemName() + " </font>";
 
@@ -338,14 +338,14 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                 viewHolder.ivItemImage.setImageDrawable(vectorDrawable);
             }
             String sPRICE = "| <font color=#FF4500>&#8377; " + new DecimalFormat("##.##").format(model.getUnitPrice()) + "</font>";
-            String sMargin = MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + new DecimalFormat("##.##").format(Double.parseDouble(model.marginPoint)) + "%";
+            String sMargin = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + new DecimalFormat("##.##").format(Double.parseDouble(model.marginPoint)) + "%";
             String sMRP = new DecimalFormat("##.##").format(model.price);
             //set values
             viewHolder.tvMrp.setText(sMRP);
             viewHolder.tvMrp.setPaintFlags(viewHolder.tvMrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             viewHolder.tvPrice.setText(Html.fromHtml(sPRICE));
             viewHolder.tvMargin.setText(sMargin);
-            viewHolder.tvDreamPoint.setText(MyApplication.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint);
+            viewHolder.tvDreamPoint.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint);
             // set prime item price
             if (model.isPrimeItem) {
                 viewHolder.mBinding.liPrime.setVisibility(View.VISIBLE);
@@ -364,7 +364,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                 viewHolder.mBinding.tvUnlock.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_right_arrow, 0);
             }
 
-            ItemListModel cartModel = MyApplication.getInstance().noteRepository.getItemByMrpId(model.getItemId(), model.getItemMultiMRPId());
+            ItemListModel cartModel = RetailerSDKApp.getInstance().noteRepository.getItemByMrpId(model.getItemId(), model.getItemMultiMRPId());
 
             boolean isItemFound;
             if (cartModel != null && model.getItemId() == cartModel.getItemId()) {
@@ -494,7 +494,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                                     viewHolder.mBinding.availQty.setText(String.valueOf(availqty));
                                 }
                             } else {
-                                Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + model.getBillLimitQty() + " " + MyApplication.getInstance().dbHelper.getString(R.string.item_t), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + model.getBillLimitQty() + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_t), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             viewHolder.tvselectedItemQuantity.setText("" + itemQuantity);
@@ -509,12 +509,12 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                     if (addBtn) {
                         viewHolder.mBinding.visible.setVisibility(View.GONE);
                         viewHolder.btnAdd.setVisibility(View.VISIBLE);
-                        Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.no_item_available), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available), Toast.LENGTH_SHORT).show();
                     } else {
                         if (model.getOfferQtyAvaiable() <= itemQuantity) {
-                            Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.no_item_available), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.getFlashDealMaxQtyPersonCanTake(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.getFlashDealMaxQtyPersonCanTake(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -557,11 +557,11 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                                             viewHolder.freeItemQutTV.setText("0");
                                         }
                                     } else {
-                                        Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             } else {
-                                Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg), Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "ItemMaster":
@@ -581,10 +581,10 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                                         }
                                     }
                                 } else {
-                                    Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero), Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg), Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "FlashDeal":
@@ -627,15 +627,15 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
     }
 
     private boolean setlimit(ViewHolder viewHolder, ItemListModel model, boolean addFlag, int itemQuantity) {
-        int total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
+        int total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
         int availqty = 0;
-        int totalItemqty = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(model.getItemMultiMRPId());
+        int totalItemqty = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(model.getItemMultiMRPId());
         int itemlimitqty = 0;
         totalItemqty += model.getMinOrderQty();
         itemlimitqty = model.getItemLimitQty();
 //        if (total > 0) {
         if (total + itemQuantity > itemlimitqty) {
-            Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.getItemLimitQty() + " " + MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2));
+            Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.getItemLimitQty() + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2));
         } else {
             if (model.getBillLimitQty() != 0) {
                 if (model.getBillLimitQty() >= itemQuantity) {
@@ -646,7 +646,7 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
                         viewHolder.mBinding.availQty.setText(String.valueOf(availqty));
                     }
                 } else {
-                    Toast.makeText(activity, MyApplication.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + model.getBillLimitQty() + " " + MyApplication.getInstance().dbHelper.getString(R.string.item_t), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + model.getBillLimitQty() + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_t), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 viewHolder.tvselectedItemQuantity.setText("" + itemQuantity);

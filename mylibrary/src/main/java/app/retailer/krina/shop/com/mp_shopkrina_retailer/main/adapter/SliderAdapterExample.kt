@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.HomeDataModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ViewPagerItemBinding
@@ -27,7 +26,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.slider.SliderViewAdapte
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.category.HomeCategoryFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
@@ -103,7 +102,7 @@ class SliderAdapterExample(private val activity: HomeActivity) :
                         )
                     }
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "app_home_slider_click",
                         analyticPost
                     )
@@ -127,7 +126,7 @@ class SliderAdapterExample(private val activity: HomeActivity) :
                             analyticPost.subSubCatId =
                                 model.subsubCategoryId
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "app_home_slider_click",
                                 analyticPost
                             )

@@ -44,7 +44,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.appHo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.appHome.FlashDealItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -66,7 +66,7 @@ import java.text.DecimalFormat
  */
 class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     DynamicHtmlInterface {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private val TAG = this.javaClass.name
     private var rootView: View? = null
     private var mBinding: FragmentHomeSubCategoryBinding? = null
@@ -96,7 +96,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,12 +153,12 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
         analyticPost.categoryId = categoryId
         analyticPost.subCatId = subCatId
         analyticPost.subSubCatId = subSubCattId
-        MyApplication.getInstance().updateAnalytics("storeView", analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics("storeView", analyticPost)
     }
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName,
             null
@@ -833,7 +833,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                DecimalFormat("##.##").format(list[i].discountPercentage) + MyApplication.getInstance().dbHelper.getString(
+                                DecimalFormat("##.##").format(list[i].discountPercentage) + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.per_of_min_per
                                 ) + list[i].billAmount
                             //offerList.add(offerMag);
@@ -844,7 +844,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                MyApplication.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
                             // offerList.add(offerMag);
                             "$offerMag* $offerText  "
                         } else {
@@ -852,14 +852,14 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                     "PostOffer",
                                     ignoreCase = true
                                 )
-                            ) MyApplication.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
+                            ) RetailerSDKApp.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
                             if (list[i].walletType.equals(
                                     "WalletPercentage",
                                     ignoreCase = true
                                 )
                             ) {
                                 val offerText =
-                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + MyApplication.getInstance().dbHelper.getString(
+                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.per_of_min_per
                                     ) + DecimalFormat("##.##").format(
                                         list[i].billAmount
@@ -868,9 +868,9 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                 "$offerMag* $offerText  "
                             } else {
                                 val offerText =
-                                    (MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) +
+                                    (RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) +
                                             DecimalFormat("##.##").format(convertToAmount(list[i].billDiscountWallet))
-                                            + MyApplication.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
+                                            + RetailerSDKApp.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
                                         "##.##"
                                     ).format(
                                         list[i].billAmount

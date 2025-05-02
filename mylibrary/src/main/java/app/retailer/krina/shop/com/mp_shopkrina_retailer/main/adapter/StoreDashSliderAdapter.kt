@@ -27,7 +27,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.slider.SliderViewAdapte
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.category.HomeCategoryFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
@@ -101,7 +101,7 @@ class StoreDashSliderAdapter(private val activity: HomeActivity) :
                         )
                     }
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "store_appHome_slider_click",
                         analyticPost
                     )
@@ -124,7 +124,7 @@ class StoreDashSliderAdapter(private val activity: HomeActivity) :
                             analyticPost.subSubCatId =
                                 model.subsubCategoryId
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_appHome_slider_click",
                                 analyticPost
                             )

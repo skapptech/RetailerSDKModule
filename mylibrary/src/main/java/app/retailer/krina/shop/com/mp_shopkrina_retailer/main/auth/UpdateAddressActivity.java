@@ -66,7 +66,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityUpdateAddressBinding;
@@ -83,7 +82,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.NewSi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
@@ -197,7 +196,7 @@ public class UpdateAddressActivity extends AppCompatActivity implements Location
                     break;
                 case Activity.RESULT_CANCELED:
                     // The user was asked to change settings, but chose not to
-                    Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.allow_location_access), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.allow_location_access), Toast.LENGTH_LONG).show();
                     mGoogleApiClient.disconnect();
                     break;
                 default:
@@ -666,8 +665,8 @@ public class UpdateAddressActivity extends AppCompatActivity implements Location
             if (model.isStatus()) {
                 CustomerResponse customer = model.customers;
                 if (customer != null) {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.signup_successfully_done));
-                    MyApplication.getInstance().prefManager.setLoggedIn(true);
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.signup_successfully_done));
+                    RetailerSDKApp.getInstance().prefManager.setLoggedIn(true);
                     // SharePrefs.getInstance(getApplicationContext()).putInt(SharePrefs.CUSTOMER_ID, Integer.parseInt(customer.getCustomerId()));
                     SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.SK_CODE, customer.getSkcode());
                     SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.SHOP_NAME, customer.getShopName());

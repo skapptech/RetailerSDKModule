@@ -20,7 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
@@ -93,7 +93,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     fun initialization() {
         tv_title = mBinding.toolbarProfile.title
         mBinding.toolbarProfile.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.profile)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.profile)
         supportFragmentManager.beginTransaction().replace(
             R.id.content,
             EditProfileHomeFragment(), EditProfileHomeFragment::class.java.name

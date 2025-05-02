@@ -22,7 +22,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.AdapterGam
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AddGamePointModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.GamesBannerModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -105,7 +105,7 @@ class GamesWebActivity : AppCompatActivity() {
             showClaimPointDialog(message)
         }
         // update analytic
-        MyApplication.getInstance().updateAnalyticGame("game_over", score)
+        RetailerSDKApp.getInstance().updateAnalyticGame("game_over", score)
     }
 
     fun ShowToast(message: String?) {
@@ -120,8 +120,8 @@ class GamesWebActivity : AppCompatActivity() {
         val pd_title = mView.findViewById<TextView>(R.id.pd_title)
         val okBtn = mView.findViewById<TextView>(R.id.ok_btn)
         val tvGameOverHead = mView.findViewById<TextView>(R.id.tvGameOverHead)
-        tvGameOverHead.text = MyApplication.getInstance().dbHelper.getString(R.string.game_over)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.play_again)
+        tvGameOverHead.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.game_over)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.play_again)
         pd_title.text = Message
         okBtn.setOnClickListener { v: View? -> customDialog.dismiss() }
         customDialog.show()
@@ -136,13 +136,13 @@ class GamesWebActivity : AppCompatActivity() {
         val tvClaim = mView.findViewById<TextView>(R.id.tvClaim)
         val tvCancel = mView.findViewById<TextView>(R.id.tvCancel)
         val tvGameOverHead = mView.findViewById<TextView>(R.id.tvGameOverHead)
-        tvGameOverHead.text = MyApplication.getInstance().dbHelper.getString(R.string.game_over)
-        tvClaim.text = MyApplication.getInstance().dbHelper.getString(R.string.claim)
-        tvCancel.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
-        tvDetail.text = MyApplication.getInstance().dbHelper.getString(R.string.won_wallet_points)
+        tvGameOverHead.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.game_over)
+        tvClaim.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
+        tvCancel.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
+        tvDetail.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.won_wallet_points)
         tvClaim.setOnClickListener {
             // update analytic
-            MyApplication.getInstance().updateAnalyticGame("game_claim_click", message.toInt())
+            RetailerSDKApp.getInstance().updateAnalyticGame("game_claim_click", message.toInt())
             dialog.dismiss()
             callApi(message.toInt())
         }
@@ -164,7 +164,7 @@ class GamesWebActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -205,7 +205,7 @@ class GamesWebActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }

@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.allBrands.BrandOrderFragment.Companion.newInstance
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 import java.text.BreakIterator
@@ -160,7 +160,7 @@ class AllBrandsAdapter(
                 analyticPost.categoryId = rowItemn.categoryid
                 analyticPost.subSubCatId = rowItemn.subsubCategoryid
                 analyticPost.subSubCatName = rowItemn.subsubcategoryName
-                MyApplication.getInstance().updateAnalytics("brand_click")
+                RetailerSDKApp.getInstance().updateAnalytics("brand_click")
                 val args = Bundle()
                 args.putInt("subCatId", rowItemn.subsubCategoryid)
                 args.putInt("Categoryid", rowItemn.categoryid)

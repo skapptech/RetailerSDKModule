@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemReturnOrderBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderItemModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,14 +39,14 @@ class ReturnOrderAdapter(
         Glide.with(activity).load(model.getItemPic()).into(holder.mBinding.ivImage)
         holder.mBinding.tvName.text = model.getItemName()
         holder.mBinding.tvPrice.text =
-            (MyApplication.getInstance().dbHelper.getString(R.string.item_mrp)
+            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp)
                     + "  " + model.getPrice())
         holder.mBinding.tvQty.text =
-            (MyApplication.getInstance().dbHelper.getString(R.string.text_order_qty)
+            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_order_qty)
                     + " " + model.getQty())
         if (model.returnQty != 0) {
             holder.mBinding.tvReturnQty.text =
-                (MyApplication.getInstance().dbHelper.getString(R.string.text_return_qty)
+                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_return_qty)
                         + " " + model.returnQty)
         } else {
             holder.mBinding.tvReturnQty.text = ""
@@ -55,7 +55,7 @@ class ReturnOrderAdapter(
             holder.mBinding.cbSelect.visibility = View.VISIBLE
             if (model.isReturnReplaced) {
                 holder.mBinding.cbSelect.visibility = View.GONE
-                holder.mBinding.tvReturnQty.text = MyApplication.getInstance().dbHelper
+                holder.mBinding.tvReturnQty.text = RetailerSDKApp.getInstance().dbHelper
                     .getString(R.string.text_return_replace_request)
             } else {
                 holder.mBinding.cbSelect.visibility = View.VISIBLE
@@ -104,13 +104,13 @@ class ReturnOrderAdapter(
             } else if (qty == "0") {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.minimum_qty_should_not_be_zero)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.minimum_qty_should_not_be_zero)
                 )
                 //liQty.setError(  activity.getResources().getString(R.string.minimum_qty_should_not_be_zero));
             } else if (qty.toInt() > list[position].getQty()) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_qty_less_msg)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_qty_less_msg)
                 )
                 //liQty.setError("Quantity should be equal or less than Order quantity");
             } else if (spReason!!.selectedItemPosition == 0) {
@@ -118,7 +118,7 @@ class ReturnOrderAdapter(
                 liQty.isErrorEnabled = false
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_select_valid_reson)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_select_valid_reson)
                 )
             } else {
                 dialog.dismiss()

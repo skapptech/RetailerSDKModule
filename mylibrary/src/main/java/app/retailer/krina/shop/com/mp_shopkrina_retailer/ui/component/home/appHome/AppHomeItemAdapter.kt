@@ -27,7 +27,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -88,16 +88,16 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
         val model = list!![i]
         //set String
         viewHolder.tvMrpText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_mrp) + " "
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp) + " "
         viewHolder.tvRemainingQtyText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
         viewHolder.tvItemLeftText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_left)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left)
         viewHolder.tvEndInText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.end_in_text)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.end_in_text)
         viewHolder.tvFreeItemNotActiveText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
-        viewHolder.btnAdd.text = MyApplication.getInstance().dbHelper.getString(R.string.add_btn)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
+        viewHolder.btnAdd.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn)
 
         // set MOQ
         if (model.moqList.size > 0) {
@@ -109,9 +109,9 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
         }
         //ii;
         viewHolder.tvMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         viewHolder.tvMultiMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         if (!TextUtils.isNullOrEmpty(model.scheme)) {
             viewHolder.tvSchemeText.visibility = View.VISIBLE
             viewHolder.tvSchemeText.text = "" + model.scheme
@@ -143,7 +143,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
             viewHolder.btnAdd.visibility = View.GONE
             itemAddRemove(viewHolder, model, true)
             // analytics for add to cart
-            MyApplication.getInstance()
+            RetailerSDKApp.getInstance()
                 .updateAnalyticsCart(FirebaseAnalytics.Event.ADD_TO_CART, model)
         }
         // checkout clicked
@@ -163,11 +163,11 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
             val ivClose = dialogLayout.findViewById<ImageView>(R.id.ivClose)
             ivClose.setOnClickListener { v1: View? -> dialog.dismiss() }
             tvDSelectQty.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for)
-            tvDMoq.text = MyApplication.getInstance().dbHelper.getString(R.string.moq)
-            tvDMrp.text = MyApplication.getInstance().dbHelper.getString(R.string.mrp)
-            tvDRs.text = MyApplication.getInstance().dbHelper.getString(R.string.rs)
-            tvDMargin.text = MyApplication.getInstance().dbHelper.getString(R.string.margins_d)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for)
+            tvDMoq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq)
+            tvDMrp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp)
+            tvDRs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs)
+            tvDMargin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d)
             item_name.text = model.itemname
             val mMoqPriceList = dialogLayout.findViewById<ListView>(R.id.listview_moq_price)
             val listener = AdapterInterface { pos ->
@@ -229,15 +229,15 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
     }
 
     private fun addRemoveFav(model: ItemListModel, viewHolder: ViewHolder) {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
             viewHolder.favItem.setImageResource(R.drawable.ic_favourite)
-            MyApplication.getInstance().noteRepository.deleteTask(model)
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(model)
             Utils.addFav(model.itemId.toString().toInt(), false, activity)
         } else {
             viewHolder.favItem.setImageResource(R.drawable.ic_favorite_red)
-            MyApplication.getInstance().noteRepository.insertTask(model)
+            RetailerSDKApp.getInstance().noteRepository.insertTask(model)
             Utils.addFav(model.itemId.toString().toInt(), true, activity)
-            MyApplication.getInstance().analyticAddWishList(model)
+            RetailerSDKApp.getInstance().analyticAddWishList(model)
         }
     }
 
@@ -259,7 +259,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
         /*Fav section*/flashofferFlag = false
         try {
             // check item in wishList
-            if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+            if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
                 viewHolder.favItem.setImageResource(R.drawable.ic_favorite_red)
             } else {
                 viewHolder.favItem.setImageResource(R.drawable.ic_favourite)
@@ -286,7 +286,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeItemIV.setBackgroundResource(R.drawable.ic_gift_bg)
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.Dp)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp)
                         val sfreewalletDP = DecimalFormat("##.##").format(model.offerWalletPoint)
                         freeOfferTextGet =
                             "<font color=#fe4e4e>Get&nbsp;$sfreewalletDP&nbsp;Free</font><font color=#000000>&nbsp;Dream Points</font>"
@@ -302,7 +302,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                         }
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.free)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.free)
                         freeOfferTextGet =
                             "<font color=#fe4e4e>Get " + model.offerFreeItemQuantity + "&nbsp;Free </font>" + "<font color=#000000>&nbsp;" + model.offerFreeItemName + " </font>"
                     }
@@ -374,15 +374,15 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
             val sPRICE =
                 "| <font color=#FF4500>&#8377; " + DecimalFormat("##.##").format(model.unitPrice) + "</font>"
             val sMargin =
-                MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                     "##.##"
                 ).format(model.marginPoint!!.toDouble()) + "%"
             val sMRP = DecimalFormat("##.##").format(model.price)
-            val cartModel = MyApplication.getInstance().noteRepository.getItemByMrpId(
+            val cartModel = RetailerSDKApp.getInstance().noteRepository.getItemByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
-            val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+            val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -419,7 +419,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
             if (model.isPrimeItem) {
                 viewHolder.liPrime.visibility = View.VISIBLE
                 viewHolder.tvPPrice.text = SharePrefs.getInstance(activity)
-                    .getString(SharePrefs.PRIME_NAME) + " " + MyApplication.getInstance().dbHelper.getString(
+                    .getString(SharePrefs.PRIME_NAME) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.price
                 ) + ": ₹" + DecimalFormat("##.##").format(model.primePrice)
                 viewHolder.tvPrice.setTextColor(activity.resources.getColor(R.color.grey))
@@ -439,7 +439,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                 )
             } else {
                 viewHolder.tvUnlock.text =
-                    " " + MyApplication.getInstance().dbHelper.getString(R.string.text_unlock)
+                    " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_unlock)
                 viewHolder.tvUnlock.setCompoundDrawablesWithIntrinsicBounds(
                     R.drawable.ic_lock,
                     0,
@@ -448,7 +448,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                 )
             }
             viewHolder.tvDreamPoint.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
             var isItemFound = false
             if (cartModel != null && model.itemId == cartModel.itemId) {
                 isItemFound = true
@@ -586,13 +586,13 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                     if (model.offerQtyAvaiable <= itemQuantity + model.minOrderQty) {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_item_available),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available),
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.flashDealMaxQtyPersonCanTake,
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.flashDealMaxQtyPersonCanTake,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -606,7 +606,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                     } else {
                         viewHolder.btnAdd.visibility = View.VISIBLE
                         // analytics for remove from cart
-                        MyApplication.getInstance()
+                        RetailerSDKApp.getInstance()
                             .updateAnalyticsCart(FirebaseAnalytics.Event.REMOVE_FROM_CART, model)
                     }
                 } else {
@@ -617,7 +617,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                     } else {
                         viewHolder.btnAdd.visibility = View.VISIBLE
                         // analytics for remove from cart
-                        MyApplication.getInstance()
+                        RetailerSDKApp.getInstance()
                             .updateAnalyticsCart(FirebaseAnalytics.Event.REMOVE_FROM_CART, model)
                     }
                 }
@@ -647,7 +647,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                                 } else {
                                     Toast.makeText(
                                         activity,
-                                        MyApplication.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero),
+                                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.mini_qty_should_not_be_zero),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -736,7 +736,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
         add: Boolean
     ): Boolean {
         var addFlag = addFlag
-        val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+        val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
             model.itemId,
             model.itemMultiMRPId
         )
@@ -754,7 +754,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
             if (total + itemQuantity > itemlimitqty) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.itemLimitQty + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.additemToast_2
                     )
                 )
@@ -795,7 +795,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
     ): Boolean {
         var addFlag = addFlag
         try {
-            val total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(
+            val total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -805,7 +805,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                 if (total + itemQuantity > itemlimitqty) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                     )
                 } else {
                     viewHolder.tvselectedItemQuantity.text = "" + itemQuantity
@@ -816,7 +816,7 @@ class AppHomeItemAdapter : RecyclerView.Adapter<AppHomeItemAdapter.ViewHolder>, 
                     if (itemQuantity > model.billLimitQty) {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                         )
                     } else {
                         viewHolder.tvselectedItemQuantity.text = "" + itemQuantity

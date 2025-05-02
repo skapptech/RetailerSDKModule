@@ -4,21 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.comment.PostCommentModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.mandibhaw.MandiCheckModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.mandibhaw.MandiLocation
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.PostModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.FollowingListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.FollowingResponceModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.UserFollowingModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.UserLikeListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.UserProfileModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Network
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SingleLiveEvent
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
-import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -68,172 +63,172 @@ import kotlinx.coroutines.launch
 
 
     fun getUser(customerID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUser(customerID).collect {
                     _userResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
 
     fun getFeed(model: FeedRequestModel) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFeed(model).collect {
                     _FeedResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
 
     fun getSubmitPoll(pollModelResquest: PollModelResquest) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getSubmitPoll(pollModelResquest).collect {
                     _submitOptionResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun postLike(postLikeModelRequest: PostLikeModelRequest, likeCount: Int) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postLike(postLikeModelRequest, likeCount).collect {
                     _likeResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getOtherUser(customerID: String, otherUserID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getOtherUser(customerID, otherUserID).collect {
                     _otherUserResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getUserLikesList(postID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserLikeList(postID).collect {
                     _userLikesResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getUserFollowing(userFollowingModel: UserFollowingModel) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserFolling(userFollowingModel).collect {
                     _userFollowResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getUserUnFlow(model: UserFollowingModel) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserUnFlow(model).collect {
                     _userUnFollowResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getFollowerList(customerID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFollowerList(customerID).collect {
                     _followerListResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getFollowingList(customerID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFollowingList(customerID).collect {
                     _followingListResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getSpecificPost(postID: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getSpecificPost(postID).collect {
                     _specificPostResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getNotifctionCount(userid: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getNotifctionCount(userid).collect {
                     _notifictionCountResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun postDelete(postId: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postDelete(postId).collect {
                     _deletePostResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun getMandiUser(Longitute: Double,Laitutute: Double) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getMandiUser(Longitute,Laitutute).collect {
                     _getMandiBhavResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 

@@ -18,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAdd
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.AddressSearchAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ViewUtils.Companion.snackbar
@@ -58,15 +58,15 @@ class AddressSearchActivity : AppCompatActivity(), AddressSearchAdapter.ClickLis
         }
         if (searchCity) {
             mBinding.address.hint =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_city_hint)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city_hint)
         } else if (type == 1) {
-            title = MyApplication.getInstance().dbHelper.getString(R.string.search_area)
+            title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_area)
             mBinding.address.hint =
-                MyApplication.getInstance().dbHelper.getString(R.string.search_area)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_area)
         } else {
-            title = MyApplication.getInstance().dbHelper.getString(R.string.title_serach_address)
+            title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address)
             mBinding.address.hint =
-                MyApplication.getInstance().dbHelper.getString(R.string.search_delivery_address)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_delivery_address)
         }
     }
 
@@ -135,12 +135,12 @@ class AddressSearchActivity : AppCompatActivity(), AddressSearchAdapter.ClickLis
             if (searchCity) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_enter_city_name)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_city_name)
                 )
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_enter_address_p)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_address_p)
                 )
             }
         } else {
@@ -189,7 +189,7 @@ class AddressSearchActivity : AppCompatActivity(), AddressSearchAdapter.ClickLis
                         Utils.hideProgressDialog()
                         mBinding.progressSearch.visibility = View.INVISIBLE
                         mBinding.imSearchPlace.visibility = View.VISIBLE
-                        mBinding.root.snackbar(MyApplication.getInstance().noteRepository.getString(R.string.no_result_found))
+                        mBinding.root.snackbar(RetailerSDKApp.getInstance().noteRepository.getString(R.string.no_result_found))
                     }
                 }
             }

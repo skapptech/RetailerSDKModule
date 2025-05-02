@@ -59,7 +59,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.payment.Pa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -71,8 +71,6 @@ import com.squareup.picasso.Target
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
@@ -608,7 +606,7 @@ class DirectUdharActivity : AppCompatActivity() {
         share.setType("text/plain")
         share.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(Intent.createChooser(share, "Share"))
-        MyApplication.getInstance().updateAnalyticShare("TradeActivity", text)
+        RetailerSDKApp.getInstance().updateAnalyticShare("TradeActivity", text)
     }
 
     private fun Call(text: String) {
@@ -899,7 +897,7 @@ class DirectUdharActivity : AppCompatActivity() {
             if (b) {
                 Utils.setToast(
                     context,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_update_your_profile_to_access_trade)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_update_your_profile_to_access_trade)
                 )
                 startActivity(Intent(context, EditProfileActivity::class.java))
             } else {

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
@@ -31,7 +31,7 @@ public class CreateImageFile {
             if (Utils.getAvailableSpaceInMB() > 500) {
                 new WriteImageFile(activity, response, fileName).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             } else {
-                Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.space_not_availabe));
+                Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.space_not_availabe));
             }
         }
 

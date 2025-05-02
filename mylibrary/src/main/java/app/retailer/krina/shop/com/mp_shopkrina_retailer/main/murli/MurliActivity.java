@@ -13,7 +13,6 @@ import android.os.Environment;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 
 import com.google.gson.JsonObject;
 
@@ -30,7 +29,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassFor
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMurliBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
@@ -58,7 +57,7 @@ public class MurliActivity extends Activity implements AnimationListener, MediaP
         setContentView(mBinding.getRoot());
         player = new MediaPlayer();
         mBinding.ibClose.setOnClickListener(v -> onBackPressed());
-        commonAPICall = CommonClassForAPI.getInstance(MyApplication.getInstance().activity);
+        commonAPICall = CommonClassForAPI.getInstance(RetailerSDKApp.getInstance().activity);
         commonAPICall.getMurliAudioForMobile(audioObserver, SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID),
                 SharePrefs.getInstance(this).getInt(SharePrefs.WAREHOUSE_ID), "Shortcut Icon");
     }
@@ -266,7 +265,7 @@ public class MurliActivity extends Activity implements AnimationListener, MediaP
             if (Utils.getAvailableSpaceInMB() > 300) {
                 new WriteAudioFile(response).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             } else {
-                Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.space_not_availabe));
+                Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.space_not_availabe));
             }
         }
 

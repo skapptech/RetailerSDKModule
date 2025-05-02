@@ -21,7 +21,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.SubCategor
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TargetModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.CustomerTargetResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
@@ -64,34 +64,34 @@ class AchievedTargetActivity : AppCompatActivity() {
 
 
     private fun initViews() {
-        mBinding!!.title.text = MyApplication.getInstance().dbHelper.getString(R.string.my_target)
+        mBinding!!.title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target)
         mBinding!!.tvHurryUpHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.hurry_up_2)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hurry_up_2)
         mBinding!!.tvTargetPeriodHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.target_period)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.target_period)
         mBinding!!.tvTargetPeriodHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.target_period)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.target_period)
         mBinding!!.tvWalletPointsHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.wallet_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.wallet_points)
         mBinding!!.tvChanceToWin.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.chance_win)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.chance_win)
         mBinding!!.tvClaimButton.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.claim)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
         mBinding!!.tvTargetHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.target)
         mBinding!!.tvAchievedHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.achieved)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.achieved)
         mBinding!!.tvBrandTargetDescription.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_brand_list)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_brand_list)
         mBinding!!.tvLineItemTargetDescription.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_brand_list)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_brand_list)
         mBinding!!.tvItemTargetDescription.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_products)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.click_here_to_check_rest_products)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         utils = Utils(this)
         mBinding!!.back.setOnClickListener { onBackPressed() }
         mBinding!!.title.text =
-            subCategoryTargetModel!!.companyName + " " + MyApplication.getInstance().dbHelper.getString(
+            subCategoryTargetModel!!.companyName + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.target
             )
         val percentage = calculatePercentage(
@@ -119,7 +119,7 @@ class AchievedTargetActivity : AppCompatActivity() {
         mBinding!!.tvYourTargetHead.text =
             "Your " + SimpleDateFormat("MMMM", Locale.ENGLISH).format(
                 Date()
-            ) + " " + MyApplication.getInstance().dbHelper.getString(R.string.month_target)
+            ) + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.month_target)
         // mBinding.tvMonthTarget.setText(getString(R.string.achieve_your) + " " + new SimpleDateFormat("MMMM", Locale.ENGLISH).format(new Date()) + " " + getString(R.string.month_target));
         //  mBinding.tvCompanyName.setText(subCategoryTargetModel.getCompanyName());
         mBinding!!.tvDate.text = Utils.getCurrentDate(Calendar.getInstance().time)
@@ -156,7 +156,7 @@ class AchievedTargetActivity : AppCompatActivity() {
             val endDate = sdf.parse(subCategoryTargetModel!!.endDate)
             val diff = endDate.time - startDate.time
             mBinding!!.tvDaysLeft.text = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
-                .toString() + " " + MyApplication.getInstance().dbHelper.getString(R.string.days_left)
+                .toString() + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.days_left)
         } catch (e: ParseException) {
             e.printStackTrace()
         }
@@ -258,10 +258,10 @@ class AchievedTargetActivity : AppCompatActivity() {
         val pdTitle = mView.findViewById<TextView>(R.id.pd_title)
         val alert = mView.findViewById<TextView>(R.id.tv_alert)
         val cancel_btn = mView.findViewById<TextView>(R.id.cancel_btn)
-        alert.text = MyApplication.getInstance().dbHelper.getString(R.string.alert_for_gps)
-        pdTitle.text = MyApplication.getInstance().dbHelper.getString(R.string.licence_update_msg)
-        cancel_btn.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok_d)
+        alert.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert_for_gps)
+        pdTitle.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.licence_update_msg)
+        cancel_btn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok_d)
         alert.visibility = View.GONE
         pdTitle.text = message
         val cancelBtn = mView.findViewById<TextView>(R.id.cancel_btn)

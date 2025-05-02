@@ -15,7 +15,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.LanguageLi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -49,11 +49,11 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
         } else if (LocaleHelper.getLanguage(applicationContext).equals("gu", ignoreCase = true)) {
             gujaratiCB!!.isChecked = true
         }
-        mBinding.tvHindi.text = MyApplication.getInstance().dbHelper.getString(R.string.hindi)
-        mBinding.tvEnglish.text = MyApplication.getInstance().dbHelper.getString(R.string.english)
-        mBinding.tvGujarati.text = MyApplication.getInstance().dbHelper.getString(R.string.Gujarati)
+        mBinding.tvHindi.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.hindi)
+        mBinding.tvEnglish.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.english)
+        mBinding.tvGujarati.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.Gujarati)
         mBinding.toolbarCl.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.changelang)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.changelang)
     }
 
     override fun onClick(v: View) {
@@ -65,8 +65,8 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
                     gujaratiCB!!.isChecked = false
                     LocaleHelper.setLocale(applicationContext, "en")
                     SharePrefs.getInstance(this).putString(SharePrefs.CURRENT_LANGUAGE, "en")
-                    MyApplication.getInstance().clearLocalData()
-                    MyApplication.getInstance().dbHelper.truncateLangTable()
+                    RetailerSDKApp.getInstance().clearLocalData()
+                    RetailerSDKApp.getInstance().dbHelper.truncateLangTable()
                     startActivity(Intent(applicationContext, SplashScreenActivity::class.java))
                 } else {
                     englishCB!!.isChecked = true
@@ -78,8 +78,8 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
                     gujaratiCB!!.isChecked = false
                     LocaleHelper.setLocale(applicationContext, "hi")
                     SharePrefs.getInstance(this).putString(SharePrefs.CURRENT_LANGUAGE, "hi")
-                    MyApplication.getInstance().clearLocalData()
-                    MyApplication.getInstance().dbHelper.truncateLangTable()
+                    RetailerSDKApp.getInstance().clearLocalData()
+                    RetailerSDKApp.getInstance().dbHelper.truncateLangTable()
                     startActivity(Intent(applicationContext, SplashScreenActivity::class.java))
                 } else {
                     hindiCB!!.isChecked = true
@@ -90,8 +90,8 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
                     englishCB!!.isChecked = false
                     hindiCB!!.isChecked = false
                     LocaleHelper.setLocale(applicationContext, "gu")
-                    MyApplication.getInstance().clearLocalData()
-                    MyApplication.getInstance().dbHelper.truncateLangTable()
+                    RetailerSDKApp.getInstance().clearLocalData()
+                    RetailerSDKApp.getInstance().dbHelper.truncateLangTable()
                     startActivity(Intent(applicationContext, SplashScreenActivity::class.java))
                 } else {
                     gujaratiCB!!.isChecked = true
@@ -108,8 +108,8 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
 
     override fun onSelectLanguage(position: Int) {
         Utils.showProgressDialog(activity)
-        MyApplication.getInstance().clearLangData()
-        MyApplication.getInstance().dbHelper.deleteAndUpdateTable(dataPostSnapshot)
+        RetailerSDKApp.getInstance().clearLangData()
+        RetailerSDKApp.getInstance().dbHelper.deleteAndUpdateTable(dataPostSnapshot)
     }
 
     private fun initView() {

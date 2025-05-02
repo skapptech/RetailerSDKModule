@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReturnItemDetailBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderItemModel;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 
 public class ReturnItemDetailActivity extends AppCompatActivity {
     private ActivityReturnItemDetailBinding mBinding;
@@ -23,7 +23,7 @@ public class ReturnItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_return_item_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(MyApplication.getInstance().dbHelper.getString(R.string.title_activity_return_order));
+        setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_return_order));
 
         if (getIntent().getExtras() != null) {
             model = getIntent().getParcelableExtra("list");
@@ -41,8 +41,8 @@ public class ReturnItemDetailActivity extends AppCompatActivity {
     private void initViews() {
         Glide.with(this).load(model.getItemPic()).into(mBinding.ivImage);
         mBinding.tvName.setText(model.getItemName());
-        mBinding.tvPrice.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_mrp) + " " + model.getPrice());
-        mBinding.tvQty.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_order_qty) + " " + model.getQty());
+        mBinding.tvPrice.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp) + " " + model.getPrice());
+        mBinding.tvQty.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_order_qty) + " " + model.getQty());
         mBinding.cbSelect.setChecked(model.isSelected());
     }
 }

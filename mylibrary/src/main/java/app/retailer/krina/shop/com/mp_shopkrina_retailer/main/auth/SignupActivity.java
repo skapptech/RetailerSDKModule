@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivitySignupBinding;
@@ -58,7 +57,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
@@ -162,14 +161,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         customTextView(mBinding.tvTerms);
         mBinding.btnSignup.setOnClickListener(this);
 
-        mBinding.etFirstNameSignUp.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_name));
-        mBinding.etShopNameSignUp.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_shopname));
-        mBinding.etCity.setHint(MyApplication.getInstance().dbHelper.getString(R.string.select_city));
-        mBinding.etAddress.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_shipping_address));
-        mBinding.etGSTSignup.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_GSt));
-        mBinding.etMobileNo.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_mobilenumber));
-        mBinding.btnSignup.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_signup));
-        mBinding.tvTerms.setHint(MyApplication.getInstance().dbHelper.getString(R.string.terms_of_use));
+        mBinding.etFirstNameSignUp.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_name));
+        mBinding.etShopNameSignUp.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_shopname));
+        mBinding.etCity.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city));
+        mBinding.etAddress.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_shipping_address));
+        mBinding.etGSTSignup.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_GSt));
+        mBinding.etMobileNo.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_mobilenumber));
+        mBinding.btnSignup.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_signup));
+        mBinding.tvTerms.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_of_use));
 
         SIGNUPLOC = SharePrefs.getInstance(getApplicationContext()).getString(SharePrefs.SIGNUPLOC);
         mobile = SharePrefs.getInstance(getApplicationContext()).getString(SharePrefs.MOBILE_NUMBER);
@@ -293,7 +292,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } else if (addressModel == null && addressModel.getCityId() == 0) {
             mBinding.etCity.callOnClick();
         } else if (!mBinding.checkbox.isChecked()) {
-            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.check_terms_and_condition));
+            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.check_terms_and_condition));
         } else if (utils.isNetworkAvailable()) {
             // API call SignUp
             SignupModel signupModel = new SignupModel(SharePrefs.getInstance(getApplicationContext()).getInt(SharePrefs.CUSTOMER_ID),
@@ -308,7 +307,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             Utils.showProgressDialog(this);
             commonClassForAPI.fetchSignupData(callSignUpDes, signupModel);
         } else {
-            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
         }
     }
 

@@ -20,7 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.flip.FlipViewController
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
 
@@ -78,7 +78,7 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
                 } else {
                     Utils.setToast(
                         baseContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.text_no_story_available)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_no_story_available)
                     )
                 }
             } catch (e: Exception) {
@@ -171,7 +171,7 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
                 mBinding!!.progressBar.visibility = View.VISIBLE
 
                 Glide.with(this@StoryActivity)
-                    .load(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + list[position].imagePath)
+                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + list[position].imagePath)
                     .error(R.drawable.murli_story_end_page)
                     .into(ivImage1)
             }

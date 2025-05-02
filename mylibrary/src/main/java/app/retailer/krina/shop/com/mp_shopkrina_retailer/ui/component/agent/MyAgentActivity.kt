@@ -15,7 +15,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.MyAgentListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MyAgentModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MyAgentActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class MyAgentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_agent)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.my_agents)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_agents)
 
         val appRepository = AppRepository(this)
         viewModel = ViewModelProvider(

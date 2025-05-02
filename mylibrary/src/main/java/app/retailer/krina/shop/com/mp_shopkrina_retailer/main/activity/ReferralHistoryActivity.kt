@@ -9,7 +9,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReferralHistoryBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.ReferredListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReferredModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class ReferralHistoryActivity : AppCompatActivity() {
     lateinit var binding: ActivityReferralHistoryBinding
@@ -22,18 +22,18 @@ class ReferralHistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_referral_history)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.referral_history)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.referral_history)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
 
         binding.tvShopNameH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.shop_name)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.shop_name)
         binding.tvWalletPoint.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.wallet_Point)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.wallet_Point)
         binding.tvStatusH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.status)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.status)
 
         list = intent.getParcelableArrayListExtra("list")
         referredAdapter = ReferredListAdapter(this, list!!)

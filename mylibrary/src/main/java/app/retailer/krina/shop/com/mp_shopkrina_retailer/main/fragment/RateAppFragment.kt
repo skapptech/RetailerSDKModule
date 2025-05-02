@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentRat
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.EditProfileActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfileResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonIOException
 import com.google.gson.JsonObject
@@ -48,7 +48,7 @@ class RateAppFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             editProfileActivity!!,
             this.javaClass.simpleName,
             null
@@ -58,24 +58,24 @@ class RateAppFragment : Fragment() {
 
     fun initialization() {
         editProfileActivity!!.tv_title!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
         val utils = Utils(activity)
         val commonClassForAPI = CommonClassForAPI.getInstance(activity)
         mBinding.helpUsImproveOurService.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.help_us_improve_our_service)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.help_us_improve_our_service)
         mBinding.howWouldYouRateOurApp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.how_would_you_rate_our_app)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.how_would_you_rate_our_app)
         mBinding.enterYourValuableFeedback.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_your_valuable_feedback)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_your_valuable_feedback)
         mBinding.submitRating.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         mBinding.editFeedback.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.type_here)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.type_here)
         mBinding.submitRating.setOnClickListener { v: View? ->
             if (mBinding.rateUs.rating.toDouble() == 0.0) {
                 Toast.makeText(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.select_rating),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_rating),
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (mBinding.editFeedback.text.toString().trim { it <= ' ' }
@@ -85,7 +85,7 @@ class RateAppFragment : Fragment() {
                     .isEmpty()) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.feedback_empty_field)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.feedback_empty_field)
                 )
             } else {
                 if (utils.isNetworkAvailable) {
@@ -110,7 +110,7 @@ class RateAppFragment : Fragment() {
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             }
@@ -125,7 +125,7 @@ class RateAppFragment : Fragment() {
                 if (response != null && response.isStatus) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.toast_submitted)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_submitted)
                     )
                 }
                 try {

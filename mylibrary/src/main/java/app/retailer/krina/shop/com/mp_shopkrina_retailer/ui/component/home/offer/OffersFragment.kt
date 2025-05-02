@@ -17,11 +17,11 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentOffersTextBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class OffersFragment : Fragment() {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var viewModel: OfferViewModel
     private var rootView: View? = null
     private lateinit var mBinding: FragmentOffersTextBinding
@@ -32,7 +32,7 @@ class OffersFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -58,7 +58,7 @@ class OffersFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         activity!!.bottomNavigationView!!.menu.findItem(R.id.offers).isChecked = true
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName,
             null
@@ -85,12 +85,12 @@ class OffersFragment : Fragment() {
         activity!!.rightSideIcon!!.visibility = View.VISIBLE
         activity!!.topToolbarTitle!!.visibility = View.GONE
         activity!!.topToolbarTitle!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_offers)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_offers)
     }
     fun initialization() {
         observe(viewModel.getBillDiscountListData, ::handleOfferResult)
         activity!!.bottomNavigationView!!.visibility = View.VISIBLE
-        mBinding.noOfferAvailable.text = MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available)
+        mBinding.noOfferAvailable.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available)
         list = ArrayList()
         mBinding.recyclerOffer.adapter =
             OfferAdapter(

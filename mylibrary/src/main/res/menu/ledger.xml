@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/convert_pdf"
+        android:icon="@drawable/ic_pdf_down"
+        android:title="generate pdf"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/convert_excel"
+        android:icon="@drawable/ic_excel_down"
+        android:title="generate excel"
+        app:showAsAction="always" />
+</menu>

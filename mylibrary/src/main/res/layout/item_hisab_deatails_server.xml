@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingVertical="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="60dp">
+
+        <TextView
+            android:id="@+id/tv_header_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/round_light"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:text=""
+            android:visibility="gone"
+            android:textColor="@color/black" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/RLS_server"
+            android:layout_below="@+id/tv_header_date"
+            android:layout_alignLeft="@+id/name"
+            android:background="@drawable/their_message"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            android:elevation="2dp">
+
+        <TextView
+            style="@style/CommonStyleSB"
+            android:id="@+id/message_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green_50"
+            android:text=""
+            android:textSize="12dp" />
+
+        <TextView
+            style="@style/CommonStyleSB"
+            android:id="@+id/tv_note"
+            android:layout_below="@+id/message_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:ellipsize="end"
+            android:ems="5"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="11sp" />
+        </RelativeLayout>
+      <!--  <TextView
+        android:id="@+id/tv_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_server"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="@dimen/size5"
+        android:paddingBottom="4dp"
+        android:text="Date time"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/size8" />-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLS_server"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/size5"
+            android:padding="@dimen/size2">
+        <ImageView
+            android:id="@+id/im_server_camera"
+            android:layout_width="@dimen/size15"
+            android:layout_height="@dimen/size15"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/size5"
+            android:visibility="gone"
+            android:src="@drawable/camera" />
+        <TextView
+            android:id="@+id/tv_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date time"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/size8" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="1dp"
+        android:layout_margin="8dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/community_et_border"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="प्रश्न का उत्तर यहां लिखे"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="9dp"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey"
+                android:layout_marginHorizontal="4dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivImage"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="2dp"
+                android:adjustViewBounds="true"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/app_name"
+                android:padding="5dp"
+                app:srcCompat="@drawable/closee" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

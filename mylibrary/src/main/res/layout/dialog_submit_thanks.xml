@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/drawable_bg_corner"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_rupee" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_30dp_padding"
+            android:id="@+id/tvThanksHead"
+            android:text="@string/thanks_for_uploading"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_20dp_padding"
+            android:layout_marginTop="@dimen/layout_30dp_padding"
+            android:layout_marginRight="@dimen/layout_20dp_padding"
+            android:id="@+id/tvYouWillReceive"
+            android:text="@string/receive_form_as_eligibility_verified"
+            android:textColor="@color/Darkgrey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="80dp"
+            android:background="#cccccc" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_padding_10"
+            android:layout_marginBottom="@dimen/view_padding_10"
+            android:gravity="center"
+            android:padding="@dimen/view_padding_10"
+            android:text="@string/ok"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

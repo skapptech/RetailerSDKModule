@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="होम "
+        android:icon="@drawable/ic_action_home"
+        />
+
+
+    <item
+        android:id="@+id/notifications"
+        android:title="मंडी भाव"
+        android:actionLayout="@layout/feed_nofiction_count"
+        android:icon="@drawable/ic_action_heart"
+        />
+
+    <item
+        android:id="@+id/profile"
+        android:title="प्रोफाइल"
+        android:icon="@drawable/ic_action_profile"
+        />
+
+
+</menu>

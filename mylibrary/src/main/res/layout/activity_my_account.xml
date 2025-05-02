@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_my_account"
+            layout="@layout/toolbar_arrow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/accout_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size10"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_marginRight="@dimen/size10"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/my_account_adapter" />
+    </LinearLayout>
+</layout>

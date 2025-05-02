@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?actionBarSize"
+                android:clipToPadding="false"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="@dimen/layout_5dp_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:id="@+id/liEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:maxHeight="150dp"
+                    android:src="@drawable/maintenance" />
+
+                <TextView
+                    android:id="@+id/this_site_is_under_maintenance"
+                    style="@style/CommonStyleB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size15"
+                    android:text="@string/this_site_is_under_maintenance"
+                    android:textColor="#292929"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/we_are_preparing_to_serve_you_better"
+                    style="@style/CommonStyleB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:text="@string/we_are_preparing_to_serve_you_better"
+                    android:textColor="#9b9c9e" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

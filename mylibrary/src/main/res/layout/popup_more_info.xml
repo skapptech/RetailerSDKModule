@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rl_confirmation_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size10"
+        android:layout_marginRight="@dimen/size10"
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/size10"
+        app:cardElevation="@dimen/cardview_default_elevation">
+
+        <LinearLayout
+            android:id="@+id/design_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:padding="10dp"
+                    android:text="@string/more_info"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivClose"
+                    android:layout_width="@dimen/size20"
+                    android:layout_height="@dimen/size20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/size10"
+                    android:background="@drawable/ic_cross" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/on_completi"
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size20"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/on_completi"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size12" />
+
+            <TextView
+                android:id="@+id/tv_gift_item_name"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size3"
+                android:layout_marginBottom="@dimen/size10"
+                android:lineSpacingExtra="0sp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size15"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/giftImage"
+                    android:layout_width="200dp"
+                    android:layout_height="164dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/size30"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/shopimage"
+                        android:layout_width="200dp"
+                        android:layout_height="164dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/logo_sk" />
+
+                    <View
+                        android:id="@+id/overlayImage"
+                        android:layout_width="200dp"
+                        android:layout_height="164dp"
+                        android:background="@drawable/overlay_rounded_corner_bg" />
+
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:id="@+id/RLWalletPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/size30"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="200dp"
+                        android:layout_height="164dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/component_178_1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvWalletPoints"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvWalletPointsHead"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/wallet_points"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/overlayImagePoint"
+                        android:layout_width="200dp"
+                        android:layout_height="164dp"
+                        android:background="@drawable/overlay_rounded_corner_bg"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/rlOffer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/scratch_card_open">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvOfferValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                android:text="100"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/overlayImageOffer"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/overlay_rounded_corner_bg"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/ivUnlock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:src="@drawable/ic_lock_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.92" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

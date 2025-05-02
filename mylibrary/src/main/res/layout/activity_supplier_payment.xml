@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_my_ledger"
+            layout="@layout/toolbar_arrow" />
+
+        <LinearLayout
+            android:id="@+id/ll_coming_soon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvComingSoonL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size24"
+                android:fontFamily="@font/anton"
+                android:includeFontPadding="false"
+                android:text="@string/coming_soon"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size30" />
+
+            <TextView
+                android:id="@+id/tvCheckLater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size155"
+                android:fontFamily="@font/seguisb"
+                android:gravity="center"
+                android:text="@string/please_check_back_later"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_ledger_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size12"
+                android:layout_marginTop="5dp"
+
+                android:layout_marginRight="@dimen/size10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLedgerNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size2"
+                    android:gravity="start"
+                    android:text="@string/ledger_note"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvFinYr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size10"
+                    android:gravity="start"
+                    android:text="@string/financial_year"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border_orange_report">
+
+
+                    <Spinner
+                        android:id="@+id/spinner_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lerGetData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/size10"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFromL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/From"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/view_padding_10"
+                        android:background="@drawable/border_orange_report"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size5">
+
+                        <TextView
+                            android:id="@+id/start_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/view_padding_10"
+                            android:layout_weight="1"
+                            android:hint="DD/MM/YYYY"
+                            android:textColor="@color/Black" />
+
+                        <ImageView
+                            android:id="@+id/startImage"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/ic_calendar"
+                            android:tint="@color/colorAccent" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvToL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/To"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/view_padding_10"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_orange_report"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size5">
+
+                        <TextView
+                            android:id="@+id/end_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/view_padding_10"
+                            android:layout_weight="1"
+                            android:hint="DD/MM/YYYY"
+                            android:inputType="date"
+                            android:textColor="#000" />
+
+                        <ImageView
+                            android:id="@+id/endImage"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_calendar"
+                            android:tint="@color/colorAccent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size16"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginRight="@dimen/size10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLedgerType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/ledger_type"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginBottom="5dp"
+
+                    android:background="@drawable/border_orange_report">
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/get_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size12"
+                android:layout_marginTop="@dimen/size15"
+                android:layout_marginRight="@dimen/size10"
+                android:background="@drawable/bt_drawable_orang"
+                android:text="@string/hint_search"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size20"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginRight="@dimen/size20">
+
+                <TextView
+                    android:id="@+id/tv_close_balnce"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/Black" />
+
+                <TextView
+                    android:id="@+id/tv_current_opping_bal"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/Black" />
+            </RelativeLayout>
+
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/rv_supplier_payment"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginLeft="@dimen/size10"-->
+            <!--                android:layout_marginTop="@dimen/size20"-->
+            <!--                android:layout_marginRight="@dimen/size10" />-->
+        </LinearLayout>
+    </LinearLayout>
+</layout>

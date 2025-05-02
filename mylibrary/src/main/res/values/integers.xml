@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="CAPTURE_IMAGE_CAMERA">1111</integer>
+    <integer name="CAPTURE_IMAGE_LIBRARY">2222</integer>
+
+    <integer name="CAPTURE_IMAGE_CAMERA_BACK">3333</integer>
+    <integer name="CAPTURE_IMAGE_LIBRARY_BACK">4444</integer>
+</resources>

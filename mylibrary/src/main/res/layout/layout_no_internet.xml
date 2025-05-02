@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/activity_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="140dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:maxHeight="150dp"
+                android:src="@drawable/no_internet" />
+
+            <TextView
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/size10"
+                android:id="@+id/tvNotConnected"
+                android:text="@string/not_connected_to_internet"
+                android:textColor="#9b9c9e" />
+
+            <Button
+                android:id="@+id/retry"
+                style="@style/CommonStyleB"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/retry"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size18"
+                app:backgroundTint="@android:color/white" />
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="?android:attr/windowBackground"
+            android:backgroundTint="@color/light_grey"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/navigation" />
+    </RelativeLayout>
+</layout>

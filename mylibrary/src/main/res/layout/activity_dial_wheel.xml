@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dial_background"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CommonStyleB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:fontFamily="@font/anton"
+            android:gravity="center"
+            android:id="@+id/tvSpinToWin"
+            android:text="@string/spin_to_win"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size30" />
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+           android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size30">
+
+            <ImageView
+                android:id="@+id/imRoulette"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/wheel"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/imPointer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="6dp"
+                android:padding="130dp"
+                app:srcCompat="@drawable/spin_center"
+                android:contentDescription="@string/app_name" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvRemainingDial"
+            style="@style/CommonStyleB"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:fontFamily="@font/anton"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size20" />
+
+        <Button
+            android:id="@+id/btn_spin"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="270dp"
+            android:layout_height="62dp"
+            android:background="@drawable/play_dial_btn" />
+
+        <TextView
+            android:id="@+id/skip_dial"
+            android:layout_gravity="center"
+            style="@style/CommonStyleB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:fontFamily="@font/anton"
+            android:text="@string/skip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size30" />
+    </LinearLayout>
+</layout>

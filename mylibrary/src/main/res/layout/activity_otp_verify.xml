@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/logo_sk_ep" />
+
+        <TextView
+            android:id="@+id/tvEnterMobileT"
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/EnterMobileNumber"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvOtpT"
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/msg_sent_otp"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91-"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_chngnumber"
+            style="@style/CommonStyleSB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size20"
+            android:text="@string/ChangeNumber"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+        <app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.OtpEditText
+            android:id="@+id/et_otp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_resend_otp"
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/resend_otp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:id="@+id/RLTimer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp">
+
+            <ProgressBar
+                android:id="@+id/progressbar1_timerview"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:progressBackgroundTint="#EBEBEB"
+                android:progressDrawable="@drawable/custom_timer" />
+
+            <TextView
+                android:id="@+id/tv_resend_otp_timer"
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="59"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_verify_otp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="@dimen/size30"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/next" />
+    </LinearLayout>
+</layout>

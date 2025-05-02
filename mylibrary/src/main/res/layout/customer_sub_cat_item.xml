@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size5"
+        android:background="@color/white1">
+
+        <LinearLayout
+            android:id="@+id/ll_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_box_100"
+            android:foreground="@drawable/rippleeffect"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/im_claimed_logo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity=""
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/claimed"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/im_claimed_logo"
+                    android:orientation="vertical">
+                    
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/im_company_logo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/size5"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/staples_bg"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_company_name"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:typeface="sans" />
+
+                    <TextView
+                        android:id="@+id/tv_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_target_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="date"
+                        android:textColor="@color/grey"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_progressbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="@dimen/size5"
+                        android:gravity="center"
+                        android:visibility="visible">
+
+                        <ProgressBar
+                            android:id="@+id/target_progress"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:layout_margin="@dimen/size5"
+                            android:indeterminate="false"
+                            android:maxHeight="5dp"
+                            android:minHeight="5dp"
+                            android:progressDrawable="@drawable/custom_progress_bar" />
+
+                        <TextView
+                            android:id="@+id/progress_percent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/target_progress"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/white1"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tvClaimButton"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/ll_main"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/drawable_button_corner"
+                        android:backgroundTint="@color/colorAccent"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/text_btn_claim"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

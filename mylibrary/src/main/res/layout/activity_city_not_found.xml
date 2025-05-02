@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/activity_background"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_oops"
+        style="@style/CommonStyleSR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="@dimen/view_padding_20"
+        android:text="@string/ooops"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/iv_not_found_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/tv_oops"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/layout_30dp_padding"
+        android:background="@drawable/image_sad"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_not_found_city"
+        style="@style/CommonStyleSR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_not_found_image"
+        android:layout_marginLeft="@dimen/view_padding_20"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="@dimen/view_padding_20"
+        android:textColor="@color/Darkgrey" />
+</RelativeLayout>

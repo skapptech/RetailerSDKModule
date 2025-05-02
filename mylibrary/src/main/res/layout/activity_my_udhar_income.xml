@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_udhar_income"
+            layout="@layout/toolbar_arrow" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size10"
+            app:cardCornerRadius="@dimen/size5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_udhar_salary"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="30dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_timetable"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:id="@+id/tv_Select_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_udhar_salary"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="80dp"
+                        android:text="@string/txt_how_old" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_Select_income"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="90dp"
+                        android:layout_marginTop="@dimen/layout_20dp_padding"
+                        android:layout_marginEnd="50dp"
+                        android:text="@string/txt_My_income"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <Spinner
+                    android:id="@+id/sp_income_rate"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_20dp_padding"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="@dimen/layout_20dp_padding" />
+
+                <Button
+                    android:id="@+id/bt_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_20dp_padding"
+                    android:layout_marginTop="@dimen/size20"
+                    android:layout_marginRight="@dimen/layout_20dp_padding"
+                    android:layout_marginBottom="@dimen/layout_30dp_padding"
+                    android:background="@drawable/drawable_corner_udhar"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</layout>

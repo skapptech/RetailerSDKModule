@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="180dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@drawable/ic_phone_location" />
+
+            <TextView
+                android:id="@+id/tvSkCode"
+                style="@style/CommonStyleB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:hint="@string/app_name"
+                android:textColor="@android:color/black"
+                android:textIsSelectable="true"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/CommonStyleSB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="center_horizontal"
+                android:text="@string/thank_you_for_your_registration"
+                android:textColor="@android:color/black"
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/we_will_inform_you_once_we_available"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:autoLink="phone"
+                android:text="Contact us"
+                android:textColor="@color/secondary_text"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                style="@style/CommonStyleB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/app_name"
+                android:text="+91 7828112112"
+                android:textColor="@android:color/black"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/orange_seller_bg"
+                android:minWidth="130dp"
+                android:text="@string/call_now"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="80dp"
+            android:src="@drawable/ic_logo_grey" />
+    </RelativeLayout>
+</layout>

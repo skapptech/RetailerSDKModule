@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.auth.PlacesSearchActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/arrow_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                android:elevation="@dimen/size15">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="@dimen/size60"
+                        android:layout_height="@dimen/size50"
+                        android:contentDescription="@string/app_name"
+                        android:paddingTop="@dimen/size16"
+                        android:paddingEnd="@dimen/size30"
+                        android:paddingBottom="@dimen/size16"
+                        android:src="@drawable/ic_back"
+                        app:tint="@color/Black"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/et_search_keyword"
+                        style="@style/CommonStyleB"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:paddingEnd="@dimen/size72"
+                        android:text="@string/title_serach_address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size16" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="@dimen/size15">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address"
+                style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/search_delivery_address"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords|textMultiLine"
+                    android:maxLines="3"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/ler_city_selection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size5"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/city"
+                    style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="2dp"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="@string/city" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/state"
+                    style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_state"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:hint="@string/state_astrick"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pincode"
+                style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_pincode"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:focusable="false"
+                    android:hint="@string/pin_code"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/flate_or_floor_number"
+                style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_flate_or_floor_number"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:hint="@string/address_field_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/landmark"
+                style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/size5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_landmark"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:hint="@string/landmark_optional"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="@dimen/size5"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="@dimen/size5"
+                android:background="@drawable/drawable_corner_button"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/save"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

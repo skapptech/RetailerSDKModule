@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo_sk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/app_name"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_notificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textAppearance="@android:style/TextAppearance.StatusBar.EventContent.Title"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--  <ImageView
+              android:id="@+id/btn_notification_changestate"
+              android:layout_width="30dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="1dp"
+              android:adjustViewBounds="true"
+              android:contentDescription="@string/app_name"
+              android:src="@drawable/play_icon" />-->
+
+        <TextView
+            android:id="@+id/btn_notficationTimer"
+            style="?android:buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_notification_exit"
+            style="?android:buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:text="Close"
+            android:textAllCaps="false" />
+    </RelativeLayout>
+</LinearLayout>

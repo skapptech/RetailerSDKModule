@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="@dimen/size30"
+                android:layout_height="@dimen/size50"
+                android:contentDescription="@string/app_name"
+                android:paddingTop="@dimen/size16"
+                android:paddingBottom="@dimen/size16"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size30"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size10"
+                android:layout_toEndOf="@+id/back"
+                android:text="@string/customer_level"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvYourLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:nestedScrollingEnabled="false" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tvCustomerLevel"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/tvTargetHead"
+                    android:text="@string/you_are_a_sk_customer"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/tvOrderCount"
+                    android:background="@drawable/orange_circle"
+                    android:backgroundTint="@color/colorTargetOne"
+                    android:padding="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:id="@+id/tvOrderValue"
+                    android:visibility="gone"
+                    android:background="@drawable/orange_circle"
+                    android:backgroundTint="@color/colorTargetTwo"
+                    android:padding="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/tvOrderBrandValue"
+                    android:background="@drawable/orange_circle"
+                    android:backgroundTint="@color/colorTargetOne"
+                    android:padding="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/tvOrderKKValue"
+                    android:background="@drawable/orange_circle"
+                    android:backgroundTint="@color/colorTargetTwo"
+                    android:padding="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

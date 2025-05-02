@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llShowLable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size10"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/size10"
+            android:background="@drawable/poll_progress_drwawable"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvpollText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:padding="@dimen/size8"
+                android:text="bhagwan"
+                android:textColor="#2D4099"
+                android:textSize="@dimen/size14" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/llprogress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/size20"
+            android:visibility="visible">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <RelativeLayout
+                    android:id="@+id/rlProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.70">
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:minWidth="100dp"
+                        android:progress="60"
+                        app:indicatorColor="#EFF2FF"
+                        app:indicatorSize="170dp"
+                        app:trackCornerRadius="10dp"
+                        app:trackThickness="30dp" />
+
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/size20"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center_vertical"
+                        android:text="bhagwan%"
+                        android:textColor="#2D4099"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/ivCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.01"
+                    android:paddingStart="@dimen/size50"
+                    android:scaleType="center"
+                    android:src="@drawable/process_check"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tvPollProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/progress"
+                    android:layout_marginStart="@dimen/size5"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.29"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="right"
+                    android:text="100"
+                    android:textColor="@color/bucket_black"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

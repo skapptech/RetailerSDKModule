@@ -1,0 +1,49 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary"
+            app:elevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="@dimen/size60"
+                    android:layout_height="@dimen/size50"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingTop="@dimen/size16"
+                    android:paddingEnd="@dimen/size30"
+                    android:paddingBottom="@dimen/size16"
+                    android:src="@drawable/ic_back"
+                    android:tint="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size30"
+                    android:layout_marginStart="@dimen/size76"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginEnd="100dp"
+                    android:gravity="center"
+                    android:text="@string/order_summary"
+                    android:textSize="20sp"
+                    android:tint="@android:color/black" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

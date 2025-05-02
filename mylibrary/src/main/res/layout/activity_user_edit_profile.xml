@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".community.post.AddPostActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarPost"
+            layout="@layout/toolbar_edit" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/White"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/show_image_user"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlProfileUpload"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_alignParentBottom="true"
+                       >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/profile_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/profile_image"
+                                app:elevation="8dp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/size24"
+                                android:layout_height="@dimen/size24"
+                                android:layout_alignParentBottom="true"
+                                android:layout_above="@+id/profile_image"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/edit_image"/>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/size14"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/UserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size10"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:maxLines="1"
+                        android:text="Prakash Pandey"
+                        android:textColor="#213346"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size10"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <TextView
+                            android:id="@+id/TvShopName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.2"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="1"
+                            android:text="Tirupati Balaji Traders"
+                            android:textColor="#213346" />
+
+                        <TextView
+                            android:id="@+id/tvCity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:drawablePadding="@dimen/size10"
+                            android:drawableLeft="@drawable/location_on_user"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="1"
+                            android:text="Indore"
+                            android:textColor="#213346" />
+
+                        <TextView
+                            android:id="@+id/tvMobileNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="gone"
+                            android:fontFamily="@font/poppins_medium"
+                            android:maxLines="1"
+                            android:text=""
+                            android:textColor="#213346" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginTop="@dimen/size20"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:layout_marginBottom="@dimen/size10"
+                        android:background="@drawable/edittext_prfofile">
+
+                        <EditText
+                            android:id="@+id/etUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:imeOptions="actionNext"
+                            android:paddingEnd="@dimen/size40"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="कृपया अपना नाम दर्ज करें"
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/size10" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:paddingEnd="@dimen/size10"
+                            android:src="@drawable/unlock" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginTop="@dimen/size10"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:layout_marginBottom="@dimen/size10"
+                        android:background="@drawable/edittext_prfofile">
+
+                        <EditText
+                            android:id="@+id/et_Mobile_No"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:imeOptions="actionNext"
+                            android:editable="false"
+                            android:focusableInTouchMode="false"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="Mobile Number"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/size10" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:paddingEnd="@dimen/size10"
+                            android:src="@drawable/unlock" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginTop="@dimen/size10"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:layout_marginBottom="@dimen/size10"
+                        android:background="@drawable/edittext_prfofile">
+
+                        <EditText
+                            android:id="@+id/etShopName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="कृपया दुकान का नाम दर्ज करें"
+                            android:paddingEnd="@dimen/size40"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/size10" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:paddingEnd="@dimen/size10"
+                            android:src="@drawable/unlock" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size10"
+                        android:layout_marginTop="@dimen/size10"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:layout_marginBottom="@dimen/size10"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_marginRight="@dimen/size5"
+                            android:layout_weight="1"
+                            android:background="@drawable/edittext_prfofile">
+
+                            <EditText
+                                android:id="@+id/etCity"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="कृपया शहर का नाम दर्ज करें"
+                                android:singleLine="true"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:imeOptions="actionDone"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/size10" />
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:paddingEnd="@dimen/size10"
+                                android:src="@drawable/unlock" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_marginStart="@dimen/size5"
+                            android:layout_weight="0.5"
+                            android:visibility="gone"
+                            android:background="@drawable/edittext_prfofile">
+
+                            <EditText
+                                android:id="@+id/etState"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:fontFamily="@font/poppins_medium"
+                                android:hint="State"
+                                android:maxLines="1"
+                                android:paddingStart="@dimen/size10" />
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:paddingEnd="@dimen/size10"
+                                android:src="@drawable/unlock" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_marginTop="@dimen/size20"
+                    android:fontFamily="@font/poppins_medium"
+                    android:maxLines="1"
+                    android:visibility="gone"
+                    android:text="दुकान की फोटो डालें"
+                    android:textColor="#949494"
+                    android:textSize="15dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size10"
+                    android:visibility="gone"
+                    android:background="@drawable/banner_img"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_above="@+id/tvLable"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/image_user_profile" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:text="खुद की व धुंधली फोटो न डालें"
+                        android:textColor="#2D4099" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginEnd="@dimen/size10"
+                    android:layout_marginBottom="@dimen/size20"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="1">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginRight="@dimen/size5"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edittext_prfofile">
+
+                        <EditText
+                            android:id="@+id/etStartingyear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="दुकान कब शुरू की"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/size10" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="@dimen/size5"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edittext_prfofile">
+
+                        <EditText
+                            android:id="@+id/etShopSize"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="दुकान का साइज Sq.ft."
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/size10" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

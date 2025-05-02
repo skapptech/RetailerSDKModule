@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/LL_VP"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_main_chat_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/white_rectangle_box"
+            android:elevation="5dp"
+            android:layout_marginEnd="@dimen/size8"
+            android:layout_marginStart="@dimen/size8"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_marginBottom="@dimen/size10"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/initialsTextView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/gradient"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="G" />
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_user_number"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:text="Number"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/size10"
+                android:background="@color/grey"/>
+            <TextView
+                android:id="@+id/tv_last_trs_amount"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:text="5000"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size16" />
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/size10"
+                android:background="@color/grey"/>
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:layout_marginBottom="@dimen/size5"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+
+
+</layout>

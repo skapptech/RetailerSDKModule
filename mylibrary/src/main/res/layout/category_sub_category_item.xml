@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ExpandableListView
+            style="@style/CommonStyleSR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/white"
+            android:divider="@color/transparent"
+            android:dividerHeight="0dp"
+            android:groupIndicator="@null"
+            android:nestedScrollingEnabled="true"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategoryPopup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_20dp_padding"
+            android:layout_marginTop="@dimen/view_padding_10"
+            android:layout_marginEnd="@dimen/layout_20dp_padding"
+            android:layout_marginBottom="@dimen/view_padding_10" />
+    </LinearLayout>
+</LinearLayout>
+
+

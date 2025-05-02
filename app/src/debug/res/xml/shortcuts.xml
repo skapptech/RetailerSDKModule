@@ -1,0 +1,45 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_myorder"
+        android:shortcutId="order"
+        android:shortcutShortLabel="@string/txt_My_Order">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity"
+            android:targetPackage="app.retailer.krina.shop.com.mp_shopkrina_retailer.debug" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_cart_orange"
+        android:shortcutId="cart"
+        android:shortcutShortLabel="@string/shopping_cart">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ShopingCartActivity"
+            android:targetPackage="app.retailer.krina.shop.com.mp_shopkrina_retailer.debug" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_my_profile"
+        android:shortcutId="profile"
+        android:shortcutShortLabel="@string/edit_profile">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.EditProfileActivity"
+            android:targetPackage="app.retailer.krina.shop.com.mp_shopkrina_retailer.debug" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_games_icon"
+        android:shortcutId="game"
+        android:shortcutShortLabel="@string/title_activity_game">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.GamesListActivity"
+            android:targetPackage="app.retailer.krina.shop.com.mp_shopkrina_retailer.debug" />
+    </shortcut>
+</shortcuts>

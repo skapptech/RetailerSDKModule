@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_collection"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="@string/collection" />
+
+    <item
+        android:id="@+id/menu_customer_balnce"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="@string/customer_balance" />
+
+</menu>

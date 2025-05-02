@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp">
+
+        <ImageView
+            android:id="@+id/ivBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:id="@+id/llRootView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/size16"
+            android:paddingTop="@dimen/size12"
+            android:paddingBottom="@dimen/size24"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvRewardType"
+                        style="@style/CommonStyleB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3X"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/ivCoin"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@+id/tvRewardType"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_coin_final" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvPoints"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressDays"
+                        android:layout_width="wrap_content"
+                        android:layout_height="11dp"
+                        android:layout_marginTop="2dp"
+                        android:minWidth="100dp"
+                        app:indicatorColor="@color/bucket_red"
+                        app:indicatorSize="170dp"
+                        app:trackColor="@color/bucket_view_red"
+                        app:trackCornerRadius="10dp"
+                        app:trackThickness="10dp" />
+
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="0%"
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/ivEmoji"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="1dp" />
+
+                    <TextView
+                        android:id="@+id/tvDaysLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/progress"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="4 दिन शेष"
+                        android:textColor="@color/bucket_white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/btnFillBucket"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="1dp"
+                    android:src="@drawable/ic_bucket_btn" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/activity_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/activity_background"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/topBarColor"
+                app:elevation="10dp">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="@dimen/size60"
+                    android:layout_height="@dimen/size50"
+                    android:contentDescription="@string/app_name"
+                    android:paddingTop="@dimen/size16"
+                    android:paddingEnd="@dimen/size30"
+                    android:paddingBottom="@dimen/size16"
+                    app:srcCompat="@drawable/ic_cross"
+                    app:tint="@color/Black" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/CommonStyleB"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size30"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginEnd="100dp"
+                    android:gravity="center"
+                    android:text="@string/Filter"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </androidx.appcompat.widget.Toolbar>
+            <!--
+            price layout
+            -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/activity_background" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/topBarColor"
+                        android:orientation="horizontal"
+                        android:padding="15dp">
+
+                        <TextView
+                            style="@style/CommonStyleSB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_weight="1"
+                            android:text="@string/price"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            style="@style/CommonStyleSB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/grey"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/dropdown"
+                            android:layout_width="50dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@+id/tv_price"
+                            app:srcCompat="@drawable/ic_search_down_arrow" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/slider_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/topBarColor"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:visibility="gone">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/activity_background" />
+
+                        <com.google.android.material.slider.RangeSlider
+                            android:id="@+id/rangeSeekbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_minrange"
+                                style="@style/CommonStyleB"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:text="0"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_maxrange"
+                                style="@style/CommonStyleB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:text="1000"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- price layout -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/activity_background" />
+
+                        <LinearLayout
+                            android:id="@+id/base_cat_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center"
+                            android:background="@color/topBarColor"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tvHeader"
+                                    style="@style/CommonStyleSR"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="0.5"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/Tiltle_BaseCategories"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="17sp" />
+
+                                <ImageView
+                                    android:id="@+id/expandable_icon"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginRight="30dp"
+                                    android:contentDescription="@string/app_name"
+                                    app:srcCompat="@drawable/ic_search_down_arrow" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/activity_background" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_basechild"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:visibility="gone" />
+
+
+                        <LinearLayout
+                            android:id="@+id/cat_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center"
+                            android:background="@color/topBarColor"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tvCatHeader"
+                                    style="@style/CommonStyleSR"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="0.5"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/title_categories"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="17sp" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginRight="30dp"
+                                    android:contentDescription="@string/app_name"
+                                    app:srcCompat="@drawable/ic_search_down_arrow" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/activity_background" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_cat_child"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/subcat_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@color/topBarColor"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSubCatHeader"
+                                style="@style/CommonStyleSR"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="0.5"
+                                android:includeFontPadding="false"
+                                android:text="@string/Tiltle_SubCategories"
+                                android:textColor="@android:color/black"
+                                android:textSize="17sp" />
+
+                            <ImageView
+
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="30dp"
+                                android:contentDescription="@string/app_name"
+                                app:srcCompat="@drawable/ic_search_down_arrow" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_subcat_child"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/white"
+                            android:visibility="gone" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/activity_background" />
+
+                        <LinearLayout
+                            android:id="@+id/brand_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@color/topBarColor"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSubSubCatHeader"
+                                style="@style/CommonStyleSR"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="0.5"
+                                android:includeFontPadding="false"
+                                android:text="@string/Tiltle_brand"
+                                android:textColor="@android:color/black"
+                                android:textSize="17sp" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="30dp"
+                                android:contentDescription="@string/app_name"
+                                app:srcCompat="@drawable/ic_search_down_arrow" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_brand_child"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/white"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <!--  unit layout -->
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/clear_all_filter"
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/orange_border_circle"
+                    android:gravity="center"
+                    android:text="@string/Clear_all"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnApply"
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/riban_rectangle"
+                    android:gravity="center"
+                    android:text="Apply"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_pending"
+            layout="@layout/toolbar_arrow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/llClose"
+            android:layout_below="@+id/toolbar_pending"
+            android:layout_margin="@dimen/size5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pend_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="?colorPrimary"
+            android:padding="@dimen/size10">
+
+            <TextView
+                android:id="@+id/tvTotalAmountP"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:text="@string/total_amnt"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/txt_close_bal"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size18" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

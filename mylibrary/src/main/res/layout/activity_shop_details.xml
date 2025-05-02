@@ -1,0 +1,291 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.fragment.ShopInfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarSd"
+            layout="@layout/toolbar_arrow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/activity_background"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/white_rectangle_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TILayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColorHint="@color/Darkgrey">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_shop_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@color/White"
+                            android:hint="@string/txt_shop_name"
+                            android:inputType="text"
+                            android:paddingTop="6dp"
+                            android:textColor="@color/Black"
+                            android:textColorHighlight="@color/Darkgrey"
+                            android:textColorHint="@color/Darkgrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivShopPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    app:srcCompat="@drawable/ic_photo_camera_orange_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_rectangle_box">
+
+                <Spinner
+                    android:id="@+id/spDocType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/liGst"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size60"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_rectangle_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size60"
+                    android:layout_weight="0.4"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TilGST"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textColorHint="@color/Darkgrey">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_gst_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/White"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:hint="@string/txt_gst_no"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="15"
+                            android:paddingTop="6dp"
+                            android:textAllCaps="true"
+                            android:textColor="@color/Black"
+                            android:textColorHighlight="@color/Darkgrey"
+                            android:textColorHint="@color/Darkgrey" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivGstPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    app:srcCompat="@drawable/ic_photo_camera_orange_24dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/RLVerifyLoader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_5dp_padding"
+                android:layout_marginBottom="@dimen/layout_10dp_padding"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_gst"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_isverified"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/layout_10dp_padding"
+                    android:layout_marginEnd="@dimen/layout_10dp_padding"
+                    android:layout_toRightOf="@+id/progress_bar_gst"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnUpdateGst"
+                style="@style/CommonStyleB"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/size5"
+                android:background="@drawable/sign_up_button_shape"
+                android:padding="@dimen/layout_5dp_padding"
+                android:text="@string/request_to_update_gst"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/liPanCard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size60"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/size5"
+                android:background="@drawable/white_rectangle_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPanNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:textColorHint="@color/Darkgrey">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPanNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/pannumber"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:padding="11dp"
+                        android:textColor="@color/Black"
+                        android:textColorHighlight="@color/Darkgrey"
+                        android:textColorHint="@color/Darkgrey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/liLicense"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size60"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_rectangle_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/TilLicence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="0.4"
+                    android:textColorHint="@color/Darkgrey">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLicenseNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_license_no"
+                        android:inputType="text"
+                        android:padding="11dp"
+                        android:textColor="@color/Black"
+                        android:textColorHighlight="@color/Darkgrey"
+                        android:textColorHint="@color/Darkgrey" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/iv_license_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="5dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:maxWidth="50dp"
+                    android:maxHeight="50dp"
+                    app:srcCompat="@drawable/ic_photo_camera_orange_24dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnExpiryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_rectangle_box"
+                android:gravity="start|center"
+                android:hint="@string/select_license_expiry_date"
+                android:paddingStart="11dp"
+                android:textAllCaps="false"
+                android:textColor="@color/tertiary_text"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|bottom"
+                android:paddingBottom="40dp">
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_corner_udhar"
+                    android:minWidth="170dp"
+                    android:text="@string/txt_cust_Save"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/colorAccent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

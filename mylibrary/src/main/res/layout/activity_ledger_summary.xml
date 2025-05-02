@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_padding_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/CommonStyleSB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/from"
+                        android:id="@+id/tvFromD"
+                        android:textSize="@dimen/size15" />
+
+                    <TextView
+                        android:id="@+id/txt_frmDate"
+                        style="@style/CommonStyleB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size5"
+                        android:layout_weight="1"
+                        android:text="1 April 2020"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size15" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/CommonStyleSB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvToD"
+                        android:text="@string/to" />
+
+                    <TextView
+                        android:id="@+id/txt_endDate"
+                        style="@style/CommonStyleB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size5"
+                        android:layout_weight="1"
+                        android:text="5 December 2020"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size15" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ll_openBal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cv_date"
+            android:background="@color/white"
+            android:padding="@dimen/size10">
+
+            <TextView
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:id="@+id/tvOpeningBal"
+                android:text="@string/opening_balance"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/txt_open_bal"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size18" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_supplier_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llClose"
+            android:layout_below="@+id/ll_openBal"
+            android:layout_margin="@dimen/size5" />
+
+        <LinearLayout
+            android:id="@+id/llClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:padding="@dimen/size10">
+
+            <TextView
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:id="@+id/tvClosingBal"
+                android:text="@string/closing_balance"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/txt_close_bal"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size18" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

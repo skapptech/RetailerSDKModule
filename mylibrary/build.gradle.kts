@@ -5,12 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.sk.mylibrary"
+    namespace = "app.retailer.krina.shop.com.mp_shopkrina_retailer"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 23
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -24,6 +23,13 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -78,6 +84,8 @@ dependencies {
     //implementation(libs.rangeseekbar) // this place use material RangeSlider com.google.android.material.slider.RangeSlider
     implementation(libs.arclayout)
     implementation(libs.shimmer)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.firebase.database.ktx)
     kapt(libs.glide.compiler)
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)

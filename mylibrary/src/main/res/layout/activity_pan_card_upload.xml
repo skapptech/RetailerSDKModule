@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_pancard"
+            layout="@layout/toolbar_arrow" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/activity_background"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_gender"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="60dp"
+                        android:text="@string/gender"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/sp_gender"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_gender"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding" />
+
+                    <TextView
+                        android:id="@+id/tv_upload_pan"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sp_gender"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="@dimen/view_padding_20"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/txt_Upload_Your_PAN"
+                        android:textSize="16sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_upload_pan_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_below="@+id/tv_upload_pan"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_30dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:layout_marginBottom="@dimen/view_padding_10">
+
+                        <ImageView
+                            android:id="@+id/iv_upload_pan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/pan_card_bg" />
+
+                        <ImageView
+                            android:id="@+id/iv_show_iv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_photo_camera" />
+
+                        <TextView
+                            android:id="@+id/tv_uplod_text"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_show_iv"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/view_padding_20"
+                            android:text="@string/txt_Upload_PAN"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_pan_number"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl_upload_pan_txt"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginTop="@dimen/layout_30dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:hint="@string/txt_Upload_number"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="10"
+                        android:singleLine="true"
+                        android:textAllCaps="true"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/view_padding_20"
+                    android:layout_marginBottom="@dimen/layout_30dp_padding">
+
+                    <Button
+                        android:id="@+id/bt_next"
+                        style="@style/CommonStyleB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/layout_20dp_padding"
+                        android:layout_marginRight="@dimen/layout_20dp_padding"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/drawable_corner_udhar"
+                        android:text="@string/next"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

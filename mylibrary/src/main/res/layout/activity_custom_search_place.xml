@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/arrow_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                android:elevation="@dimen/size15">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="@dimen/size60"
+                        android:layout_height="@dimen/size50"
+                        android:contentDescription="@string/app_name"
+                        android:paddingTop="@dimen/size16"
+                        android:paddingEnd="@dimen/size30"
+                        android:paddingBottom="@dimen/size16"
+                        android:src="@drawable/ic_back"
+                        android:tint="@color/Black"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/et_search_keyword"
+                        style="@style/CommonStyleB"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:paddingEnd="@dimen/size72"
+                        android:text="@string/title_serach_address"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/size16" />
+
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="@dimen/size15">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address"
+                    style="@style/TextAppearance.AppTheme.TextInputLayout.HintTextAlt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toStartOf="@+id/imSearchPlace">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_searchPlace"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:hint="@string/search_delivery_address"
+                        android:imeOptions="actionSearch"
+                        android:inputType="textCapWords"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/imSearchPlace"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/places_ic_search"
+                    android:tint="@android:color/black" />
+
+                <ProgressBar
+                    android:id="@+id/progressSearch"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:indeterminateTint="@color/colorPrimaryDark"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/places_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

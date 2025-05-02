@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cart_header"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_store_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_grey">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/CommonStyleB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="start"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:textAllCaps="false"
+            android:textColor="@color/color_orange"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</layout>

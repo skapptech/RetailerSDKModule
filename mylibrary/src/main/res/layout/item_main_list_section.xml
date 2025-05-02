@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rlHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ivHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textAllCaps="false"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_header_hz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/title_hz"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/white" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_view_all"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:drawableEnd="@drawable/ic_right_arrow"
+                    android:text="View All"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar_cyclic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_header"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlHeader"
+                android:background="@color/white"
+                android:nestedScrollingEnabled="false"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/ll_no_remaining_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_header"
+                android:background="@color/white1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/clock"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:contentDescription="@string/app_name"
+                        app:srcCompat="@drawable/ic_alarm_clock" />
+
+                    <TextView
+                        android:id="@+id/tv_prime_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/clock"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Prime"
+                        android:textColor="@color/green_50"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_prime_user_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/clock"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_no_prime_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_prime_text"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="No Prime"
+                        android:textColor="@color/green_50"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_non_prime_user_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_prime_user_time"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/size10"
+                    android:gravity="center"
+                    android:text="Coming Soon"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/liMenu"
+                layout="@layout/item_main_list_menu" />
+
+            <Button
+                android:id="@+id/btnLoadMore"
+                style="@style/CommonStyleB"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_below="@+id/rvItems"
+                android:layout_marginStart="-4dp"
+                android:layout_marginTop="-4dp"
+                android:layout_marginEnd="-4dp"
+                android:backgroundTint="@color/chinese_orange"
+                android:gravity="center"
+                android:text="@string/load_more"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/ll_load_item"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_below="@+id/rvItems"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/load_more"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>

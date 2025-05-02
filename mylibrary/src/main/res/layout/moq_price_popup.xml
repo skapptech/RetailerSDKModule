@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_popup">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvDSelectQty"
+            style="@style/CommonStyleSB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/select_quantities_for"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="7dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/closee" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/itemName"
+        style="@style/CommonStyleSB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="3dp"
+        android:background="@color/White"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/name"
+        android:textColor="@color/tertiary_text"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_30dp_padding"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="@dimen/size10"
+        android:divider="@color/White"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvDMoq"
+            style="@style/CommonStyleSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:gravity="center"
+            android:text="@string/moq"
+            android:textColor="@color/secondary_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDMrp"
+            style="@style/CommonStyleSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size5"
+            android:layout_weight=".8"
+            android:gravity="center"
+            android:text="@string/mrp"
+            android:textColor="@color/secondary_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDRs"
+            style="@style/CommonStyleSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight=".8"
+            android:gravity="center"
+            android:text="@string/rs"
+            android:textColor="@color/secondary_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDMargin"
+            style="@style/CommonStyleSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight=".8"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/margins_d"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp" />
+
+        <TextView
+            style="@style/CommonStyleSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:gravity="center"
+            android:textColor="@color/secondary_text" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d4d4d4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listview_moq_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null" />
+    </LinearLayout>
+</LinearLayout>

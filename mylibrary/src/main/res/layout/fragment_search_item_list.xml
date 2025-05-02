@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2f2f2"
+        android:paddingBottom="@dimen/size60">
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="1dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/view_padding_10"
+                android:layout_marginTop="@dimen/layout_5dp_padding"
+                android:layout_marginRight="@dimen/view_padding_10"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/greyrectangle_main">
+
+                <EditText
+                    android:id="@+id/frag_search_edt"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_padding_10"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="@dimen/view_padding_10"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/hint_search_kisan"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:padding="2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorAccent" />
+
+                <ImageView
+                    android:id="@+id/ivVoiceSearch"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="@dimen/layout_5dp_padding"
+                    android:contentDescription="@string/app_name"
+                    app:srcCompat="@drawable/microphone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!--
+        price layout
+        -->
+        <LinearLayout
+            android:id="@+id/price_filterlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll1"
+            android:layout_marginTop="2dp"
+            android:background="@color/topBarColor"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_price_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txt_price"
+                        style="@style/CommonStyleSB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_pricefilter"
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="3dp"
+                        app:srcCompat="@drawable/ic_price_up_filter" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/dropdown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="@string/app_name"
+                        app:srcCompat="@drawable/ic_filter_cone" />
+
+                    <TextView
+                        android:id="@+id/tvFilter"
+                        style="@style/CommonStyleSB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/Filter"
+                        android:textColor="@color/Black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!--
+        price layout
+        -->
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/total_bg"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF393939"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="1.4">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTotalPrice"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Rs 0"
+                        android:textColor="@color/White"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/saveTotalItem"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#FFFF4500"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4">
+
+                    <Button
+                        android:id="@+id/checkoutBtn"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/checkout"
+                        android:text="@string/check_cart"
+                        android:textColor="@color/White" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/price_filterlayout"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frag_search_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/pbLoader"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/relEmptyItem"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/itemavailable"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

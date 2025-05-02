@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/llDistrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlMainCity"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/White"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvMandiCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/size15"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=" मध्य प्रदेश "
+                android:textColor="@color/black"
+                android:textSize="@dimen/size15" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ECEFFF"/>
+    </LinearLayout>
+
+</layout>

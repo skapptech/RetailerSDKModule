@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rl_bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/offer_scratch_bg_blue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="95dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo_sk" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    style="@style/CommonStyleB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:background="@drawable/offer_expire_time_bg"
+                    android:drawableStart="@drawable/timer_1"
+                    android:drawablePadding="2dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="2dp"
+                    android:text="Time Expired!"
+                    android:textColor="@color/red"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size8"
+                android:layout_marginRight="@dimen/size8"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvOffer"
+                    style="@style/PoppinsSM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:text="Scratch Card &amp; Win"
+                    android:textColor="@color/White"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvDes"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/White"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOfferDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Offer valid on select products"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_10sp" />
+
+                <LinearLayout
+                    android:id="@+id/rlApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp">
+
+                    <TextView
+                        android:id="@+id/tvSelect"
+                        style="@style/PoppinsSM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@drawable/border_grey_rounded"
+                        android:backgroundTint="#C9E265"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="3dp"
+                        android:text="@string/order_now"
+                        android:textColor="#245961"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_bill_item">
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="right"
+                android:layout_margin="3dp"
+                android:contentDescription="@string/app_name"
+                android:padding="5dp"
+                android:src="@drawable/ic_info_outline_black_24dp"
+                android:tint="@android:color/white" />
+        </FrameLayout>
+    </RelativeLayout>
+</layout>

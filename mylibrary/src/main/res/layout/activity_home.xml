@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="left"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <include
+            android:id="@+id/toolbarH"
+            layout="@layout/app_bar_main_retailer" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white1"
+            android:fitsSystemWindows="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/size20"
+                android:layout_marginBottom="50dp"
+                android:background="@color/white1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/top_nav_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_image_nav"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="16dp"
+                            android:padding="@dimen/size10"
+                            android:visibility="visible"
+                            app:civ_border_color="@color/colorPrimaryDark"
+                            app:civ_border_width="1dp"
+                            app:srcCompat="@drawable/profile_round" />
+
+                        <ImageView
+                            android:id="@+id/ivPrime"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_centerHorizontal="true"
+                            android:contentDescription="@string/app_name"
+                            app:srcCompat="@drawable/ic_prime_logo" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size5"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            style="@style/CommonStyleSB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:gravity="start"
+                            android:maxLines="1"
+                            android:textColor="@color/primary_text"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/user_skcode"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size3"
+                            android:paddingStart="@dimen/size1"
+                            android:textColor="@color/dark_grey_blue"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_editProfile"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/drawable_button_corner"
+                            android:paddingStart="11dp"
+                            android:paddingTop="3dp"
+                            android:paddingEnd="11dp"
+                            android:paddingBottom="3dp"
+                            android:text="@string/edit"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp">
+
+                    <LinearLayout
+                        android:id="@+id/liWallet"
+                        android:layout_width="match_parent"
+                        android:layout_height="79dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_wallet_bg"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/txt_walletPT"
+                            style="@style/CommonStyleB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="0"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvWalletPointH"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:text="@string/your_walet_total"
+                            android:textColor="@color/primary_text"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/liGullak"
+                        android:layout_width="match_parent"
+                        android:layout_height="79dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_wallet_bg"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/tvGullakAmt"
+                            style="@style/CommonStyleB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="3dp"
+                            android:text="0"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvGullakH"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:text="@string/gullak_balance"
+                            android:textColor="@color/primary_text"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/liRtgs"
+                        android:layout_width="match_parent"
+                        android:layout_height="79dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_wallet_bg"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/tvRtgsAmt"
+                            style="@style/CommonStyleB"
+                            android:layout_width="22dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="3dp"
+                            android:text="₹0"
+                            android:textColor="@color/primary_text"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvRtgsH"
+                            style="@style/CommonStyleSR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:text="@string/rtgs_balance"
+                            android:textColor="@color/primary_text"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_menu"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/white"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/expandable_header" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size50"
+                android:layout_gravity="bottom"
+                android:background="@color/very_light_gray"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="App Ver 2.1"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>

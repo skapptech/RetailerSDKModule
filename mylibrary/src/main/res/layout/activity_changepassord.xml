@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarCp"
+            layout="@layout/toolbar_arrow" />
+
+        <LinearLayout
+            android:id="@+id/ll_meassage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_10dp_padding"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/view_padding_10"
+                android:text="@string/reset_chnage_pass_text"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_padding_10"
+            android:layout_marginTop="@dimen/view_padding_10"
+            android:layout_marginRight="@dimen/view_padding_10"
+            android:background="@drawable/white_rectangle_box"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/oldpassword"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_padding_10"
+                android:background="@drawable/white_rectangle_box"
+                android:hint="@string/oldpass"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColorHint="@color/grey"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_padding_10"
+            android:layout_marginTop="@dimen/layout_5dp_padding"
+            android:layout_marginRight="@dimen/view_padding_10"
+            android:id="@+id/tvNewPassword"
+            android:background="@drawable/white_rectangle_box"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/newpassword"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_padding_10"
+                android:background="@drawable/white_rectangle_box"
+                android:hint="@string/newpass"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColorHint="@color/grey"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_padding_10"
+            android:layout_marginTop="@dimen/layout_5dp_padding"
+            android:layout_marginRight="@dimen/view_padding_10"
+            android:id="@+id/tvConfirmPassword"
+            android:background="@drawable/white_rectangle_box"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_confirm_pwd"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_padding_10"
+                android:background="@drawable/white_rectangle_box"
+                android:hint="@string/conformpass"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColorHint="@color/grey"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|bottom"
+            android:paddingBottom="40dp">
+
+            <Button
+                android:id="@+id/changePasswordBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_corner_udhar"
+                android:minWidth="170dp"
+                android:text="@string/txt_cust_Save"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorPrimaryDark" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+
+
+

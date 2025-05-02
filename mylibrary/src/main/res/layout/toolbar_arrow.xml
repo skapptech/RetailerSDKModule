@@ -1,0 +1,77 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/arrow_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary"
+            app:elevation="2dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size50"
+                    android:clickable="true"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingTop="@dimen/size16"
+                    android:paddingBottom="@dimen/size16"
+                    android:tint="@android:color/black"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size30"
+                    android:layout_marginTop="@dimen/size10"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_toStartOf="@id/Img_info"
+                    android:layout_toEndOf="@+id/back"
+                    android:ellipsize="end"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/Img_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/size10"
+                    android:contentDescription="@string/app_name"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_info_outline_black_24dp"
+                    app:tint="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    style="@style/CommonStyleSB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/size10"
+                    android:textColor="@color/color_orange"
+                    android:gravity="center"
+                    android:text="view tickets"
+                    android:textAllCaps="true"
+                    android:visibility="invisible"
+                    android:textAlignment="center"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+</layout>

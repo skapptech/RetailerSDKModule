@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar_hisab_kitab"
+            layout="@layout/toolbar_arrow" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_below="@+id/toolbar_hisab_kitab"
+            android:layout_marginLeft="@dimen/size10"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_marginRight="@dimen/size10"
+            android:background="@drawable/stock_hkb"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/size10"
+                app:srcCompat="@drawable/ic_search" />
+
+
+            <EditText
+                android:id="@+id/et_con_search_view"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/search_or_add"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_import_contect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_search_view"
+            android:layout_margin="@dimen/size10">
+
+            <ImageView
+                android:id="@+id/tv_contect"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:src="@drawable/contect" />
+
+            <TextView
+                android:id="@+id/tv_import_contect"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_toRightOf="@+id/tv_contect"
+                android:gravity="center"
+                android:text="Import Phone Contacts"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size18" />
+
+            <TextView
+                style="@style/CommonStyleSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_import_contect"
+                android:layout_marginLeft="@dimen/size10"
+                android:layout_toRightOf="@+id/tv_contect"
+                android:gravity="start"
+                android:text="Add new customers directly from from phonebook"
+                android:textColor="@color/dark_grey_blue"
+                android:textSize="@dimen/size12" />
+
+
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cutomer_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_below="@+id/rl_import_contect"
+            android:scrollbars="vertical" />
+        <ProgressBar
+            android:id="@+id/progressBar_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:minWidth="50dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_import_contect"
+            android:id="@+id/tv_NoResult"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size10"
+            android:text="No Result Found"/>
+    </RelativeLayout>
+</layout>
+

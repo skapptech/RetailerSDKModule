@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarPost"
+            layout="@layout/toolbar_with_tittle" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/mScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/White"
+                android:overScrollMode="never">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/llProfileSecondView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/show_image_user"
+                                 android:gravity="bottom"
+                                android:paddingStart="@dimen/size20"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:id="@+id/rlProfileUpload"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_centerVertical="true">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/profile_image"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/profile_image"
+                                            app:elevation="8dp" />
+
+                                        <ImageView
+                                            android:layout_width="@dimen/size24"
+                                            android:layout_height="@dimen/size24"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_above="@+id/profile_image"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/edit_image"/>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/size20"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/UserName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size10"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:maxLines="1"
+                                android:text=""
+                                android:textColor="#213346"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size10"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/TvShopName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:maxLines="2"
+                                    android:text=""
+                                    android:textColor="#213346" />
+
+                                <TextView
+                                    android:id="@+id/tvCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/location_on_user"
+                                    android:drawablePadding="@dimen/size10"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:maxLines="1"
+                                    android:text=""
+                                    android:textColor="#213346" />
+
+                                <TextView
+                                    android:id="@+id/tvMobileNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:maxLines="1"
+                                    android:text=""
+                                    android:textColor="#213346"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingStart="24dp"
+                            android:paddingTop="16dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="16dp">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvPost"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="27dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:gravity="center"
+                                    android:text="0"
+                                    android:textColor="#161B21"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="पोस्ट्स"
+                                    android:textAlignment="center"
+                                    android:textColor="#949494"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/follwerslist"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/totalFollowers"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="#161B21"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="फॉलोवर्स"
+                                    android:textAlignment="center"
+                                    android:textColor="#949494"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/followinglist"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/totalFollowings"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="#161B21"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="फॉलोविंग"
+                                    android:textAlignment="center"
+                                    android:textColor="#949494"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/size10">
+
+                            <Button
+                                android:id="@+id/FollwerBT"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/size20"
+                                android:layout_marginTop="@dimen/size10"
+                                android:layout_marginEnd="@dimen/size20"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/drawable_button_bg_blue"
+                                android:text=""
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+
+                            <RelativeLayout
+                                android:id="@+id/rlUnfollow"
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone"
+                                android:layout_alignParentRight="true">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/post_update"
+                                    android:text="फॉलो"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/size14"
+                                    android:textStyle="normal" />
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/llProfileSecondView"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tvUploadedPost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/size10"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="अपलोडेड पोस्ट"
+                            android:textAlignment="center"
+                            android:textColor="#213346"
+                            android:textSize="18sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/tvUploadedPost"
+                            android:layout_marginTop="@dimen/size10">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvFeed"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <ProgressBar
+                                android:id="@+id/progress_load"
+                                style="?android:progressBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="80dp"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tvNoPostAvailable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="कोई पोस्ट उपलब्थ नहीं है "
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size18"
+                            android:visibility="gone" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

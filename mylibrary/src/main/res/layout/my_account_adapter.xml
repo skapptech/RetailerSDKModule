@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/myAccout_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/size3"
+        android:gravity="center"
+        app:cardCornerRadius="@dimen/size10"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/size10">
+
+        <LinearLayout
+            android:id="@+id/backLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/size10"
+            android:paddingEnd="@dimen/size10"
+            android:paddingBottom="@dimen/size10">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size5"
+                android:background="@drawable/img_border"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/icon_group"
+                    android:layout_width="@dimen/size50"
+                    android:layout_height="@dimen/size50"
+
+                    android:contentDescription="@string/app_name"
+                    app:srcCompat="@drawable/ic_shopping_online" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/CommonStyleSB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size10"
+                android:gravity="center"
+                android:maxLines="2"
+                android:padding="5dp"
+
+                android:textColor="@color/font_color"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

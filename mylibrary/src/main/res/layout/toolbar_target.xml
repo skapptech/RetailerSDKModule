@@ -1,0 +1,62 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        app:elevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="@dimen/size60"
+                android:layout_height="@dimen/size50"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingTop="@dimen/size16"
+                android:paddingEnd="@dimen/size30"
+                android:paddingBottom="@dimen/size16"
+                android:src="@drawable/ic_back"
+                android:tint="@android:color/black" />
+
+
+            <EditText
+                android:id="@+id/frag_search_edt"
+                style="@style/CommonStyleSR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="80dp"
+                android:layout_marginTop="@dimen/size5"
+                android:layout_marginStart="@dimen/size76"
+                android:gravity="start|center"
+                android:paddingStart="@dimen/size10"
+                android:background="@drawable/drawable_search"
+                android:drawableStart="@drawable/ic_search"
+                android:hint="@string/search_item_name"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ll_cart_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/size10"
+                android:layout_marginEnd="@dimen/size10"
+                android:background="@drawable/bag_basket"
+                android:textAllCaps="false"
+                android:tint="@android:color/black" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+</layout>

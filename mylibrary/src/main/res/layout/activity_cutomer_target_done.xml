@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size14"
+        android:background="@drawable/new_target_view"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/direct_logo"
+                android:layout_width="89dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="@dimen/size20"
+                android:background="@drawable/direct_logo" />
+
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/congratulat"
+                    android:layout_width="139dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="12dp"
+                    android:text="Congratulate"
+                    android:textColor="#F56B3B"
+                    android:textSize="@dimen/size15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="139dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="1dp"
+                    android:text="January Target"
+                    android:textColor="#7E84A3"
+                    android:textSize="@dimen/size12"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/on_completi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:layout_alignParentLeft="true"
+            android:text="@string/on_completi"
+            android:lineSpacingExtra="0sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSR"
+            android:textSize="@dimen/size12" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:layout_alignParentLeft="true"
+            android:text="@string/gift"
+            android:lineSpacingExtra="0sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSB"
+            android:textSize="@dimen/size15" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size40"
+            android:layout_alignParentLeft="true"
+            android:text="Shop worth Rs. 50,000"
+            android:lineSpacingExtra="0sp"
+            android:drawablePadding="@dimen/size10"
+            android:drawableLeft="@drawable/view_done_target"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSB"
+            android:textSize="@dimen/size12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size15"
+            android:layout_alignParentLeft="true"
+            android:text="Shop worth Rs. 50,000"
+            android:lineSpacingExtra="0sp"
+            android:drawablePadding="@dimen/size10"
+            android:drawableLeft="@drawable/view_done_target"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSB"
+            android:textSize="@dimen/size12" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size40"
+            android:layout_alignParentLeft="true"
+            android:text="You have won Coupon Worth"
+            android:lineSpacingExtra="0sp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSB"
+            android:textSize="@dimen/size15" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_alignParentLeft="true"
+            android:text="2000"
+            android:lineSpacingExtra="0sp"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            style="@style/CommonStyleSB"
+            android:textSize="@dimen/size30" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size10"
+            android:layout_marginTop="@dimen/size20">
+
+            <TextView
+                android:id="@+id/more_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="25dp"
+                android:gravity="center_horizontal|top"
+                android:lineSpacingExtra="0sp"
+                android:text="More Info"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size12" />
+
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_round_button"
+                android:layout_alignParentRight="true"
+                android:text="@string/claimed"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/size5"/>
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.BusinessCardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/li_card"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@drawable/business_card"
+            android:gravity="center_horizontal"
+            android:minHeight="150dp"
+            android:orientation="vertical"
+            android:paddingStart="17dp"
+            android:paddingEnd="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    app:civ_border_color="@color/colorAccent"
+                    app:civ_border_width="1dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginBottom="2dp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPoweredBy"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/powered_by_shopkirana"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="7dp"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_shop"
+                        style="@style/CommonStyleB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/app_name"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_name"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:maxLength="40"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_phone"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="end|center"
+                        android:hint="Phone no"
+                        android:maxLength="15"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background"
+                        android:textSize="12sp"
+                        app:drawableEndCompat="@drawable/ic_call_orange" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_email"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="end|center"
+                        android:hint="Email"
+                        android:maxEms="13"
+                        android:maxLines="1"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background"
+                        android:textSize="12sp"
+                        app:drawableEndCompat="@drawable/ic_email_orange" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_address"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:drawablePadding="8dp"
+                        android:gravity="end|center"
+                        android:hint="Your Shop Address"
+                        android:maxEms="12"
+                        android:maxLines="2"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/activity_background"
+                        android:textSize="12sp"
+                        app:drawableEndCompat="@drawable/ic_location_orange" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/li_card"
+            android:layout_marginBottom="60dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCreatedandShare"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:text="@string/create_and_share_your_business_card"
+                        android:textColor="@color/grey_100" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCardName"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:text="@string/txt_cust_name"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:hint="@string/txt_cust_name"
+                        android:inputType="textCapWords"
+                        android:maxLength="40"
+                        android:maxLines="1"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="TagLine"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_tag_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:hint="eg: Dealers of hardware and electrical needs"
+                        android:inputType="text"
+                        android:maxLength="60"
+                        android:textSize="17sp"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCardNumber"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/mobile_number"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:hint="@string/enter_mobile_number"
+                        android:inputType="phone"
+                        android:maxLength="13"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCardEmail"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/email_address"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:hint="Enter Email Address"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="60"
+                        android:textSize="17sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCardAddress"
+                        style="@style/CommonStyleSR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/shop_office_address"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:hint="Enter address"
+                        android:imeOptions="actionDone"
+                        android:inputType="none"
+                        android:maxLength="90"
+                        android:textSize="17sp" />
+                </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            app:contentPadding="15dp">
+
+            <TextView
+                android:id="@+id/tvShareCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/share_your_business_card"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

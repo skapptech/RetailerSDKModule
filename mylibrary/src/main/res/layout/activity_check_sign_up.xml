@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_arrow" />
+
+        <LinearLayout
+            android:id="@+id/empty_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/CommonStyleSR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/tvSelectMultiplePay"
+                    android:text="@string/please_select_nultiple_pay_no_order_to_pay_at_once"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    style="@style/CommonStyleSR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/background_for_buttons"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:id="@+id/tvPaynow"
+                    android:text="@string/pay_now"
+                    android:textColor="@color/White" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="63dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="120dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
+                    android:gravity="center"
+                    android:src="@drawable/ic_placeorder_time" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_discripction"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/grey"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/btn_sign_up"
+                    style="@style/CommonStyleSR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/solidrectangle"
+                    android:text="@string/hint_signup"
+                    android:textColor="@color/White" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rMyOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+    </LinearLayout>
+</layout>

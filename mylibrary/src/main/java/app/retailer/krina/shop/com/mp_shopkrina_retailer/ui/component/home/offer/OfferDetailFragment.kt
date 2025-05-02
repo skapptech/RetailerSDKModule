@@ -102,7 +102,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_offer_detail, container, false)
+            FragmentOfferDetailBinding.inflate(inflater, container, false)
         val appRepository = AppRepository(activity.applicationContext)
         offerViewModel =
             ViewModelProvider(
@@ -115,14 +115,14 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (arguments != null) {
-            discountModel = arguments!!.getSerializable("model") as BillDiscountModel
+            discountModel = arguments?.getSerializable("model") as BillDiscountModel
         }
 
         initialization()
         categoryAPICall()
         setValues()
 
-        RetailerSDKApp.getInstance().noteRepository.cartNonZero.observe(this) { cartList: List<ItemListModel>? ->
+        RetailerSDKApp.getInstance().noteRepository.cartNonZero.observe(activity) { cartList: List<ItemListModel>? ->
             this.cartList = cartList
             if (step == 1) {
                 updateProgress(step)

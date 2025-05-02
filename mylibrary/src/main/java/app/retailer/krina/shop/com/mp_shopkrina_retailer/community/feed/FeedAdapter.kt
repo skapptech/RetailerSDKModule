@@ -49,35 +49,34 @@ class FeedAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             THE_SINGLE_POST_VIEW -> SinGlePostView(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context), R.layout.item_single_image, parent, false
+                ItemSingleImageBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
                 )
             )
 
             THE_POLL -> POllView(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context), R.layout.item_poll_view, parent, false
+                ItemPollViewBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
                 )
             )
 
             THE_Add_POST_Gallery -> AddPostFromGallery(
-                DataBindingUtil.inflate(
+                ItemAddPostFromGalleryBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_add_post_from_gallery,
                     parent,
                     false
                 )
             )
 
             VIDEO_POST -> VideoViewHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context), R.layout.item_feed_video, parent, false
+                ItemFeedVideoBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
                 )
             )
 
             else -> SinGlePostView(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context), R.layout.item_single_image, parent, false
+                ItemSingleImageBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
                 )
             )
         }

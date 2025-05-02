@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +37,6 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
     private lateinit var viewModel: OrderViewModel
 
     private lateinit var mBinding: FragmentAllOrderBinding
-    private var activity: MyOrderActivity? = null
     private var utils: Utils? = null
     private var commonClassForAPI: CommonClassForAPI? = null
     private var myOrderAdapter: MyOrderAdapter? = null
@@ -53,15 +53,16 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
     private var rvPaylaterLimits: RecyclerView? = null
     private var progressbarPayLaterLimits: ProgressBar? = null
     private var notAvailableLimit: TextView? = null
+    var myOrderActivity = activity as? MyOrderActivity
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) type = arguments!!.getString("type")!!
+        if (arguments != null) type = arguments?.getString("type")!!
 
         val appRepository = AppRepository(context!!)
         viewModel = ViewModelProvider(
-            this, OrderViewModelFactory(activity!!.application, appRepository)
+            this, OrderViewModelFactory(myOrderActivity!!.application, appRepository)
         )[OrderViewModel::class.java]
         observe(viewModel.orderData, ::handleMyOrderResult)
         observe(viewModel.payLaterLimitData, ::handlePayLaterLimitResult)
@@ -69,7 +70,7 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as MyOrderActivity
+        myOrderActivity = context as MyOrderActivity
     }
 
     override fun onCreateView(
@@ -131,7 +132,7 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
             )
         }
 
-        myOrderAdapter = MyOrderAdapter(activity!!, list)
+        myOrderAdapter = MyOrderAdapter(myOrderActivity!!, list)
         mBinding.rMyOrder.adapter = myOrderAdapter
         mBinding.shimmerViewContainer.startShimmer()
         mBinding.LLMain.visibility = View.INVISIBLE
@@ -166,7 +167,7 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
     }
 
     private fun openPayLaterLimitsDialog() {
-        val dialog = BottomSheetDialog(activity!!)
+        val dialog = BottomSheetDialog(myOrderActivity!!)
         dialog.setContentView(R.layout.dialog_show_paylater_limits)
         dialog.window!!.findViewById<View>(R.id.design_bottom_sheet)
             .setBackgroundColor(Color.TRANSPARENT)
@@ -243,7 +244,7 @@ class AllOrderFragment : Fragment(), OnRefreshListener {
             if (data != null && data.Status) {
                 notAvailableLimit?.visibility = View.GONE
                 paylaterLimitsAdapter =
-                    PaylaterLimitsAdapter(activity!!, data.payLaterCollectionLimitDCs)
+                    PaylaterLimitsAdapter(myOrderActivity!!, data.payLaterCollectionLimitDCs)
                 rvPaylaterLimits?.adapter = paylaterLimitsAdapter
             } else {
                 notAvailableLimit?.visibility = View.VISIBLE

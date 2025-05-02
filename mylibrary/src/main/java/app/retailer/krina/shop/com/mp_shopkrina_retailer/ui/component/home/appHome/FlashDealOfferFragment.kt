@@ -40,7 +40,8 @@ import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 class FlashDealOfferFragment : Fragment() {
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
+
     private val TAG = FlashDealOfferFragment::class.java.name
     private lateinit var appCtx: RetailerSDKApp
     private lateinit var mBinding: FragmentFlashDealOfferBinding
@@ -62,8 +63,8 @@ class FlashDealOfferFragment : Fragment() {
 
     override fun onAttach(_context: Context) {
         super.onAttach(_context)
-        activity = _context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = _context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
 
     }
 
@@ -73,15 +74,15 @@ class FlashDealOfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_flash_deal_offer, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+            FragmentFlashDealOfferBinding.inflate(inflater, container, false)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         appHomeViewModel =
             ViewModelProvider(
-                activity!!,
+                homeActivity!!,
                 AppHomeViewModelFactory(appCtx, appRepository)
             )[AppHomeViewModel::class.java]
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
 
         // init
         initialization()
@@ -90,21 +91,21 @@ class FlashDealOfferFragment : Fragment() {
 
         // flash deal offer
         if (arguments != null) {
-            if (arguments!!.containsKey("isStore") && arguments!!.getBoolean("isStore")) {
-                val subCatId = arguments!!.getInt("subCategoryId")
-                sSectionId = arguments!!.getString("SECTION_ID")
-                flashDealBackImage = arguments!!.getString("FlashDealBackImage")
+            if (arguments?.containsKey("isStore") !!&& arguments?.getBoolean("isStore")!!) {
+                val subCatId = arguments?.getInt("subCategoryId")
+                sSectionId = arguments?.getString("SECTION_ID")
+                flashDealBackImage = arguments?.getString("FlashDealBackImage")
                 appHomeViewModel.getStoreFlashDeal(
                     customerId,
                     warehouseId,
                     sSectionId,
-                    subCatId,
+                    subCatId!!,
                     LocaleHelper.getLanguage(activity),
                     "Flash Fragment"
                 )
             } else {
-                sSectionId = arguments!!.getString("SECTION_ID")
-                flashDealBackImage = arguments!!.getString("FlashDealBackImage")
+                sSectionId = arguments?.getString("SECTION_ID")
+                flashDealBackImage = arguments?.getString("FlashDealBackImage")
                 callFlashDealAPI(sSectionId)
                 handleStartFlashDeal(sSectionId)
             }
@@ -116,7 +117,7 @@ class FlashDealOfferFragment : Fragment() {
             )
         }
         appHomeViewModel.getFlashDealBannerImage(customerId, warehouseId)
-        appHomeViewModel.getFlashDealBannerImageData.observe(activity!!) {
+        appHomeViewModel.getFlashDealBannerImageData.observe(homeActivity!!) {
             if (!TextUtils.isNullOrEmpty(it)) {
                 Picasso.get().load(it)
                     .placeholder(R.drawable.logo_grey_wide)
@@ -131,7 +132,7 @@ class FlashDealOfferFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName, null
         )
         if (mFlashHome) {
@@ -172,13 +173,13 @@ class FlashDealOfferFragment : Fragment() {
         rvFlashDealOffer.layoutManager = LinearLayoutManager(activity)
         mFlashDealItemListAdapter =
             FlashDealItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 mItemListArrayList,
                 mItemListArrayList.size,
                 flashDealBackImage!!
             )
         rvFlashDealOffer.adapter = mFlashDealItemListAdapter
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
     }
 
     private fun callFlashDealAPI(sectionId: String?) {
@@ -374,7 +375,7 @@ class FlashDealOfferFragment : Fragment() {
                             mBinding.llFlashdealData.visibility = View.GONE
                             mBinding.llNoRemainingTime.visibility = View.VISIBLE
                             mBinding.llNoFlash.visibility = View.GONE
-                            Glide.with(activity!!).load(LogoUrl).into(mBinding.ivLeftTimeImage)
+                            Glide.with(homeActivity!!).load(LogoUrl).into(mBinding.ivLeftTimeImage)
                         }
                         if (!TextUtils.isNullOrEmpty(nonPrimeStartTime) && !TextUtils.isNullOrEmpty(
                                 SectionID
@@ -391,7 +392,7 @@ class FlashDealOfferFragment : Fragment() {
                             mBinding.llFlashdealData.visibility = View.GONE
                             mBinding.llNoRemainingTime.visibility = View.VISIBLE
                             mBinding.llNoFlash.visibility = View.GONE
-                            Glide.with(activity!!).load(LogoUrl).into(mBinding.ivLeftTimeImage)
+                            Glide.with(homeActivity!!).load(LogoUrl).into(mBinding.ivLeftTimeImage)
                         }
                         if (TextUtils.isNullOrEmpty(primeStartTime) && !TextUtils.isNullOrEmpty(
                                 SectionID

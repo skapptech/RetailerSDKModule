@@ -71,7 +71,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
     private var rootView: View? = null
     private var mBinding: FragmentHomeSubCategoryBinding? = null
     private lateinit var appHomeViewModel: AppHomeViewModel
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
     private val mFlashDealArrayList = ArrayList<ItemListModel>()
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: SubCategoryItemAdapter? = null
@@ -95,8 +95,8 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,10 +124,10 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                 container,
                 false
             )
-            val appRepository = AppRepository(activity!!.applicationContext)
+            val appRepository = AppRepository(homeActivity!!.applicationContext)
             appHomeViewModel =
                 ViewModelProvider(
-                    activity!!,
+                    homeActivity!!,
                     AppHomeViewModelFactory(appCtx, appRepository)
                 )[AppHomeViewModel::class.java]
             rootView = mBinding!!.root
@@ -144,8 +144,8 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
 
         // analytics data
         val analyticPost = AnalyticPost()
@@ -159,7 +159,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
     override fun onResume() {
         super.onResume()
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
@@ -195,7 +195,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
         marginLayoutParams.topMargin = 50
         mFlashDealItemListAdapter =
             FlashDealItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 mFlashDealArrayList,
                 listSizeFlashDeal,
                 flashDealBackImages
@@ -611,16 +611,16 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
         customerId = SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID)
 
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         layoutManager = LinearLayoutManager(activity)
         mBinding!!.recyclerCategories.layoutManager = layoutManager
-        adapter = SubCategoryItemAdapter(activity!!, mSectionType)
+        adapter = SubCategoryItemAdapter(homeActivity!!, mSectionType)
         mBinding!!.recyclerCategories.adapter = adapter
         val vectorDrawable = AppCompatResources.getDrawable(
-            activity!!, R.drawable.logo_grey
+            homeActivity!!, R.drawable.logo_grey
         )
         if (!TextUtils.isNullOrEmpty(itemImage)) {
-            Glide.with(activity!!).load(itemImage).placeholder(vectorDrawable)
+            Glide.with(homeActivity!!).load(itemImage).placeholder(vectorDrawable)
                 .into(mBinding!!.topImage)
         } else {
             mBinding!!.topImage.setImageDrawable(vectorDrawable)
@@ -666,7 +666,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
             lang,
             "Home Flash Deal"
         )
-        appHomeViewModel.getFlashDealItemData.observe(activity!!) {
+        appHomeViewModel.getFlashDealItemData.observe(homeActivity!!) {
             when (it) {
                 is Response.Loading -> {}
                 is Response.Success -> {
@@ -759,7 +759,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                         mBinding!!.recyclerCategories.layoutManager = layoutManager
                         dashboardAdapter =
                             StoreDashAdapter(
-                                activity!!, it,
+                                homeActivity!!, it,
                                 this@StoreHomeFragment, this@StoreHomeFragment,
                                 this@StoreHomeFragment)
                         mBinding!!.recyclerCategories.adapter = dashboardAdapter
@@ -793,7 +793,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             mBinding!!.recyclerCategories.layoutManager =
                                 GridLayoutManager(activity, 2)
                             adapter!!.setData(baseCatModel.subsubCategoryDc, baseCatModel)
-                            Glide.with(activity!!).load(
+                            Glide.with(homeActivity!!).load(
                                 EndPointPref.getInstance(activity)
                                     .getString(EndPointPref.API_ENDPOINT) + baseCatModel.subCategoryDC[0].storeBanner
                             )

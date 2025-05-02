@@ -30,14 +30,14 @@ open class HomeCategoryFragment : Fragment() {
     private var rootView: View? = null
     private lateinit var mBinding: FragmentHomeCategoryBinding
     private lateinit var homeCategoryViewModel: HomeCategoryViewModel
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
     private var list: ArrayList<AllCategoryModel>? = null
     private var adapter: CategoriesAdapter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -47,11 +47,11 @@ open class HomeCategoryFragment : Fragment() {
     ): View? {
         if (rootView == null) {
             mBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_home_category, container, false)
-            val appRepository = AppRepository(activity!!.applicationContext)
+                FragmentHomeCategoryBinding.inflate(inflater, container, false)
+            val appRepository = AppRepository(homeActivity!!.applicationContext)
             homeCategoryViewModel =
                 ViewModelProvider(
-                    activity!!,
+                    homeActivity!!,
                     HomeCategoryViewModelFactory(appCtx, appRepository)
                 )[HomeCategoryViewModel::class.java]
         }
@@ -61,8 +61,8 @@ open class HomeCategoryFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
         observe(homeCategoryViewModel.getCategoryData, ::handleCategoryResult)
         // init view
         initialization()
@@ -70,17 +70,17 @@ open class HomeCategoryFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity!!.bottomNavigationView!!.menu.findItem(R.id.category).isChecked = true
+        homeActivity!!.bottomNavigationView!!.menu.findItem(R.id.category).isChecked = true
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName, null
         )
     }
 
     fun initialization() {
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         list = ArrayList()
-        adapter = CategoriesAdapter(activity!!, list)
+        adapter = CategoriesAdapter(homeActivity!!, list)
         mBinding.recyclerCategories.adapter = adapter
         // local storage
         val dataSaved = SharePrefs.getInstance(activity).getString(SharePrefs.CATEGORY_BY_ALL)
@@ -112,7 +112,7 @@ open class HomeCategoryFragment : Fragment() {
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         } else {
-            homeCategoryViewModel.getCategory(activity!!.custId,
+            homeCategoryViewModel.getCategory(homeActivity!!.custId,
                 SharePrefs.getInstance(activity).getInt(SharePrefs.WAREHOUSE_ID),
                 LocaleHelper.getLanguage(activity))
         }

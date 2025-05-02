@@ -34,9 +34,9 @@ class SubSubCategoryAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemSubSubcategoryBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_sub_subcategory, viewGroup, false
+                 viewGroup, false
             )
         )
     }

@@ -25,14 +25,14 @@ class OffersFragment : Fragment() {
     private lateinit var viewModel: OfferViewModel
     private var rootView: View? = null
     private lateinit var mBinding: FragmentOffersTextBinding
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
     private var list: ArrayList<BillDiscountModel>? = null
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -42,11 +42,11 @@ class OffersFragment : Fragment() {
     ): View? {
         if (rootView == null) {
             mBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_offers_text, container, false)
-            val appRepository = AppRepository(activity!!.applicationContext)
+                FragmentOffersTextBinding.inflate(inflater, container, false)
+            val appRepository = AppRepository(homeActivity!!.applicationContext)
             viewModel =
                 ViewModelProvider(
-                    activity!!,
+                    homeActivity!!,
                     OfferViewModelFactory(appCtx, appRepository)
                 )[OfferViewModel::class.java]
             rootView = mBinding.root
@@ -57,15 +57,15 @@ class OffersFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity!!.bottomNavigationView!!.menu.findItem(R.id.offers).isChecked = true
+        homeActivity!!.bottomNavigationView!!.menu.findItem(R.id.offers).isChecked = true
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
         if (SharePrefs.getInstance(activity)
                 .getBoolean(SharePrefs.IS_SELLER_AVAIL)
-        ) activity!!.mBinding!!.toolbarH.liStoreH.visibility =
+        ) homeActivity!!.mBinding!!.toolbarH.liStoreH.visibility =
             View.VISIBLE
     }
 
@@ -73,7 +73,7 @@ class OffersFragment : Fragment() {
         super.onStop()
         if (SharePrefs.getInstance(activity)
                 .getBoolean(SharePrefs.IS_SELLER_AVAIL)
-        ) activity!!.mBinding!!.toolbarH.liStoreH.visibility =
+        ) homeActivity!!.mBinding!!.toolbarH.liStoreH.visibility =
             View.GONE
     }
 
@@ -81,20 +81,20 @@ class OffersFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Top item visible and gone
-        activity!!.searchText!!.visibility = View.VISIBLE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
-        activity!!.topToolbarTitle!!.visibility = View.GONE
-        activity!!.topToolbarTitle!!.text =
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.topToolbarTitle!!.visibility = View.GONE
+        homeActivity!!.topToolbarTitle!!.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_offers)
     }
     fun initialization() {
         observe(viewModel.getBillDiscountListData, ::handleOfferResult)
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding.noOfferAvailable.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available)
         list = ArrayList()
         mBinding.recyclerOffer.adapter =
             OfferAdapter(
-                activity!!,
+                homeActivity!!,
                 list!!
             )
         viewModel.getAllBillDiscountOffer(SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID),"Home Bottom")
@@ -113,7 +113,7 @@ class OffersFragment : Fragment() {
                     list = it.billDiscountList
                     mBinding.recyclerOffer.adapter =
                         OfferAdapter(
-                            activity!!,
+                            homeActivity!!,
                             list!!
                         )
                 }

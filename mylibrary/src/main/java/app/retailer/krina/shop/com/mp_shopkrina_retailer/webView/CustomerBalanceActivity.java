@@ -27,7 +27,8 @@ public class CustomerBalanceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_customer_balnce);
+        mBinding = ActivityCustomerBalnceBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         // init view
         initialization();
         mBinding.toolbarHisabKitab.back.setOnClickListener(v -> onBackPressed());

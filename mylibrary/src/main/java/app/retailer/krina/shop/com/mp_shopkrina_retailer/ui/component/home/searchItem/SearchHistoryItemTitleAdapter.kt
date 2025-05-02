@@ -21,9 +21,9 @@ class SearchHistoryItemTitleAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            SerachhintTitleBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.serachhint_title, parent, false
+               parent, false
             )
         )
     }

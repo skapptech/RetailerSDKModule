@@ -71,7 +71,8 @@ class OtpVerifyActivity : AppCompatActivity(), OtpReceivedInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_otp_verify)
+        mBinding = ActivityOtpVerifyBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

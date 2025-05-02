@@ -39,7 +39,7 @@ import io.reactivex.observers.DisposableObserver;
 /**
  * Created by user on 5/26/2017.
  */
-public class RetailerSDKApp {
+public class RetailerSDKApp extends Application{
     private static RetailerSDKApp mInstance;
     static Context context;
 

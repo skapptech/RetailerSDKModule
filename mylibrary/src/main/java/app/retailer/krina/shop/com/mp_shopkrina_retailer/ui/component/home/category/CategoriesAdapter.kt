@@ -16,9 +16,9 @@ class CategoriesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return RecyclerViewHolder(
-            DataBindingUtil.inflate(
+            ItemCategoriesBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_categories, parent, false
+               parent, false
             )
         )
     }

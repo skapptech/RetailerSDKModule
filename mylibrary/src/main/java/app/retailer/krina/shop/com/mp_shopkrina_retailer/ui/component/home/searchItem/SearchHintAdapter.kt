@@ -23,9 +23,9 @@ class SearchHintAdapter(private val context: Context, private val searchclick: S
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<SearchHistoryRowAdapterBinding>(
+            SearchHistoryRowAdapterBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.search_history_row_adapter, parent, false
+                parent, false
             )
         )
     }

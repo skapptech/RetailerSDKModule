@@ -30,9 +30,8 @@ class PollAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.items_poll_progress, parent, false
+            ItemsPollProgressBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }

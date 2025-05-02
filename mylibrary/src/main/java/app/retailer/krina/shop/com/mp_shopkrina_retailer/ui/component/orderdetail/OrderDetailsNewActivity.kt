@@ -62,8 +62,8 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_order_details_new)
-
+        mBinding = ActivityOrderDetailsNewBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         if (intent.extras != null) {
             deliveryOtp = intent.getIntExtra("deliveryOtp", 0)
             orderId = intent.getIntExtra("orderId", 0)

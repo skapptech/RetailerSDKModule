@@ -29,7 +29,8 @@ class CustomSearchPlaceActivity : AppCompatActivity(), PlacesAutoCompleteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_custom_search_place)
+        mBinding = ActivityCustomSearchPlaceBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         mBinding.back.setOnClickListener { onBackPressed() }
         mBinding.etSearchKeyword.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_city)

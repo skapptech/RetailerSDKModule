@@ -38,8 +38,8 @@ public class TransactionDetailActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transaction_detail);
-
+        mBinding = ActivityTransactionDetailBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             customersContactModel = (CustomerRes) getIntent().getSerializableExtra("list");

@@ -28,26 +28,26 @@ import com.squareup.picasso.Picasso
 class SalesRateFragment : BottomSheetDialogFragment() {
     private lateinit var appCtx: RetailerSDKApp
     private lateinit var homeViewModel: HomeViewModel
-    private var activity: AppCompatActivity? = null
     private var ratingList: ArrayList<RatingModel>? = null
     private var agentVisit: String? = null
     private var onButtonClick: OnButtonClick? = null
     private var position = 0
     private var clickedPos = 3
 
+    var appCompatActivity = activity as? AppCompatActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as AppCompatActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        appCompatActivity = context as AppCompatActivity
+        appCtx = appCompatActivity!!.application as RetailerSDKApp
         onButtonClick = context as OnButtonClick
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            ratingList = arguments!!.getSerializable("list") as ArrayList<RatingModel>?
-            position = arguments!!.getInt("position")
+            ratingList = arguments?.getSerializable("list") as ArrayList<RatingModel>?
+            position = arguments?.getInt("position")!!
         }
     }
 
@@ -55,10 +55,10 @@ class SalesRateFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val appRepository = AppRepository(activity!!.applicationContext)
+        val appRepository = AppRepository(appCompatActivity!!.applicationContext)
         homeViewModel =
             ViewModelProvider(
-                activity!!,
+                appCompatActivity!!,
                 HomeViewModelFactory(appCtx, appRepository)
             )[HomeViewModel::class.java]
         return inflater.inflate(R.layout.fragment_sales_rating, container, false)
@@ -89,7 +89,7 @@ class SalesRateFragment : BottomSheetDialogFragment() {
         btnSubmit.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         tvOrderId.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + ratingList!![0].orderId
-        val timeArray = activity!!.resources.getStringArray(R.array.salesman_times)
+        val timeArray = appCompatActivity!!.resources.getStringArray(R.array.salesman_times)
         fbVisit.removeAllViews()
         val viewList: MutableList<TextView> = ArrayList()
         for (s in timeArray) {
@@ -100,16 +100,16 @@ class SalesRateFragment : BottomSheetDialogFragment() {
             params.setMargins(15, 10, 15, 10)
             val textView = TextView(activity)
             textView.layoutParams = params
-            textView.background = activity!!.resources.getDrawable(R.drawable.rectangle_grey)
+            textView.background = appCompatActivity!!.resources.getDrawable(R.drawable.rectangle_grey)
             textView.setPadding(40, 20, 40, 20)
             textView.text = "" + s
             viewList.add(textView)
             textView.setOnClickListener { view1: View ->
                 agentVisit = textView.text.toString()
                 for (view2 in viewList) {
-                    view2.background = activity!!.resources.getDrawable(R.drawable.rectangle_grey)
+                    view2.background = appCompatActivity!!.resources.getDrawable(R.drawable.rectangle_grey)
                 }
-                view1.background = activity!!.resources.getDrawable(R.drawable.rectangle_orange)
+                view1.background = appCompatActivity!!.resources.getDrawable(R.drawable.rectangle_orange)
             }
             fbVisit.addView(textView)
         }

@@ -232,7 +232,8 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         if (!BuildConfig.DEBUG) window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE
         )
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_payment_option)
+        mBinding = ActivityPaymentOptionBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this, PaymentViewModelFactory(application, appRepository)

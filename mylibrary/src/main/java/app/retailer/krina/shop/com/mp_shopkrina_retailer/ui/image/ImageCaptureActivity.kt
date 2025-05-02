@@ -41,7 +41,8 @@ class ImageCaptureActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_image_capture)
+        mBinding = ActivityImageCaptureBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         if (intent.extras != null) {
             fileName = intent.getStringExtra(Constant.FILE_NAME).toString()
             isGalleryOption = intent.getBooleanExtra(Constant.IS_GALLERY_OPTION, false)

@@ -20,9 +20,9 @@ class PollOptionAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemPollOptionBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_poll_option, parent, false
+                parent, false
             )
         )
     }

@@ -42,7 +42,8 @@ class AddressSearchActivity : AppCompatActivity(), AddressSearchAdapter.ClickLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_address_search)
+        mBinding = ActivityAddressSearchBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

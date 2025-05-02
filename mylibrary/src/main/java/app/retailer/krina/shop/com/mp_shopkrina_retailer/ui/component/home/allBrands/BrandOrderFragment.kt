@@ -54,7 +54,7 @@ class BrandOrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_order_brands, container, false)
+            FragmentOrderBrandsBinding.inflate(inflater, container, false)
         val appRepository = AppRepository(activity.applicationContext)
         viewModel =
             ViewModelProvider(
@@ -63,8 +63,8 @@ class BrandOrderFragment : Fragment() {
             )[AllBrandViewModel::class.java]
         // get Argument
         if (arguments != null) {
-            subCatId = arguments!!.getInt("subCatId")
-            categoryId = arguments!!.getInt("Categoryid")
+            subCatId = arguments?.getInt("subCatId")!!
+            categoryId = arguments?.getInt("Categoryid")!!
         }
         lang = LocaleHelper.getLanguage(activity)
         // show and hide view

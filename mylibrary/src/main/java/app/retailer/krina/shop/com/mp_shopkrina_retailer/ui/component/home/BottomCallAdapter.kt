@@ -36,23 +36,23 @@ class BottomCallAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == SALES_RATING) {
             SalesHolder(
-                DataBindingUtil.inflate(
+                ItemBottomArBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_bottom_ar, parent, false
+                     parent, false
                 )
             )
         } else if (viewType == DELIVERY_RATING) {
             DeliveryHolder(
-                DataBindingUtil.inflate(
+                ItemBottomDbrBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_bottom_dbr, parent, false
+                    parent, false
                 )
             )
         } else {
             TrackOrdHolder(
-                DataBindingUtil.inflate(
+                ItemBottomTrackOrderBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_bottom_track_order, parent, false
+                     parent, false
                 )
             )
         }

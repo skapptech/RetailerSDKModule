@@ -56,8 +56,8 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_share_option);
-
+        mBinding = ActivityShareOptionBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         try {
             if (getIntent().getExtras() != null) {
                 totalBalanceDue = getIntent().getExtras().getDouble("balance");

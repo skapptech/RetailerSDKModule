@@ -27,9 +27,9 @@ class SearchFilterBaseCatAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            SerachfilterheaderadapterBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.serachfilterheaderadapter, viewGroup, false
+                viewGroup, false
             )
         )
     }

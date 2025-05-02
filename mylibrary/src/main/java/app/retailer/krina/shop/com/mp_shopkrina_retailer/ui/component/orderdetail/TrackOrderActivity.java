@@ -127,7 +127,8 @@ public class TrackOrderActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_track_order);
+        mBinding = ActivityTrackOrderBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.track_order));

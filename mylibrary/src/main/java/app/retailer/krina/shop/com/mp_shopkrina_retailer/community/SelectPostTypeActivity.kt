@@ -18,8 +18,8 @@ class SelectPostTypeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_select_post_type)
-
+        binding = ActivitySelectPostTypeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         binding.toolbarPost.btnPost.visibility = View.GONE
 
         binding.toolbarPost.back.setOnClickListener {

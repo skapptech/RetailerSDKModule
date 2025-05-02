@@ -31,10 +31,9 @@ class CategoryItemAdapter internal constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil
+            ItemListGridviewBinding
                 .inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_list_gridview,
                     parent,
                     false
                 )

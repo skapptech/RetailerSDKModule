@@ -64,7 +64,7 @@ import java.util.Locale
 class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClicked,
     SubCatClicked, BrandClicked {
     private val SPEECH_REQUEST_CODE = 123
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
     private lateinit var appCtx: RetailerSDKApp
     private lateinit var viewModel: SearchItemViewModel
     private var mBinding: FragmentSearchItemListBinding? = null
@@ -101,8 +101,8 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -111,11 +111,11 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_search_item_list, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+            FragmentSearchItemListBinding.inflate(inflater, container, false)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         viewModel =
             ViewModelProvider(
-                activity!!,
+                homeActivity!!,
                 SearchItemViewModelFactory(appCtx, appRepository)
             )[SearchItemViewModel::class.java]
         return mBinding!!.root
@@ -124,16 +124,18 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     override fun onResume() {
         super.onResume()
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
         if (netConnectionReceiver != null) {
-            activity!!.registerReceiver(
-                netConnectionReceiver,
-                IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
-                , Context.RECEIVER_NOT_EXPORTED
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                homeActivity!!.registerReceiver(
+                    netConnectionReceiver,
+                    IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+                    , Context.RECEIVER_NOT_EXPORTED
+                )
+            }
         }
         if (mSearchFlag) {
             if (itemListAdapter != null) {
@@ -151,8 +153,8 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         //CallAPI
         allCategoryApiCall()
         if (arguments != null) {
-            val pos = arguments!!.getInt("pos")
-            val query = arguments!!.getString("query")
+            val pos = arguments?.getInt("pos")
+            val query = arguments?.getString("query")
             if (pos == 67) {
                 mBinding!!.fragSearchEdt.setText(query)
                 callApi()
@@ -163,7 +165,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     override fun onPause() {
         super.onPause()
         if (netConnectionReceiver != null) {
-            activity!!.unregisterReceiver(netConnectionReceiver)
+            homeActivity!!.unregisterReceiver(netConnectionReceiver)
         }
     }
 
@@ -276,21 +278,21 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         subcat = ArrayList()
         cat = ArrayList()
         mBaseCategoryIdList = ArrayList()
-        searchHistoryAdapter = SearchHintAdapter(activity!!, this)
+        searchHistoryAdapter = SearchHintAdapter(homeActivity!!, this)
         custId = SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID)
         lang = LocaleHelper.getLanguage(activity)
-        activity!!.spLayout!!.visibility = View.GONE
-        activity!!.rightSideIcon!!.visibility = View.VISIBLE
-        activity!!.searchText!!.visibility = View.GONE
-        activity!!.topToolbarTitle!!.visibility = View.GONE
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.spLayout!!.visibility = View.GONE
+        homeActivity!!.rightSideIcon!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.GONE
+        homeActivity!!.topToolbarTitle!!.visibility = View.GONE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
         mBinding!!.fragSearchEdt.isCursorVisible = true
         mBinding!!.fragSearchRv.layoutManager = LinearLayoutManager(activity)
-        searchHintAdapter = SearchHistoryItemTitleAdapter(activity!!, historyItemList!!)
+        searchHintAdapter = SearchHistoryItemTitleAdapter(homeActivity!!, historyItemList!!)
         itemListAdapter =
             ItemListAdapter(
-                activity!!,
+                homeActivity!!,
                 mItemListArrayList
             )
         mBinding!!.fragSearchEdt.hint =
@@ -332,7 +334,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         // voice search
         mBinding!!.ivVoiceSearch.setOnClickListener { v: View? -> showGoogleInputDialog() }
         mBinding!!.fragSearchEdt.requestFocus()
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = homeActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(mBinding!!.fragSearchEdt, InputMethodManager.SHOW_IMPLICIT)
     }
 
@@ -352,9 +354,9 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
 
     private fun SearchFilterPopup() {
         Utils.hideKeyboard(activity, view)
-        val mBindingFilter = DataBindingUtil.inflate<SearchFilterPopupBinding>(
+        val mBindingFilter = SearchFilterPopupBinding.inflate(
             layoutInflater,
-            R.layout.search_filter_popup, null, false
+           null, false
         )
         // set text
         mBindingFilter.tvHeader.text =
@@ -562,19 +564,19 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         }
         if (baseCateList!!.size != 0) {
             val searchFilterBaseCatAdapter = SearchFilterBaseCatAdapter(
-                baseCateList!!, activity!!, this, pos
+                baseCateList!!, homeActivity!!, this, pos
             )
             mbinding.rvBasechild.adapter = searchFilterBaseCatAdapter
         }
-        searchFilterCatChildAdapter = SearchFilterCatChildAdapter(activity!!, this)
+        searchFilterCatChildAdapter = SearchFilterCatChildAdapter(homeActivity!!, this)
         mbinding.rvCatChild.adapter = searchFilterCatChildAdapter
         if (pos >= 0) {
             setCategory(pos)
         }
-        searchFilterSubCatChildAdapter = SearchFilterSubCatChildAdapter(activity!!, this)
+        searchFilterSubCatChildAdapter = SearchFilterSubCatChildAdapter(homeActivity!!, this)
         mbinding.rvSubcatChild.adapter = searchFilterSubCatChildAdapter
         setSubCategory()
-        searchFilterBrandAdapter = SearchFilterBrandAdapter(activity!!, this)
+        searchFilterBrandAdapter = SearchFilterBrandAdapter(homeActivity!!, this)
         mbinding.rvBrandChild.adapter = searchFilterBrandAdapter
         setSubSubCategory()
     }

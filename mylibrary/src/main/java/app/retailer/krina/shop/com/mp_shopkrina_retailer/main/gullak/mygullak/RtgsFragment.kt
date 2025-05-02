@@ -56,7 +56,7 @@ class RtgsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rtgs, container, false)
+        binding = FragmentRtgsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

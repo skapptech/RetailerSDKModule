@@ -88,8 +88,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_map);
-        if (getIntent() != null) {
+        mBinding = ActivityMapBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
+     if (getIntent() != null) {
             flag = getIntent().getIntExtra("flag", 0);
         }
         mGoogleApiClient = new GoogleApiClient.Builder(this)

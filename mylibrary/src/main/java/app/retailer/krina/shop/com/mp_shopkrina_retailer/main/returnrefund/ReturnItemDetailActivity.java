@@ -21,7 +21,8 @@ public class ReturnItemDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_return_item_detail);
+        mBinding = ActivityReturnItemDetailBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_return_order));
 

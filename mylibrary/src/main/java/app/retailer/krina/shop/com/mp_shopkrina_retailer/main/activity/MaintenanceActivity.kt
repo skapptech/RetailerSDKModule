@@ -19,7 +19,8 @@ class MaintenanceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_maintainance)
+        mBinding = ActivityMaintainanceBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         mBinding.title.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.under_maintenance)
         mBinding.tvPreparing.text =

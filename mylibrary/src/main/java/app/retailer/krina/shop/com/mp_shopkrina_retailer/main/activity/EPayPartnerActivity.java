@@ -37,7 +37,8 @@ public class EPayPartnerActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_epay_partner);
+        mBinding = ActivityEpayPartnerBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot())   ;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mBinding.etcountry.setText("India");

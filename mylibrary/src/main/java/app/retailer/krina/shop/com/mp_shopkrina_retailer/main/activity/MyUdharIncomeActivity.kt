@@ -23,7 +23,8 @@ class MyUdharIncomeActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_udhar_income)
+        mBinding = ActivityMyUdharIncomeBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         if (intent.extras != null) {
             incomeRateSt = intent.getStringExtra("incomeRateSt")
         }

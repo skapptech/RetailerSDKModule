@@ -154,7 +154,8 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_shop_details)
+        mBinding = ActivityShopDetailsBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         editProfileModel = EditProfileModel()
     }
 

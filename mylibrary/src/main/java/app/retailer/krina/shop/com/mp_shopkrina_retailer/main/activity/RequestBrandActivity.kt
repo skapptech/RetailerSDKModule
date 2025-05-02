@@ -31,10 +31,8 @@ class RequestBrandActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(
-            this@RequestBrandActivity,
-            R.layout.activity_request_brand
-        )
+        mBinding = ActivityRequestBrandBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         //init view
         initialization()
         //back Btn

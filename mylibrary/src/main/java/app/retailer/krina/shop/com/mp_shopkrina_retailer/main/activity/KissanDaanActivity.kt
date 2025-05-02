@@ -12,6 +12,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityGamesWebBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityKissanDaanBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
@@ -24,7 +25,8 @@ class KissanDaanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_kissan_daan)
+        mBinding = ActivityKissanDaanBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         val webSettings = mBinding.daanWebview.settings
         val cust_id = "" + SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID)
         val hub_id = "" + SharePrefs.getInstance(this).getInt(SharePrefs.WAREHOUSE_ID)

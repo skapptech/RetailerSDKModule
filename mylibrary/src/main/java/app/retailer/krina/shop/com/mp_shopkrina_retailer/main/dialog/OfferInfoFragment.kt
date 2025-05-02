@@ -15,19 +15,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.DecimalFormat
 
 class OfferInfoFragment : BottomSheetDialogFragment() {
-    private var activity: AppCompatActivity? = null
+    var appCompatActivity = activity as? AppCompatActivity
     private lateinit var model: BillDiscountModel
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as AppCompatActivity
+        appCompatActivity = context as AppCompatActivity
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            model = arguments!!.getSerializable("list") as BillDiscountModel
+            model = arguments?.getSerializable("list") as BillDiscountModel
         }
     }
 

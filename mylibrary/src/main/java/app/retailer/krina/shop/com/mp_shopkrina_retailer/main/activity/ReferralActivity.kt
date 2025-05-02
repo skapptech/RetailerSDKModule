@@ -37,7 +37,8 @@ class ReferralActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_referral)
+        binding = ActivityReferralBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         supportActionBar?.elevation = 0F
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.refer_and_earn)

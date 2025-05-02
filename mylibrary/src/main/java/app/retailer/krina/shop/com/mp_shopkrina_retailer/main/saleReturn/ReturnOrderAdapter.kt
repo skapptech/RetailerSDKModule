@@ -23,9 +23,8 @@ class ReturnOrderAdapter(var mContext: Context, var mList: ArrayList<SalesReturn
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ReturnOrderBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.return_order,
                 parent,
                 false
             )

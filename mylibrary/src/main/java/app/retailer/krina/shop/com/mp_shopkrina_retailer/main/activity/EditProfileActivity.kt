@@ -16,6 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.direct.TradeActivi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.fragment.EditProfileHomeFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.EditProfileModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.CustomerResponse
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActvityTradeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
@@ -52,8 +53,8 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             finish()
             return
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile)
-
+        mBinding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         if (!SharePrefs.getInstance(this).getBoolean(SharePrefs.IS_SIGN_UP)) {
             startActivity(
                 Intent(applicationContext, CheckSignUpActivity::class.java)

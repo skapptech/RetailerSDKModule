@@ -62,7 +62,8 @@ class WebViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.fragment_web_view)
+        mBinding = FragmentWebViewBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         mBinding.webView.clearCache(true)

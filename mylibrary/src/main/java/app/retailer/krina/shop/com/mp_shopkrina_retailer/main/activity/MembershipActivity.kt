@@ -32,7 +32,8 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_membership)
+        mBinding = ActivityMembershipBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Sk " + SharePrefs.getInstance(applicationContext)
             .getString(SharePrefs.PRIME_NAME) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.membership)

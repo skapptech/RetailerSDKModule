@@ -27,7 +27,8 @@ class YourLevelActivity : AppCompatActivity(), OnTargetLevelClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_your_level)
+        mBinding = ActivityYourLevelBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         activity = this
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         utils = Utils(this)

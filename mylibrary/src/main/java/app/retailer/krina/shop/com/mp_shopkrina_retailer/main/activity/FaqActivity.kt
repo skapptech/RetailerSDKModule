@@ -23,7 +23,8 @@ class FaqActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_faq)
+        mBinding = ActivityFaqBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         mBinding.toolbarFaq.title.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.help)
         mBinding.tvIssueCat.text =

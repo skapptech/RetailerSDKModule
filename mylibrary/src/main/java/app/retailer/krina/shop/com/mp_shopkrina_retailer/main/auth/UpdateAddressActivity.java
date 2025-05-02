@@ -109,8 +109,8 @@ public class UpdateAddressActivity extends AppCompatActivity implements Location
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_update_address);
-
+        mBinding = ActivityUpdateAddressBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 

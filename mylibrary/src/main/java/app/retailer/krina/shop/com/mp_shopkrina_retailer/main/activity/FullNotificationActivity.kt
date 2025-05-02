@@ -36,7 +36,8 @@ class FullNotificationActivity : AppCompatActivity(), View.OnTouchListener {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_full_notification)
+        mBinding = ActivityFullNotificationBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding!!.btnClose.setOnClickListener { onBackPressed() }
         mBinding!!.ivImage.setOnTouchListener(OnSwipeTouchListener(this))
     }

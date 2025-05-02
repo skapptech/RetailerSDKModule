@@ -35,7 +35,8 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_story)
+        mBinding = ActivityStoryBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding!!.flipView.isOverFlipEnabled = true
         mBinding!!.flipView.isFlipByTouchEnabled = true
         mBinding!!.flipView.onViewFlipListener = this

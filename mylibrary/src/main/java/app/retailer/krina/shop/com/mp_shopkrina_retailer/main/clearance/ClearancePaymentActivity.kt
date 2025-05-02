@@ -51,6 +51,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.payment.Prepai
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.payment.ScaleUpResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityClearanceBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityClearancePaymentBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.epaylater.EPayWebViewActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.epaylater.EpayLaterEncryptDecryptUtil
@@ -204,7 +205,8 @@ class ClearancePaymentActivity : AppCompatActivity(), View.OnClickListener, OnSe
 //        if (!BuildConfig.DEBUG) window.setFlags(
 //            WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE
 //        )
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_clearance_payment)
+        mBinding = ActivityClearancePaymentBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         if (intent.extras != null) {
             list = intent.getSerializableExtra("list") as ArrayList<ClearanceItemModel>
         }

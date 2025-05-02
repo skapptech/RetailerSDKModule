@@ -860,7 +860,7 @@ class NotificationItemListAdapter(
         var relItemDetails: RelativeLayout? = null
         var LLItemMain: LinearLayout
         fun bind(obj: CategoryItemOrderInfo?) {
-            mBinding.executePendingBindings()
+           // mBinding.executePendingBindings()
         }
 
         fun timerExpire(endTime: Long) {

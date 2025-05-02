@@ -1,5 +1,6 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -22,14 +23,15 @@ class BasketOfferTiltleAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            BasketCategoryTitleBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.basket_category_title, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }
 
-    override fun onBindViewHolder(vh: ViewHolder, i: Int) {
+    override fun onBindViewHolder(vh: ViewHolder, @SuppressLint("RecyclerView") i: Int) {
         try {
             vh.mBinding.filterTitle.text = title[i]
             vh.layout.setOnClickListener { view: View? ->

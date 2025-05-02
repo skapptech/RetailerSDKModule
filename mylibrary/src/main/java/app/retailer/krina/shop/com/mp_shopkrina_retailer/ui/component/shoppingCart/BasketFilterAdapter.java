@@ -78,8 +78,11 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                R.layout.category_order_items, viewGroup, false));
+        return new ViewHolder(CategoryOrderItemsBinding.inflate(
+                LayoutInflater.from(viewGroup.getContext()),
+                viewGroup,
+                false
+        ));
     }
 
     @Override
@@ -760,9 +763,9 @@ public class BasketFilterAdapter extends RecyclerView.Adapter<BasketFilterAdapte
             customRunnable = new CustomRunnable(handler, remaingSecTV, 10000);
         }
 
-        public void bind(CategoryItemOrderInfo obj) {
-            mBinding.executePendingBindings();
-        }
+//        public void bind(CategoryItemOrderInfo obj) {
+//            mBinding.executePendingBindings();
+//        }
 
         public void timerExpire(long endTime) {
             handler.removeCallbacks(customRunnable);

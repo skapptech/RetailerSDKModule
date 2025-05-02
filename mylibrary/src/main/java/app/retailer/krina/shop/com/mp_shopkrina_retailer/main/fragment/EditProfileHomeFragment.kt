@@ -94,8 +94,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_edit_profile, container, false)
+        mBinding = FragmentEditProfileBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 

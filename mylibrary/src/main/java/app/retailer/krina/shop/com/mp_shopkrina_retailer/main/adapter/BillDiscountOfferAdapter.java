@@ -69,11 +69,17 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
-            return new ScratchCardHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                    R.layout.item_scratch_card_list, parent, false));
+            return new ScratchCardHolder(ItemScratchCardListBinding.inflate(
+                    LayoutInflater.from(parent.getContext()),
+                    parent,
+                    false
+            ));
         } else {
-            return new BillDiscountHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                    R.layout.item_bill_discount, parent, false));
+            return new BillDiscountHolder(ItemBillDiscountBinding.inflate(
+                    LayoutInflater.from(parent.getContext()),
+                    parent,
+                    false
+            ));
         }
     }
 

@@ -19,9 +19,10 @@ class OrderStatusAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<ItemOrderStatusBinding>(
+            ItemOrderStatusBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_order_status, parent, false
+                parent,
+                false
             )
         )
     }

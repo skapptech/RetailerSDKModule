@@ -26,25 +26,22 @@ class IssueDetailAdapter(private val context: Context, private var list: ArrayLi
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_HEADER -> HeaderViewHolder(
-                DataBindingUtil.inflate(
+                MyIssueDetailAdapterBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.my_issue_detail_adapter,
                     viewGroup,
                     false
                 )
             )
             TYPE_ITEM -> ViewHolder(
-                DataBindingUtil.inflate(
+                CommentTextAdapterBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.comment_text_adapter,
                     viewGroup,
                     false
                 )
             )
             else -> ViewHolder(
-                DataBindingUtil.inflate(
+                CommentTextAdapterBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.comment_text_adapter,
                     viewGroup,
                     false
                 )

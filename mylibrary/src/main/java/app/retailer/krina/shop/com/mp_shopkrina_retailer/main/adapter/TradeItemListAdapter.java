@@ -67,8 +67,8 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                R.layout.trade_offer_items, viewGroup, false));
+        return new ViewHolder(TradeOfferItemsBinding.inflate(LayoutInflater.from(viewGroup.getContext()),
+                 viewGroup, false));
     }
 
     @Override

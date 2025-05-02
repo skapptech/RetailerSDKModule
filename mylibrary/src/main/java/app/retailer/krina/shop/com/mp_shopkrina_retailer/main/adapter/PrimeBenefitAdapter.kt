@@ -14,11 +14,10 @@ class PrimeBenefitAdapter(private val activity: Activity, private val list: Arra
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    activity
-                ),
-                R.layout.item_prime_benefit_list, parent, false
+            ItemPrimeBenefitListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }

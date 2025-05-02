@@ -25,9 +25,10 @@ class AppHomeSearchAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemHomeRecentSearchBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_home_recent_search, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

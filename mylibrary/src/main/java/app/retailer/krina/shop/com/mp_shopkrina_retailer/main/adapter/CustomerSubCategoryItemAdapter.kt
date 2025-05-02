@@ -34,16 +34,16 @@ class CustomerSubCategoryItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 1) {
             return ViewHolder(
-                DataBindingUtil.inflate(
+                ActivityCutomerTargetAssineViewBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.activity_cutomer_target_assine_view, parent, false
+                    parent,
+                    false
                 )
             )
         } else {
             return ViewHolderBrand(
-                DataBindingUtil.inflate(
+                ActivityCutomerTargetAssineBrandBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.activity_cutomer_target_assine_brand,
                     parent,
                     false
                 )

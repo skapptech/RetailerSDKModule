@@ -26,9 +26,10 @@ class MyDreamAdapter(
 ) : RecyclerView.Adapter<MyDreamAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<ItemMyDreamBinding>(
+            ItemMyDreamBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_my_dream, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

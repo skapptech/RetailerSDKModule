@@ -24,10 +24,10 @@ class CustomerListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    viewGroup.context
-                ), R.layout.item_customer_list, viewGroup, false
+            ItemCustomerListBinding.inflate(
+                LayoutInflater.from(viewGroup.context),
+                viewGroup,
+                false
             )
         )
     }

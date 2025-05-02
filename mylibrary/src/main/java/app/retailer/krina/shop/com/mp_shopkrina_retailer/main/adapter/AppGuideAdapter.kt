@@ -13,9 +13,10 @@ class AppGuideAdapter(private val _context: Context, private val mylist: ArrayLi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            MyAccountAdapterBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.my_account_adapter, parent, false
+                parent,
+                false
             )
         )
     }

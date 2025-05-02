@@ -56,8 +56,7 @@ class AppHomeItemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_app_home_item, container, false)
+        mBinding = FragmentAppHomeItemBinding.inflate(inflater, container, false)
         sSectionId = arguments?.getString("SECTION_ID")
         sSectionSubType = arguments?.getString("SECTION_SUB_TYPE")
         sURL = arguments?.getString("URL")

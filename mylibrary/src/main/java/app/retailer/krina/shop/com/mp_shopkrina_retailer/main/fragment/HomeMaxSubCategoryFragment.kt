@@ -35,12 +35,7 @@ class HomeMaxSubCategoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_max_home_sub_category,
-            container,
-            false
-        )
+        mBinding = FragmentMaxHomeSubCategoryBinding.inflate(inflater, container, false)
         val bundle = this.arguments
         if (bundle != null) {
             subCateDataModel = bundle.getSerializable("SUB_CAT_MODEL") as HomeDataModel?

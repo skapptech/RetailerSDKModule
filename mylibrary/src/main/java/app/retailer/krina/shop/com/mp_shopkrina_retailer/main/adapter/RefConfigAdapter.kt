@@ -24,9 +24,8 @@ class RefConfigAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemReferConfigBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_refer_config,
                 parent,
                 false
             )

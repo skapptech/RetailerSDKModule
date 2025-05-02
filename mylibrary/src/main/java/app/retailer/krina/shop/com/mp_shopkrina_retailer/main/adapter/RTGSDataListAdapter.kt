@@ -22,9 +22,8 @@ class RTGSDataListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemRtgsHistoryBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_rtgs_history,
                 parent,
                 false
             )

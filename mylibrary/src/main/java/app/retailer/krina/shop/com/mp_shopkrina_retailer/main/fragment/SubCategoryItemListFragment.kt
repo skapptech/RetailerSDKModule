@@ -48,12 +48,7 @@ class SubCategoryItemListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.sub_category_item_list_fragment,
-            container,
-            false
-        )
+        mBinding = SubCategoryItemListFragmentBinding.inflate(inflater, container, false)
         val bundle = this.arguments
         if (bundle != null) {
             subCatId = bundle.getInt("SUB_CAT_ID")

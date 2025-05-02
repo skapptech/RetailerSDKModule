@@ -19,9 +19,8 @@ class FaqAdapter(private val context: Context, private val mylist: ArrayList<Faq
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            FaqItemBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.faq_item,
                 parent,
                 false
             )

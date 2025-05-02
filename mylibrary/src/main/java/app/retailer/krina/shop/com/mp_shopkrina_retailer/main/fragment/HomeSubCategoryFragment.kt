@@ -57,8 +57,7 @@ class HomeSubCategoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_home_sub_category, container, false)
+            mBinding = FragmentHomeSubCategoryBinding.inflate(inflater, container, false)
         val bundle = this.arguments
         if (bundle != null) {
             baseCatId = bundle.getInt("BaseCategoryId")

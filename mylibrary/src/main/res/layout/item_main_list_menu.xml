@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <LinearLayout
         android:id="@+id/liImage"
         android:layout_width="match_parent"
@@ -12,7 +9,9 @@
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
             android:id="@+id/ivCategories"
@@ -142,4 +141,3 @@
                 android:typeface="sans" />
         </LinearLayout>
     </LinearLayout>
-</layout>

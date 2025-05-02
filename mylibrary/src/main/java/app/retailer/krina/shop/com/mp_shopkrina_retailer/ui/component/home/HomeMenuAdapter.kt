@@ -31,9 +31,10 @@ class HomeMenuAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ExpandableHeaderBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.expandable_header, parent, false
+                parent,
+                false
             )
         )
     }

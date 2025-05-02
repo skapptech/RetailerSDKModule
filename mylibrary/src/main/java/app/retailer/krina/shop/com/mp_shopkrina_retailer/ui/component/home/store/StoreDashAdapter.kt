@@ -80,53 +80,62 @@ class StoreDashAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(viewGroup.context)
+
         return when (viewType) {
             PAGER_TYPE -> ViewPagerViewHolder(
-                DataBindingUtil.inflate<ItemBrandDashViewpagerBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_brand_dash_viewpager, viewGroup, false
+                ItemBrandDashViewpagerBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             ITEM_TYPE -> ItemViewHolder(
-                DataBindingUtil.inflate<ItemStoreProductBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_store_product, viewGroup, false
+                ItemStoreProductBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             OTHER_TYPE -> ItemViewHolder(
-                DataBindingUtil.inflate<ItemStoreProductBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_store_product, viewGroup, false
+                ItemStoreProductBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             NON_CLICKABLE_BANNER -> BannerViewHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.apphome_banner, viewGroup, false
+                ApphomeBannerBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             DYNAMIC_HTML -> DynamicViewHolder(
-                DataBindingUtil.inflate<ItemDynamicWebviewBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_dynamic_webview, viewGroup, false
+                ItemDynamicWebviewBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             SECTION_TYPE -> RecyclerViewHolder(
-                DataBindingUtil.inflate<ItemStoreSectionBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_store_section, viewGroup, false
+                ItemStoreSectionBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             else -> RecyclerViewHolder(
-                DataBindingUtil.inflate<ItemStoreSectionBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.item_store_section, viewGroup, false
+                ItemStoreSectionBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
         }

@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <LinearLayout
         android:id="@+id/rl_items"
         android:layout_width="match_parent"
@@ -10,7 +7,9 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="6dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout
             android:id="@+id/rl_header"
@@ -96,4 +95,3 @@
             android:textColor="@color/colorAccent"
             app:backgroundTint="@android:color/white" />
     </LinearLayout>
-</layout>

@@ -65,30 +65,34 @@ class HomeSectionAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             SCROLLABLE_BANNER -> RecyclerViewHorizontalHolder(
-                DataBindingUtil.inflate<HorizontalTypeBinding>(
+                HorizontalTypeBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.horizontal_type, viewGroup, false
+                    viewGroup,
+                    false
                 )
             )
 
             SCROLLABLE_TILE -> RecyclerViewTileTypeHolder(
-                DataBindingUtil.inflate<TileTypeBinding>(
+                TileTypeBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.tile_type, viewGroup, false
+                    viewGroup,
+                    false
                 )
             )
 
             OTHER_TYPE_2 -> RecyclerView3gridTypeOneHolder(
-                DataBindingUtil.inflate<Grid3Binding>(
+                Grid3Binding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.grid_3, viewGroup, false
+                    viewGroup,
+                    false
                 )
             )
 
             else -> RecyclerViewOtherTypeOneHolder(
-                DataBindingUtil.inflate<OtherTypeOneBinding>(
+                OtherTypeOneBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.other_type_one, viewGroup, false
+                    viewGroup,
+                    false
                 )
             )
         }

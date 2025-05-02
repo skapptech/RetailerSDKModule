@@ -54,27 +54,26 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(viewGroup.context)
+
         return when (viewType) {
             BANNER -> RecyclerViewOtherTypeHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.other_type,
+                OtherTypeBinding.inflate(
+                    inflater,
                     viewGroup,
                     false
                 )
             )
             TILE -> RecyclerView3gridTypeOneHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.grid_3,
+                Grid3Binding.inflate(
+                    inflater,
                     viewGroup,
                     false
                 )
             )
             else -> RecyclerViewOtherTypeHolder(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.other_type,
+                OtherTypeBinding.inflate(
+                    inflater,
                     viewGroup,
                     false
                 )

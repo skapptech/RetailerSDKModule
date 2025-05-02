@@ -63,39 +63,46 @@ class StoreSectionAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(viewGroup.context)
+
         return when (viewType) {
             SCROLLABLE_BANNER -> RecyclerViewHorizontalHolder(
-                DataBindingUtil.inflate<HorizontalTypeBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.horizontal_type, viewGroup, false
+                HorizontalTypeBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             SCROLLABLE_TILE -> RecyclerViewTileTypeHolder(
-                DataBindingUtil.inflate<TileTypeBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.tile_type, viewGroup, false
+                TileTypeBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             BANNER -> RecyclerViewOtherTypeHolder(
-                DataBindingUtil.inflate<OtherTypeBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.other_type, viewGroup, false
+                OtherTypeBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             OTHER_TYPE_2 -> RecyclerView3gridTypeOneHolder(
-                DataBindingUtil.inflate<Grid3Binding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.grid_3, viewGroup, false
+                Grid3Binding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
 
             else -> RecyclerViewOtherTypeOneHolder(
-                DataBindingUtil.inflate<OtherTypeOneBinding>(
-                    LayoutInflater.from(viewGroup.context),
-                    R.layout.other_type_one, viewGroup, false
+                OtherTypeOneBinding.inflate(
+                    inflater,
+                    viewGroup,
+                    false
                 )
             )
         }

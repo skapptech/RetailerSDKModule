@@ -50,9 +50,10 @@ class SliderAdapterExample(private val activity: HomeActivity) :
 
     override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterVH {
         return SliderAdapterVH(
-            DataBindingUtil.inflate(
+            ViewPagerItemBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.view_pager_item, parent, false
+                parent,
+                false
             )
         )
     }

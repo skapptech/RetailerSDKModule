@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
     <LinearLayout
         android:id="@+id/liTile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@drawable/rectangle_transperent_outline">
+        android:background="@drawable/rectangle_transperent_outline"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:id="@+id/backLayout"
@@ -43,4 +42,3 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-</layout>

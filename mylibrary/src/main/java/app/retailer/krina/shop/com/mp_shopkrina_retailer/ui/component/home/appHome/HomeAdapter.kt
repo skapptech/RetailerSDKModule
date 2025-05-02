@@ -29,9 +29,14 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.FeedActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.HomeDataModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.HomeDataModel.AppItemsList
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemDynamicWebviewBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainBucketGamePagerBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListBannerBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListCartBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListProductBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListSearchBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListSectionBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListStoreBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListViewpagerBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.BucketGameInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.DynamicHtmlInterface
@@ -119,99 +124,89 @@ class HomeAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             PAGER_TYPE -> ViewPagerViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainListViewpagerBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_viewpager,
                     viewGroup,
                     false
                 )
             )
 
             FLASH_TYPE -> RecyclerViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainListSectionBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_section,
                     viewGroup,
                     false
                 )
             )
 
             SECTION_TYPE -> RecyclerViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainListSectionBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_section,
                     viewGroup,
                     false
                 )
             )
 
             BANNER, NON_CLICKABLE_BANNER -> BannerHolder(
-                activity, DataBindingUtil.inflate(
+                activity,
+                ItemMainListBannerBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_banner,
                     viewGroup,
                     false
                 )
             )
 
             ITEM_TYPE, OTHER_TYPE -> ItemViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainListProductBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_product,
                     viewGroup,
                     false
                 )
             )
 
             DYNAMIC_HTML -> DynamicViewHolder(
-                DataBindingUtil.inflate(
+                ItemDynamicWebviewBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_dynamic_webview,
                     viewGroup,
                     false
                 )
             )
 
             CART -> CartHolder(
-                DataBindingUtil.inflate(
+                ItemMainListCartBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_cart,
                     viewGroup,
                     false
                 )
             )
 
             SEARCH -> SearchHolder(
-                DataBindingUtil.inflate(
+                ItemMainListSearchBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_search,
                     viewGroup,
                     false
                 )
             )
 
             STORE -> StoreHolder(
-                DataBindingUtil.inflate(
+                ItemMainListStoreBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_store,
                     viewGroup,
                     false
                 )
             )
 
             BUCKET_GAME_TYPE -> BucketGameViewPagerViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainBucketGamePagerBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_bucket_game_pager,
                     viewGroup,
                     false
                 )
             )
 
             else -> RecyclerViewHolder(
-                DataBindingUtil.inflate(
+                ItemMainListSectionBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.item_main_list_section,
                     viewGroup,
                     false
                 )

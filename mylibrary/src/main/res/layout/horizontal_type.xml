@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/catLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="@drawable/rippleeffect">
 
-    <LinearLayout
-        android:id="@+id/catLinearLayout"
+    <ImageView
+        android:id="@+id/ivBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="@drawable/rippleeffect">
-
-        <ImageView
-            android:id="@+id/ivBanner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitCenter" />
-    </LinearLayout>
-</layout>
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter" />
+</LinearLayout>

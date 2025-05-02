@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
     <LinearLayout
         android:id="@+id/catLinearLayout"
         android:layout_width="match_parent"
@@ -8,7 +6,8 @@
         android:background="@drawable/rectangle_transperent_outline"
         android:foreground="@drawable/rippleeffect"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/iv_item_image"
@@ -36,4 +35,3 @@
             android:textColor="#000"
             android:textSize="12sp" />
     </LinearLayout>
-</layout>

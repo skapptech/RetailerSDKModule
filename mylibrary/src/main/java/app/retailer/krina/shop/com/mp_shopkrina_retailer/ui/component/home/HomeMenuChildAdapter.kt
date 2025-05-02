@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ExpandableHeaderBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ExpandableListItemBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.BusinessCardActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ContactUsActivity
@@ -34,9 +35,10 @@ class HomeMenuChildAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ExpandableListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.expandable_list_item, parent, false
+                parent,
+                false
             )
         )
     }

@@ -1,81 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="6dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="6dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rlHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/mobikwik_orange"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp">
 
-            <RelativeLayout
-                android:id="@+id/rlHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/mobikwik_orange"
-                android:paddingStart="12dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="8dp">
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    style="@style/CommonStyleSB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="14"
-                    android:text="@string/apply_code"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvSearch"
-                    style="@style/CommonStyleSB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTitle"
-                    android:layout_marginTop="2dp"
-                    android:maxEms="14"
-                    android:textColor="@color/holo_gray_dark"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bs_divider_color" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <Button
-                android:id="@+id/btnViewAll"
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/CommonStyleSB"
                 android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_gravity="end"
-                android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
-                android:drawableTint="@color/white"
-                android:minWidth="87dp"
-                android:text="View all"
-                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                android:maxEms="14"
+                android:text="@string/apply_code"
                 android:textColor="@color/white"
-                android:textSize="11sp"
-                app:backgroundTint="@color/primary" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</layout>
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvSearch"
+                style="@style/CommonStyleSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="2dp"
+                android:maxEms="14"
+                android:textColor="@color/holo_gray_dark"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bs_divider_color" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <Button
+            android:id="@+id/btnViewAll"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_gravity="end"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawableTint="@color/white"
+            android:minWidth="87dp"
+            android:text="View all"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:backgroundTint="@color/primary" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

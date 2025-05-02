@@ -1,9 +1,780 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="app.retailer.krina.shop.com.mp_shopkrina_retailer">
+
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+<!--    <uses-permission-->
+<!--        android:name="com.google.android.gms.permission.AD_ID"-->
+<!--        tools:node="remove" />-->
+
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+        <package android:name="com.google.android.apps.nbu.paisa.user" />
+        <package android:name="com.phonepe.app" />
+        <package android:name="net.one97.paytm" />
+        <package android:name="in.org.npci.upiapp" />
+        <package android:name="in.amazon.mShop.android.shopping" />
+        <package android:name="com.myairtelapp" />
+        <package android:name="com.snapwork.hdfc" />
+        <package android:name="com.axis.mobile" />
+
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:allowClearUserData="false"
+        android:fullBackupContent="true"
+        android:hardwareAccelerated="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/security_config"
+        android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:vmSafeMode="true"
+        tools:replace="android:allowBackup,android:theme">
         <activity
-            android:name="app.retailer.krina.shop.com.mp_shopkrina_retailer.MainActivityTest"
+            android:name=".ui.component.splash.SplashScreenActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash">
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+<!--        <activity-->
+<!--            android:name=".ui.component.home.ProductShareActivity"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/txt_product_deatils"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:parentActivityName=".ui.component.home.HomeActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:theme="@style/AppTheme">-->
+<!--            <intent-filter android:autoVerify="true">-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+<!--                <data android:scheme="https" />-->
+<!--                <data android:host="www.shopkirana.in" />-->
+<!--            </intent-filter>-->
+<!--            <intent-filter android:autoVerify="true">-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+<!--                <data android:scheme="https" />-->
+<!--                <data android:host="kisankirana.in" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+        <activity
+            android:name=".main.murli.StoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".main.murli.MurliActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".main.target.CustomerTargetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.target.CustomerSubCategoryTargetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.target.AchievedTargetActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".community.profile.EditProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.NoInternetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.EPayPartnerActivity"
+            android:label="Partner Detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".epaylater.EPayWebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.HDFCActivity"
+            android:label="@string/payment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.ScratchCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.auth.MobileSignUpActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.component.auth.OtpVerifyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.component.home.HomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.auth.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".main.activity.TestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".main.auth.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.order.MyOrderActivity"
+            android:exported="true"
+            android:label="@string/myOrder"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="shopkirana.in/order"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.component.shoppingCart.ShoppingCartActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.MyWalletActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.activity.MyDreamActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.payment.PaymentOptionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".main.target.TargetOrderListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.component.payment.PayNowActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".main.auth.SignupActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.FavouriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.notification.NotificationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.RequestBrandActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.DialWheelActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".main.activity.CityNoFindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.CheckSignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.settings.ChangeLanguageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.ContactUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.home.productDetails.ProductDetailsActivity"
+            android:label="@string/txt_product_deatils"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.orderdetail.OrderSummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.MyUdharActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.MyUdharIncomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.PanCardUploadActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.UploadDocumentActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".webView.ShowImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.settings.TermsAndConditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.MapsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.home.freebies.FreebiesOfferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.settings.TermOfServicesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.notification.ActionBleNotificationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.LegerPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.EpayLaterFormActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="ePayLater"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".main.activity.MaintenanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.auth.PlacesSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.DeliveryFeedbackActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".webView.ShareOptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.direct.TradeActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.component.home.HomeActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="dl.trade.er15.xyz"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.component.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".main.activity.FullNotificationActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:parentActivityName=".ui.component.splash.SplashScreenActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.component.splash.SplashScreenActivity" />
+        </activity>
+        <activity
+            android:name=".ui.component.auth.NewSignupActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.VideoNotificationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label=""
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Translucent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.component.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".main.activity.BusinessCardActivity"
+            android:label="@string/title_activity_business_card"
+            android:parentActivityName=".ui.component.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.component.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".main.returnrefund.ReturnReplaceActivity"
+            android:label="@string/title_activity_return_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.returnrefund.ReturnOrderListActivity"
+            android:label="@string/title_activity_return_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.returnrefund.ReturnItemDetailActivity"
+            android:label="@string/title_activity_return_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.returnrefund.ReturnOrderDetailActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.WebViewActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".webView.CustomerBalanceActivity" />
+        <activity
+            android:name=".main.myIssues.AddIssueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.myIssues.MyIssuesActivity"
+            android:label="@string/title_activity_my_issue"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.myIssues.MyIssueDetailActivity"
+            android:label="@string/title_activity_my_issue"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.GamesListActivity"
+            android:label="@string/title_activity_game"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.activity.GamesWebActivity"
+            android:label="" />
+        <activity
+            android:name=".main.activity.ExpiringPointsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".main.auth.PlacesBillingSearchActivity" />
+        <activity
+            android:name=".main.UrlHandlerActivity"
+            android:exported="true"
+            android:noHistory="true" />
+        <activity
+            android:name=".main.gullak.mygullak.MyGullakActivity"
+            android:label="@string/my_gullak"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".main.gullak.AddPaymentActivity"
+            android:label="@string/gullak_payment"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".main.activity.YourLevelActivity" />
+        <activity android:name=".main.activity.RazorPayWebviewActivity" />
+        <activity
+            android:name=".main.activity.MembershipActivity"
+            android:label="@string/activity_title_membership"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.MembershipPlanActivity"
+            android:exported="true"
+            android:label="@string/activity_title_membership_plan"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".main.activity.PendingPaymentActivity" />
+        <activity
+            android:name=".main.activity.LedgerSummaryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.PipActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.activity.FaqActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.MyAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.ShopDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.settings.RateAppActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.component.settings.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.auth.CustomSearchPlaceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.KissanDaanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".webView.TransactionDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.home.store.StoreFreebiesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.DirectUdharActivity"
+            android:exported="true"
+            android:label=""
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.agent.MyAgentActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.ReferralActivity"
+            android:exported="false"
+            android:label="@string/refer_and_earn"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.ReferralHistoryActivity"
+            android:exported="false"
+            android:label="@string/referral_history"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.component.auth.CustomerAddressActivity"
+            android:exported="true"
+            android:label="@string/title_serach_address"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.component.auth.AddressSearchActivity"
+            android:exported="true"
+            android:label="@string/title_serach_address"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.activity.DeliveryConcernActivity"
+            android:label="@string/raise_concern"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".main.gullak.RtgsInfoActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.component.orderdetail.OrderDetailsNewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.component.orderdetail.TrackOrderActivity"
+            android:exported="false"
+            android:label="@string/track_order"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.auth.UpdateAddressActivity"
+            android:exported="true"
+            android:screenOrientation="sensorPortrait" />
+        <!-- <activity android:name=".main.direct.RazorPayPaymentActivity" />-->
+        <activity android:name=".main.activity.ServiceAvailableActivity" />
+        <activity
+            android:name=".main.clearance.ClearanceActivity"
+            android:exported="false"
+            android:label="Clearance Sale"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".main.clearance.ClearancePaymentActivity"
+            android:exported="false"
+            android:label=""
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".firebase.NotificationDismissActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:label=""
+            android:noHistory="true" />
+        <activity
+            android:name=".ui.component.home.offer.OfferDetailFragment"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".community.FeedActivity"
+            android:exported="true"
+            android:icon="@drawable/feed_notification"
+            android:label="feed"
+            android:parentActivityName=".ui.component.home.HomeActivity"
+            android:roundIcon="@drawable/feed_notification"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.component.home.HomeActivity" />
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="kisankirana.in" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".community.feed.FeedImageShowActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".community.mandibhaw.MandiBhavActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".community.mandibhaw.MandiBhavCityActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".community.profile.ProfileActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".community.notification.UserNotificationActivity"
+            android:exported="true"
+            android:label="@string/title_notification"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".community.post.AddPollActivity"
+            android:exported="true"
+            android:label="" />
+        <activity
+            android:name=".community.post.AddPostActivity"
+            android:exported="true"
+            android:label="New Post">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".community.SelectPostTypeActivity"
+            android:exported="true"
+            android:label="" />
+        <activity
+            android:name=".main.saleReturn.ReturnOrderActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.saleReturn.ReturnOrderDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.saleReturn.AddReturnOrderRequestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity android:name=".main.activity.ScaleUpActivity" />
+
+        <activity
+            android:name=".ui.image.ImageCaptureActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_translucent" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_path" />
+        </provider>
+
+        <service
+            android:name=".services.ContactService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false" />
+        <service
+            android:name=".services.NotificationTimerService"
+            android:enabled="true"
             android:exported="false" />
+        <service
+            android:name=".services.OnClearFromRecentService"
+            android:exported="false"
+            android:stopWithTask="false" />
+        <service
+            android:name=".services.ReceiveApiService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".widget.ListViewWidgetService"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".widget.UpdateWidgetService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".widget.OfferWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/offer_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".receiver.SmsBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.ReferrerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_sk" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.key.ApiKey"
+            android:value="{7b4573793c6f42d58991055b14e2b77c}" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.mixpanel.android.MPConfig.EnableDebugLogging"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.mixpanel.android.MPConfig.ResourcePackageName"
+            android:value="app.retailer.krina.shop.com.mp_shopkrina_retailer" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

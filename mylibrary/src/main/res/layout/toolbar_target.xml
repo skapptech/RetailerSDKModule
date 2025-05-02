@@ -1,12 +1,10 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorPrimary"
+    app:elevation="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?colorPrimary"
-        app:elevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,4 +57,3 @@
                 android:tint="@android:color/black" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-</layout>

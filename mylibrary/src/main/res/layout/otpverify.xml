@@ -1,113 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
 
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo_sk_ep" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size40"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter your mobile number"
+            android:textSize="12sp" />
 
-
-
-
+        <TextView
+            style="@style/CommonStyleSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:text="@string/msg_sendyou_otp"
+            android:textSize="12sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="@dimen/size50"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/border_grey_light"
+        android:orientation="horizontal">
 
-
-
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/logo_sk_ep" />
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/size40"
+        <TextView
+            android:id="@+id/et_countrycode"
+            style="@style/CommonStyleSR"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/CommonStyleSR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Please enter your mobile number"
-                android:textSize="12sp" />
-
-            <TextView
-                style="@style/CommonStyleSR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size5"
-                android:text="@string/msg_sendyou_otp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="@dimen/size50"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/border_grey_light"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/et_countrycode"
-                style="@style/CommonStyleSR"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/size20"
-                android:layout_marginEnd="@dimen/size5"
-                android:gravity="center|start"
-                android:text="(+91)"
-                android:textColor="@color/black" />
-
-            <ImageView
-                android:layout_width="@dimen/size12"
-                android:layout_height="@dimen/size12"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/size10"
-                app:srcCompat="@drawable/downarrow_grey" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#D3D3D3" />
-
-            <EditText
-                android:layout_marginStart="@dimen/size10"
-                android:layout_width="match_parent"
-                android:layout_marginEnd="@dimen/size10"
-                android:hint="@string/hint_mobilenumber"
-                android:background="@color/White"
-                style="@style/CommonStyleSR"
-                android:textSize="@dimen/size15"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_phoneno"
-                android:maxLength="10"
-                android:inputType="number"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/size20"
+            android:layout_marginEnd="@dimen/size5"
+            android:gravity="center|start"
+            android:text="(+91)"
+            android:textColor="@color/black" />
 
         <ImageView
-            android:layout_marginTop="@dimen/size50"
-            android:id="@+id/submit_number"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="@dimen/size60"
-            app:srcCompat="@drawable/next" />
-    </LinearLayout>
-        </LinearLayout>
+            android:layout_width="@dimen/size12"
+            android:layout_height="@dimen/size12"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/size10"
+            app:srcCompat="@drawable/downarrow_grey" />
 
-</layout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#D3D3D3" />
+
+        <EditText
+            android:id="@+id/et_phoneno"
+            style="@style/CommonStyleSR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size10"
+            android:layout_marginEnd="@dimen/size10"
+            android:background="@color/White"
+            android:hint="@string/hint_mobilenumber"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="@dimen/size15" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/submit_number"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="@dimen/size50"
+        android:layout_marginBottom="@dimen/size60"
+        app:srcCompat="@drawable/next" />
+</LinearLayout>
+

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size10"
-        android:layout_marginVertical="@dimen/size5"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:paddingVertical="@dimen/size10"
-        android:paddingHorizontal="@dimen/size10"
-        android:background="@drawable/rectangle_green_corner_green_background">
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/size10"
+    android:layout_marginVertical="@dimen/size5"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:paddingVertical="@dimen/size10"
+    android:paddingHorizontal="@dimen/size10"
+    android:background="@drawable/rectangle_green_corner_green_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:layout_width="0dp"
@@ -36,4 +36,3 @@
             android:src="@drawable/ic_delete_icon"/>
     </LinearLayout>
 
-</layout>

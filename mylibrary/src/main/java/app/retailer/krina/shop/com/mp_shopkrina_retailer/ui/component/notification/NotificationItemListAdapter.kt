@@ -68,9 +68,9 @@ class NotificationItemListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            CategoryOrderItemsBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.category_order_items, viewGroup, false
+                 viewGroup, false
             )
         )
     }

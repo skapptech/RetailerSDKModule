@@ -37,7 +37,7 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener, OnLang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_change_language)
+        mBinding =ActivityChangeLanguageBinding.inflate(layoutInflater)
         activity = this
         //init view
         initView()

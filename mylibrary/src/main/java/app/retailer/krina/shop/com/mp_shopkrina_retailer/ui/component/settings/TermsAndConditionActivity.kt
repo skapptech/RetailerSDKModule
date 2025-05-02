@@ -16,7 +16,7 @@ class TermsAndConditionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_terms_condition)
+        mBinding = ActivityTermsConditionBinding.inflate(layoutInflater)
         //init view
         initView()
         // back btn

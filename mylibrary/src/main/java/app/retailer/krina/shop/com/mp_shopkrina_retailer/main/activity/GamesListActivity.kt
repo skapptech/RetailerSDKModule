@@ -114,7 +114,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/game_terms_hindi.html"
+                            EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/images/game/game_terms_hindi.html"
                         )
                 )
             } else {
@@ -122,7 +122,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/game_terms.html"
+                            EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/images/game/game_terms.html"
                         )
                 )
             }

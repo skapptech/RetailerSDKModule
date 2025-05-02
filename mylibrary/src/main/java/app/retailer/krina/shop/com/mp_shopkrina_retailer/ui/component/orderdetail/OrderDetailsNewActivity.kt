@@ -139,7 +139,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
                     override fun onComplete() {
                     }
                 },
-                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + orderId
+                EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + orderId
             )
             CommonClassForAPI.getInstance(this).getAppHomeBottomData(
                 object :
@@ -158,7 +158,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
                     override fun onComplete() {
                     }
                 },
-                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + orderId
+                EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + orderId
             )
         }
 

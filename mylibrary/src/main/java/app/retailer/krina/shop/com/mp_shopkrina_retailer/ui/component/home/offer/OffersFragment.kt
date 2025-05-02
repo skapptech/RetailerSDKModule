@@ -47,7 +47,7 @@ class OffersFragment : Fragment() {
             viewModel =
                 ViewModelProvider(
                     activity!!,
-                    OfferViewModelFactory(appCtx, appRepository)
+                    OfferViewModelFactory(RetailerSDKApp.application, appRepository)
                 )[OfferViewModel::class.java]
             rootView = mBinding.root
             initialization()

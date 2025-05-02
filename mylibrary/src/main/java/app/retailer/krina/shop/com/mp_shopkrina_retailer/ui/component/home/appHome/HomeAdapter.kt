@@ -470,8 +470,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("appHome_loadMore_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("appHome_loadMore_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString("SECTION_SUB_TYPE", homeDataModel.sectionSubType.toString())
@@ -486,8 +485,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("appHome_item_viewAll_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("appHome_item_viewAll_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString("SECTION_SUB_TYPE", homeDataModel.sectionSubType)
@@ -562,8 +560,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("app_home_load_more_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_load_more_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString("SECTION_SUB_TYPE", homeDataModel.sectionSubType)
@@ -580,8 +577,7 @@ class HomeAdapter(
                     analyticPost.sectionName = homeDataModel.sectionName
                     analyticPost.url = homeDataModel.webViewUrl
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("appHome_other_viewAll_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("appHome_other_viewAll_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString("SECTION_SUB_TYPE", homeDataModel.sectionSubType.toString())
@@ -627,8 +623,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("app_home_flash_more_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_flash_more_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString(
@@ -1213,8 +1208,7 @@ class HomeAdapter(
                                 )
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_basCat_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_basCat_click", analyticPost)
                         }
 
                         "Brand" -> {
@@ -1275,8 +1269,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_brand_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_brand_click", analyticPost)
                         }
 
                         "Category" -> {
@@ -1327,8 +1320,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_category_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_category_click", analyticPost)
                         }
 
                         "SubCategory" -> {
@@ -1391,8 +1383,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_subCat_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_subCat_click", analyticPost)
                         }
 
                         "Other" -> {
@@ -1484,8 +1475,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_default_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_default_click", analyticPost)
                         }
 
                         else -> {
@@ -1537,8 +1527,7 @@ class HomeAdapter(
                                     )
                                 }
                             }
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_default_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_default_click", analyticPost)
                         }
                     }
                 }

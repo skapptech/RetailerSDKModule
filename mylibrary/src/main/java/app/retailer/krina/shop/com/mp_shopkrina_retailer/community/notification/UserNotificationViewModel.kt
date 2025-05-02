@@ -21,26 +21,26 @@ class UserNotificationViewModel(private var repository: UserNotificationReposito
     val readNotificationResponse: LiveData<NetworkResult<Boolean>> = _readNotificationResponse
 
     fun getNotification(skip:Int,take:Int,customerID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.getNotification(skip,take,customerID).collect() {
                     _userNotificationResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(),"No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application,"No internet connectivity")
         }
     }
 
     fun getNotificationReadNotification(notificationID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getNotificationReadNotification(notificationID).collect() {
                     _readNotificationResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(),"No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application,"No internet connectivity")
         }
     }
 }

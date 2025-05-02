@@ -143,8 +143,8 @@ public class RestClient {
                 })
                 .addInterceptor(chain -> {
                     request = chain.request().newBuilder()
-                            .header("username", Utils.getCustMobile(RetailerSDKApp.getInstance()))
-                            .header("customerType", Utils.getCustomerType(RetailerSDKApp.getInstance()))
+                            .header("username", Utils.getCustMobile(RetailerSDKApp.application))
+                            .header("customerType", Utils.getCustomerType(RetailerSDKApp.application))
                             .header("activity", RetailerSDKApp.getInstance().activity == null ? "" : RetailerSDKApp.getInstance().activity.getClass().getSimpleName())
                             .header("section", TextUtils.isNullOrEmpty(mSectionType) ? "" : mSectionType)
                             .header("deviceId", RetailerSDKApp.getInstance().activity == null ? "" : Utils.getDeviceUniqueID(RetailerSDKApp.getInstance().activity))
@@ -161,7 +161,7 @@ public class RestClient {
                 .create();
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getBaseUrl())
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.application).getBaseUrl())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
@@ -184,21 +184,21 @@ public class RestClient {
                 .create();
         if (url.equalsIgnoreCase("epay")) {
             retrofit1 = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getEpayEndpoint())
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.application).getEpayEndpoint())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build();
         } else if (url.equalsIgnoreCase("cb")) {
             retrofit3 = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getString(EndPointPref.CHECKBOOK_ENDPOINT))
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.application).getString(EndPointPref.CHECKBOOK_ENDPOINT))
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build();
         } else {
             retrofit4 = new Retrofit.Builder()
-                    .baseUrl(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL))
+                    .baseUrl(SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.TRADE_WEB_URL))
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
@@ -262,7 +262,7 @@ public class RestClient {
                 .create();
 
         retrofit2 = new Retrofit.Builder()
-                .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getTradeEndpoint())
+                .baseUrl(EndPointPref.getInstance(RetailerSDKApp.application).getTradeEndpoint())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

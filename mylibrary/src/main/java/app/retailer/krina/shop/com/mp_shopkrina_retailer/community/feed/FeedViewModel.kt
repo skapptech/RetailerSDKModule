@@ -63,172 +63,172 @@ import kotlinx.coroutines.launch
 
 
     fun getUser(customerID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUser(customerID).collect {
                     _userResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
 
     fun getFeed(model: FeedRequestModel) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFeed(model).collect {
                     _FeedResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
 
     fun getSubmitPoll(pollModelResquest: PollModelResquest) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getSubmitPoll(pollModelResquest).collect {
                     _submitOptionResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun postLike(postLikeModelRequest: PostLikeModelRequest, likeCount: Int) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postLike(postLikeModelRequest, likeCount).collect {
                     _likeResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getOtherUser(customerID: String, otherUserID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getOtherUser(customerID, otherUserID).collect {
                     _otherUserResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getUserLikesList(postID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserLikeList(postID).collect {
                     _userLikesResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getUserFollowing(userFollowingModel: UserFollowingModel) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserFolling(userFollowingModel).collect {
                     _userFollowResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getUserUnFlow(model: UserFollowingModel) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getUserUnFlow(model).collect {
                     _userUnFollowResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getFollowerList(customerID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFollowerList(customerID).collect {
                     _followerListResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getFollowingList(customerID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getFollowingList(customerID).collect {
                     _followingListResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getSpecificPost(postID: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getSpecificPost(postID).collect {
                     _specificPostResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getNotifctionCount(userid: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getNotifctionCount(userid).collect {
                     _notifictionCountResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun postDelete(postId: String) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postDelete(postId).collect {
                     _deletePostResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun getMandiUser(Longitute: Double,Laitutute: Double) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getMandiUser(Longitute,Laitutute).collect {
                     _getMandiBhavResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 

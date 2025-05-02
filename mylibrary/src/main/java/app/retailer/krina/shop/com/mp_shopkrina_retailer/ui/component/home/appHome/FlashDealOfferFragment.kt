@@ -78,7 +78,7 @@ class FlashDealOfferFragment : Fragment() {
         appHomeViewModel =
             ViewModelProvider(
                 activity!!,
-                AppHomeViewModelFactory(appCtx, appRepository)
+                AppHomeViewModelFactory(RetailerSDKApp.application, appRepository)
             )[AppHomeViewModel::class.java]
         activity!!.searchText!!.visibility = View.VISIBLE
         activity!!.rightSideIcon!!.visibility = View.VISIBLE

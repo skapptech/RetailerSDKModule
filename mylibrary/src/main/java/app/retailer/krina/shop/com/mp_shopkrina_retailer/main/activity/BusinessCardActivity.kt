@@ -251,8 +251,7 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        RetailerSDKApp.getInstance()
-            .updateAnalyticShare(javaClass.simpleName, "BusinessCard WhatsApp Share")
+        RetailerSDKApp.getInstance().updateAnalyticShare(javaClass.simpleName, "BusinessCard WhatsApp Share")
     }
 
     private fun shareImage() {

@@ -23,39 +23,39 @@ class PostViewModel constructor(private val repository: PostRepository) : ViewMo
     val uploadPostImg: LiveData<NetworkResult<JsonObject>> = uploadPostImgData
 
     fun uploadPostImg(body: MultipartBody.Part?) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.uploadPostImg(body).collect() {
                     uploadPostImgData.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
 
     fun newPost(model: PostModel) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.newPost(model).collect() {
                     newPostLiveData.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun editPost(model: PostModel) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.editPost(model).collect() {
                     newPostLiveData.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 

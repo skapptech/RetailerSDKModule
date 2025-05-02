@@ -40,7 +40,7 @@ class ImageAdapter(
             holder.mBinding.image.setImageURI(File(model.imgFileFullPath).toUri())
         } else {
             Glide.with(context)
-                .load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
+                .load(SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
                 .into(holder.mBinding.image)
         }
 

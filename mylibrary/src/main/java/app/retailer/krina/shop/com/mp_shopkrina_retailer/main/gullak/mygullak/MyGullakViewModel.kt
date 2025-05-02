@@ -41,7 +41,6 @@ class MyGullakViewModel : ViewModel() {
                 }
 
                 override fun onError(e: Throwable) {
-                    gullakLiveData?.value = null
                 }
 
                 override fun onComplete() {}

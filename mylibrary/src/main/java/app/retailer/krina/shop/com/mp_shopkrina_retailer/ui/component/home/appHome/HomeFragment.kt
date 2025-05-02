@@ -155,7 +155,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         appHomeViewModel =
             ViewModelProvider(
                 homeActivity!!,
-                AppHomeViewModelFactory(appCtx, appRepository)
+                AppHomeViewModelFactory(RetailerSDKApp.application, appRepository)
             )[AppHomeViewModel::class.java]
         initialization()
 

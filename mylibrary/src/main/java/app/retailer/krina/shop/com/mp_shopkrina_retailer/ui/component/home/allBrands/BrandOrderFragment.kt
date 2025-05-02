@@ -59,7 +59,7 @@ class BrandOrderFragment : Fragment() {
         viewModel =
             ViewModelProvider(
                 activity,
-                AllBrandViewModelFactory(appCtx, appRepository)
+                AllBrandViewModelFactory(RetailerSDKApp.application, appRepository)
             )[AllBrandViewModel::class.java]
         // get Argument
         if (arguments != null) {

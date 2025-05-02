@@ -407,8 +407,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun loadingData() {
         RetailerSDKApp.getInstance().clearLocalData()
-        mBinding!!.btnTryAgain.visibility = View.GONE
-        mBinding!!.pBar.visibility = View.VISIBLE
+        mBinding.btnTryAgain.visibility = View.GONE
+        mBinding.pBar.visibility = View.VISIBLE
         viewModel.getMyProfile(
             SharePrefs.getInstance(
                 applicationContext

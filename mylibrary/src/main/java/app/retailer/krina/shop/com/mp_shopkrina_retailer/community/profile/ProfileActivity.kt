@@ -674,7 +674,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         share.type = "text/*"
         share.putExtra(
             Intent.EXTRA_TEXT,
-            "" + model.desc + "\n" + SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + "/" + model.userId + "/" + model.postId
+            "" + model.desc + "\n" + SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.TRADE_WEB_URL) + "/" + model.userId + "/" + model.postId
         )
         startActivity(Intent.createChooser(share, "Share Post"))
 

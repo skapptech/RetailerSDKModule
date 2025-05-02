@@ -22,26 +22,26 @@ class EditProfileViewMode constructor(private val repository: EditProfileReposit
     val uploadPostImg: LiveData<NetworkResult<JsonObject>> = uploadPostImgData
 
     fun getSubmitUser(model: UserUpdate) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.submitUser(model).collect() {
                     _updateUserResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 
     fun uploadPostImg(body: MultipartBody.Part?) {
-        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.application!!)) {
             viewModelScope.launch(Dispatchers.IO)  {
                 repository.uploadPostImg(body).collect() {
                     uploadPostImgData.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.application, "No internet connectivity")
         }
     }
 

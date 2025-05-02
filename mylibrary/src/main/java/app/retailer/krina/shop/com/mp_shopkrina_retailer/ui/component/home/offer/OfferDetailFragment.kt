@@ -107,7 +107,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         offerViewModel =
             ViewModelProvider(
                 activity,
-                OfferViewModelFactory(appCtx, appRepository)
+                OfferViewModelFactory(RetailerSDKApp.application, appRepository)
             )[OfferViewModel::class.java]
         return binding.root
     }

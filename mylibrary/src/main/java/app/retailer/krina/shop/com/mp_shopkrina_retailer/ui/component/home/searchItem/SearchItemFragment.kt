@@ -116,7 +116,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         viewModel =
             ViewModelProvider(
                 activity!!,
-                SearchItemViewModelFactory(appCtx, appRepository)
+                SearchItemViewModelFactory(RetailerSDKApp.application, appRepository)
             )[SearchItemViewModel::class.java]
         return mBinding!!.root
     }

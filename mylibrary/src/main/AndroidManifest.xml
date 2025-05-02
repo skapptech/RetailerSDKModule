@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="app.retailer.krina.shop.com.mp_shopkrina_retailer">
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,6 +24,7 @@
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
@@ -32,9 +32,9 @@
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-<!--    <uses-permission-->
-<!--        android:name="com.google.android.gms.permission.AD_ID"-->
-<!--        tools:node="remove" />-->
+    <!--    <uses-permission-->
+    <!--        android:name="com.google.android.gms.permission.AD_ID"-->
+    <!--        tools:node="remove" />-->
 
     <queries>
         <package android:name="com.whatsapp" />
@@ -54,7 +54,6 @@
     </queries>
 
     <application
-        android:allowBackup="false"
         android:allowClearUserData="false"
         android:fullBackupContent="true"
         android:hardwareAccelerated="true"
@@ -65,7 +64,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:vmSafeMode="true"
-        tools:replace="android:allowBackup,android:theme">
+        tools:replace="android:theme">
         <activity
             android:name=".ui.component.splash.SplashScreenActivity"
             android:exported="false"
@@ -75,33 +74,33 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-<!--        <activity-->
-<!--            android:name=".ui.component.home.ProductShareActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/txt_product_deatils"-->
-<!--            android:launchMode="singleTop"-->
-<!--            android:parentActivityName=".ui.component.home.HomeActivity"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:theme="@style/AppTheme">-->
-<!--            <intent-filter android:autoVerify="true">-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
+        <!--        <activity-->
+        <!--            android:name=".ui.component.home.ProductShareActivity"-->
+        <!--            android:exported="false"-->
+        <!--            android:label="@string/txt_product_deatils"-->
+        <!--            android:launchMode="singleTop"-->
+        <!--            android:parentActivityName=".ui.component.home.HomeActivity"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:theme="@style/AppTheme">-->
+        <!--            <intent-filter android:autoVerify="true">-->
+        <!--                <action android:name="android.intent.action.VIEW" />-->
 
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+        <!--                <category android:name="android.intent.category.DEFAULT" />-->
+        <!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-<!--                <data android:scheme="https" />-->
-<!--                <data android:host="www.shopkirana.in" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter android:autoVerify="true">-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
+        <!--                <data android:scheme="https" />-->
+        <!--                <data android:host="www.shopkirana.in" />-->
+        <!--            </intent-filter>-->
+        <!--            <intent-filter android:autoVerify="true">-->
+        <!--                <action android:name="android.intent.action.VIEW" />-->
 
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
+        <!--                <category android:name="android.intent.category.DEFAULT" />-->
+        <!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-<!--                <data android:scheme="https" />-->
-<!--                <data android:host="kisankirana.in" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <!--                <data android:scheme="https" />-->
+        <!--                <data android:host="kisankirana.in" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
         <activity
             android:name=".main.murli.StoryActivity"
             android:screenOrientation="portrait"

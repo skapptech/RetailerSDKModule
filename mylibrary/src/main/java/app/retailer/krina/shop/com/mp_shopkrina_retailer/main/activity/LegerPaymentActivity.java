@@ -455,7 +455,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
                 SupplierDocModel supplierDocModel = new Gson().fromJson(response.toString(), SupplierDocModel.class);
                 if (supplierDocModel.isStatus()) {
                     if (supplierDocModel.isURL() != null) {
-                        String Url = EndPointPref.getInstance(RetailerSDKApp.getInstance()).getBaseUrl() + supplierDocModel.isURL();
+                        String Url = EndPointPref.getInstance(RetailerSDKApp.application).getBaseUrl() + supplierDocModel.isURL();
                         String fileName = Url.substring(Url.lastIndexOf("/") + 1);
                         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Url));
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

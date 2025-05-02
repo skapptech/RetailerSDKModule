@@ -180,7 +180,7 @@ class EditProfileActivity : AppCompatActivity() {
                         fileName = it.data.get("FileName").asString
                         relativePath = it.data.get("RelativePath").asString
                         fileFullPath = it.data.get("FileFullpath").asString
-                        Picasso.get().load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + fileFullPath)
+                        Picasso.get().load(SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.TRADE_WEB_URL) + fileFullPath)
                             .into(mBinding.profileImage)
                     } else {
                         Utils.setToast(applicationContext, "error")

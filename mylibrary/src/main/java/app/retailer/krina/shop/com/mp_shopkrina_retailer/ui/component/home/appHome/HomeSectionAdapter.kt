@@ -372,8 +372,7 @@ class HomeSectionAdapter(
                                 )
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_basCat_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_basCat_click", analyticPost)
                         }
 
                         "Brand" -> {
@@ -440,8 +439,7 @@ class HomeSectionAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_brand_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_brand_click", analyticPost)
                         }
 
                         "Category" -> {
@@ -497,8 +495,7 @@ class HomeSectionAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_category_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_category_click", analyticPost)
                         }
 
                         "SubCategory" -> {
@@ -570,8 +567,7 @@ class HomeSectionAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_subCat_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_subCat_click", analyticPost)
                         }
 
                         "Other" -> {
@@ -669,8 +665,7 @@ class HomeSectionAdapter(
                                 }
                             }
                             // update analytics
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_default_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_default_click", analyticPost)
                         }
 
                         else -> {
@@ -728,8 +723,7 @@ class HomeSectionAdapter(
                                     )
                                 }
                             }
-                            RetailerSDKApp.getInstance()
-                                .updateAnalytics("appHome_default_click", analyticPost)
+                            RetailerSDKApp.getInstance().updateAnalytics("appHome_default_click", analyticPost)
                         }
                     }
                 }

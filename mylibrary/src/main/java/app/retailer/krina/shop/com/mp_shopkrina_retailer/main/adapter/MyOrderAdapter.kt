@@ -157,7 +157,7 @@ class MyOrderAdapter(
                     override fun onError(e: Throwable) {}
                     override fun onComplete() {}
                 },
-                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + obj.orderId
+                EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + obj.orderId
             )
             if (obj.salesPersonMobile != null && obj.salesPersonMobile!!.isNotEmpty()) {
                 CommonClassForAPI.getInstance(activity).getAppHomeBottomData(
@@ -173,7 +173,7 @@ class MyOrderAdapter(
                         override fun onError(e: Throwable) {}
                         override fun onComplete() {}
                     },
-                    EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + obj.orderId
+                    EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + obj.orderId
                 )
             }
         }

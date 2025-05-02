@@ -52,7 +52,7 @@ open class HomeCategoryFragment : Fragment() {
             homeCategoryViewModel =
                 ViewModelProvider(
                     activity!!,
-                    HomeCategoryViewModelFactory(appCtx, appRepository)
+                    HomeCategoryViewModelFactory(RetailerSDKApp.application, appRepository)
                 )[HomeCategoryViewModel::class.java]
         }
         return mBinding.root

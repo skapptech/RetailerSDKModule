@@ -347,13 +347,13 @@ public class NoteRepository {
         try {
             value = noteDatabase.daoLangAccess().getString(key);
             if (TextUtils.isNullOrEmpty(value)) {
-                int resId = RetailerSDKApp.getInstance().getResources().getIdentifier(key, "string", RetailerSDKApp.getInstance().getPackageName());
-                value = RetailerSDKApp.getInstance().getResources().getString(resId);
+                int resId = RetailerSDKApp.application.getResources().getIdentifier(key, "string", RetailerSDKApp.application.getPackageName());
+                value = RetailerSDKApp.application.getResources().getString(resId);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            int resId = RetailerSDKApp.getInstance().getResources().getIdentifier(key, "string", RetailerSDKApp.getInstance().getPackageName());
-            value = RetailerSDKApp.getInstance().getResources().getString(resId);
+            int resId = RetailerSDKApp.application.getResources().getIdentifier(key, "string", RetailerSDKApp.application.getPackageName());
+            value = RetailerSDKApp.application.getResources().getString(resId);
         }
         return value;
     }
@@ -361,14 +361,14 @@ public class NoteRepository {
     public String getString(int key) {
         String value = "";
         try {
-            String stringKey = RetailerSDKApp.getInstance().getResources().getResourceEntryName(key);
+            String stringKey = RetailerSDKApp.application.getResources().getResourceEntryName(key);
             value = noteDatabase.daoLangAccess().getString(stringKey);
             if (TextUtils.isNullOrEmpty(value)) {
-                value = RetailerSDKApp.getInstance().getResources().getString(key);
+                value = RetailerSDKApp.application.getResources().getString(key);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            value = RetailerSDKApp.getInstance().getResources().getString(key);
+            value = RetailerSDKApp.application.getResources().getString(key);
         }
         return value;
     }
@@ -380,7 +380,7 @@ public class NoteRepository {
             protected Void doInBackground(Void... voids) {
                 noteDatabase.daoLangAccess().truncateLangTable();
                 for (DataSnapshot postSnapshot : dataPostSnapshot.getChildren()) {
-                    String selectedLanguage = SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.SELECTED_LANGUAGE);
+                    String selectedLanguage = SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.SELECTED_LANGUAGE);
                     if (selectedLanguage.equals(postSnapshot.getKey())) {
                         ArrayList<LangModel> list = new ArrayList<>();
                         for (DataSnapshot langSnapshot : postSnapshot.getChildren()) {

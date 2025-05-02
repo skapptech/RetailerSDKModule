@@ -113,7 +113,7 @@ class AddPollActivity : AppCompatActivity(), OnButtonClick {
 
                         Glide.with(this)
                             .load(
-                                SharePrefs.getInstance(RetailerSDKApp.getInstance())
+                                SharePrefs.getInstance(RetailerSDKApp.application)
                                     .getString(SharePrefs.TRADE_WEB_URL) + fileFullPath
                             )
                             .into(binding.ivAdd)

@@ -266,7 +266,7 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
             try {
                 if (response != null) {
                     filePath = response;
-                    String invoiceURl = EndPointPref.getInstance(RetailerSDKApp.getInstance()).getTradeEndpoint() + response;
+                    String invoiceURl = EndPointPref.getInstance(RetailerSDKApp.application).getTradeEndpoint() + response;
                     downloadFileFromUrl(invoiceURl, response);
                 }
             } catch (Exception ex) {

@@ -70,7 +70,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     CatePopupInterface {
     private lateinit var mBinding: FragmentSubSubCategoryBinding
     private lateinit var activity: HomeActivity
-    private lateinit var appCtx: RetailerSDKApp
+
     private lateinit var subSubCatViewModel: SubSubCatViewModel
     private lateinit var popupWindow: PopupWindow
     private var subCategoryFilterAdapter: SubCategoryFilterAdapter? = null
@@ -115,7 +115,6 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -129,7 +128,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         subSubCatViewModel =
             ViewModelProvider(
                 activity,
-                SubSubCategoryViewModelFactory(appCtx, appRepository)
+                SubSubCategoryViewModelFactory(RetailerSDKApp.application, appRepository)
             )[SubSubCatViewModel::class.java]
         val bundle = this.arguments
         if (bundle != null) {
@@ -587,7 +586,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     // Call itemMater API
     private fun callItemMasterAPI(sSubCatId: Int, subCatId: Int, categoryId: Int) {
         filterItems()
-        if (NetworkUtils.isInternetAvailable(appCtx)) {
+        if (NetworkUtils.isInternetAvailable(RetailerSDKApp.application)) {
             sortType = "M"
             direction = "desc"
             skip = 0
@@ -1010,34 +1009,6 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                 Toast.makeText(activity, it.errorMesssage.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-
-    private fun checkAvailOffer(categoryId: Int, subCatId: Int, sSubCatId: Int) {
-        Observable.fromCallable {
-            // will run in background thread (same as doinBackground)
-            val discountList = RetailerSDKApp.getInstance().billDiscountList
-            val list = ArrayList<BillDiscountModel>()
-            if (discountList != null && discountList.size > 0) {
-                if (subCatId == 0 && sSubCatId == 0)
-                    list.addAll(discountList.filter { item -> item.billDiscountType == "category" && item.offerBillDiscountItems!!.any { it.id == categoryId } })
-                else {
-                    list.addAll(discountList.filter { it.billDiscountType == "subcategory" && it.offerBillDiscountItems!!.any { it.id == subCatId && it.categoryId == categoryId } })
-                    list.addAll(discountList.filter { it.billDiscountType == "subsubcategory" || it.billDiscountType == "brand" && it.offerBillDiscountItems!!.any { it.id == sSubCatId && it.categoryId == categoryId && it.subCategoryId == subCatId } })
-                }
-            }
-            list
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                println("dis " + it.size)
-                if (it.size > 0)
-                    Utils(activity).showOfferView(
-                        mBinding.progressCategory,
-                        activity.bottomNavigationView,
-                        it[0].description
-                    )
-            }
     }
 
     private fun handleCategoriesResult(it: Response<JsonObject>) {

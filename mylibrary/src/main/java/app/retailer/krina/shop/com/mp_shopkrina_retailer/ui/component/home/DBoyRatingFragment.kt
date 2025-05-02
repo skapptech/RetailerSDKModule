@@ -35,15 +35,15 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as AppCompatActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        appCtx = requireActivity().application as RetailerSDKApp
         onButtonClick = context as OnButtonClick
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            position = arguments!!.getInt("position")
-            ratingList = arguments!!.getSerializable("list") as ArrayList<RatingModel>?
+            position = requireArguments().getInt("position")
+            ratingList = requireArguments().getSerializable("list") as ArrayList<RatingModel>?
         }
     }
 
@@ -51,11 +51,11 @@ class DBoyRatingFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val appRepository = AppRepository(activity!!.applicationContext)
+        val appRepository = AppRepository(RetailerSDKApp.application)
         homeViewModel =
             ViewModelProvider(
-                activity!!,
-                HomeViewModelFactory(appCtx, appRepository)
+                requireActivity(),
+                HomeViewModelFactory(RetailerSDKApp.application, appRepository)
             )[HomeViewModel::class.java]
         return inflater.inflate(R.layout.fragment_d_boy_rating, container, false)
     }

@@ -128,7 +128,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
             appHomeViewModel =
                 ViewModelProvider(
                     activity!!,
-                    AppHomeViewModelFactory(appCtx, appRepository)
+                    AppHomeViewModelFactory(RetailerSDKApp.application, appRepository)
                 )[AppHomeViewModel::class.java]
             rootView = mBinding!!.root
 

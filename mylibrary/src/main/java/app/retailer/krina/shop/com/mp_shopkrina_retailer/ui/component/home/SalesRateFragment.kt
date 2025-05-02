@@ -59,7 +59,7 @@ class SalesRateFragment : BottomSheetDialogFragment() {
         homeViewModel =
             ViewModelProvider(
                 activity!!,
-                HomeViewModelFactory(appCtx, appRepository)
+                HomeViewModelFactory(RetailerSDKApp.application, appRepository)
             )[HomeViewModel::class.java]
         return inflater.inflate(R.layout.fragment_sales_rating, container, false)
     }

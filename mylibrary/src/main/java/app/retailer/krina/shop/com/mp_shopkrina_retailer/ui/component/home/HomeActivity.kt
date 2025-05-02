@@ -1915,10 +1915,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     } else {
                         RetailerSDKApp.getInstance().clearCartData()
                     }
-
                 }
             }
-
             is Response.Error -> {
             }
         }

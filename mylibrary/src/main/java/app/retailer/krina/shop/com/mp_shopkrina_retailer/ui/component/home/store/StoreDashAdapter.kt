@@ -368,8 +368,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    RetailerSDKApp.getInstance()
-                        .updateAnalytics("store_appHome_loadMore_click", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("store_appHome_loadMore_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
                     args.putString("SECTION_SUB_TYPE", homeDataModel.sectionSubType)

@@ -41,7 +41,8 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class RetailerSDKApp {
     private static RetailerSDKApp mInstance;
-    static Context context;
+    public static Application application;
+    public static Context context;
 
     public boolean CHECK_FROM_COME = true;
     public NoteRepository noteRepository;
@@ -50,8 +51,7 @@ public class RetailerSDKApp {
     public Activity activity;
     public NoteRepository dbHelper;
     public PrefManager prefManager;
-
-    public ArrayList<BillDiscountModel> billDiscountList;
+    //
     public boolean isReloadCart = false;
     public boolean isCommentOpen = false;
 
@@ -62,10 +62,10 @@ public class RetailerSDKApp {
         return mInstance;
     }
 
-    public static void initialize(Context context1) {
+    public static void initialize(Application context1) {
+        application = context1;
         context = context1;
         mInstance = new RetailerSDKApp();
-
     }
 
 
@@ -921,8 +921,8 @@ public class RetailerSDKApp {
             long differenceDates = difference / (24 * 60 * 60 * 1000);
             if (differenceDates > EndPointPref.getInstance(context).getLong(EndPointPref.logOutDays)) {
                 clearLocalData();
-                RetailerSDKApp.getInstance().clearCartData();
-                RetailerSDKApp.getInstance().prefManager.setLoggedIn(false);
+                clearCartData();
+                prefManager.setLoggedIn(false);
                 context.startActivity(new Intent(context, MobileSignUpActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
@@ -932,14 +932,14 @@ public class RetailerSDKApp {
     }
 
     public void logout(Activity activity) {
-        RetailerSDKApp.getInstance().clearLocalData();
-        RetailerSDKApp.getInstance().clearCartData();
-        RetailerSDKApp.getInstance().noteRepository.truncateCart();
-        RetailerSDKApp.getInstance().noteRepository.truncateSearch();
-        RetailerSDKApp.getInstance().noteRepository.deleteNotifyTask();
-        RetailerSDKApp.getInstance().prefManager.setLoggedIn(false);
+        clearLocalData();
+        clearCartData();
+        noteRepository.truncateCart();
+        noteRepository.truncateSearch();
+        noteRepository.deleteNotifyTask();
+        prefManager.setLoggedIn(false);
         SharePrefs.getInstance(activity).clear();
-        RetailerSDKApp.getInstance().updateLogOut();
+        updateLogOut();
         // clear app data
         activity.getCacheDir().delete();
         Intent intent = new Intent(activity, MobileSignUpActivity.class);

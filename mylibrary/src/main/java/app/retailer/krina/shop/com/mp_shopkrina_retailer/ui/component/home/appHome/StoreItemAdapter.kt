@@ -85,7 +85,7 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (vh.itemViewType == BANNER) {
             if (!TextUtils.isNullOrEmpty(model.logo)) {
                 Picasso.get()
-                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + model.logo!!.trim())
+                    .load(EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + model.logo!!.trim())
                     .placeholder(R.drawable.logo_grey)
                     .into((vh as RecyclerViewOtherTypeHolder).mBinding.ivItem)
             } else {
@@ -103,7 +103,7 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             (vh as RecyclerView3gridTypeOneHolder).mBinding.tvTextTitle.text = model.subCategoryName
             if (!TextUtils.isNullOrEmpty(model.logo)) {
                 Picasso.get()
-                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + model.logo!!.trim())
+                    .load(EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + model.logo!!.trim())
                     .placeholder(R.drawable.logo_grey)
                     .into(vh.mBinding.ivItemImage)
             } else {

@@ -81,6 +81,7 @@ class DialWheelActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         skipSpinPopup()
     }
 

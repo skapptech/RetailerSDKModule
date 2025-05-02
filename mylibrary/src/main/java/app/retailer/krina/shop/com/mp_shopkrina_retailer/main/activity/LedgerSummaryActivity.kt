@@ -241,7 +241,7 @@ class LedgerSummaryActivity : AppCompatActivity() {
                     if (supplierDocModel.isStatus) {
                         if (supplierDocModel.isURL != null) {
                             val Url =
-                                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + supplierDocModel.isURL
+                                EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + supplierDocModel.isURL
                             val fileName = Url.substring(Url.lastIndexOf("/") + 1)
                             val request = DownloadManager.Request(Uri.parse(Url))
                             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

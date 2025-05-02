@@ -320,7 +320,7 @@ class ProfileFeedAdapter(
                 }
                 if (feedListModel.imageObj != null && feedListModel.imageObj!!.size > 0) {
                     Glide.with(context)
-                        .load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
+                        .load(SharePrefs.getInstance(RetailerSDKApp.application).getString(SharePrefs.TRADE_WEB_URL) + feedListModel.imageObj!![0].imgFileFullPath)
                         .placeholder(R.drawable.logo_grey)
                         .into(holder.binding.ivImage)
                 } else {

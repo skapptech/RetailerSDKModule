@@ -25,4 +25,10 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="120dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#xA;    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;" />
 </LinearLayout>

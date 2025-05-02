@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityRet
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.SalesReturnRequestListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class ReturnOrderActivity : AppCompatActivity() {
@@ -59,13 +59,13 @@ class ReturnOrderActivity : AppCompatActivity() {
         binding.rvReturnOrder.setHasFixedSize(true)
         binding.rvReturnOrder.adapter = returnOrderAdapter
 
-        binding.tvReturnOrder.text = MyApplication.getInstance().dbHelper.getString(R.string.return_order)
-        binding.tvAddRequest.text = MyApplication.getInstance().dbHelper.getString(R.string.text_add_request)
-        binding.tvOrderId.text = MyApplication.getInstance().dbHelper.getString(R.string.request_id)
-        binding.tvOrderValue.text = MyApplication.getInstance().dbHelper.getString(R.string.order_value)
-        binding.tvOrderDate.text = MyApplication.getInstance().dbHelper.getString(R.string.order_date)
-        binding.tvStatus.text = MyApplication.getInstance().dbHelper.getString(R.string.status)
-        binding.tvNoDataFound.text = MyApplication.getInstance().dbHelper.getString(R.string.no_request_found)
+        binding.tvReturnOrder.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.return_order)
+        binding.tvAddRequest.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_add_request)
+        binding.tvOrderId.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_id)
+        binding.tvOrderValue.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_value)
+        binding.tvOrderDate.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_date)
+        binding.tvStatus.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.status)
+        binding.tvNoDataFound.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_request_found)
     }
 
 

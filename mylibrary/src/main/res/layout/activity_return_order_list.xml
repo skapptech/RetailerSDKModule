@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.returnrefund.ReturnOrderListActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_offer"
@@ -40,4 +37,3 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
-</layout>

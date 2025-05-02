@@ -64,7 +64,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -118,10 +118,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mAutocompleteView.setOnItemClickListener(mAutocompleteClickListener);
         mBinding.toolbarMap.back.setVisibility(View.GONE);
 
-        mBinding.toolbarMap.title.setText(MyApplication.getInstance().dbHelper.getString(R.string.search_place));
-        mBinding.tvLoc.setText(MyApplication.getInstance().dbHelper.getString(R.string.location));
-        mBinding.googleplacesearch.setHint(MyApplication.getInstance().dbHelper.getString(R.string.Search_here));
-        mBinding.fabAdd.setHint(MyApplication.getInstance().dbHelper.getString(R.string.Confirm_Location));
+        mBinding.toolbarMap.title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_place));
+        mBinding.tvLoc.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.location));
+        mBinding.googleplacesearch.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Search_here));
+        mBinding.fabAdd.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Confirm_Location));
 
         isGPS = Utils.gpsPermission(this, "runtime");
 
@@ -172,7 +172,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     locationFlag = true;
                 }
             } else {
-                Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("please_enter_address"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("please_enter_address"), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -197,7 +197,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     break;
                 case Activity.RESULT_CANCELED:
                     // The user was asked to change settings, but chose not to
-                    Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("allow_location_access"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("allow_location_access"), Toast.LENGTH_LONG).show();
                     mGoogleApiClient.disconnect();
                     break;
                 default:
@@ -315,9 +315,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 finish();
                 Utils.rightTransaction(this);
             } else {
-                MyApplication.getInstance().clearLocalData();
-                MyApplication.getInstance().clearCartData();
-                MyApplication.getInstance().prefManager.setLoggedIn(true);
+                RetailerSDKApp.getInstance().clearLocalData();
+                RetailerSDKApp.getInstance().clearCartData();
+                RetailerSDKApp.getInstance().prefManager.setLoggedIn(true);
                 startActivity(new Intent(getApplicationContext(), SplashScreenActivity.class));
                 finish();
             }
@@ -378,7 +378,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Double.parseDouble(mLongitude), adress, ""), "map Section");
                     }
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("internet_connection"));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("internet_connection"));
                 }
             } else {
                 if (utils.isNetworkAvailable()) {
@@ -392,7 +392,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                         "", "", "", "", 0, ""), "Address ad lat long");
                     }
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("internet_connection"));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("internet_connection"));
                 }
             }
         } catch (Exception e) {
@@ -421,7 +421,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Utils.hideProgressDialog();
                 if (model.isStatus() && model.getCustomers() != null) {
                     CustomerResponse customer = model.getCustomers();
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getData("succesfullSubmitted"));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getData("succesfullSubmitted"));
                     SharePrefs.getInstance(getApplicationContext()).putInt(SharePrefs.CUSTOMER_ID, customer.customerId);
                     SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.SK_CODE, customer.getSkcode());
                     SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.MOBILE_NUMBER, customer.getMobile());

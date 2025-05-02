@@ -5,7 +5,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.HomeMenuHeaderModel
@@ -19,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.settings.S
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.target.CustomerSubCategoryTargetActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.agent.MyAgentActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ViewAnimationUtils
 
@@ -48,67 +47,67 @@ class HomeMenuAdapter(
             holder.mBinding.expandableIcon.visibility = View.GONE
         }
         if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.scale_up),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.scale_up),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ic_direct_udhar)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.direct_udhar),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.direct_udhar),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ic_direct_udhar)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.myOrder),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.myOrder),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.shopping_bag)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.my_target),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.goal)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.my_ledger),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_ledger),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ledger)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.more_tool),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.more_tool),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ic_new_setting)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.contact),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ic_contact_us)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.my_agents),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_agents),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.person_icon)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.help),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.help),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.help)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.refer_and_earn),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.refer_and_earn),
                 ignoreCase = true
             )
         ) {
             holder.mBinding.iconGroup.setImageResource(R.drawable.ic_share_button)
         } else if (list[position].title.equals(
-                MyApplication.getInstance().dbHelper.getString(R.string.setting),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.setting),
                 ignoreCase = true
             )
         ) {
@@ -125,99 +124,99 @@ class HomeMenuAdapter(
         holder.mBinding.lblListHeader.setOnClickListener {
             val intent: Intent
             if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.direct_udhar),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.direct_udhar),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("direct_udhaar_click")
+                RetailerSDKApp.getInstance().updateAnalytics("direct_udhaar_click")
                 activity.mDrawerLayout!!.closeDrawer(Gravity.START)
                 activity.callLeadApi(
                     EndPointPref.getInstance(activity).baseUrl +
                             "/api/Udhar/GenerateLead?CustomerId=[CustomerId]"
                 )
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.scale_up),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.scale_up),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("scaleUp_click")
+                RetailerSDKApp.getInstance().updateAnalytics("scaleUp_click")
                 activity.callScaleUpApi()
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.myOrder),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.myOrder),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("my_order_click")
+                RetailerSDKApp.getInstance().updateAnalytics("my_order_click")
                 intent = Intent(activity, MyOrderActivity::class.java)
                 activity.startActivity(intent)
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_target),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("target_click")
+                RetailerSDKApp.getInstance().updateAnalytics("target_click")
                 intent = Intent(activity, CustomerSubCategoryTargetActivity::class.java)
                 activity.startActivity(intent)
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_ledger),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_ledger),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("ledger_payment_click")
+                RetailerSDKApp.getInstance().updateAnalytics("ledger_payment_click")
                 intent = Intent(activity, LegerPaymentActivity::class.java)
                 activity.startActivity(intent)
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_agents),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_agents),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("my_agent_click")
+                RetailerSDKApp.getInstance().updateAnalytics("my_agent_click")
                 activity.startActivity(Intent(activity, MyAgentActivity::class.java))
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.more_tool),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.more_tool),
                     ignoreCase = true
                 )
             ) {
                 list[position].isOpen = !list[position].isOpen
                 notifyDataSetChanged()
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.contact),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("contact_us_click")
+                RetailerSDKApp.getInstance().updateAnalytics("contact_us_click")
                 activity.startActivity(
                     Intent(activity, ContactUsActivity::class.java)
                         .putExtra("Type", "ContactUsActivity")
                 )
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.refer_and_earn),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.refer_and_earn),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("refer_earn_click")
+                RetailerSDKApp.getInstance().updateAnalytics("refer_earn_click")
                 activity.startActivity(Intent(activity, ReferralActivity::class.java))
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.setting),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.setting),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("settings_click")
+                RetailerSDKApp.getInstance().updateAnalytics("settings_click")
                 activity.startActivity(Intent(activity, SettingActivity::class.java))
                 Utils.fadeTransaction(activity)
             } else if (list[position].title.equals(
-                    MyApplication.getInstance().dbHelper.getString(R.string.help),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.help),
                     ignoreCase = true
                 )
             ) {
-                MyApplication.getInstance().updateAnalytics("faq_click")
+                RetailerSDKApp.getInstance().updateAnalytics("faq_click")
                 activity.startActivity(Intent(activity, FaqActivity::class.java))
                 Utils.fadeTransaction(activity)
             }

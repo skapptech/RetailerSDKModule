@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AdapterInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import java.text.DecimalFormat
 
@@ -60,7 +60,7 @@ class MoqAdapter(
         price.text = "" + model.unitPrice
         tvMrp.text = "" + model.price
         tvPPrice.text = (SharePrefs.getInstance(context).getString(SharePrefs.PRIME_NAME)
-                + " " + MyApplication.getInstance().dbHelper.getData("price")
+                + " " + RetailerSDKApp.getInstance().dbHelper.getData("price")
                 + ": ₹" + DecimalFormat("##.##").format(model.primePrice))
         if (model.isPrimeItem) {
             liPrime.visibility = View.VISIBLE

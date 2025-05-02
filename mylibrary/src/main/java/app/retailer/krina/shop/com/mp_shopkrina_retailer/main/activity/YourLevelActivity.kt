@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnTargetLeve
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.YourLevelAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.YourLevelTargetModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -39,9 +39,9 @@ class YourLevelActivity : AppCompatActivity(), OnTargetLevelClick {
         mBinding!!.back.setOnClickListener { view: View? -> onBackPressed() }
         mBinding!!.rvYourLevel.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mBinding!!.title.hint = MyApplication.getInstance().dbHelper.getData("customer_level")
+        mBinding!!.title.hint = RetailerSDKApp.getInstance().dbHelper.getData("customer_level")
         mBinding!!.tvTargetHead.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.you_are_a_sk_customer)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_are_a_sk_customer)
         callYourLevel()
     }
 
@@ -63,32 +63,32 @@ class YourLevelActivity : AppCompatActivity(), OnTargetLevelClick {
     private fun viewData(position: Int, model: YourLevelTargetModel) {
         if (position == 0) {
             mBinding!!.tvTargetHead.text =
-                MyApplication.getInstance().dbHelper.getData("you_r_sk_customer")
+                RetailerSDKApp.getInstance().dbHelper.getData("you_r_sk_customer")
             mBinding!!.tvOrderCount.visibility = View.GONE
             mBinding!!.tvOrderValue.visibility = View.GONE
             mBinding!!.tvOrderBrandValue.visibility = View.GONE
             mBinding!!.tvOrderKKValue.visibility = View.GONE
         } else {
             mBinding!!.tvTargetHead.text =
-                MyApplication.getInstance().dbHelper.getData("level_following_task")
+                RetailerSDKApp.getInstance().dbHelper.getData("level_following_task")
             mBinding!!.tvOrderCount.visibility = View.VISIBLE
             mBinding!!.tvOrderValue.visibility = View.VISIBLE
             mBinding!!.tvOrderBrandValue.visibility = View.VISIBLE
             mBinding!!.tvOrderKKValue.visibility = View.VISIBLE
             mBinding!!.tvOrderCount.text =
-                MyApplication.getInstance().dbHelper.getData("place_minimum") + " " + model.orderCount + " " + MyApplication.getInstance().dbHelper.getData(
+                RetailerSDKApp.getInstance().dbHelper.getData("place_minimum") + " " + model.orderCount + " " + RetailerSDKApp.getInstance().dbHelper.getData(
                     "order_in_month"
                 )
             mBinding!!.tvOrderValue.text =
-                MyApplication.getInstance().dbHelper.getData("order_must_be") + " " + model.volume + MyApplication.getInstance().dbHelper.getData(
+                RetailerSDKApp.getInstance().dbHelper.getData("order_must_be") + " " + model.volume + RetailerSDKApp.getInstance().dbHelper.getData(
                     "in_this_month"
                 )
             mBinding!!.tvOrderBrandValue.text =
-                MyApplication.getInstance().dbHelper.getData("order_atleast") + " " + model.brandCount + " " + MyApplication.getInstance().dbHelper.getData(
+                RetailerSDKApp.getInstance().dbHelper.getData("order_atleast") + " " + model.brandCount + " " + RetailerSDKApp.getInstance().dbHelper.getData(
                     "different_brands"
                 )
             mBinding!!.tvOrderKKValue.text =
-                MyApplication.getInstance().dbHelper.getData("order_kisan_kirana") + model.kkVolume + "/-"
+                RetailerSDKApp.getInstance().dbHelper.getData("order_kisan_kirana") + model.kkVolume + "/-"
         }
     }
 

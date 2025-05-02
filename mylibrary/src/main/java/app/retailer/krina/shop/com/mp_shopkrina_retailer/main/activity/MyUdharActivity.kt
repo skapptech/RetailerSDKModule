@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyUdharBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.util.*
 
@@ -32,10 +32,10 @@ class MyUdharActivity : AppCompatActivity(), View.OnClickListener {
         val toolbarTittleTV = mBinding!!.toolbarMyUdhar.title
         incomeRateSP = mBinding!!.spIncomeRate
         val nextBT = mBinding!!.btNext
-        toolbarTittleTV.text = MyApplication.getInstance().dbHelper.getData("txt_My_Udhaar")
+        toolbarTittleTV.text = RetailerSDKApp.getInstance().dbHelper.getData("txt_My_Udhaar")
         mBinding!!.tvSelectIncome.text =
-            MyApplication.getInstance().dbHelper.getData("txt_Select_income")
-        mBinding!!.btNext.text = MyApplication.getInstance().dbHelper.getData("next")
+            RetailerSDKApp.getInstance().dbHelper.getData("txt_Select_income")
+        mBinding!!.btNext.text = RetailerSDKApp.getInstance().dbHelper.getData("next")
         toolBarBackLL.setOnClickListener(this)
         nextBT.setOnClickListener(this)
         incomeSetData()
@@ -67,7 +67,7 @@ class MyUdharActivity : AppCompatActivity(), View.OnClickListener {
         if (incomeRateSt.equals("Please Select", ignoreCase = true)) {
             Utils.setToast(
                 this,
-                MyApplication.getInstance().dbHelper.getData("Please_Select_Annual")
+                RetailerSDKApp.getInstance().dbHelper.getData("Please_Select_Annual")
             )
         } else {
             startActivity(

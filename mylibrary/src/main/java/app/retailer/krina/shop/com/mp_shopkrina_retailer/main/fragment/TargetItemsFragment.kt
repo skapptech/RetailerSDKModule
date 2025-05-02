@@ -20,14 +20,14 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.TargetResponseMo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
 class TargetItemsFragment : Fragment(), SearchInterface {
     private lateinit var mBinding: FragmentTargetItemsBinding
     private lateinit var activity: TargetOrderListActivity
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
 
     private val mList = ArrayList<ItemListModel>()
     var itemListAdapter: TargetItemListAdapter? = null
@@ -214,6 +214,6 @@ class TargetItemsFragment : Fragment(), SearchInterface {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as TargetOrderListActivity
-        appCtx = activity.application as MyApplication
+        appCtx = activity.application as RetailerSDKApp
     }
 }

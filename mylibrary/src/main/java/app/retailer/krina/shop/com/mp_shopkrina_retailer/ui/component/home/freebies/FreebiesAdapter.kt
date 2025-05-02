@@ -33,7 +33,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.CategoryItemOrderInf
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -82,20 +82,20 @@ class FreebiesAdapter(
         val model = list!![position]
         //set String
         viewHolder.mBinding.tvMrpText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_mrp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp)
         viewHolder.mBinding.tvRemainingQtyText.text =
-            MyApplication.getInstance().dbHelper.getString(
+            RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.remaining_qty
             ) + " "
         viewHolder.mBinding.tvItemLeftText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_left)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left)
         viewHolder.mBinding.tvEndInText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.end_in_text)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.end_in_text)
         viewHolder.mBinding.tvFreeItemNotActiveText.text =
-            MyApplication.getInstance().dbHelper.getString(
+            RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.inactive_customer_msg
             )
-        viewHolder.btnAdd.text = MyApplication.getInstance().dbHelper.getString(R.string.add_btn)
+        viewHolder.btnAdd.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn)
 
         // set MOQ
         if (model.moqList != null && model.moqList.size > 0) {
@@ -106,9 +106,9 @@ class FreebiesAdapter(
             viewHolder.tvMultiMoq.visibility = View.GONE
         }
         viewHolder.mBinding.tvMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         viewHolder.tvMultiMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         if (!TextUtils.isNullOrEmpty(model.scheme)) {
             viewHolder.mBinding.tvSchemeText.visibility = View.VISIBLE
             viewHolder.mBinding.tvSchemeText.text = "" + model.scheme
@@ -168,11 +168,11 @@ class FreebiesAdapter(
             val ivClose = dialogLayout.findViewById<ImageView>(R.id.ivClose)
             ivClose.setOnClickListener { v1: View? -> dialog.dismiss() }
             tvDSelectQty.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for)
-            tvDMoq.text = MyApplication.getInstance().dbHelper.getString(R.string.moq)
-            tvDMrp.text = MyApplication.getInstance().dbHelper.getString(R.string.mrp)
-            tvDRs.text = MyApplication.getInstance().dbHelper.getString(R.string.rs)
-            tvDMargin.text = MyApplication.getInstance().dbHelper.getString(R.string.margins_d)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for)
+            tvDMoq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq)
+            tvDMrp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp)
+            tvDRs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs)
+            tvDMargin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d)
             val mMoqPriceList = dialogLayout.findViewById<ListView>(R.id.listview_moq_price)
             item_name.text = model.itemname
             val listener = AdapterInterface { pos ->
@@ -230,13 +230,13 @@ class FreebiesAdapter(
     }
 
     private fun addRemoveFav(model: ItemListModel, viewHolder: ViewHolder) {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
-            MyApplication.getInstance().noteRepository.deleteTask(model)
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(model)
             Utils.addFav(model.itemId.toString().toInt(), false, activity)
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
-            MyApplication.getInstance().noteRepository.insertTask(model)
+            RetailerSDKApp.getInstance().noteRepository.insertTask(model)
             Utils.addFav(model.itemId.toString().toInt(), true, activity)
         }
     }
@@ -244,7 +244,7 @@ class FreebiesAdapter(
     private fun setValueInUI(viewHolder: ViewHolder, model: ItemListModel) {
         flashOfferFlag = false
         // check item in wishList
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.itemId)) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.itemId)) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
@@ -265,9 +265,9 @@ class FreebiesAdapter(
                 // String[] spItemName = moqPojoArrayList.get(0).getItemname().split("(?<=\\D)(?=\\d)");
                 val spItemName = model.itemname
                 val freeOfferTextBuy =
-                    "<font color=#fe4e4e>" + MyApplication.getInstance().dbHelper.getString(
+                    "<font color=#fe4e4e>" + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.buy
-                    ) + "&nbsp;" + model.offerMinimumQty + "&nbsp;" + MyApplication.getInstance().dbHelper.getString(
+                    ) + "&nbsp;" + model.offerMinimumQty + "&nbsp;" + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.pcs
                     ) + "&nbsp;</font>" + "<font color=#000000>&nbsp;" + spItemName + " </font>"
                 var freeOfferTextGet = ""
@@ -278,19 +278,19 @@ class FreebiesAdapter(
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeItemIV.setBackgroundResource(R.drawable.ic_gift_bg)
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(
+                            RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.Dp
                             )
                         val sfreewalletDP = DecimalFormat("##.##").format(model.offerWalletPoint)
                         freeOfferTextGet =
-                            ("<font color=#fe4e4e>" + MyApplication.getInstance().dbHelper.getString(
+                            ("<font color=#fe4e4e>" + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.get
                             )
-                                    + "&nbsp;" + sfreewalletDP + "&nbsp;" + MyApplication.getInstance().dbHelper.getString(
+                                    + "&nbsp;" + sfreewalletDP + "&nbsp;" + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.free
                             )
                                     + "</font>" + "<font color=#000000>&nbsp;" +
-                                    MyApplication.getInstance().dbHelper.getString(R.string.dream_points) + "</font>")
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.dream_points) + "</font>")
                     }
 
                     "ItemMaster" -> {
@@ -303,14 +303,14 @@ class FreebiesAdapter(
                         }
                         viewHolder.freeItemQutTV.text = "0"
                         viewHolder.freeDepePointTV.text =
-                            MyApplication.getInstance().dbHelper.getString(
+                            RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.free
                             )
                         // String[] spItemFreeItemName = moqPojoArrayList.get(0).getOfferFreeItemName().split("(?<=\\D)(?=\\d)");
                         freeOfferTextGet =
-                            "<font color=#fe4e4e>" + MyApplication.getInstance().dbHelper.getString(
+                            "<font color=#fe4e4e>" + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.get
-                            ) + "&nbsp;" + model.offerFreeItemQuantity + "&nbsp;" + MyApplication.getInstance().dbHelper.getString(
+                            ) + "&nbsp;" + model.offerFreeItemQuantity + "&nbsp;" + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.free
                             ) + " </font>" + "<font color=#000000>&nbsp;" + model.offerFreeItemName + " </font>"
                     }
@@ -380,7 +380,7 @@ class FreebiesAdapter(
             val sPRICE =
                 "| <font color=#FF4500>&#8377; " + DecimalFormat("##.##").format(model.unitPrice) + "</font>"
             val sMargin =
-                MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                     "##.##"
                 ).format(
                     model.marginPoint!!.toDouble()
@@ -392,13 +392,13 @@ class FreebiesAdapter(
             viewHolder.tvPrice.text = Html.fromHtml(sPRICE)
             viewHolder.tvMargin.text = sMargin
             viewHolder.tvDreamPoint.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp) + " " + model.dreamPoint
             // set prime item price
             if (model.isPrimeItem) {
                 viewHolder.mBinding.liPrime.visibility = View.VISIBLE
                 viewHolder.mBinding.tvPPrice.text =
                     (SharePrefs.getInstance(activity).getString(SharePrefs.PRIME_NAME)
-                            + " " + MyApplication.getInstance().dbHelper.getString(R.string.price)
+                            + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.price)
                             + ": ₹" + DecimalFormat("##.##").format(model.primePrice))
                 viewHolder.mBinding.tvPrice.setTextColor(activity.resources.getColor(R.color.grey))
             } else {
@@ -424,11 +424,11 @@ class FreebiesAdapter(
                     0
                 )
             }
-            val cartModel = MyApplication.getInstance().noteRepository.getItemByMrpId(
+            val cartModel = RetailerSDKApp.getInstance().noteRepository.getItemByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
-            val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+            val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -724,7 +724,7 @@ class FreebiesAdapter(
         add: Boolean
     ): Boolean {
         var addFlag = addFlag
-        val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+        val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
             model.itemId,
             model.itemMultiMRPId
         )
@@ -742,9 +742,9 @@ class FreebiesAdapter(
         if (add) {
             if (total + itemQuantity > itemlimitqty) {
                 Utils.setToast(
-                    activity, (MyApplication.getInstance().dbHelper.getString(R.string.additemToast)
+                    activity, (RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast)
                             + " " + model.itemLimitQty) + " " +
-                            MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2)
                 )
             } else {
                 if (model.billLimitQty != 0) {
@@ -783,7 +783,7 @@ class FreebiesAdapter(
     ): Boolean {
         var addFlag = addFlag
         try {
-            val total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(
+            val total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -793,7 +793,7 @@ class FreebiesAdapter(
                 if (total + itemQuantity > itemlimitqty) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                     )
                 } else {
                     viewHolder.tvselectedItemQuantity.text = "" + itemQuantity
@@ -804,7 +804,7 @@ class FreebiesAdapter(
                     if (itemQuantity > model.billLimitQty) {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                         )
                     } else {
                         viewHolder.tvselectedItemQuantity.text = "" + itemQuantity

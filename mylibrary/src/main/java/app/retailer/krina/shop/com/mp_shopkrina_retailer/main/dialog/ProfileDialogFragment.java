@@ -21,7 +21,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.EditProfi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.StoryBordSharePrefs;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 
 public class ProfileDialogFragment extends DialogFragment {
     private HomeActivity activity;
@@ -74,11 +74,11 @@ public class ProfileDialogFragment extends DialogFragment {
         Button cancelBtn = view.findViewById(R.id.cancel_btn);
 
         if (criticalInfoMissMSG.startsWith("Your Critical info")) {
-            tvTitle.setText(MyApplication.getInstance().dbHelper.getString(R.string.critical_info_msg));
+            tvTitle.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.critical_info_msg));
         } else {
             tvTitle.setText(criticalInfoMissMSG);
         }
-        tvInfo.setText(MyApplication.getInstance().dbHelper.getString(R.string.please_update_your_information));
+        tvInfo.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_update_your_information));
 
         okBtn.setOnClickListener(v -> {
             dismiss();
@@ -99,7 +99,7 @@ public class ProfileDialogFragment extends DialogFragment {
 
         getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         // update analytic
-        MyApplication.getInstance().updateAnalytics("criticalInfoDialog");
+        RetailerSDKApp.getInstance().updateAnalytics("criticalInfoDialog");
 
         getDialog().setCancelable(false);
     }

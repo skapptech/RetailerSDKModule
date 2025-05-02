@@ -36,7 +36,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.store
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -259,7 +259,7 @@ public class JavaScriptInterface {
 
     private void callProductDetailApi(int itemId) {
         Utils.showProgressDialog(activity);
-        CommonClassForAPI.getInstance(MyApplication.getInstance().activity).fetchProductDetails(productDetailObserver, itemId,
+        CommonClassForAPI.getInstance(RetailerSDKApp.getInstance().activity).fetchProductDetails(productDetailObserver, itemId,
                 SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID),
                 SharePrefs.getInstance(activity).getInt(SharePrefs.WAREHOUSE_ID),
                 LocaleHelper.getLanguage(activity));
@@ -313,7 +313,7 @@ public class JavaScriptInterface {
                 intent.putExtra("NUMBER", response.getItemNumber());
                 intent.putExtra("ItemMultiMRPId", response.getItemMultiMRPId());
                 args.putSerializable("ITEM_LIST", response);
-                ItemListModel model = MyApplication.getInstance().noteRepository.getCartItem1(response.getItemId());
+                ItemListModel model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(response.getItemId());
                 if (response.isItemLimit && model != null) {
                     intent.putExtra("remainingqty", model.getItemLimitQty() - model.qty);
                 }

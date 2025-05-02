@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMaintainanceBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class MaintenanceActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMaintainanceBinding
@@ -21,10 +21,10 @@ class MaintenanceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_maintainance)
         mBinding.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.under_maintenance)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.under_maintenance)
         mBinding.tvPreparing.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.we_are_preparing_to_serve_you_better)
-        mBinding.retry.text = MyApplication.getInstance().dbHelper.getString(R.string.retry)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.we_are_preparing_to_serve_you_better)
+        mBinding.retry.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.retry)
         mBinding.retry.setOnClickListener { closeScreen() }
     }
 

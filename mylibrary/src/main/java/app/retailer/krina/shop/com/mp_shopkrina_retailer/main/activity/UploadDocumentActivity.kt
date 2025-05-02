@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityUploadDocumentBinding
@@ -39,9 +38,7 @@ import com.google.gson.Gson
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -85,7 +82,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
             panCardImagePath = intent.getStringExtra("CustomerDocUpload")
             genderString = intent.getStringExtra("genderString")
         }
-        if (!MyApplication.getInstance().CHECK_FROM_COME) {
+        if (!RetailerSDKApp.getInstance().CHECK_FROM_COME) {
             initView()
             incomeSetData()
         } else {
@@ -104,7 +101,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getData("please_select_document_type"),
+                        RetailerSDKApp.getInstance().dbHelper.getData("please_select_document_type"),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -153,7 +150,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getData("failed_to_capture_picture"),
+                        RetailerSDKApp.getInstance().dbHelper.getData("failed_to_capture_picture"),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -174,7 +171,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getData("failed_to_capture_picture"),
+                        RetailerSDKApp.getInstance().dbHelper.getData("failed_to_capture_picture"),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -227,7 +224,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         toolBarBackLL = mBinding.toolbarUploadDocument.back
         toolbarTittleTV = mBinding.toolbarUploadDocument.title
         toolbarTittleTV!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Address_Proof)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Address_Proof)
         toolBarBackLL!!.setOnClickListener(this)
         mBinding.btNext.setOnClickListener(this)
         mBinding.rlUploadPanTxt.setOnClickListener(this)
@@ -309,16 +306,16 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         toolBarBackLL = mBinding.toolbarUploadDocument.back
         toolbarTittleTV = mBinding.toolbarUploadDocument.title
         toolbarTittleTV!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Address_Proof)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Address_Proof)
         mBinding.tvUploadPan.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_any_other_doc)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_any_other_doc)
         mBinding.tvUplodText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Document)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Document)
         mBinding.txtBck.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Document_back)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Document_back)
         mBinding.tvUplodTextBack.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Document_back)
-        mBinding.btNext.text = MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Document_back)
+        mBinding.btNext.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         mBinding.toolbarUploadDocument.back.setOnClickListener(this)
         mBinding.btNext.setOnClickListener(this)
         mBinding.rlUploadPanTxt.setOnClickListener(this)
@@ -355,7 +352,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                 )
             }
         }
@@ -369,10 +366,10 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         val tvThanksHead = dialog.findViewById<TextView>(R.id.tvThanksHead)
         val tvYouWillReceive = dialog.findViewById<TextView>(R.id.tvYouWillReceive)
         tvThanksHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.thanks_for_uploading)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.thanks_for_uploading)
         tvYouWillReceive.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.receive_form_as_eligibility_verified)
-        OkTv.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.receive_form_as_eligibility_verified)
+        OkTv.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         dialog.setCancelable(false)
         OkTv.setOnClickListener { v: View? ->
             startActivity(Intent(applicationContext, HomeActivity::class.java))
@@ -391,10 +388,10 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         val gallery = dialog.findViewById<TextView>(R.id.gallery)
         val Cancel = dialog.findViewById<TextView>(R.id.liCancel)
         val tvAddPhotoHead = dialog.findViewById<TextView>(R.id.tvAddPhotoHead)
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener { v: View? ->
             callForImage(CAPTURE_IMAGE_CAMERA)
             dialog.dismiss()
@@ -416,10 +413,10 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
         val gallery = dialog.findViewById<TextView>(R.id.gallery)
         val Cancel = dialog.findViewById<TextView>(R.id.liCancel)
         val tvAddPhotoHead = dialog.findViewById<TextView>(R.id.tvAddPhotoHead)
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener { v: View? ->
             callForImageBack(CAPTURE_IMAGE_CAMERA_BACK)
             dialog.dismiss()
@@ -715,7 +712,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
                     e.printStackTrace()
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
                     )
                 }
             }
@@ -725,7 +722,7 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
                 Utils.hideProgressDialog()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
                 )
             }
 

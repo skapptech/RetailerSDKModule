@@ -18,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 import java.util.*
@@ -81,14 +81,14 @@ class SubCategoryItemListFragment : Fragment() {
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             homeActivity!!,
             this.javaClass.simpleName,
             null
@@ -120,7 +120,7 @@ class SubCategoryItemListFragment : Fragment() {
             )
         mBinding.rvCategoryItem.adapter = itemListAdapter
         mBinding.txtNoDataFound.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Data_not_found)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Data_not_found)
     }
 
     inner class ComparatorOfNumericString : Comparator<ItemListModel> {

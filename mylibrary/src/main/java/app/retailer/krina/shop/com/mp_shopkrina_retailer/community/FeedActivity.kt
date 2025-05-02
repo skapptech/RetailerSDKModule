@@ -54,7 +54,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ProgressDialog
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -125,7 +125,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         super.onPostCreate(savedInstanceState)
         randomNumber = (0..10).random()
 
-        MyApplication.getInstance().noteRepository.fetchAllFeeds().observe(this) {
+        RetailerSDKApp.getInstance().noteRepository.fetchAllFeeds().observe(this) {
             if (feedList != null && feedList!!.isNotEmpty()) {
                 feedList?.clear()
                 feedList?.addAll(it)
@@ -145,8 +145,8 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
     override fun onResume() {
         super.onResume()
         try {
-            MyApplication.getInstance().mixpanel.timeEvent("feedExit")
-            MyApplication.getInstance().updateAnalytics("feedView")
+            RetailerSDKApp.getInstance().mixpanel.timeEvent("feedExit")
+            RetailerSDKApp.getInstance().updateAnalytics("feedView")
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -158,15 +158,15 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
 
     override fun onDestroy() {
         super.onDestroy()
-        MyApplication.getInstance().updateAnalytics("feedExit")
+        RetailerSDKApp.getInstance().updateAnalytics("feedExit")
     }
 
 
     private fun init() {
         mBinding.tvBrandStore.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.brand_store)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.brand_store)
         mBinding.tvSellerStore.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.seller_store)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.seller_store)
 
         val repository = FeedRepository(RestClient.getInstance4().service4)
         feedViewModel = ViewModelProvider(this, FeedFactory(repository))[FeedViewModel::class.java]
@@ -194,8 +194,8 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
             //analysis
             analyticPost.eventName = "notificationClick"
             analyticPost.source = "Feed"
-            MyApplication.getInstance().mixpanel.timeEvent("notificationClickExit")
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().mixpanel.timeEvent("notificationClickExit")
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         }
         mBinding.profileImage.setOnClickListener {
             profileActivity("icon")
@@ -203,7 +203,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         mBinding.createPostFB.setOnClickListener {
             analyticPost.eventName = "newPostClick"
             analyticPost.source = "feedScreen"
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
             startActivity(
                 Intent(
                     applicationContext, SelectPostTypeActivity::class.java
@@ -393,7 +393,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
                     ProgressDialog.getInstance().dismiss()
                     if (it.data.status) {
                         val followingResponceModel: FollowingResponceModel = it.data
-                        MyApplication.getInstance().noteRepository.followUpdate(
+                        RetailerSDKApp.getInstance().noteRepository.followUpdate(
                             followingResponceModel.res.followeeId.toInt(), true
                         )
                     }
@@ -509,20 +509,20 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
                     "" /*  R.id.search -> return "loadFragment(SearchFragment())"*/
                     analyticPost.eventName = "navBarClick"
                     analyticPost.section = "home"
-                    MyApplication.getInstance().updateAnalytics(analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
                 }
 
                 R.id.notifications -> {
                     getCurrentLatLong()
                     analyticPost.eventName = "navBarClick"
                     analyticPost.section = "notifications"
-                    MyApplication.getInstance().updateAnalytics(analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
                 }
 
                 R.id.profile -> {
                     analyticPost.eventName = "navBarClick"
                     analyticPost.section = "profile"
-                    MyApplication.getInstance().updateAnalytics(analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
                     profileActivity("navbar")
                 }
             }
@@ -684,13 +684,13 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         analyticPost.postId = postId
         analyticPost.postType = postType
         analyticPost.source = "feed"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun openComments(model: FeedPostModel) {
 //        if (this::commentListDialog.isInitialized && commentListDialog.isShowing)
 //            commentListDialog.dismiss()
-        MyApplication.getInstance().isCommentOpen = true
+        RetailerSDKApp.getInstance().isCommentOpen = true
         CommentDialog.newInstance(model).show(supportFragmentManager, "a")
     }
 
@@ -745,7 +745,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         analyticPost.likeCount = model.likeCount
         analyticPost.postType = model.postType
         analyticPost.commentCount = model.commentCount
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     private fun getLocalBitmapUri(bitmap: Bitmap?): Uri? {
@@ -805,7 +805,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
         analyticPost.postType = feedModel.postType
         analyticPost.likeCount = feedModel.likeCount
         analyticPost.commentCount = feedModel.commentCount
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun editPost(feeModel: FeedPostModel) {
@@ -858,7 +858,7 @@ class FeedActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeUser
             analyticPost.eventName = "deletePost"
             analyticPost.postId = feedModel.postId
             analyticPost.postType = feedModel.postType
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         }
         alertDialog.show()
     }

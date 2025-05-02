@@ -32,7 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemL
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.searchItem.SearchItemFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.reactivex.observers.DisposableObserver
@@ -122,7 +122,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
             shortBottomDialog.setContentView(mFilterDialogBinding.root)
 
             mFilterDialogBinding.tvSort.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.sort_by)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.sort_by)
 
             mFilterDialogBinding.llcolse.setOnClickListener {
                 shortBottomDialog.dismiss()
@@ -179,7 +179,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             homeActivity!!,
             this.javaClass.simpleName,
             null
@@ -255,11 +255,11 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         utils = Utils(activity)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
         homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
-        mBinding!!.filterSort.text = MyApplication.getInstance().dbHelper.getString(R.string.sort)
+        mBinding!!.filterSort.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.sort)
         mBinding!!.noItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.items_not_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.items_not_available)
         mBinding!!.DataNotFound.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Data_not_found)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Data_not_found)
 
         mBinding!!.rvSubSubCategory.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -325,7 +325,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
                 layoutHideUnHide(false)
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_data_available)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_data_available)
                 )
             }
         } else {
@@ -351,7 +351,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -361,57 +361,57 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
         filterList.clear()
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.margins),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.margins),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_low_to_high),
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_low_to_high),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_low_to_high),
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_low_to_high),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 false
             )
         )
@@ -425,7 +425,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
             mBinding.rvCategoryItem.visibility = View.VISIBLE
         } else {
             mBinding.filterTitle.text =
-                "0 " + MyApplication.getInstance().dbHelper.getData("Items")
+                "0 " + RetailerSDKApp.getInstance().dbHelper.getData("Items")
             mBinding.noItems.visibility = View.VISIBLE
             mBinding.rvCategoryItem.visibility = View.GONE
         }
@@ -442,7 +442,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
             layoutHideUnHide(false)
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.no_data_available)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_data_available)
             )
         }
     }
@@ -537,7 +537,7 @@ class NewSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface,
                         }
                         if (list.size != 0) {
                             mBinding!!.filterTitle.text =
-                                list.size.toString() + " " + MyApplication.getInstance().dbHelper.getString(
+                                list.size.toString() + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.Items
                                 )
                             itemListAdapter = ItemListAdapter(homeActivity!!, list)

@@ -28,7 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Mobil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.orderdetail.OrderSummaryActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
@@ -38,7 +38,7 @@ class MyOrderActivity : AppCompatActivity(), OnButtonClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!MyApplication.getInstance().prefManager.isLoggedIn) {
+        if (!RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
             finish()
         }
@@ -155,7 +155,7 @@ class MyOrderActivity : AppCompatActivity(), OnButtonClick {
 
     private fun init() {
         mBinding.toolbarOrderDetails.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.myOrder)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.myOrder)
         mBinding.toolbarOrderDetails.back.setOnClickListener { onBackPressed() }
 
         setupViewPager(mBinding.viewPager)
@@ -173,15 +173,15 @@ class MyOrderActivity : AppCompatActivity(), OnButtonClick {
 
         adapter.addFragment(
             AllOrderFragment.newInstance("live"),
-            MyApplication.getInstance().dbHelper.getString(R.string.live_order)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.live_order)
         )
         adapter.addFragment(
             AllOrderFragment.newInstance("completed"),
-            MyApplication.getInstance().dbHelper.getString(R.string.over)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.over)
         )
         adapter.addFragment(
             AllOrderFragment.newInstance("PayLater"),
-            MyApplication.getInstance().dbHelper.getString(R.string.paylater_order)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.paylater_order)
         )
         viewPager.adapter = adapter
     }

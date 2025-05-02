@@ -20,13 +20,10 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemFeedVid
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemPollViewBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemSingleImageBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin.Companion.isValidUrl
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin.Companion.setResizableText
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
 
 class FeedAdapter(
     private var context: Context,

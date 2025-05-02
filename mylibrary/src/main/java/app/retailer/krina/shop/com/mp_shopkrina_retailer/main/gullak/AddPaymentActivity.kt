@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
@@ -35,7 +34,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AvenuesParams
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -48,9 +47,6 @@ import io.reactivex.observers.DisposableObserver
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.DecimalFormat
-import java.util.Random
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 
 class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
     PaymentResultWithDataListener {
@@ -79,7 +75,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_payment)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.gullak_balance)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.gullak_balance)
 
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
@@ -187,7 +183,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                             )
                         }
                     } else {
@@ -212,7 +208,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                             )
                         }
                     }
@@ -250,7 +246,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                 )
             }
         }
@@ -304,7 +300,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             } catch (e: Exception) {
@@ -348,7 +344,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -378,10 +374,10 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         amount = binding.tiAmount.editText?.text.toString().trim()
         if (TextUtils.isNullOrEmpty(amount)) {
             binding.tiAmount.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.amount_required)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount_required)
         } else if (amount.toDouble() < 1) {
             binding.tiAmount.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.amount_greater_than_zero)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount_greater_than_zero)
         } else {
             binding.tiAmount.isErrorEnabled = false
             Utils.showProgressDialog(this)
@@ -431,7 +427,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -490,13 +486,13 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun initViews() {
         binding.tvAddPayment.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_payment_to_gullak)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_payment_to_gullak)
         binding.btnHDFC.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_payment_to_gullak)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_payment_to_gullak)
         binding.tvGullakTerms.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.gullak_money_cannot_be_transferred)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.gullak_money_cannot_be_transferred)
         binding.btnRazorpy.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_from_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_from_razorpay)
 
         sharePrefs = SharePrefs(applicationContext)
         commonAPICall = CommonClassForAPI.getInstance(this)
@@ -636,7 +632,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                         )
                     }
                 } catch (e: java.lang.Exception) {
@@ -706,7 +702,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.text_some_error_occured)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_some_error_occured)
                     )
                 }
             }
@@ -717,7 +713,7 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
                 hideProgressDialog()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_response)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_response)
                 )
             }
 

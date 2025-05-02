@@ -18,7 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.widget.ImageView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,7 +73,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.viewHolder.BannerHolder
@@ -219,13 +218,13 @@ class HomeAdapter(
         when (vh.itemViewType) {
             PAGER_TYPE -> {
                 (vh as ViewPagerViewHolder).mBinding.liMenu.tvCategory.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.clearance)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.clearance)
                 vh.mBinding.liMenu.tvFreebie.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.freebies)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.freebies)
                 vh.mBinding.liMenu.tvTrade.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.trade_offers)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.trade_offers)
                 vh.mBinding.liMenu.tvTarget.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_target)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_target)
                 vh.mBinding.pager.setSliderAdapter(vh.sliderAdapterExample)
                 vh.sliderAdapterExample.setData(
                     homeDataList[position]
@@ -288,17 +287,17 @@ class HomeAdapter(
 
             SECTION_TYPE -> {
                 (vh as RecyclerViewHolder).mBinding.liMenu.tvCategory.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.clearance)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.clearance)
                 vh.mBinding.liMenu.tvFreebie.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.freebies)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.freebies)
                 vh.mBinding.liMenu.tvTrade.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.trade_offers)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.trade_offers)
                 vh.mBinding.liMenu.tvTarget.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_target)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_target)
                 var listSizeItem = homeDataModel.appItemsList?.size
                 vh.mBinding.btnLoadMore.visibility = View.GONE
                 vh.mBinding.btnLoadMore.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.load_more)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.load_more)
                 if (homeDataModel.headerTextSize > 2) {
                     vh.mBinding.title.textSize = homeDataModel.headerTextSize.toFloat()
                 } else {
@@ -370,7 +369,7 @@ class HomeAdapter(
 
             ITEM_TYPE -> {
                 (vh as ItemViewHolder).mBinding.btnLoadMore.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.load_more)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.load_more)
                 vh.mBinding.title.text = homeDataModel.sectionName
                 vh.mBinding.titleHz.text = homeDataModel.sectionName
                 vh.mBinding.ivHeader.visibility = View.VISIBLE
@@ -471,7 +470,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("appHome_loadMore_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -487,7 +486,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("appHome_item_viewAll_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -500,7 +499,7 @@ class HomeAdapter(
 
             OTHER_TYPE -> {
                 (vh as ItemViewHolder).mBinding.btnLoadMore.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.load_more)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.load_more)
                 vh.mBinding.title.text = homeDataModel.sectionName
                 vh.mBinding.titleHz.text = homeDataModel.sectionName
                 vh.mBinding.ivHeader.visibility = View.VISIBLE
@@ -563,7 +562,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("app_home_load_more_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -581,7 +580,7 @@ class HomeAdapter(
                     analyticPost.sectionName = homeDataModel.sectionName
                     analyticPost.url = homeDataModel.webViewUrl
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("appHome_other_viewAll_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -628,7 +627,7 @@ class HomeAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("app_home_flash_more_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -670,11 +669,11 @@ class HomeAdapter(
 
             CART -> {
                 (vh as CartHolder).mBinding.btnViewAll.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.view_all)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.view_all)
                 vh.mBinding.tvTotalH.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.txt_total_amount)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_total_amount)
                 vh.mBinding.btnCheckout.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.checkout)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkout)
                 vh.mBinding.tvTitle.text = homeDataModel.sectionName
                 if (!TextUtils.isNullOrEmpty(homeDataModel.tileHeaderBackgroundImage)) {
                     Picasso.get().load(homeDataModel.tileHeaderBackgroundImage)
@@ -696,7 +695,7 @@ class HomeAdapter(
                 if (homeDataModel.sequence > 1) {
                     vh.mBinding.tvTotalItems.visibility = View.VISIBLE
                     vh.mBinding.tvTotalItems.text =
-                        "+" + (homeDataModel.sequence - 1) + " " + MyApplication.getInstance().dbHelper.getString(
+                        "+" + (homeDataModel.sequence - 1) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.more_items
                         )
                 } else {
@@ -711,7 +710,7 @@ class HomeAdapter(
                 }
                 vh.mBinding.btnCheckout.setOnClickListener {
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics("app_home_checkout_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_checkout_click")
                     activity.startActivity(Intent(activity, ShoppingCartActivity::class.java))
                     Utils.leftTransaction(
                         activity
@@ -725,7 +724,7 @@ class HomeAdapter(
                 if (homeDataModel.appItemsList!!.size > 3) {
                     vh.mBinding.btnViewAll.visibility = View.VISIBLE
                     vh.mBinding.btnViewAll.text =
-                        ("+" + (homeDataModel.appItemsList!!.size - 3) + " " + MyApplication.getInstance().dbHelper.getString(
+                        ("+" + (homeDataModel.appItemsList!!.size - 3) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.more_items
                         ))
                 } else {
@@ -826,13 +825,13 @@ class HomeAdapter(
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.ivCategories -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_clearance_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_clearance_click")
                     //  activity.pushFragments(HomeCategoryFragment.newInstance(), false, true, null);
                     activity.startActivity(Intent(activity, ClearanceActivity::class.java))
                 }
 
                 R.id.ivFreebiesOffer -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_freebie_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_freebie_click")
                     activity.startActivity(Intent(activity, FreebiesOfferActivity::class.java))
                     Utils.fadeTransaction(
                         activity
@@ -840,12 +839,12 @@ class HomeAdapter(
                 }
 
                 R.id.ivTradeOffer -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_trade_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_trade_click")
                     activity.pushFragments(TradeOfferFragment.newInstance(), false, true, null)
                 }
 
                 R.id.liMyTarget -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_target_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_target_click")
                     activity.startActivity(
                         Intent(
                             activity, CustomerSubCategoryTargetActivity::class.java
@@ -874,13 +873,13 @@ class HomeAdapter(
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.ivCategories -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_clearance_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_clearance_click")
 //                    activity.pushFragments(HomeCategoryFragment.newInstance(), false, true, null);
                     activity.startActivity(Intent(activity, ClearanceActivity::class.java))
                 }
 
                 R.id.ivFreebiesOffer -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_freebie_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_freebie_click")
                     activity.startActivity(Intent(activity, FreebiesOfferActivity::class.java))
                     Utils.fadeTransaction(
                         activity
@@ -888,12 +887,12 @@ class HomeAdapter(
                 }
 
                 R.id.ivTradeOffer -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_trade_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_trade_click")
                     activity.pushFragments(TradeOfferFragment.newInstance(), false, true, null)
                 }
 
                 R.id.liMyTarget -> {
-                    MyApplication.getInstance().updateAnalytics("app_home_target_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("app_home_target_click")
                     activity.startActivity(
                         Intent(
                             activity, CustomerSubCategoryTargetActivity::class.java
@@ -1214,7 +1213,7 @@ class HomeAdapter(
                                 )
                             }
                             // update analytics
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_basCat_click", analyticPost)
                         }
 
@@ -1276,7 +1275,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_brand_click", analyticPost)
                         }
 
@@ -1328,7 +1327,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_category_click", analyticPost)
                         }
 
@@ -1392,7 +1391,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_subCat_click", analyticPost)
                         }
 
@@ -1485,7 +1484,7 @@ class HomeAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_default_click", analyticPost)
                         }
 
@@ -1538,7 +1537,7 @@ class HomeAdapter(
                                     )
                                 }
                             }
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalytics("appHome_default_click", analyticPost)
                         }
                     }

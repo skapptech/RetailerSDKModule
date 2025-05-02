@@ -18,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.RefConfigA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReferralConfigModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReferredModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.reactivex.observers.DisposableObserver
@@ -40,7 +40,7 @@ class ReferralActivity : AppCompatActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_referral)
         supportActionBar?.elevation = 0F
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.refer_and_earn)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.refer_and_earn)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,7 @@ class ReferralActivity : AppCompatActivity(), View.OnClickListener {
                 else
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().noteRepository.getString(R.string.no_history_available)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.no_history_available)
                     )
             }
             R.id.btnShare -> {
@@ -92,25 +92,25 @@ class ReferralActivity : AppCompatActivity(), View.OnClickListener {
 
     fun init() {
         binding.tvReferralDoubleH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.referral_double_dhamaka)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.referral_double_dhamaka)
         binding.tvReferEarnH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.refer_your_friends_earn_rewards)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.refer_your_friends_earn_rewards)
         binding.tvCodeH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.referral_code)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.referral_code)
         binding.tvTotalRefH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.total_referred)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.total_referred)
         binding.tvReferComH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.refer_completed)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.refer_completed)
         binding.tvRewardEarnH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.rewards_earned)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.rewards_earned)
         binding.btnHow.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.how_it_work)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.how_it_work)
         binding.btnHistory.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.referral_history)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.referral_history)
         binding.tvInviteFfH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.invite_your_friends)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.invite_your_friends)
         binding.btnShare.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.invite)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.invite)
 
         sharePrefs = SharePrefs(applicationContext)
         utils = Utils(this)
@@ -145,15 +145,15 @@ class ReferralActivity : AppCompatActivity(), View.OnClickListener {
         val tcCreditOnH = dialog.findViewById<TextView>(R.id.tcCreditOnH)
         val rvReferral = dialog.findViewById<RecyclerView>(R.id.rvReferral)
 
-        tvHow?.text = MyApplication.getInstance().noteRepository.getString(R.string.how_it_work)
+        tvHow?.text = RetailerSDKApp.getInstance().noteRepository.getString(R.string.how_it_work)
         tvPointsMsg?.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.you_will_get_wallet_points_on_referral_msg)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.you_will_get_wallet_points_on_referral_msg)
         tvOrderCountH?.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.order_count)
-        tvYouGetH?.text = MyApplication.getInstance().noteRepository.getString(R.string.you_get)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.order_count)
+        tvYouGetH?.text = RetailerSDKApp.getInstance().noteRepository.getString(R.string.you_get)
         tvFriendGetH?.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.friend_get)
-        tcCreditOnH?.text = MyApplication.getInstance().noteRepository.getString(R.string.credit_on)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.friend_get)
+        tcCreditOnH?.text = RetailerSDKApp.getInstance().noteRepository.getString(R.string.credit_on)
 
         refConfigAdapter = RefConfigAdapter(this, list!!)
         rvReferral?.adapter = refConfigAdapter

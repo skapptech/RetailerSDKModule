@@ -10,7 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.AddPollA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.AddPostActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivitySelectPostTypeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class SelectPostTypeActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectPostTypeBinding
@@ -30,12 +30,12 @@ class SelectPostTypeActivity : AppCompatActivity() {
         analyticPost.source = "SelectionPostType"
         binding.liPost.setOnClickListener {
             analyticPost.postTypeClick = "Text"
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
             startActivity(Intent(applicationContext, AddPostActivity::class.java))
         }
         binding.liQues.setOnClickListener {
             analyticPost.postTypeClick = "Poll"
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
             startActivity(Intent(applicationContext, AddPollActivity::class.java))
         }
     }

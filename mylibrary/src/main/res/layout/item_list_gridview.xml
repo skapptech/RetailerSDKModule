@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:id="@+id/catLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="7dp"
-        android:foreground="@drawable/rippleeffect"
-        android:orientation="vertical">
+<LinearLayout android:id="@+id/catLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="7dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="7dp"
+    android:foreground="@drawable/rippleeffect"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/imageViewGirdItem_home"
@@ -35,4 +33,3 @@
             android:textColor="@android:color/black"
             android:textSize="12sp" />
     </LinearLayout>
-</layout>

@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityTermsServicesBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class TermOfServicesActivity : AppCompatActivity() {
     private var mBinding: ActivityTermsServicesBinding? = null
@@ -35,14 +35,14 @@ class TermOfServicesActivity : AppCompatActivity() {
     }
 
     private fun initialization() {
-        title = MyApplication.getInstance().dbHelper.getString(R.string.terms_and_condition)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_and_condition)
         // load HTML file
         val termsAndCondition = intent.getStringExtra("isTermsAndCondition")
         if (termsAndCondition != null) {
             if (termsAndCondition == "isTermsAndCondition") {
                 mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/privacy.html")
             } else if (termsAndCondition == "isPrivacyPolicy") {
-                title = MyApplication.getInstance().dbHelper.getString(R.string.txt_privacy_policy)
+                title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_privacy_policy)
                 mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/termsUse.html")
             } else {
                 mBinding!!.webView.loadUrl(EndPointPref.getInstance(applicationContext).baseUrl + "/images/policy/termsUseAndPrivacy.html")

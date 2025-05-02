@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.GullakModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 
@@ -15,7 +15,7 @@ class MyGullakViewModel : ViewModel() {
     private var commonAPICall: CommonClassForAPI? = null
 
     fun init() {
-        commonAPICall = CommonClassForAPI.getInstance(MyApplication.getInstance().activity)
+        commonAPICall = CommonClassForAPI.getInstance(RetailerSDKApp.getInstance().activity)
     }
 
     fun getMyGullakList(): LiveData<ArrayList<GullakModel>?>? {

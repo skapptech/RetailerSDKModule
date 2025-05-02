@@ -73,7 +73,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.services.NotificationTimerService;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CreateContact;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import io.reactivex.observers.DisposableObserver;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -103,7 +103,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (object.has("IsEnabledDismissNotification")) {
                 isEnabledDismissBtn = object.getBoolean("IsEnabledDismissNotification");
             }
-            MyApplication.getInstance().mixpanel.getPeople().increment("notificationReceived", 1);
+            RetailerSDKApp.getInstance().mixpanel.getPeople().increment("notificationReceived", 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -915,8 +915,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void silentLogOut(Context context, int i) {
         if (!BuildConfig.DEBUG || i == 1) {
-            MyApplication.getInstance().clearLocalData();
-            MyApplication.getInstance().clearCartData();
+            RetailerSDKApp.getInstance().clearLocalData();
+            RetailerSDKApp.getInstance().clearCartData();
             PrefManager prefManager = new PrefManager(context);
             prefManager.setLoggedIn(false);
             Intent intent = new Intent(context, MobileSignUpActivity.class)

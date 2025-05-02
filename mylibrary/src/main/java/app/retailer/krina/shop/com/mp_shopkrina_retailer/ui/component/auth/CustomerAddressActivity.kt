@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.CityModel
@@ -37,7 +36,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.settings.TermOfServicesActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -212,17 +211,17 @@ class CustomerAddressActivity : AppCompatActivity() {
             }
     }
     private fun init() {
-        title = MyApplication.getInstance().dbHelper.getString(R.string.title_serach_address)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address)
         mBinding.address.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.search_delivery_address)
-        mBinding.city.hint = MyApplication.getInstance().dbHelper.getString(R.string.city)
-        mBinding.state.hint = MyApplication.getInstance().dbHelper.getString(R.string.state_astrick)
-        mBinding.pincode.hint = MyApplication.getInstance().dbHelper.getString(R.string.pin_code)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_delivery_address)
+        mBinding.city.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.city)
+        mBinding.state.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.state_astrick)
+        mBinding.pincode.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pin_code)
         mBinding.flateOrFloorNumber.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.address_field_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.address_field_number)
         mBinding.landmark.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.landmark_optional)
-        mBinding.btnSave.hint = MyApplication.getInstance().dbHelper.getString(R.string.save)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.landmark_optional)
+        mBinding.btnSave.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.save)
         customTextView(mBinding.tvTerms)
 
         mBinding.etCity.setOnClickListener {
@@ -263,7 +262,7 @@ class CustomerAddressActivity : AppCompatActivity() {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().noteRepository.getString(R.string.select_city)
+                    RetailerSDKApp.getInstance().noteRepository.getString(R.string.select_city)
                 )
             }
         }
@@ -289,7 +288,7 @@ class CustomerAddressActivity : AppCompatActivity() {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().noteRepository.getString(R.string.select_area)
+                    RetailerSDKApp.getInstance().noteRepository.getString(R.string.select_area)
                 )
             }
         }
@@ -305,27 +304,27 @@ class CustomerAddressActivity : AppCompatActivity() {
             if (TextUtils.isNullOrEmpty(address)) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.enter_delivery_address)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_delivery_address)
                 )
             } else if (TextUtils.isNullOrEmpty(city) && REDIRECT_FLAG == 1) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.select_city)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city)
                 )
             } else if (TextUtils.isNullOrEmpty(zipcode)) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number)
                 )
             } else if (zipcode?.length!! < 6) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number)
                 )
             } else if (intent.extras == null && !mBinding.checkbox.isChecked) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.check_terms_and_condition)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.check_terms_and_condition)
                 )
             } else {
                 model.customerId =
@@ -510,11 +509,11 @@ class CustomerAddressActivity : AppCompatActivity() {
                     if (customer != null) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.signup_successfully_done)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.signup_successfully_done)
                         )
-                        MyApplication.getInstance().prefManager.isLoggedIn = true
+                        RetailerSDKApp.getInstance().prefManager.isLoggedIn = true
                         SaveCustomerLocalInfo.saveCustomerInfo(applicationContext, customer,false)
-                        MyApplication.getInstance().updateAnalytics("sign_up_complete")
+                        RetailerSDKApp.getInstance().updateAnalytics("sign_up_complete")
                     }
                     if (intent.extras != null && REDIRECT_FLAG == 2) {
                         startActivity(Intent(applicationContext, HomeActivity::class.java))

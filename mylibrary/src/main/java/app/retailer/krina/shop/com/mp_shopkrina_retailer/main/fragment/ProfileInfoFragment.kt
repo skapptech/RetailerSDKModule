@@ -27,7 +27,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.EditProfi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfileResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
@@ -67,7 +67,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             editProfileActivity!!,
             this.javaClass.simpleName,
             null
@@ -133,13 +133,13 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.txt_note_verified)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_note_verified)
                         )
                     }
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.gps_permission)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.gps_permission)
                     )
                 }
             }
@@ -161,13 +161,13 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.txt_note_verified)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_note_verified)
                         )
                     }
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.gps_permission)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.gps_permission)
                     )
                 }
             }
@@ -188,17 +188,17 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                 if (sCustName!!.isEmpty()) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.entername))
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.entername))
                     mBinding.etCustName.requestFocus()
                 } else if (sCustEmail!!.isEmpty()) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_email_address))
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_email_address))
                     mBinding.etCustEmail.requestFocus()
                 } else if (!Utils.isValidEmail(sCustEmail)) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_email_address)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_email_address)
                     )
                     mBinding.etCustEmail.requestFocus()
 //                } else if (sDOB.isEmpty()) {
@@ -209,15 +209,15 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
 //                    mBinding.etCustDob.requestFocus()
                 } else if (sCustShippingAddress!!.isEmpty()) {
                     mBinding.tilCustSAdd.error =
-                        MyApplication.getInstance().dbHelper.getString(R.string.hint_shipping_address)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_shipping_address)
                     mBinding.etCustShippingAddress.requestFocus()
                 } else if (panNumber != "" && panNumber.length < 10) {
                     mBinding.tilPanNo.error =
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_pan_number)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pan_number)
                     mBinding.etpanNo.requestFocus()
                 } else if (aadharNumber != "" && aadharNumber.length < 12) {
                     mBinding.tilAadharNo.error =
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_aadhar_number)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_aadhar_number)
                     mBinding.tilAadharNo.requestFocus()
                 } else {
                     editProfileModel!!.name = sCustName
@@ -250,7 +250,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                         )
                     }
                 }
@@ -349,36 +349,36 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
 
     private fun initView() {
         editProfileActivity!!.tv_title!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_personal_informations)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_personal_informations)
         utils = Utils(activity)
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
         editProfileModel = editProfileActivity!!.editProfileModel
         sCustDob = editProfileModel!!.dOB
         sCustAnni = editProfileModel!!.anniversaryDate
         mBinding.tilCustName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_name)
         mBinding.tilCustEmail.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_email)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_email)
         mBinding.tilCustDob.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_dob)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_dob)
         mBinding.tilCustAnni.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_anniversary_date)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_anniversary_date)
         mBinding.tilCustContact.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_contact_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_contact_number)
         mBinding.tilWhatsapp.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number)
         mBinding.tilCustSAdd.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_shipping_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_shipping_address)
         mBinding.tilCustBAdd.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_billing_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_billing_address)
         mBinding.checkboxCN.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_check_whatsapp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_check_whatsapp)
         mBinding.txtCbCheckSameAddress.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_check_shiping_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_check_shiping_address)
         mBinding.tilAadharNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.aadhar_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.aadhar_number)
         mBinding.tilPanNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.pannumber)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pannumber)
 
         mBinding.btnUpdate.setOnClickListener(this)
         mBinding.etCustDob.setOnClickListener(this)
@@ -408,7 +408,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setButton(
                 DialogInterface.BUTTON_NEGATIVE,
-                MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
             ) { dialog1: DialogInterface?, which: Int -> }
             dialog.show()
         } catch (e: Exception) {
@@ -433,7 +433,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setButton(
                 DialogInterface.BUTTON_NEGATIVE,
-                MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
             ) { dialog1: DialogInterface?, which: Int -> mBinding.etCustAnni.setText("") }
             dialog.show()
         } catch (e: Exception) {
@@ -489,7 +489,7 @@ class ProfileInfoFragment : Fragment(), View.OnClickListener {
                             .putString(SharePrefs.USER_PROFILE_IMAGE, customer?.uploadProfilePichure)
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.toast_succesfull)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_succesfull)
                         )
                         startActivity(Intent(activity, HomeActivity::class.java))
                         activity!!.finish()

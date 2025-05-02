@@ -8,7 +8,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityDeliveryConcernBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.DeliveryConcern
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonObject
 import io.reactivex.observers.DisposableObserver
@@ -42,7 +42,7 @@ class DeliveryConcernActivity : AppCompatActivity() {
 
     private fun init() {
         mBinding.tvCommentH.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.comment) + " :"
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.comment) + " :"
 
         Utils.showProgressDialog(this)
         CommonClassForAPI.getInstance(this).getOrderConcernByOrderId(observer, orderId)
@@ -55,7 +55,7 @@ class DeliveryConcernActivity : AppCompatActivity() {
     private fun postConcern() {
         if (mBinding.etComment.text.toString().isEmpty()) {
             mBinding.etComment.error =
-                MyApplication.getInstance().noteRepository.getString(R.string.write_your_comment_here)
+                RetailerSDKApp.getInstance().noteRepository.getString(R.string.write_your_comment_here)
         } else {
             val jsonObject = JsonObject()
             jsonObject.addProperty("OrderId", orderId)
@@ -108,7 +108,7 @@ class DeliveryConcernActivity : AppCompatActivity() {
                 try {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().noteRepository.getString(R.string.succesfullSubmitted)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.succesfullSubmitted)
                     )
                     onBackPressed()
                 } catch (e: Exception) {

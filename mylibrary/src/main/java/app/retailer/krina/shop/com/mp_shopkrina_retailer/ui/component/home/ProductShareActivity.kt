@@ -27,7 +27,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.FeedActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
@@ -43,7 +42,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -103,7 +102,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.txt_product_deatils)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_product_deatils)
         vectorDrawable = AppCompatResources.getDrawable(this, R.drawable.logo_grey)
         //init view
         initialization()
@@ -120,7 +119,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 if (intent.hasExtra("notificationId")) {
                     val notificationId = intent.extras!!.getInt("notificationId")
-                    MyApplication.getInstance().notificationView(notificationId)
+                    RetailerSDKApp.getInstance().notificationView(notificationId)
                     intent.extras!!.clear()
                 }
             } else {
@@ -132,7 +131,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
             onBackPressed()
         }
         //check for login
-        if (MyApplication.getInstance().prefManager.isLoggedIn) {
+        if (RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
             if (utils!!.isNetworkAvailable) {
                 if (intent.data != null && intent.data.toString().contains("trade")) {
                     if (EndPointPref.getInstance(applicationContext)
@@ -169,7 +168,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                 )
             }
         } else {
@@ -261,26 +260,26 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
         freeDepePointTV = mBinding!!.tvFreeDepePoint
         freeItemIV = mBinding!!.ivFreeIteam
         mBinding!!.tvMrpHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_mrp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp)
         mBinding!!.tvQtLeft.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty)
         mBinding!!.tvUnlock.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.unlock_price)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.unlock_price)
         mBinding!!.tvItemLeftD.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_left_d)
-        mBinding!!.tvEndInD.text = MyApplication.getInstance().dbHelper.getString(R.string.end_in)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left_d)
+        mBinding!!.tvEndInD.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.end_in)
         mBinding!!.tvInactiveOrder.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg)
         mBinding!!.tvShare.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.share_product_txt)
-        mBinding!!.btnShare.text = MyApplication.getInstance().dbHelper.getString(R.string.share)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.share_product_txt)
+        mBinding!!.btnShare.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.share)
         mBinding!!.addToCart.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_to_basket)
-        mBinding!!.buyNow.text = MyApplication.getInstance().dbHelper.getString(R.string.buy_now)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_basket)
+        mBinding!!.buyNow.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.buy_now)
         mBinding!!.tvSorryNoItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.sorry_this_item_is_not_available_at_the_moment_nplease_check_back_later)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.sorry_this_item_is_not_available_at_the_moment_nplease_check_back_later)
         mBinding!!.goToHome.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.go_to_home)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.go_to_home)
         mBinding!!.tvMrp.paintFlags = mBinding!!.tvMrp.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         mBinding!!.ivFav.setOnClickListener(this)
         mBinding!!.addItem.setOnClickListener(this)
@@ -380,7 +379,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
             )
         )
         startActivity(Intent.createChooser(share, "Share Image"))
-        MyApplication.getInstance().updateAnalyticShareProd(itemListModel)
+        RetailerSDKApp.getInstance().updateAnalyticShareProd(itemListModel)
     }
 
     private fun shareWithoutImage() {
@@ -392,13 +391,13 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                     SharePrefs.getInstance(applicationContext).getInt(SharePrefs.WAREHOUSE_ID)
         )
         startActivity(Intent.createChooser(share, "Share Image"))
-        MyApplication.getInstance().updateAnalyticShareProd(itemListModel)
+        RetailerSDKApp.getInstance().updateAnalyticShareProd(itemListModel)
     }
 
     private fun setValue() {
         try {
             // check item in wishList
-            if (MyApplication.getInstance().noteRepository.isItemWishList(itemListModel!!.itemId)) {
+            if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(itemListModel!!.itemId)) {
                 mBinding!!.ivFav.setImageResource(R.drawable.ic_favorite_red)
             } else {
                 mBinding!!.ivFav.setImageResource(R.drawable.ic_favourite)
@@ -492,7 +491,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 itemListModel!!.unitPrice
             )
             val sMargin =
-                " | " + MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                " | " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                     "##.##"
                 ).format(
                     itemListModel!!.marginPoint!!.toDouble()
@@ -501,7 +500,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
             ivProductName!!.text = itemListModel!!.itemname
             tvProductPrice!!.text = Html.fromHtml(text).toString()
             tvMoQTV!!.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + itemListModel!!.minOrderQty
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + itemListModel!!.minOrderQty
             TvMrpTV!!.text = sMRP
             tvMargin!!.text = sMargin
             tvDreemPointTV!!.text = "DP " + itemListModel!!.dreamPoint
@@ -555,7 +554,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             Toast.makeText(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.write_external_permission_setting),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.write_external_permission_setting),
                 Toast.LENGTH_LONG
             ).show()
         } else {
@@ -568,7 +567,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateItemQuantity() {
-        val model = MyApplication.getInstance().noteRepository.getCartItem1(
+        val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(
             itemListModel!!.itemId
         )
         if (model != null) {
@@ -655,16 +654,16 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 if (!flashDealFlag) {
                     itemQuantity += itemListModel!!.minOrderQty
                     if (itemListModel!!.isItemLimit) {
-                        if (MyApplication.getInstance().noteRepository.cartCount > 0) {
+                        if (RetailerSDKApp.getInstance().noteRepository.cartCount > 0) {
                             val qtyDTO =
-                                MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+                                RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
                                     itemListModel!!.itemId, itemListModel!!.itemMultiMRPId
                                 )
                             total = qtyDTO.quantity
                             if (total + itemQuantity > itemListModel!!.itemLimitQty) {
                                 Utils.setToast(
                                     applicationContext,
-                                    MyApplication.getInstance().dbHelper.getString(
+                                    RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.additemToast
                                     )
                                             + " " + itemListModel!!.itemLimitQty
@@ -682,7 +681,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                                 if (itemQuantity > itemListModel!!.itemLimitQty) {
                                     Utils.setToast(
                                         applicationContext,
-                                        MyApplication.getInstance().dbHelper.getString(
+                                        RetailerSDKApp.getInstance().dbHelper.getString(
                                             R.string.additemToast
                                         )
                                                 + " " + itemListModel!!.itemLimitQty
@@ -710,20 +709,20 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
 //                        viewHolder.mBinding.visible.setVisibility(View.GONE);
 //                        viewHolder.btnAdd.setVisibility(View.VISIBLE);
                         Toast.makeText(
-                            applicationContext, MyApplication.getInstance().dbHelper.getString(
+                            applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.no_items_avl
                             ), Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         if (itemListModel!!.offerQtyAvaiable <= itemQuantity) {
                             Toast.makeText(
-                                applicationContext, MyApplication.getInstance().dbHelper.getString(
+                                applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.no_items_avl
                                 ), Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             Toast.makeText(
-                                applicationContext, MyApplication.getInstance().dbHelper.getString(
+                                applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.only_add_max_item
                                 ) + itemListModel!!.flashDealMaxQtyPersonCanTake, Toast.LENGTH_SHORT
                             ).show()
@@ -763,7 +762,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                             } else {
                                 Toast.makeText(
-                                    this, MyApplication.getInstance().dbHelper.getString(
+                                    this, RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.minimum_qty_should_not_be_zero
                                     ), Toast.LENGTH_SHORT
                                 ).show()
@@ -788,7 +787,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                         } else {
                             Toast.makeText(
                                 this,
-                                MyApplication.getInstance().dbHelper.getString(R.string.minimum_qty_should_not_be_zero),
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.minimum_qty_should_not_be_zero),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -837,7 +836,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setLimit(itemQuantity: Int, add: Boolean): Boolean {
-        val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+        val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
             itemListModel!!.itemId, itemListModel!!.itemMultiMRPId
         )
         val total = qtyDTO.quantity
@@ -855,9 +854,9 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
             if (total + itemQuantity > itemListModel!!.itemLimitQty) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.additemToast) +
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) +
                             " " + itemListModel!!.itemLimitQty + " " +
-                            MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2)
                 )
             } else {
                 if (itemListModel!!.billLimitQty != 0) {
@@ -878,9 +877,9 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 if (itemQuantity > itemListModel!!.itemLimitQty) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.additemToast) +
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) +
                                 " " + itemListModel!!.itemLimitQty + " " +
-                                MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2)
                     )
                 } else {
                     if (itemListModel!!.billLimitQty != 0) {
@@ -908,7 +907,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
     ): Boolean {
         var addFlag = addFlag
         try {
-            val total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(
+            val total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(
                 itemListModel!!.itemId, itemListModel.itemMultiMRPId
             )
             val itemlimitqty = itemListModel.billLimitQty
@@ -916,7 +915,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                 if (total + itemQuantity > itemlimitqty) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + itemListModel.billLimitQty + " item"
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + itemListModel.billLimitQty + " item"
                     )
                 } else {
                     mBinding!!.itemRowQuantityTv.text = "" + itemQuantity
@@ -927,7 +926,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                     if (itemQuantity > itemListModel.billLimitQty) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + itemListModel.billLimitQty + " item"
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + itemListModel.billLimitQty + " item"
                         )
                     } else {
                         mBinding!!.itemRowQuantityTv.text = "" + itemQuantity
@@ -958,16 +957,16 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
                                 model.totalFreeItemQty = freeItemQty
                                 model.totalFreeWalletPoint = totalFreeWalletPoint
                                 // update cart database
-                                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                                 } else {
-                                    MyApplication.getInstance().noteRepository.addToCart(model)
+                                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                                 }
                                 // update cart database
-                                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                                 } else {
-                                    MyApplication.getInstance().noteRepository.addToCart(model)
+                                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                                 }
                                 RxBus.getInstance().sendEvent(true)
                             } catch (e: Exception) {
@@ -1006,7 +1005,7 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
         return status
@@ -1044,13 +1043,13 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun addRemoveFav() {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(itemListModel!!.itemId)) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(itemListModel!!.itemId)) {
             mBinding!!.ivFav.setImageResource(R.drawable.ic_favourite)
-            MyApplication.getInstance().noteRepository.deleteTask(itemListModel)
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(itemListModel)
             Utils.addFav(itemListModel!!.itemId.toString().toInt(), false, this)
         } else {
             mBinding!!.ivFav.setImageResource(R.drawable.ic_favorite_red)
-            MyApplication.getInstance().noteRepository.insertTask(itemListModel)
+            RetailerSDKApp.getInstance().noteRepository.insertTask(itemListModel)
             Utils.addFav(itemListModel!!.itemId.toString().toInt(), true, this)
         }
     }

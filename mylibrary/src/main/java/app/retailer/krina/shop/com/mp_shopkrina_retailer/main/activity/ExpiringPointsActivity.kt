@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.MyExpiring
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MyExpiringWalletModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -32,7 +32,7 @@ class ExpiringPointsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_expiring_points)
         mBinding.toolbarMyWallet.title.text =
-            MyApplication.getInstance().dbHelper.getData("expiring_points")
+            RetailerSDKApp.getInstance().dbHelper.getData("expiring_points")
         //init view
         initialization()
         // back btn
@@ -93,7 +93,7 @@ class ExpiringPointsActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getData("internet_connection")
+                RetailerSDKApp.getInstance().dbHelper.getData("internet_connection")
             )
         }
     }

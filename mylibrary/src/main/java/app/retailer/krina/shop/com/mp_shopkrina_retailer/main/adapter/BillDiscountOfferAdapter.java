@@ -40,7 +40,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.C
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -84,7 +84,7 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
             String llApplyColorCode;
             ((ScratchCardHolder) holder).mBinding.rlBill.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(model.getColorCode() != null ? model.getColorCode() : "#4D9654")));
             // set String
-            ((ScratchCardHolder) holder).mBinding.tvDes.setText(MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + model.getBillAmount());
+            ((ScratchCardHolder) holder).mBinding.tvDes.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + model.getBillAmount());
             ((ScratchCardHolder) holder).mBinding.tvMsg.setText(model.getMessage());
             ((ScratchCardHolder) holder).mBinding.tvTime.setText("00:00");
             if (list.get(pos).getImagePath() != null) {
@@ -103,38 +103,38 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
                 ((ScratchCardHolder) holder).mBinding.tvOffer.setTypeface(((ScratchCardHolder) holder).mBinding.tvOffer.getTypeface(), Typeface.NORMAL);
                 ((ScratchCardHolder) holder).mBinding.ivImage.setImageResource(R.drawable.logo_sk);
                 if (model.getBillDiscountOfferOn() != null && model.getBillDiscountOfferOn().equalsIgnoreCase("Percentage")) {
-                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getDiscountPercentage()) + "% "+MyApplication.getInstance().dbHelper.getString(R.string.off));
+                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getDiscountPercentage()) + "% "+ RetailerSDKApp.getInstance().dbHelper.getString(R.string.off));
                 } else if (model.getBillDiscountOfferOn() != null && model.getBillDiscountOfferOn().equalsIgnoreCase("DynamicAmount")) {
-                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(model.getBillDiscountWallet()) + " "+MyApplication.getInstance().dbHelper.getString(R.string.off));
+                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(model.getBillDiscountWallet()) + " "+ RetailerSDKApp.getInstance().dbHelper.getString(R.string.off));
                 } else {
-                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(convertToAmount(model.getBillDiscountWallet())) + " "+MyApplication.getInstance().dbHelper.getString(R.string.off));
+                    ((ScratchCardHolder) holder).mBinding.tvOffer.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(convertToAmount(model.getBillDiscountWallet())) + " "+ RetailerSDKApp.getInstance().dbHelper.getString(R.string.off));
                 }
             } else {
                 ((ScratchCardHolder) holder).mBinding.tvOffer.setTypeface(((ScratchCardHolder) holder).mBinding.tvOffer.getTypeface(), Typeface.BOLD);
-                ((ScratchCardHolder) holder).mBinding.tvOffer.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_scratch_win));
+                ((ScratchCardHolder) holder).mBinding.tvOffer.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_scratch_win));
             }
             if (model.isSelected) {
                 ((ScratchCardHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_tealish_green_8dp_corner));
                 llApplyColorCode = "#EBFBF3";
-                ((ScratchCardHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().noteRepository.getString(R.string.text_remove));
+                ((ScratchCardHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.text_remove));
                 ((ScratchCardHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.red));
                 ((ScratchCardHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
-                ((ScratchCardHolder) holder).mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
+                ((ScratchCardHolder) holder).mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
             } else {
                 if (model.isApplicable) {
                     // tap to apply
                     llApplyColorCode = "#FCF3F0";
-                    ((ScratchCardHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.tap_to_apply));
+                    ((ScratchCardHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.tap_to_apply));
                     ((ScratchCardHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.color_gray_txt));
                     ((ScratchCardHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey_8dp_corner));
                     ((ScratchCardHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
-                    ((ScratchCardHolder) holder).mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
+                    ((ScratchCardHolder) holder).mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
                 } else {
                     ((ScratchCardHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_orange_8dp_corner));
                     ((ScratchCardHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.red));
                     llApplyColorCode = "#f5f9ff";
                     if (EndPointPref.getInstance(activity).getBoolean(EndPointPref.showOfferBtn))
-                        ((ScratchCardHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.add_more));
+                        ((ScratchCardHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_more));
                     else
                         ((ScratchCardHolder) holder).mBinding.tvSelect.setText("");
                     ((ScratchCardHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.chinese_orange));
@@ -163,7 +163,7 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
 
                 @Override
                 public void onFinish() {
-                    ((ScratchCardHolder) holder).mBinding.tvTime.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_time_expire));
+                    ((ScratchCardHolder) holder).mBinding.tvTime.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_time_expire));
                 }
             }.start();
 
@@ -189,11 +189,11 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
                 ((BillDiscountHolder) holder).mBinding.ivImg.setImageResource(R.drawable.logo_sk);
             }
 
-            ((BillDiscountHolder) holder).mBinding.tvOfferDes.setText(MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + list.get(pos).getBillAmount());
+            ((BillDiscountHolder) holder).mBinding.tvOfferDes.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + list.get(pos).getBillAmount());
             ((BillDiscountHolder) holder).mBinding.tvSelect.setTag(pos);
             ((BillDiscountHolder) holder).mBinding.rlBillItem.setVisibility(View.GONE);
             if (model.getBillDiscountOfferOn() != null && model.getBillDiscountOfferOn().equalsIgnoreCase("Percentage")) {
-                ((BillDiscountHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getDiscountPercentage()) + "% " + MyApplication.getInstance().dbHelper.getString(R.string.bill_discount));
+                ((BillDiscountHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getDiscountPercentage()) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_discount));
             } else if (model.getBillDiscountOfferOn() != null && model.getBillDiscountOfferOn().equalsIgnoreCase("FreeItem")) {
                 ((BillDiscountHolder) holder).mBinding.rlBillItem.setVisibility(View.VISIBLE);
                 ((BillDiscountHolder) holder).mBinding.tvOffer.setText(R.string.free_item_offer);
@@ -209,14 +209,14 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
                             + model.getBillAmount() + " Get free");
                 } else ((BillDiscountHolder) holder).mBinding.tvItemName.setVisibility(View.GONE);
             } else {
-                String msgPostBill = model.getApplyOn().equalsIgnoreCase("PostOffer") ? MyApplication.getInstance().dbHelper.getString(R.string.postoffer) : "";
+                String msgPostBill = model.getApplyOn().equalsIgnoreCase("PostOffer") ? RetailerSDKApp.getInstance().dbHelper.getString(R.string.postoffer) : "";
                 if (model.getWalletType().equalsIgnoreCase("WalletPercentage")) {
-                    ((BillDiscountHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getBillDiscountWallet()) + "% "+MyApplication.getInstance().dbHelper.getString(R.string.off) + msgPostBill);
+                    ((BillDiscountHolder) holder).mBinding.tvOffer.setText(new DecimalFormat("##.##").format(model.getBillDiscountWallet()) + "% "+ RetailerSDKApp.getInstance().dbHelper.getString(R.string.off) + msgPostBill);
                 } else {
-                    ((BillDiscountHolder) holder).mBinding.tvOffer.setText(MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(convertToAmount(model.getBillDiscountWallet())) + " "+MyApplication.getInstance().dbHelper.getString(R.string.off) + msgPostBill);
+                    ((BillDiscountHolder) holder).mBinding.tvOffer.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + new DecimalFormat("##.##").format(convertToAmount(model.getBillDiscountWallet())) + " "+ RetailerSDKApp.getInstance().dbHelper.getString(R.string.off) + msgPostBill);
                 }
             }
-            ((BillDiscountHolder) holder).mBinding.tvMinQty.setText("( " + MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + new DecimalFormat("##.##").format(model.getBillAmount()) + " )");
+            ((BillDiscountHolder) holder).mBinding.tvMinQty.setText("( " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + new DecimalFormat("##.##").format(model.getBillAmount()) + " )");
             long timestamp = getTimeStamp(model.getEnd());
             long expiryTime = timestamp - new Date().getTime();
             ((BillDiscountHolder) holder).timer = new CountDownTimer(expiryTime, 1000) {
@@ -247,27 +247,27 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
             if (model.isSelected) {
                 // offer applied
                 llApplyColorCode = "#EBFBF3";
-                ((BillDiscountHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_remove));
+                ((BillDiscountHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_remove));
                 ((BillDiscountHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.red));
                 ((BillDiscountHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_tealish_green_8dp_corner));
                 ((BillDiscountHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
-                ((BillDiscountHolder) holder).mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
+                ((BillDiscountHolder) holder).mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
             } else {
                 if (model.isApplicable) {
                     // tap to apply
                     llApplyColorCode = "#FCF3F0";
-                    ((BillDiscountHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.tap_to_apply));
+                    ((BillDiscountHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.tap_to_apply));
                     ((BillDiscountHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.color_gray_txt));
                     ((BillDiscountHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey_8dp_corner));
                     ((BillDiscountHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
-                    ((BillDiscountHolder) holder).mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
+                    ((BillDiscountHolder) holder).mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
                 } else {
                     llApplyColorCode = "#f5f9ff";
                     ((BillDiscountHolder) holder).mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.chinese_orange));
                     ((BillDiscountHolder) holder).mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_orange_8dp_corner));
                     ((BillDiscountHolder) holder).mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.red));
                     if (EndPointPref.getInstance(activity).getBoolean(EndPointPref.showOfferBtn))
-                        ((BillDiscountHolder) holder).mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.add_more));
+                        ((BillDiscountHolder) holder).mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_more));
                     else
                         ((BillDiscountHolder) holder).mBinding.tvSelect.setText("");
                 }
@@ -332,29 +332,29 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
                                                 //  mBinding.rlBill.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey));
                                                 //   mBinding.tvSelect.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey));
                                                 mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.color_gray_txt));
-                                                mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.tap_to_apply));
+                                                mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.tap_to_apply));
                                                 int llApplyDynamicColor = Color.parseColor("#FCF3F0");
                                                 mBinding.llApply.setBackgroundTintList(ColorStateList.valueOf(llApplyDynamicColor));
                                                 mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey_8dp_corner));
                                                 mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
                                                 list.get(getAdapterPosition()).isSelected = false;
-                                                mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
+                                                mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
                                             } else {
                                                 //  mBinding.rlBill.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_orange));
                                                 //   mBinding.tvSelect.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_orange));
                                                 mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.red));
-                                                mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_remove));
+                                                mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_remove));
                                                 int llApplyDynamicColor = Color.parseColor("#EBFBF3");
                                                 mBinding.llApply.setBackgroundTintList(ColorStateList.valueOf(llApplyDynamicColor));
                                                 mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_tealish_green_8dp_corner));
                                                 mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
                                                 list.get(getAdapterPosition()).isSelected = true;
-                                                mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
+                                                mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
 
                                             }
                                             onApplyOfferClick.onApplyOfferClick(response);
                                             // update analytic apply promotion
-                                            MyApplication.getInstance().updateAnalyticPromotion(list.get(getAdapterPosition()));
+                                            RetailerSDKApp.getInstance().updateAnalyticPromotion(list.get(getAdapterPosition()));
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -418,27 +418,27 @@ public class BillDiscountOfferAdapter extends RecyclerView.Adapter<RecyclerView.
                                             try {
                                                 if (list.get(getAdapterPosition()).isSelected) {
                                                     mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.chinese_orange));
-                                                    mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.tap_to_apply));
+                                                    mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.tap_to_apply));
                                                     int llApplyDynamicColor = Color.parseColor("#FCF3F0");
                                                     mBinding.llApply.setBackgroundTintList(ColorStateList.valueOf(llApplyDynamicColor));
                                                     mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_grey_8dp_corner));
                                                     mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
                                                     list.get(getAdapterPosition()).isSelected = false;
-                                                    mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
+                                                    mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_unlocked));
                                                 } else {
                                                     mBinding.tvSelect.setTextColor(ContextCompat.getColor(activity, R.color.tealish_green));
-                                                    mBinding.tvSelect.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_btn_applied));
+                                                    mBinding.tvSelect.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_btn_applied));
                                                     int llApplyDynamicColor = Color.parseColor("#EBFBF3");
                                                     mBinding.llApply.setBackgroundTintList(ColorStateList.valueOf(llApplyDynamicColor));
                                                     mBinding.rlMain.setBackground(activity.getResources().getDrawable(R.drawable.rectangle_tealish_green_8dp_corner));
                                                     mBinding.tvMsg.setTextColor(ContextCompat.getColor(activity, R.color.black));
                                                     list.get(getAdapterPosition()).isSelected = true;
-                                                    mBinding.tvMsg.setText(MyApplication.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
+                                                    mBinding.tvMsg.setText(RetailerSDKApp.getInstance().noteRepository.getString(R.string.congrats_offer_applied));
 
                                                 }
                                                 onApplyOfferClick.onApplyOfferClick(response);
                                                 // update analytic apply promotion
-                                                MyApplication.getInstance().updateAnalyticPromotion(list.get(getAdapterPosition()));
+                                                RetailerSDKApp.getInstance().updateAnalyticPromotion(list.get(getAdapterPosition()));
                                             } catch (Exception e) {
                                                 e.printStackTrace();
 

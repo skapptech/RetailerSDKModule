@@ -42,7 +42,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.Bas
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.CategoriesModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.SubCategoriesModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.FilterItemModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.SliderModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.CatRelatedItemPostModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SectionPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -54,7 +53,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.searchItem.SearchItemFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -71,7 +70,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     CatePopupInterface {
     private lateinit var mBinding: FragmentSubSubCategoryBinding
     private lateinit var activity: HomeActivity
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var subSubCatViewModel: SubSubCatViewModel
     private lateinit var popupWindow: PopupWindow
     private var subCategoryFilterAdapter: SubCategoryFilterAdapter? = null
@@ -116,7 +115,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity.application as MyApplication
+        appCtx = activity.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -161,7 +160,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity,
             this.javaClass.simpleName, null
         )
@@ -275,11 +274,11 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         popupWindow = PopupWindow()
         mRelatedItemAdapter = CategoryRelatedItemViewAdapter(activity, relatedItemList)
         mBinding.rvRelatedItem.adapter = mRelatedItemAdapter
-        mBinding.txtSort.text = MyApplication.getInstance().dbHelper.getString(R.string.sort)
+        mBinding.txtSort.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.sort)
         mBinding.noItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_items_avl)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_avl)
         mBinding.tvItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.related_item)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.related_item)
 
         mBinding.nestedScroll.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
             if (v.getChildAt(v.childCount - 1) != null) {
@@ -356,27 +355,27 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
 
     private fun appStoryView() {
         builder = GuideView.Builder(activity)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.category))
-            .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.category_detail))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.category))
+            .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.category_detail))
             .setGravity(Gravity.center)
             .setDismissType(DismissType.anywhere)
             .setTargetView(activity.lerCateSelected)
             .setGuideListener { view: View ->
                 when (view.id) {
                     R.id.liCategory -> builder.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.subcategory
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.subcategory_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.subcategory_detail))
                         .setTargetView(mBinding.rvSubCategory).build()
 
                     R.id.rvSubCategory -> builder.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.brand
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.brand_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.brand_detail))
                         .setTargetView(mBinding.rvSubSubCategory).build()
 
                     R.id.rvSubSubCategory -> {
@@ -450,7 +449,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         if (isStore && this.categoryList.size > 1) {
             this.categoryList.add(
                 0,
-                CategoriesModel(MyApplication.getInstance().dbHelper.getString(R.string.all), 0)
+                CategoriesModel(RetailerSDKApp.getInstance().dbHelper.getString(R.string.all), 0)
             )
         }
         if (this.categoryList.size != 0) {
@@ -466,7 +465,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
             }
             if (isStore) {
                 activity.tvCateSelected!!.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.all)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.all)
             }
             if (i == 0) {
                 mBinding.noItems.visibility = View.VISIBLE
@@ -474,7 +473,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.somthing_went_wrong)
             )
         }
     }
@@ -520,7 +519,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         shortBottomDialog.setContentView(mFilterDialogBinding.root)
 
         mFilterDialogBinding.tvSort.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.sort_by)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.sort_by)
 
         mFilterDialogBinding.llcolse.setOnClickListener {
             shortBottomDialog.dismiss()
@@ -612,7 +611,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -622,57 +621,57 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         filterList.clear()
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.margins),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.margins),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_low_to_high),
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_low_to_high),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_price),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_price),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 "",
                 true
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_low_to_high),
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_low_to_high),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 false
             )
         )
         filterList.add(
             FilterItemModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_high_to_low),
-                MyApplication.getInstance().dbHelper.getString(R.string.moq),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_high_to_low),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq),
                 false
             )
         )
@@ -687,7 +686,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
             mBinding.llRelatedItem.visibility = View.VISIBLE
         } else {
             mBinding.filterTitle.text =
-                "0 " + MyApplication.getInstance().dbHelper.getString(R.string.Items)
+                "0 " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.Items)
             mBinding.noItems.visibility = View.VISIBLE
             mBinding.progressCategory.visibility = View.GONE
             mBinding.rvCategoryItem.visibility = View.GONE
@@ -722,7 +721,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                 filterSubCategoryList.add(
                     0, SubCategoriesModel(
                         false, 0,
-                        categoryId, MyApplication.getInstance().dbHelper.getString(R.string.all),
+                        categoryId, RetailerSDKApp.getInstance().dbHelper.getString(R.string.all),
                         "", 10
                     )
                 )
@@ -753,7 +752,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                 layoutHideUnHide(false)
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_data_available)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_data_available)
                 )
                 subCategoryFilterAdapter!!.setSubcategoryOrderList(
                     filterSubCategoryList,
@@ -772,7 +771,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
             filterSubSubCategoriesList.add(
                 0,
                 SubSubCategoriesModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.all),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.all),
                     baseCategoryId, CategoryId, SubCategotyId, 0
                 )
             )
@@ -894,7 +893,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                             }
                             if (list.size != 0) {
                                 mBinding.filterTitle.text =
-                                    it.totalItem + " " + MyApplication.getInstance().dbHelper.getString(
+                                    it.totalItem + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.Items
                                     )
                                 itemListAdapter =
@@ -908,7 +907,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                                 }
                                 mBinding.nestedScroll.fullScroll(NestedScrollView.FOCUS_UP)
                                 // update analytic
-                                MyApplication.getInstance().updateAnalyticVIL("categoryItems", list)
+                                RetailerSDKApp.getInstance().updateAnalyticVIL("categoryItems", list)
                                 if (list.size < 5) {
                                     skip += 10
                                     mBinding.progressCategory.visibility = View.VISIBLE
@@ -993,7 +992,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
                             if (list.size != 0) {
                                 itemListAdapter!!.notifyDataSetChanged()
                                 // update analytic
-                                MyApplication.getInstance().updateAnalyticVIL("categoryItems", list)
+                                RetailerSDKApp.getInstance().updateAnalyticVIL("categoryItems", list)
                             }
                         } else {
                             if (subSubCattId == 0)
@@ -1017,7 +1016,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
     private fun checkAvailOffer(categoryId: Int, subCatId: Int, sSubCatId: Int) {
         Observable.fromCallable {
             // will run in background thread (same as doinBackground)
-            val discountList = MyApplication.getInstance().billDiscountList
+            val discountList = RetailerSDKApp.getInstance().billDiscountList
             val list = ArrayList<BillDiscountModel>()
             if (discountList != null && discountList.size > 0) {
                 if (subCatId == 0 && sSubCatId == 0)

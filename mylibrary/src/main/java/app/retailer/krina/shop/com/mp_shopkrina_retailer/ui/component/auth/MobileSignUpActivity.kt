@@ -17,14 +17,12 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.OTPResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMobileSignUpBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.auth.LoginActivity
@@ -34,7 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.Spl
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AppSignatureHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ViewUtils.Companion.snackbar
@@ -131,7 +129,7 @@ class MobileSignUpActivity : AppCompatActivity(){
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        if (MyApplication.getInstance().noteRepository.isTableEmpty) {
+        if (RetailerSDKApp.getInstance().noteRepository.isTableEmpty) {
             LocaleHelper.setLocale(this, "hi")
             Utils.setLocale(
                 applicationContext, "hi"
@@ -166,13 +164,13 @@ class MobileSignUpActivity : AppCompatActivity(){
 
     fun initialization() {
         mBinding!!.tvPleaseEnterMobile.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_enter_your_mobile_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_your_mobile_number)
         mBinding!!.tvWeSentOTP.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_sendyou_otp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_sendyou_otp)
         mBinding!!.etMobileNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_mobilenumber)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_mobilenumber)
         mBinding!!.tvLoginUsingPassword.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.login_using_password)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.login_using_password)
         mBinding!!.etMobileNo.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
                 checkFormData()
@@ -189,7 +187,7 @@ class MobileSignUpActivity : AppCompatActivity(){
             )
         }
         mBinding!!.submitNumber.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalyticAuth("signup_attempt", "", sMobileNo)
+            RetailerSDKApp.getInstance().updateAnalyticAuth("signup_attempt", "", sMobileNo)
             checkFormData()
         }
     }
@@ -241,11 +239,11 @@ class MobileSignUpActivity : AppCompatActivity(){
                         SharePrefs.LAST_LOGIN_DATE,
                         SimpleDateFormat("dd/MM/yyyy").format(Date())
                     )
-                MyApplication.getInstance().clearLocalData()
-                MyApplication.getInstance().clearCartData()
-                MyApplication.getInstance().prefManager.isLoggedIn = true
+                RetailerSDKApp.getInstance().clearLocalData()
+                RetailerSDKApp.getInstance().clearCartData()
+                RetailerSDKApp.getInstance().prefManager.isLoggedIn = true
                 // start analytic new session
-                MyApplication.getInstance().startAnalyticSession()
+                RetailerSDKApp.getInstance().startAnalyticSession()
                 startActivity(
                     Intent(applicationContext, SplashScreenActivity::class.java)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

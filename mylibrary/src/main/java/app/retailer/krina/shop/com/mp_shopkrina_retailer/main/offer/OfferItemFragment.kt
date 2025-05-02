@@ -24,7 +24,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubCategoryFilterAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryAdapter
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCategoryInterface {
@@ -80,7 +80,7 @@ open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity,
             this.javaClass.simpleName, null
         )
@@ -142,7 +142,7 @@ open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         subCategoryFilterAdapter!!.basCatId = baseCategoryId
 
         binding.noItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_items_avl)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_avl)
 
         binding.nestedScroll.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
             if (v.getChildAt(v.childCount - 1) != null) {
@@ -180,7 +180,7 @@ open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
             filterSubSubCategoriesList.add(
                 0,
                 SubSubCategoriesModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.all),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.all),
                     baseCategoryId, CategoryId, SubCategotyId, 0
                 )
             )
@@ -247,7 +247,7 @@ open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }

@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.MyIssueDeta
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.IssueDetailAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.MyIssueDetailModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.MyIssuesResponseModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -36,7 +36,7 @@ class MyIssueDetailActivity : AppCompatActivity() {
             model = intent.getSerializableExtra("model") as MyIssuesResponseModel?
 
         title =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_activity_Issue_with_the_cashback)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_Issue_with_the_cashback)
         supportActionBar!!.subtitle =
             Html.fromHtml(
                 "<font color='#212121'>" + getString(R.string.ticket__id) +
@@ -82,7 +82,7 @@ class MyIssueDetailActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.no_internet)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_internet)
             )
         }
     }

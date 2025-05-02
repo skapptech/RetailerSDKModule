@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityPanCardUploadBinding
@@ -42,9 +41,7 @@ import com.squareup.picasso.Picasso
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -82,7 +79,7 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_pan_card_upload)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         CustomerId = SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
-        if (!MyApplication.getInstance().CHECK_FROM_COME) {
+        if (!RetailerSDKApp.getInstance().CHECK_FROM_COME) {
             submitDialog()
         } else {
             setDataView()
@@ -146,7 +143,7 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.failed_to_capture_the_picture),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.failed_to_capture_the_picture),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -179,15 +176,15 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         panCardNumberET = mBinding.etPanNumber
         GenderSpinner = mBinding.spGender
         toolbarTittleTV!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_PAN_Card)
-        mBinding.tvGender.text = MyApplication.getInstance().dbHelper.getString(R.string.gender)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_PAN_Card)
+        mBinding.tvGender.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.gender)
         mBinding.tvUploadPan.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_Your_PAN)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_Your_PAN)
         mBinding.tvUplodText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_PAN)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_PAN)
         mBinding.tvUplodText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_PAN)
-        mBinding.btNext.text = MyApplication.getInstance().dbHelper.getString(R.string.next)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_PAN)
+        mBinding.btNext.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.next)
         toolBarBackLL!!.setOnClickListener(this)
         nextBT!!.setOnClickListener(this)
         uploadPanCard!!.setOnClickListener(this)
@@ -225,11 +222,11 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         val tv_terms = dialog!!.findViewById<TextView>(R.id.tv_terms)
         val tvTermsOfUse = dialog!!.findViewById<TextView>(R.id.tvTermsOfUse)
         tv_terms.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.terms_and_conditions)
-        cancel.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_and_conditions)
+        cancel.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         buttonAccept.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.accept_and_continue)
-        tvTermsOfUse.text = MyApplication.getInstance().dbHelper.getString(R.string.terms_of_use)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.accept_and_continue)
+        tvTermsOfUse.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_of_use)
         val termsTV = dialog!!.findViewById<TextView>(R.id.tv_termsstring)
         customTextView(termsTV)
         cancel.setOnClickListener { v: View? ->
@@ -244,7 +241,7 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_check_terms_conditions),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_check_terms_conditions),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -255,9 +252,9 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun customTextView(view: TextView) {
         val spanTxt =
-            SpannableStringBuilder(MyApplication.getInstance().dbHelper.getString(R.string.agree_sk_terms))
+            SpannableStringBuilder(RetailerSDKApp.getInstance().dbHelper.getString(R.string.agree_sk_terms))
         spanTxt.setSpan(ForegroundColorSpan(Color.BLACK), 32, spanTxt.length, 0)
-        spanTxt.append(" " + MyApplication.getInstance().dbHelper.getString(R.string.terms_of_service))
+        spanTxt.append(" " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_of_service))
         spanTxt.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 startActivity(Intent(applicationContext, TermsAndConditionActivity::class.java))
@@ -277,7 +274,7 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         panCardNumberET = mBinding.etPanNumber
         GenderSpinner = mBinding.spGender
         toolbarTittleTV!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Upload_PAN_Card)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Upload_PAN_Card)
         toolBarBackLL!!.setOnClickListener(this)
         nextBT!!.setOnClickListener(this)
         uploadPanCard!!.setOnClickListener(this)
@@ -302,19 +299,19 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         if (genderString.equals("Select Gender", ignoreCase = true)) {
             Toast.makeText(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(
+                RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.Please_Select_gender
                 ), Toast.LENGTH_SHORT
             ).show()
         } else if (mBinding.ivUploadPan.drawable == null) {
             Toast.makeText(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.text_plz_up_y_p),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_plz_up_y_p),
                 Toast.LENGTH_SHORT
             ).show()
         } else if (TextUtils.isNullOrEmpty(panCardNumberST)) {
             panCardNumberET!!.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_please_enter_pan_card)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_please_enter_pan_card)
             panCardNumberET!!.requestFocus()
         } else {
             if (panCardImagePath != null) {
@@ -336,7 +333,7 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.please_upload_pan_card),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_upload_pan_card),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -353,10 +350,10 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
         val gallery = dialog.findViewById<TextView>(R.id.gallery)
         val cancel = dialog.findViewById<TextView>(R.id.liCancel)
         val tvAddPhotoHead = dialog.findViewById<TextView>(R.id.tvAddPhotoHead)
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener {
             callForImage(CAPTURE_IMAGE_CAMERA)
             dialog.dismiss()

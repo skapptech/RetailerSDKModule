@@ -11,7 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityOrd
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.OrderSummaryModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 import java.text.DecimalFormat
@@ -35,15 +35,15 @@ class OrderSummaryActivity : AppCompatActivity() {
         // back btn
         mbinding.toolbarOrderSummary.back.setOnClickListener { onBackPressed() }
         mbinding.toolbarOrderSummary.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_summary)
-        mbinding.status1.text = MyApplication.getInstance().dbHelper.getString(R.string.status)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_summary)
+        mbinding.status1.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.status)
         mbinding.totalorder.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.totalorder)
-        mbinding.amount.text = MyApplication.getInstance().dbHelper.getString(R.string.amount)
-        mbinding.del.text = MyApplication.getInstance().dbHelper.getString(R.string.delivered)
-        mbinding.cancel.text = MyApplication.getInstance().dbHelper.getString(R.string.canceled)
-        mbinding.pending.text = MyApplication.getInstance().dbHelper.getString(R.string.pending)
-        mbinding.order.text = MyApplication.getInstance().dbHelper.getString(R.string.totalorder)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.totalorder)
+        mbinding.amount.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount)
+        mbinding.del.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.delivered)
+        mbinding.cancel.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.canceled)
+        mbinding.pending.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pending)
+        mbinding.order.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.totalorder)
     }
 
     override fun onBackPressed() {
@@ -76,7 +76,7 @@ class OrderSummaryActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 this,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }

@@ -9,7 +9,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.BR
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemPaymentAdapterBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.PendingPaymentModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class PendingPaymentAdapter(
@@ -28,9 +28,9 @@ class PendingPaymentAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.mBinding.tvDateIpa.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.date)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.date)
         viewHolder.mBinding.tvId.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_id)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
         val model = ladgerEntryListModel!![i]
         viewHolder.mBinding.tvDate.text =
             Utils.getDateFormat(model.date)

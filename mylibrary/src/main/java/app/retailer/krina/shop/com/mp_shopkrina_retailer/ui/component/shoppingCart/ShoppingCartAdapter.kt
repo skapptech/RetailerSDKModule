@@ -21,7 +21,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.RemoveItemInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
@@ -94,29 +94,29 @@ class ShoppingCartAdapter(
                 }
             } else {
                 (viewHolder as ViewHolder).mBinding.tvMrpText.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.item_mrp
                     ) + " "
                 viewHolder.mBinding.tvOutOfStock.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.text_out_of_stock
                     )
                 viewHolder.mBinding.tvRemove.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_remove)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_remove)
                 viewHolder.mBinding.tvRemainingQtyText.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.remaining_qty
                     ) + " "
                 viewHolder.mBinding.tvItemLeftText.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.item_left
                     )
                 viewHolder.mBinding.tvEndInText.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.end_in_text
                     )
                 viewHolder.mBinding.tvItemExpair.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.text_free_item_is_out_of_stock
                     )
 
@@ -167,7 +167,7 @@ class ShoppingCartAdapter(
                 }
                 viewHolder.tvItemName.text = cartItemDetailsList.itemname
                 // check item in wishList
-                if (MyApplication.getInstance().noteRepository.isItemWishList(cartItemDetailsList.itemId)) {
+                if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(cartItemDetailsList.itemId)) {
                     viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
                 } else {
                     viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
@@ -189,7 +189,7 @@ class ShoppingCartAdapter(
                             viewHolder.mBinding.tvFreeItemQut.text = "0"
                             viewHolder.freeItemIV.setBackgroundResource(R.drawable.ic_gift_bg)
                             viewHolder.freeDepePointTV.text =
-                                MyApplication.getInstance().dbHelper.getString(
+                                RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.Dp
                                 )
                             val sfreewalletDP =
@@ -210,7 +210,7 @@ class ShoppingCartAdapter(
                             }
                             viewHolder.mBinding.tvFreeItemQut.text = "0"
                             viewHolder.freeDepePointTV.text =
-                                MyApplication.getInstance().dbHelper.getString(
+                                RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.free
                                 )
                             freeOfferTextGet =
@@ -285,11 +285,11 @@ class ShoppingCartAdapter(
                     viewHolder.mBinding.productImage.setImageResource(R.drawable.logo_grey)
                 }
                 val sMoq =
-                    MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + cartItemDetailsList.minOrderQty
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + cartItemDetailsList.minOrderQty
                 val sMRP = DecimalFormat("##.##").format(cartItemDetailsList.price)
                 val sPRICE = " | " + DecimalFormat("##.##").format(cartItemDetailsList.unitPrice)
                 val sMargin =
-                    MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                         "##.##"
                     ).format(java.lang.Double.valueOf(cartItemDetailsList.marginPoint)) + "%"
 
@@ -318,7 +318,7 @@ class ShoppingCartAdapter(
                 viewHolder.mBinding.tvMoq.text = Html.fromHtml(sMoq)
                 viewHolder.mBinding.tvMargin.text = Html.fromHtml(sMargin)
                 viewHolder.mBinding.tvDreamPoint.text =
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.Dp
                     ) + " " + cartItemDetailsList.dreamPoint
                 if (!TextUtils.isNullOrEmpty(cartItemDetailsList.scheme)) {
@@ -430,18 +430,18 @@ class ShoppingCartAdapter(
                     )
                 }
                 viewHolder.favItem.setOnClickListener { v: View? ->
-                    if (MyApplication.getInstance().noteRepository.isItemWishList(
+                    if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(
                             cartItemDetailsList.itemId
                         )
                     ) {
                         viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite)
-                        MyApplication.getInstance().noteRepository.deleteTask(cartItemDetailsList)
+                        RetailerSDKApp.getInstance().noteRepository.deleteTask(cartItemDetailsList)
                         Utils.addFav(cartItemDetailsList.itemId, false, activity)
                     } else {
                         viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red)
-                        MyApplication.getInstance().noteRepository.insertTask(cartItemDetailsList)
+                        RetailerSDKApp.getInstance().noteRepository.insertTask(cartItemDetailsList)
                         Utils.addFav(cartItemDetailsList.itemId, true, activity)
-                        MyApplication.getInstance().analyticAddWishList(cartItemDetailsList)
+                        RetailerSDKApp.getInstance().analyticAddWishList(cartItemDetailsList)
                     }
                 }
                 viewHolder.mBinding.DelItem.setOnClickListener { view: View? ->
@@ -550,20 +550,20 @@ class ShoppingCartAdapter(
                     if (addBtn) {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_item_available),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available),
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         if (cartItemDetailsList.offerQtyAvaiable <= itemQuantity + cartItemDetailsList.minOrderQty) {
                             Toast.makeText(
-                                activity, MyApplication.getInstance().dbHelper.getString(
+                                activity, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.no_item_available
                                 ), Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             Toast.makeText(
                                 activity,
-                                MyApplication.getInstance().dbHelper.getString(
+                                RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.only_add_maximum_item
                                 ) + " " + cartItemDetailsList.flashDealMaxQtyPersonCanTake,
                                 Toast.LENGTH_SHORT
@@ -609,7 +609,7 @@ class ShoppingCartAdapter(
                                 }
                             } else {
                                 Toast.makeText(
-                                    activity, MyApplication.getInstance().dbHelper.getString(
+                                    activity, RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.mini_qty_should_not_be_zero
                                     ), Toast.LENGTH_SHORT
                                 ).show()
@@ -635,7 +635,7 @@ class ShoppingCartAdapter(
                             }
                         } else {
                             Toast.makeText(
-                                activity, MyApplication.getInstance().dbHelper.getString(
+                                activity, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.mini_qty_should_not_be_zero
                                 ), Toast.LENGTH_SHORT
                             ).show()
@@ -700,7 +700,7 @@ class ShoppingCartAdapter(
         add: Boolean
     ): Boolean {
         var addFlag = addFlag
-        val qtyDTO = MyApplication.getInstance().noteRepository.getQtyTotalQtyByMrpId(
+        val qtyDTO = RetailerSDKApp.getInstance().noteRepository.getQtyTotalQtyByMrpId(
             model.itemId,
             model.itemMultiMRPId
         )
@@ -717,9 +717,9 @@ class ShoppingCartAdapter(
         if (add) {
             if (total + itemQuantity > itemlimitqty) {
                 Utils.setToast(
-                    activity, MyApplication.getInstance().dbHelper.getString(R.string.additemToast)
+                    activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast)
                             + " " + model.itemLimitQty + " " +
-                            MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2)
                 )
             } else {
                 if (itemQuantity > 0) {
@@ -760,7 +760,7 @@ class ShoppingCartAdapter(
     ): Boolean {
         var addFlag = addFlag
         try {
-            val total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(
+            val total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(
                 model.itemId,
                 model.itemMultiMRPId
             )
@@ -770,7 +770,7 @@ class ShoppingCartAdapter(
                 if (total + itemQuantity > itemlimitqty) {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                     )
                 } else {
                     viewHolder.tvselectedItemQuantity.text = "" + itemQuantity
@@ -781,7 +781,7 @@ class ShoppingCartAdapter(
                     if (itemQuantity > model.billLimitQty) {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text) + " " + model.billLimitQty + " item"
                         )
                     } else {
                         viewHolder.tvselectedItemQuantity.text = "" + itemQuantity

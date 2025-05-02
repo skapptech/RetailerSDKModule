@@ -23,7 +23,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.Spl
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.ChangePasswordModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
@@ -44,7 +44,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_changepassord);
-        mBinding.toolbarCp.title.setText(MyApplication.getInstance().dbHelper.getString(R.string.changepassword));
+        mBinding.toolbarCp.title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.changepassword));
         SharePrefs.getInstance(ChangePasswordActivity.this).putString(SharePrefs.IsSignup, "true");
 
         Intent intent = getIntent();
@@ -52,10 +52,10 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             flag = intent.getIntExtra("FLAG", 0);
         }
         if (flag == 0) {
-            mBinding.textInputLayout.setHint(MyApplication.getInstance().dbHelper.getString(R.string.enter_sms_password));
+            mBinding.textInputLayout.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_sms_password));
             mBinding.llMeassage.setVisibility(View.VISIBLE);
         } else {
-            mBinding.textInputLayout.setHint(MyApplication.getInstance().dbHelper.getString(R.string.oldpass));
+            mBinding.textInputLayout.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.oldpass));
         }
         //init view
         initialization();
@@ -100,9 +100,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
 
     public void initialization() {
-        mBinding.tvNewPassword.setHint(MyApplication.getInstance().dbHelper.getString(R.string.newpass));
-        mBinding.tvConfirmPassword.setHint(MyApplication.getInstance().dbHelper.getString(R.string.conformpass));
-        mBinding.changePasswordBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_Save));
+        mBinding.tvNewPassword.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.newpass));
+        mBinding.tvConfirmPassword.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.conformpass));
+        mBinding.changePasswordBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_Save));
 
         CurrentPassowrd = SharePrefs.getInstance(this).getString(SharePrefs.PASSWORD);
         custId = SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID);
@@ -124,25 +124,25 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
     private void validateFields() {
         if (!(mBinding.oldpassword.getText().toString().equalsIgnoreCase(CurrentPassowrd))) {
-            mBinding.oldpassword.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_old_password_incorrect));
+            mBinding.oldpassword.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_old_password_incorrect));
             mBinding.oldpassword.requestFocus();
         } else if (TextUtils.isNullOrEmpty(mBinding.newpassword.getText().toString().trim())) {
-            mBinding.newpassword.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_enter_new_pass));
+            mBinding.newpassword.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_enter_new_pass));
             mBinding.newpassword.requestFocus();
         } else if (CurrentPassowrd.equalsIgnoreCase(mBinding.newpassword.getText().toString().trim())) {
-            mBinding.newpassword.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_both_pass_not_same));
+            mBinding.newpassword.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_both_pass_not_same));
             mBinding.newpassword.requestFocus();
         } else if (mBinding.newpassword.length() <= 5) {
-            mBinding.newpassword.setError(MyApplication.getInstance().dbHelper.getString(R.string.special_validation));
+            mBinding.newpassword.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.special_validation));
             mBinding.newpassword.requestFocus();
         } else if (TextUtils.isNullOrEmpty(mBinding.oldpassword.getText().toString().trim())) {
-            mBinding.oldpassword.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_enter_old_pass));
+            mBinding.oldpassword.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_enter_old_pass));
             mBinding.oldpassword.requestFocus();
         } else if (TextUtils.isNullOrEmpty(mBinding.etConfirmPwd.getText().toString().trim())) {
-            mBinding.etConfirmPwd.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_enter_confrm_pass));
+            mBinding.etConfirmPwd.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_enter_confrm_pass));
             mBinding.etConfirmPwd.requestFocus();
         } else if (!mBinding.newpassword.getText().toString().trim().equalsIgnoreCase(mBinding.etConfirmPwd.getText().toString().trim())) {
-            mBinding.etConfirmPwd.setError(MyApplication.getInstance().dbHelper.getString(R.string.validation_doesnotmatch));
+            mBinding.etConfirmPwd.setError(RetailerSDKApp.getInstance().dbHelper.getString(R.string.validation_doesnotmatch));
             mBinding.etConfirmPwd.requestFocus();
         } else if (utils.isNetworkAvailable()) {
             if (commonClassForAPI != null) {
@@ -153,7 +153,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         new ChangePasswordModel(SconfirmPassword, SoldPassword, custId));
             }
         } else {
-            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
         }
     }
 
@@ -165,7 +165,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             try {
                 if (jsonObject.get("Status").getAsBoolean()) {
                     Utils.hideProgressDialog();
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.msg_passwordchanged));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_passwordchanged));
                     mBinding.oldpassword.setText("");
                     mBinding.etConfirmPwd.setText("");
                     mBinding.newpassword.setText("");
@@ -174,8 +174,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         startActivity(new Intent(getApplicationContext(), SplashScreenActivity.class));
                         Utils.leftTransaction(ChangePasswordActivity.this);
                         finish();
-                        MyApplication.getInstance().prefManager.setLoggedIn(false);
-                        MyApplication.getInstance().prefManager.setShowcaseFirstTimeLaunch(true);
+                        RetailerSDKApp.getInstance().prefManager.setLoggedIn(false);
+                        RetailerSDKApp.getInstance().prefManager.setShowcaseFirstTimeLaunch(true);
                     } else if (flag == 1) {
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         Utils.rightTransaction(ChangePasswordActivity.this);
@@ -185,7 +185,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         finish();
                     }
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.msg_passwordntchanged));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_passwordntchanged));
                     Utils.hideProgressDialog();
                 }
             } catch (Exception e) {

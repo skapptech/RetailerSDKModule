@@ -31,7 +31,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.Dismiss
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.Gravity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.GuideListener
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.GuideView
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -53,7 +53,7 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
 
         // setContentView(R.layout.activity_return_replace)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.title_activity_return_order)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_return_order)
         if (intent.extras != null) {
             orderId = intent.getIntExtra("orderId", 0)
         }
@@ -77,9 +77,9 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initViews() {
         // set String
-        mBinding!!.etOrderId.setText(MyApplication.getInstance().dbHelper.getString(R.string.order_id))
+        mBinding!!.etOrderId.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id))
         mBinding!!.btnSubmit.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_add_request)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_add_request)
 
         mBinding!!.recyclerOffer.layoutManager = LinearLayoutManager(applicationContext)
         mBinding!!.btnSubmit.setOnClickListener(this)
@@ -97,7 +97,7 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.text_enter_order_id)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_enter_order_id)
                         )
                     }
                     return@setOnTouchListener true
@@ -161,12 +161,12 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
         if (mBinding!!.spReturnType.selectedItemPosition == 0) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.text_plz_select_return_replace)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_plz_select_return_replace)
             )
         } else if (list!!.size == 0) {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.text_plz_select_order)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_plz_select_order)
             )
         } else {
             val list = ArrayList<ReturnOrderItemModel>()
@@ -196,7 +196,7 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_plz_select_at_lease_one_item)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_plz_select_at_lease_one_item)
                 )
             }
         }
@@ -227,7 +227,7 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_accept_terms_condition)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_accept_terms_condition)
                 )
             }
         }
@@ -239,26 +239,26 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun appStoryView() {
         builder = GuideView.Builder(this)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.return_replace))
-            .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.return_replace_detail))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.return_replace))
+            .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.return_replace_detail))
             .setGravity(Gravity.center)
             .setDismissType(DismissType.anywhere)
             .setTargetView(mBinding!!.spReturnType)
             .setGuideListener(GuideListener { view ->
                 when (view.id) {
                     R.id.spReturnType -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Select_Order
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.Select_Order_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Select_Order_detail))
                         .setTargetView(mBinding!!.spOrderList).build()
                     R.id.spOrderList -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Submit_Request
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.Submit_Request_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Submit_Request_detail))
                         .setTargetView(mBinding!!.btnSubmit).build()
                     R.id.btnSubmit -> {
                         StoryBordSharePrefs.getInstance(this@ReturnReplaceActivity)
@@ -281,13 +281,13 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
                     Utils.hideProgressDialog()
                     if (arrayList.size > 0) {
                         orderList = arrayList
-                        orderAdapter?.add(MyApplication.getInstance().dbHelper.getString(R.string.text_select_order))
+                        orderAdapter?.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_select_order))
                         for (i in orderList!!) {
                             orderAdapter?.add("" + i)
                         }
                         orderAdapter?.notifyDataSetChanged()
                     } else {
-                        orderAdapter?.add(MyApplication.getInstance().dbHelper.getString(R.string.text_select_order))
+                        orderAdapter?.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_select_order))
                         orderAdapter?.notifyDataSetChanged()
                     }
                 } catch (e: Exception) {
@@ -318,7 +318,7 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
                         itemListAdapter?.notifyDataSetChanged()
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.text_this_order_can_not_replce)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_this_order_can_not_replce)
                         )
                     }
                 } catch (e: Exception) {

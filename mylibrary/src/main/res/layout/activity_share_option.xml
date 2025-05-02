@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
     <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -40,7 +39,7 @@
                     android:layout_height="@dimen/size40"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:tint="@color/black"
+                    app:tint="@color/black"
                     app:srcCompat="@drawable/ic_clock" />
 
                 <LinearLayout
@@ -85,7 +84,7 @@
                 <ImageView
                     android:layout_width="@dimen/size40"
                     android:layout_height="@dimen/size40"
-                    android:tint="@color/black"
+                    app:tint="@color/black"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     app:srcCompat="@drawable/ic_checklist" />
@@ -132,7 +131,7 @@
                 <ImageView
                     android:layout_width="@dimen/size40"
                     android:layout_height="@dimen/size40"
-                    android:tint="@color/black"
+                    app:tint="@color/black"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     app:srcCompat="@drawable/ic_diagram" />
@@ -179,7 +178,7 @@
                 <ImageView
                     android:layout_width="@dimen/size40"
                     android:layout_height="@dimen/size40"
-                    android:tint="@color/black"
+                    app:tint="@color/black"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     app:srcCompat="@drawable/ic_speech_bubble" />
@@ -216,5 +215,3 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-</layout>

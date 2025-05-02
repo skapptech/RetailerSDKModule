@@ -15,7 +15,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Custo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class CheckSignUpActivity : AppCompatActivity(), View.OnClickListener {
@@ -43,12 +43,12 @@ class CheckSignUpActivity : AppCompatActivity(), View.OnClickListener {
         discretionTv = mBinding!!.tvDiscripction
         titleTV = mBinding!!.toolbar.title
         mBinding!!.tvDiscripction.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.sign_up_tittle)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.sign_up_tittle)
         mBinding!!.tvSelectMultiplePay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_select_nultiple_pay_no_order_to_pay_at_once)
-        mBinding!!.tvPaynow.text = MyApplication.getInstance().dbHelper.getString(R.string.pay_now)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_nultiple_pay_no_order_to_pay_at_once)
+        mBinding!!.tvPaynow.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_now)
         mBinding!!.btnSignUp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_signup)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_signup)
         titleTV!!.text = tittleHeader
         backLayout!!.setOnClickListener(this)
         mBinding!!.btnSignUp.setOnClickListener(this)

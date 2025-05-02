@@ -17,7 +17,6 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.view.animation.Animation
 import android.webkit.WebSettings
 import android.widget.ImageView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +47,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.appHome.AppHomeItemAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.appHome.FlashDealOfferFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -280,7 +279,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "store_appHome_loadMore_click",
                         analyticPost
                     )
@@ -298,7 +297,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "store_appHome_viewAll_click",
                         analyticPost
                     )
@@ -369,7 +368,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalytics("store_appHome_loadMore_click", analyticPost)
                     val args = Bundle()
                     args.putString("SECTION_ID", homeDataModel.sectionID.toString())
@@ -386,7 +385,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "store_appHome_viewAll_click",
                         analyticPost
                     )
@@ -438,7 +437,7 @@ class StoreDashAdapter(
                     analyticPost.sectionSubType = homeDataModel.sectionSubType
                     analyticPost.sectionName = homeDataModel.sectionName
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics(
+                    RetailerSDKApp.getInstance().updateAnalytics(
                         "store_appHome_flash_LoadMore_click",
                         analyticPost
                     )
@@ -529,7 +528,7 @@ class StoreDashAdapter(
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.iv_categoties -> {
-                    MyApplication.getInstance().updateAnalytics("store_category_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("store_category_click")
                     val args = Bundle()
                     args.putString("ItemId", "")
                     args.putInt("BaseCategoryId", 0)
@@ -542,7 +541,7 @@ class StoreDashAdapter(
                 }
 
                 R.id.iv_freebies_offer -> {
-                    MyApplication.getInstance().updateAnalytics("store_freebie_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("store_freebie_click")
                     activity.startActivity(
                         Intent(
                             activity,
@@ -616,7 +615,7 @@ class StoreDashAdapter(
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.iv_categoties -> {
-                    MyApplication.getInstance().updateAnalytics("store_category_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("store_category_click")
                     val args = Bundle()
                     args.putString("ItemId", "")
                     args.putString("BaseCategoryId", "")
@@ -629,7 +628,7 @@ class StoreDashAdapter(
                 }
 
                 R.id.iv_freebies_offer -> {
-                    MyApplication.getInstance().updateAnalytics("store_freebie_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("store_freebie_click")
                     activity.startActivity(
                         Intent(
                             activity,
@@ -642,7 +641,7 @@ class StoreDashAdapter(
                 }
 
                 R.id.ll_My_target -> {
-                    MyApplication.getInstance().updateAnalytics("store_target_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("store_target_click")
                     activity.startActivity(
                         Intent(
                             activity,

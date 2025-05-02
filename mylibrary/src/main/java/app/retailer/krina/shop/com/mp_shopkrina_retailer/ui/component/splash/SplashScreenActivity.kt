@@ -19,7 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
@@ -32,7 +31,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.splash.Company
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.splash.CompanyInfoResponse.CompanyDetails
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivitySplashScreenBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ContactUsActivity
@@ -46,7 +44,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Mobil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SaveCustomerLocalInfo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -150,8 +148,8 @@ class SplashScreenActivity : AppCompatActivity() {
             )
         )
         languageForBundle()
-        MyApplication.getInstance().noteRepository.deleteFeed()
-        MyApplication.getInstance().checkLastLogin()
+        RetailerSDKApp.getInstance().noteRepository.deleteFeed()
+        RetailerSDKApp.getInstance().checkLastLogin()
     }
 
     override fun onDestroy() {
@@ -273,7 +271,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun callAPI() {
-        MyApplication.getInstance().clearLocalData()
+        RetailerSDKApp.getInstance().clearLocalData()
         viewModel.callAppVersion()
     }
 
@@ -301,14 +299,14 @@ class SplashScreenActivity : AppCompatActivity() {
         @SuppressLint("RestrictedApi") val alertDialogBuilder = AlertDialog.Builder(
             ContextThemeWrapper(this, R.style.Base_Theme_AppCompat_Dialog)
         )
-        alertDialogBuilder.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.youAreNotUpdatedTitle))
+        alertDialogBuilder.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.youAreNotUpdatedTitle))
         alertDialogBuilder.setMessage(
-            MyApplication.getInstance().dbHelper.getString(R.string.youAreNotUpdatedMessage)
-                    + " " + mAppVersion + " " + MyApplication.getInstance().dbHelper.getString(R.string.youAreNotUpdatedMessage1)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.youAreNotUpdatedMessage)
+                    + " " + mAppVersion + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.youAreNotUpdatedMessage1)
         )
         alertDialogBuilder.setCancelable(false)
         alertDialogBuilder.setPositiveButton(
-            MyApplication.getInstance().dbHelper.getString(R.string.update)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.update)
         ) { dialog: DialogInterface, id: Int ->
             dialog.cancel()
             if (BuildConfig.DEBUG)
@@ -327,7 +325,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 )
         }
         alertDialogBuilder.setNegativeButton(
-            MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         ) { dialog: DialogInterface, i: Int ->
             dialog.cancel()
             finish()
@@ -408,7 +406,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun loadingData() {
-        MyApplication.getInstance().clearLocalData()
+        RetailerSDKApp.getInstance().clearLocalData()
         mBinding!!.btnTryAgain.visibility = View.GONE
         mBinding!!.pBar.visibility = View.VISIBLE
         viewModel.getMyProfile(
@@ -501,7 +499,7 @@ class SplashScreenActivity : AppCompatActivity() {
                             }
                             if (!isCallLogin) {
                                 if (isPresent) {
-                                    if (MyApplication.getInstance().prefManager.isLoggedIn) {
+                                    if (RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
                                         loadingData()
                                     } else {
                                         mBinding!!.pBar.visibility = View.GONE
@@ -527,7 +525,7 @@ class SplashScreenActivity : AppCompatActivity() {
                             }
                         } else {
                             mBinding!!.root.snackbar(
-                                MyApplication.getInstance().dbHelper.getString(
+                                RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.no_response
                                 )
                             )
@@ -551,7 +549,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 it.data?.let {
                     try {
                         if (it.isLogOutFromThisDevice) {
-                            MyApplication.getInstance().logout(this@SplashScreenActivity)
+                            RetailerSDKApp.getInstance().logout(this@SplashScreenActivity)
                             val intent =
                                 Intent(applicationContext, MobileSignUpActivity::class.java)
                             intent.putExtra("isSplash", true)
@@ -588,7 +586,7 @@ class SplashScreenActivity : AppCompatActivity() {
                                     )
                                 }
                                 if (customer.isResetPasswordOnLogin) {
-                                    MyApplication.getInstance().logout(this@SplashScreenActivity)
+                                    RetailerSDKApp.getInstance().logout(this@SplashScreenActivity)
                                     val intent =
                                         Intent(applicationContext, ContactUsActivity::class.java)
                                     intent.putExtra("Type", "ResetPasswordActivity")
@@ -612,7 +610,7 @@ class SplashScreenActivity : AppCompatActivity() {
                                     ignoreCase = true
                                 )
                             ) {
-                                MyApplication.getInstance().logout(this@SplashScreenActivity)
+                                RetailerSDKApp.getInstance().logout(this@SplashScreenActivity)
                             }
                         }
                     } catch (ex: Exception) {
@@ -631,7 +629,7 @@ class SplashScreenActivity : AppCompatActivity() {
                                 ).getString(SharePrefs.TOKEN_NAME)
                             )
                         ) {
-                            MyApplication.getInstance().logout(this@SplashScreenActivity)
+                            RetailerSDKApp.getInstance().logout(this@SplashScreenActivity)
                         } else {
                             viewModel.callToken(
                                 "password",
@@ -883,8 +881,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 it.data?.let {
                     SharePrefs.getInstance(applicationContext)
                         .putString(SharePrefs.TOKEN, it.access_token)
-                    MyApplication.getInstance().prefManager.isLoggedIn = true
-                    MyApplication.getInstance().prefManager.setShowcaseFirstTimeLaunch(true)
+                    RetailerSDKApp.getInstance().prefManager.isLoggedIn = true
+                    RetailerSDKApp.getInstance().prefManager.setShowcaseFirstTimeLaunch(true)
                     callAPI()
                 }
             }

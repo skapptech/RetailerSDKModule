@@ -23,12 +23,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityBusinessCardBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.Constants
@@ -49,7 +48,7 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_business_card)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_activity_business_card)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_business_card)
 
         initViews()
 
@@ -103,19 +102,19 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initViews() {
         mBinding.tvPoweredBy.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.powered_by_shopkirana)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.powered_by_shopkirana)
         mBinding.tvCreatedandShare.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.create_and_share_your_business_card)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.create_and_share_your_business_card)
         mBinding.tvCardName.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_name)
         mBinding.tvCardNumber.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.mobile_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.mobile_number)
         mBinding.tvCardEmail.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.email_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.email_address)
         mBinding.tvCardAddress.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.shop_office_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_office_address)
         mBinding.tvShareCard.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.share_your_business_card)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.share_your_business_card)
     }
 
     private fun updateCardViews() {
@@ -248,11 +247,11 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
             e.printStackTrace()
             Toast.makeText(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.whatsapp_not_installed),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.whatsapp_not_installed),
                 Toast.LENGTH_SHORT
             ).show()
         }
-        MyApplication.getInstance()
+        RetailerSDKApp.getInstance()
             .updateAnalyticShare(javaClass.simpleName, "BusinessCard WhatsApp Share")
     }
 
@@ -277,7 +276,7 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         startActivity(Intent.createChooser(intent, "Share Business Card"))
-        MyApplication.getInstance().updateAnalyticShare(javaClass.simpleName, "BusinessCard Share")
+        RetailerSDKApp.getInstance().updateAnalyticShare(javaClass.simpleName, "BusinessCard Share")
     }
 
     private fun showBottomSheetDialog(bitmap: Bitmap?) {
@@ -288,10 +287,10 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
         val tvShareYourBCard = view.findViewById<TextView>(R.id.tvShareYourBCard)
         val tvWhatsapp = view.findViewById<TextView>(R.id.tvWhatsapp)
         val btnShare = view.findViewById<AppCompatButton>(R.id.btn_share)
-        btnShare.text = MyApplication.getInstance().dbHelper.getString(R.string.other)
+        btnShare.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.other)
         tvShareYourBCard.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.share_your_business_card)
-        tvWhatsapp.text = MyApplication.getInstance().dbHelper.getString(R.string.share_on_whatsapp)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.share_your_business_card)
+        tvWhatsapp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.share_on_whatsapp)
         ivImage.setImageBitmap(bitmap)
         view.findViewById<View>(R.id.li_share).setOnClickListener { shareOnWhatsapp() }
         view.findViewById<View>(R.id.btn_share).setOnClickListener { shareImage() }

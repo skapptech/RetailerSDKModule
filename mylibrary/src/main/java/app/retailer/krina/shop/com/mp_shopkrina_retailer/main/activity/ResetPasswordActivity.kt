@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityResetPassBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class ResetPasswordActivity : AppCompatActivity() {
@@ -48,15 +48,15 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     private fun setValue() {
         mBinding.toolbarResetPassword.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.customer_support)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.customer_support)
         mBinding.tvAnyIssueContact.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.contact_us_issues)
-        mBinding.btnOk.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact_us_issues)
+        mBinding.btnOk.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         mBinding.callus.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.contact) + ":" + "    " + "+(91)7828112112"
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact) + ":" + "    " + "+(91)7828112112"
         mBinding.email.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.email) + ":" + "          " + "info@shopKirana.com"
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.email) + ":" + "          " + "info@shopKirana.com"
         mBinding.website.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.website) + ":" + "      " + "http://www.ShopKirana.com"
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.website) + ":" + "      " + "http://www.ShopKirana.com"
     }
 }

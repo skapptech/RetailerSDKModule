@@ -28,7 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AvenuesParams
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonObject
 import io.reactivex.observers.DisposableObserver
@@ -54,7 +54,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_membership_plan)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "SK " + SharePrefs.getInstance(applicationContext)
-            .getString(SharePrefs.PRIME_NAME) + MyApplication.getInstance().dbHelper.getString(R.string.membership)
+            .getString(SharePrefs.PRIME_NAME) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.membership)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -81,7 +81,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/prime_terms_hindi.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/prime_terms_hindi.html"
                         )
                 )
             } else {
@@ -89,7 +89,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/prime_terms.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/prime_terms.html"
                         )
                 )
             }
@@ -118,7 +118,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
                         //                        hdfcTxtAmt = Double.parseDouble(object.getString("amount"));
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.transaction_p) + " " + `object`.getString(
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.transaction_p) + " " + `object`.getString(
                                 AvenuesParams.STATUS
                             )
                         )
@@ -183,9 +183,9 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
         } else {
             Utils.showSnackBar(
                 mBinding.rvPlan,
-                MyApplication.getInstance().dbHelper.getString(R.string.inactive_account_cannot_join_prime),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_account_cannot_join_prime),
                 true,
-                MyApplication.getInstance().dbHelper.getString(R.string.ok)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
             )
         }
     }
@@ -193,7 +193,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
     private fun initialize() {
         mBinding.tvTerms.text = getString(R.string.app_name) + " " +
                 SharePrefs.getInstance(applicationContext).getString(SharePrefs.PRIME_NAME) +
-                MyApplication.getInstance().dbHelper.getString(R.string.shopkirana_prime_terms_and_conditions)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.shopkirana_prime_terms_and_conditions)
         mBinding.tvTerms.setOnClickListener(this)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         list = ArrayList()
@@ -285,16 +285,16 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
         val tv_congratulation = mView.findViewById<TextView>(R.id.tv_congratulation)
         val btnContinue = mView.findViewById<Button>(R.id.btnContinue)
         tv_congratulation.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Congratulation)
-        btnContinue.text = MyApplication.getInstance().dbHelper.getString(R.string.txt_Continue)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Congratulation)
+        btnContinue.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Continue)
         orderMsg.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.on_your_sk_prime_membership) +
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.on_your_sk_prime_membership) +
                     " " + SharePrefs.getInstance(applicationContext)
                 .getString(SharePrefs.PRIME_NAME) +
-                    MyApplication.getInstance().dbHelper.getString(R.string.membership)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.membership)
         tvDate.text = "" +
-                MyApplication.getInstance().dbHelper.getString(R.string.subscribed_on)
-        Utils.getDateTimeFormate(startDate) + MyApplication.getInstance().dbHelper.getString(R.string.valid_till) + Utils.getDateTimeFormate(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.subscribed_on)
+        Utils.getDateTimeFormate(startDate) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_till) + Utils.getDateTimeFormate(
             endDate
         )
 
@@ -309,7 +309,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
             finish()
         }
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("prime_joined_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("prime_joined_dialog")
     }
 
     // prime plans
@@ -445,7 +445,7 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
                 Utils.hideProgressDialog()
                 try {
                     if (`object`["Status"].asBoolean) {
-                        MyApplication.getInstance().clearCartData()
+                        RetailerSDKApp.getInstance().clearCartData()
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

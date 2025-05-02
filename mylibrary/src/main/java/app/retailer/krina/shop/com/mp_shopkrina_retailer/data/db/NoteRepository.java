@@ -23,7 +23,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListM
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.NotifyModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 
@@ -347,13 +347,13 @@ public class NoteRepository {
         try {
             value = noteDatabase.daoLangAccess().getString(key);
             if (TextUtils.isNullOrEmpty(value)) {
-                int resId = MyApplication.getInstance().getResources().getIdentifier(key, "string", MyApplication.getInstance().getPackageName());
-                value = MyApplication.getInstance().getResources().getString(resId);
+                int resId = RetailerSDKApp.getInstance().getResources().getIdentifier(key, "string", RetailerSDKApp.getInstance().getPackageName());
+                value = RetailerSDKApp.getInstance().getResources().getString(resId);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            int resId = MyApplication.getInstance().getResources().getIdentifier(key, "string", MyApplication.getInstance().getPackageName());
-            value = MyApplication.getInstance().getResources().getString(resId);
+            int resId = RetailerSDKApp.getInstance().getResources().getIdentifier(key, "string", RetailerSDKApp.getInstance().getPackageName());
+            value = RetailerSDKApp.getInstance().getResources().getString(resId);
         }
         return value;
     }
@@ -361,14 +361,14 @@ public class NoteRepository {
     public String getString(int key) {
         String value = "";
         try {
-            String stringKey = MyApplication.getInstance().getResources().getResourceEntryName(key);
+            String stringKey = RetailerSDKApp.getInstance().getResources().getResourceEntryName(key);
             value = noteDatabase.daoLangAccess().getString(stringKey);
             if (TextUtils.isNullOrEmpty(value)) {
-                value = MyApplication.getInstance().getResources().getString(key);
+                value = RetailerSDKApp.getInstance().getResources().getString(key);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            value = MyApplication.getInstance().getResources().getString(key);
+            value = RetailerSDKApp.getInstance().getResources().getString(key);
         }
         return value;
     }
@@ -380,7 +380,7 @@ public class NoteRepository {
             protected Void doInBackground(Void... voids) {
                 noteDatabase.daoLangAccess().truncateLangTable();
                 for (DataSnapshot postSnapshot : dataPostSnapshot.getChildren()) {
-                    String selectedLanguage = SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.SELECTED_LANGUAGE);
+                    String selectedLanguage = SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.SELECTED_LANGUAGE);
                     if (selectedLanguage.equals(postSnapshot.getKey())) {
                         ArrayList<LangModel> list = new ArrayList<>();
                         for (DataSnapshot langSnapshot : postSnapshot.getChildren()) {
@@ -398,11 +398,11 @@ public class NoteRepository {
                 System.out.println("db updated");
                 Utils.hideProgressDialog();
                 try {
-                Utils.setLocale(MyApplication.getInstance().activity, LocaleHelper.getLanguage(MyApplication.getInstance().activity));
-                LocaleHelper.setLocale(MyApplication.getInstance().activity, LocaleHelper.getLanguage(MyApplication.getInstance().activity));
-                MyApplication.getInstance().activity.startActivity(new Intent(MyApplication.getInstance().activity, HomeActivity.class)
+                Utils.setLocale(RetailerSDKApp.getInstance().activity, LocaleHelper.getLanguage(RetailerSDKApp.getInstance().activity));
+                LocaleHelper.setLocale(RetailerSDKApp.getInstance().activity, LocaleHelper.getLanguage(RetailerSDKApp.getInstance().activity));
+                RetailerSDKApp.getInstance().activity.startActivity(new Intent(RetailerSDKApp.getInstance().activity, HomeActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                    MyApplication.getInstance().activity.finish();
+                    RetailerSDKApp.getInstance().activity.finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

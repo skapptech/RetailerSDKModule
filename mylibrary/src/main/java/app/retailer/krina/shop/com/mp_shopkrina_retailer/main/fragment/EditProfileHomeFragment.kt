@@ -32,7 +32,6 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.EditProfileModel
@@ -49,7 +48,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomerAddressActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -58,10 +57,7 @@ import com.squareup.picasso.Picasso
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -105,14 +101,14 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             editProfileActivity!!,
             this.javaClass.simpleName,
             null
         )
         mBinding.btnAddress.isClickable = true
         editProfileActivity!!.tv_title!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.profile)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.profile)
     }
 
     override fun onClick(v: View) {
@@ -126,7 +122,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 } else {
                     Utils.setToast(
                         editProfileActivity,
-                        MyApplication.getInstance().dbHelper.getData("gps_permission")
+                        RetailerSDKApp.getInstance().dbHelper.getData("gps_permission")
                     )
                 }
             }
@@ -169,13 +165,13 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getData("txt_note_verified")
+                            RetailerSDKApp.getInstance().dbHelper.getData("txt_note_verified")
                         )
                     }
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getData("gps_permission")
+                        RetailerSDKApp.getInstance().dbHelper.getData("gps_permission")
                     )
                 }
             }
@@ -198,14 +194,14 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 mBinding.ivCustProfile.setImageURI(selectedImage)
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.txt_capture)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_capture)
                 )
                 if (utils!!.isNetworkAvailable) {
                     uploadMultipart()
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             } else if (requestCode == GALLERY_REQUST && resultCode == Activity.RESULT_OK && null != data) {
@@ -255,17 +251,17 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         commonClassForAPI = CommonClassForAPI.getInstance(activity)
         custId = SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID)
         mBinding.chnage.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_change_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_change_address)
         mBinding.txtPreferences.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_preferences)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_preferences)
         mBinding.btnPersonalInfo.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_personal_informations)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_personal_informations)
         mBinding.btnShopDetail.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_shop_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_shop_details)
         mBinding.btnHoliday.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.shop_holiday)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_holiday)
         mBinding.btnRateApp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
 
         utils = Utils(activity)
         mBinding.btnPremium.setOnClickListener(this)
@@ -280,7 +276,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                 .equals("Full Verified", ignoreCase = true)
         ) {
             mBinding.txtNote.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_note_verified)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_note_verified)
             mBinding.txtNote.visibility = View.VISIBLE
         }
         if (editProfileActivity!!.editProfileModel!!.mobile == null) {
@@ -379,7 +375,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().noteRepository.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().noteRepository.getString(R.string.internet_connection)
             )
         }
     }
@@ -560,7 +556,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         } else {
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -675,15 +671,15 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         val okBtn = dialog.findViewById<TextView>(R.id.ok_btn)
         val cancelBtn = dialog.findViewById<TextView>(R.id.cancel_btn)
         val criticalInfoMissMSG =
-            MyApplication.getInstance().dbHelper.getString(R.string.licence_update_msg)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.licence_update_msg)
         if (criticalInfoMissMSG.startsWith("Your Critical info")) {
             tvTitle.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.critical_info_msg)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.critical_info_msg)
         } else {
             tvTitle.text = criticalInfoMissMSG
         }
         tvInfo.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_update_your_information)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_update_your_information)
         okBtn.setOnClickListener {
             dialog.dismiss()
             if (activity != null && isAdded) startActivity(
@@ -715,8 +711,8 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         val spDays = dialog.findViewById<Spinner>(R.id.spDays)
         val btnSubmit = dialog.findViewById<Button>(R.id.btnSubmit)
 
-        tvTitle!!.text = MyApplication.getInstance().dbHelper.getString(R.string.shop_holiday)
-        tvDesc!!.text = MyApplication.getInstance().dbHelper.getString(R.string.shop_holiday_des)
+        tvTitle!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_holiday)
+        tvDesc!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_holiday_des)
 
 //        calendarView?.minDate = System.currentTimeMillis()
 //        calendarView?.maxDate = (System.currentTimeMillis() + 24 * 60 * 60 * 1000 * 6)
@@ -848,7 +844,7 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                     if (response.status) {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.succesfullSubmitted),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.succesfullSubmitted),
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {

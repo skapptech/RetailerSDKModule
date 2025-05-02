@@ -1,7 +1,6 @@
 package app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.feed.ImageObjEntity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.GridItemLayoutBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.bumptech.glide.Glide
 import java.io.File
 
@@ -42,7 +40,7 @@ class ImageAdapter(
             holder.mBinding.image.setImageURI(File(model.imgFileFullPath).toUri())
         } else {
             Glide.with(context)
-                .load(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
+                .load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + model.imgFileFullPath)
                 .into(holder.mBinding.image)
         }
 

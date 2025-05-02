@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.FaqAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.myIssues.MyIssuesActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.FaqModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -25,9 +25,9 @@ class FaqActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_faq)
         mBinding.toolbarFaq.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.help)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.help)
         mBinding.tvIssueCat.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.my_issues)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_issues)
 
         mBinding.toolbarFaq.back.setOnClickListener { onBackPressed() }
         val utils = Utils(this)
@@ -42,7 +42,7 @@ class FaqActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
         if (SharePrefs.getInstance(applicationContext).getBoolean(SharePrefs.IS_SHOW_TICKET_MENU)) {

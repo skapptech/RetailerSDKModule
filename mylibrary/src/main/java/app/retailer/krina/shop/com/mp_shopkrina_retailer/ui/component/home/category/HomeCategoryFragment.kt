@@ -20,13 +20,13 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHom
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.Gson
 import org.json.JSONObject
 
 open class HomeCategoryFragment : Fragment() {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private var rootView: View? = null
     private lateinit var mBinding: FragmentHomeCategoryBinding
     private lateinit var homeCategoryViewModel: HomeCategoryViewModel
@@ -37,7 +37,7 @@ open class HomeCategoryFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -71,7 +71,7 @@ open class HomeCategoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         activity!!.bottomNavigationView!!.menu.findItem(R.id.category).isChecked = true
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName, null
         )
@@ -159,7 +159,7 @@ open class HomeCategoryFragment : Fragment() {
                 mBinding.progressBar.visibility = View.GONE
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_response)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_response)
                 )
             }
         }

@@ -15,7 +15,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentGul
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.GullakDataListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.GullakModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -61,7 +61,7 @@ class GullakFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvEmpty.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_items_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_available)
 
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerGullak.layoutManager = layoutManager
@@ -104,9 +104,9 @@ class GullakFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity.tvInfo.text = MyApplication.getInstance().dbHelper.getString(R.string.add_money)
+        activity.tvInfo.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_money)
         activity.binding.toolbarG.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.my_gullak)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_gullak)
     }
 
 

@@ -10,7 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityPendingPaymentBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.PendingPaymentAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.PendingPaymentModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.DecimalFormat
@@ -84,7 +84,7 @@ class PendingPaymentActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getData("no_data_available"),
+                    RetailerSDKApp.getInstance().dbHelper.getData("no_data_available"),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -108,8 +108,8 @@ class PendingPaymentActivity : AppCompatActivity() {
 
     private fun initview() {
         mBinding.toolbarPending.title.text =
-            MyApplication.getInstance().dbHelper.getData("pending_payment")
-        mBinding.tvTotalAmountP.text = MyApplication.getInstance().dbHelper.getData("total_amnt")
+            RetailerSDKApp.getInstance().dbHelper.getData("pending_payment")
+        mBinding.tvTotalAmountP.text = RetailerSDKApp.getInstance().dbHelper.getData("total_amnt")
         pendingPaymentList = ArrayList()
         mBinding.toolbarPending.back.setOnClickListener { onBackPressed() }
     }

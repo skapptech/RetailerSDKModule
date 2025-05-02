@@ -15,7 +15,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemBottomT
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.orderdetail.TrackOrderActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.io.File
 
@@ -63,7 +63,7 @@ class BottomCallAdapter(
         ratingList.clear()
         if (holder.itemViewType == SALES_RATING) {
             (holder as SalesHolder).mBinding.tvPleaseRateH.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.please_rate_sales_person_bottom)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_rate_sales_person_bottom)
             var url =
                 EndPointPref.getInstance(activity).baseUrl + File.separator + model.relativeUrl
             url = url.replace("{Id}", "" + model.id)
@@ -82,7 +82,7 @@ class BottomCallAdapter(
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().noteRepository.getString(R.string.text_some_error_occured)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.text_some_error_occured)
                     )
                 }
             }
@@ -95,7 +95,7 @@ class BottomCallAdapter(
                         Utils.hideProgressDialog()
                         if (!isClosed) Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.your_feedback_submitted_suc)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_feedback_submitted_suc)
                         )
                         isClosed = false
                     }
@@ -107,7 +107,7 @@ class BottomCallAdapter(
             }
         } else if (holder.itemViewType == DELIVERY_RATING) {
             (holder as DeliveryHolder).mBinding.tvPleaseRateH.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.please_rate_delivery_boy_bottom)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_rate_delivery_boy_bottom)
             var url =
                 EndPointPref.getInstance(activity).baseUrl + File.separator + model.relativeUrl
             url = url.replace("{Id}", "" + model.id)
@@ -126,7 +126,7 @@ class BottomCallAdapter(
                 } else {
                     Utils.setToast(
                         activity,
-                        MyApplication.getInstance().noteRepository.getString(R.string.text_some_error_occured)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.text_some_error_occured)
                     )
                 }
             }
@@ -139,7 +139,7 @@ class BottomCallAdapter(
                         Utils.hideProgressDialog()
                         if (!isClosed) Utils.setToast(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.your_feedback_submitted_suc)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_feedback_submitted_suc)
                         )
                         isClosed = false
                     }
@@ -151,7 +151,7 @@ class BottomCallAdapter(
             }
         } else {
             (holder as TrackOrdHolder).mBinding.tvOrderH.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.order_is_arriving_today)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_is_arriving_today)
             var url =
                 EndPointPref.getInstance(activity).baseUrl + File.separator + model.relativeUrl
             url = url.replace("{Id}", "" + model.id)

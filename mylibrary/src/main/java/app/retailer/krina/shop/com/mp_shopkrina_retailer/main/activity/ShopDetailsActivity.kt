@@ -42,10 +42,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.EditProfileModel
@@ -62,7 +60,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeA
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.gms.common.api.GoogleApiClient
@@ -83,9 +81,7 @@ import com.squareup.picasso.Picasso
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -182,7 +178,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
         mGoogleApiClient = GoogleApiClient.Builder(this)
@@ -253,33 +249,33 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                 val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
                 if (sShopName.isEmpty()) {
                     mBinding.etShopName.error =
-                        MyApplication.getInstance().dbHelper.getString(R.string.enter_shop_Name)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_shop_Name)
                     mBinding.etShopName.requestFocus()
                 } else if (TextUtils.isNullOrEmpty(fShop)) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_Shop_Photo)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_Shop_Photo)
                     )
                 } else if (mBinding.spDocType.selectedItemPosition == 0) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.select_doc_or_enter_license)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_doc_or_enter_license)
                     )
                 } else if (mBinding.spDocType.selectedItemPosition != 0 && !hasDoc) {
                     if (mBinding.liGst.visibility == View.VISIBLE) {
                         mBinding.etGstNo.error =
-                            MyApplication.getInstance().dbHelper.getString(R.string.enter_gstin)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_gstin)
                         mBinding.etGstNo.requestFocus()
                     }
                     if (mBinding.liLicense.visibility == View.VISIBLE) {
                         mBinding.etLicenseNo.error =
-                            MyApplication.getInstance().dbHelper.getString(R.string.enter_license_number)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_license_number)
                         mBinding.etLicenseNo.requestFocus()
                     }
                 } else if (hasDoc && (fGSTName!!.isEmpty() && fLicence!!.isEmpty())) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.upload_document_image)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.upload_document_image)
                     )
                 } else if (!TextUtils.isNullOrEmpty(fShop) && !locationManager.isProviderEnabled(
                         LocationManager.GPS_PROVIDER
@@ -329,7 +325,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                         )
                     }
                 }
@@ -399,14 +395,14 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                 }
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.txt_capture)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_capture)
                 )
                 if (utils!!.isNetworkAvailable) {
                     uploadMultipart()
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
                 Log.e("TAG", selectedImage.toString() + "")
@@ -452,7 +448,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                         // The user was asked to change settings, but chose not to
                         Toast.makeText(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.allow_location_access),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.allow_location_access),
                             Toast.LENGTH_LONG
                         ).show()
                         mGoogleApiClient.disconnect()
@@ -551,17 +547,17 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun initView() {
         mBinding.toolbarSd.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_shop_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_shop_details)
         mBinding.TILayout.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_shop_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_shop_name)
         mBinding.TilGST.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_gst_no)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_gst_no)
         mBinding.btnUpdateGst.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.request_to_update_gst)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_to_update_gst)
         mBinding.TilLicence.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_license_no)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_license_no)
         mBinding.btnSave.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_Save)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_Save)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         utils = Utils(this)
         custId = SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
@@ -776,7 +772,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                         } else
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().noteRepository.getString(R.string.not_getting_proper_address)
+                                RetailerSDKApp.getInstance().noteRepository.getString(R.string.not_getting_proper_address)
                             )
                     }
                 }
@@ -799,14 +795,14 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         val gallery = dialog.findViewById<TextView>(R.id.gallery)
         val cancel = dialog.findViewById<TextView>(R.id.liCancel)
         tvAddPhotoHead!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         if (isChoose == 1) {
             gallery.visibility = View.GONE
             tvAddPhotoHead.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.please_take_shop_image)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_take_shop_image)
         }
         takePhoto.setOnClickListener {
             dialog.dismiss()
@@ -831,7 +827,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -975,10 +971,10 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 gstSearch = etDialogGstNumber.text.toString().trim { it <= ' ' }
                 if (gstSearch!!.length >= 15) {
-                    MyApplication.getInstance().updateAnalytics("verify_gst_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("verify_gst_click")
                     pbDProgress.visibility = View.VISIBLE
                     tvDVerifiedMsg.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.verifying_gst)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.verifying_gst)
                     searchGSTInfo(gstSearch)
                 } else {
                     Utils.setToast(
@@ -992,10 +988,10 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         tvDVerify.setOnClickListener {
             gstSearch = etDialogGstNumber.text.toString().trim { it <= ' ' }
             if (gstSearch!!.length >= 15) {
-                MyApplication.getInstance().updateAnalytics("verify_gst_click")
+                RetailerSDKApp.getInstance().updateAnalytics("verify_gst_click")
                 pbDProgress.visibility = View.VISIBLE
                 tvDVerifiedMsg.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.verifying_gst)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.verifying_gst)
                 tvDVerify.isEnabled = false
                 searchGSTInfo(gstSearch)
             } else {
@@ -1028,13 +1024,13 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
         val TilGstNo = mView.findViewById<TextInputLayout>(R.id.TilGstNo)
         val tilComment = mView.findViewById<TextInputLayout>(R.id.tilComment)
 
-        TilGstNo.hint = MyApplication.getInstance().dbHelper.getString(R.string.txt_gst_no)
-        tilComment.hint = MyApplication.getInstance().dbHelper.getString(R.string.comment)
+        TilGstNo.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_gst_no)
+        tilComment.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.comment)
         cancelRequest.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.cancel_request_gst)
-        submitReq.text = MyApplication.getInstance().dbHelper.getString(R.string.submit_request)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel_request_gst)
+        submitReq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit_request)
         tvRequestGSTHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.request_gst_update)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_gst_update)
         cancelRequest.setOnClickListener { onBackPressed() }
         ivGstDialog.setOnClickListener {
             fGSTupdate =
@@ -1052,7 +1048,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                     if (requestLastEnteredGST != etGst) {
                         popupProgress?.visibility = View.VISIBLE
                         isVerifiedText.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.verifying_gst)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.verifying_gst)
                         if (utils!!.isNetworkAvailable) {
                             if (commonClassForAPI != null) {
                                 commonClassForAPI!!.getGstCustInfo(
@@ -1093,18 +1089,18 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                             )
                         }
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().noteRepository.getString(R.string.retry_with_different_gst)
+                            RetailerSDKApp.getInstance().noteRepository.getString(R.string.retry_with_different_gst)
                         )
                     }
                 } else {
                     isVerifiedText.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.gst_length)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.gst_length)
                     isVerifiedText.setTextColor(Color.RED)
                 }
             }
@@ -1125,7 +1121,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                 )
             }
         }
@@ -1369,7 +1365,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
 
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.toast_succesfull)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_succesfull)
                             )
                             if (TextUtils.isNullOrEmpty(
                                     SharePrefs.getInstance(
@@ -1433,7 +1429,7 @@ open class ShopDetailsActivity : AppCompatActivity(), View.OnClickListener,
                         Log.e("TAG", "Failed $result")
                         Toast.makeText(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.image_not_uploaded),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.image_not_uploaded),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.MyOrderPaymendetailBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.MyorderPaymentDetails
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class OrderPaymentDetailAdapter(
@@ -29,9 +29,9 @@ class OrderPaymentDetailAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTransactionNumber.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_transaction_no)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_transaction_no)
         holder.binding.tvTransitionDate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_transaction_date)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_transaction_date)
         val model = orderPayments!![position]
         holder.binding.tvPaymentFrom.text = model.paymentFrom
         holder.binding.tvAmount.text = "" + model.amount

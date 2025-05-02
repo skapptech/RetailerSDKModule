@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.orderdetai
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.payment.PayNowActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ConformOrderModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TrackOrdersDetails
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class TrackOrderAdapter(
@@ -37,12 +37,12 @@ class TrackOrderAdapter(
         holder.mBinding.tvAmountOrder.text = "₹" + model.orderAmount
         if (model.isPaid) {
             holder.mBinding.btnPayNow.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.paid)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.paid)
             holder.mBinding.btnPayNow.isEnabled = false
             holder.mBinding.btnPayNow.setBackgroundResource(R.drawable.background_for_buttons_disble)
         } else {
             holder.mBinding.btnPayNow.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.pay_online_track)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_online_track)
             holder.mBinding.btnPayNow.isEnabled = true
             holder.mBinding.btnPayNow.setBackgroundResource(R.drawable.background_for_buttons)
         }

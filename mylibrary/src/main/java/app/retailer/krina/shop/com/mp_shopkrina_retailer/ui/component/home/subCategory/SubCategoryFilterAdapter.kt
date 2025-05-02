@@ -11,7 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemSubcate
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.SubCategoryInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.SubCategoriesModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 
@@ -59,7 +59,7 @@ class SubCategoryFilterAdapter(
                 analyticPost.baseCatId = basCatId.toString()
                 analyticPost.categoryId = model.categoryid
                 analyticPost.subCatId = model.subcategoryid
-                MyApplication.getInstance().updateAnalytics(
+                RetailerSDKApp.getInstance().updateAnalytics(
                     model.subcategoryname
                             + "_click", analyticPost
                 )

@@ -59,7 +59,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AvenuesParams
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -84,10 +84,7 @@ import java.util.Calendar
 import java.util.Collections
 import java.util.Date
 import java.util.Locale
-import java.util.Random
 import java.util.TimeZone
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 
 class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultWithDataListener {
     private val TAG = this.javaClass.simpleName
@@ -244,7 +241,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
             }
 
             R.id.btnCallSu -> {
-                val phone = MyApplication.getInstance().dbHelper.getString(R.string.scaleUpContact)
+                val phone = RetailerSDKApp.getInstance().dbHelper.getString(R.string.scaleUpContact)
                 if (!TextUtils.isNullOrEmpty(phone)) {
                     startActivity(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null)))
                 }
@@ -258,7 +255,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                 ) {
                     Utils.setLongToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.not_eligible_to_pay_online)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_eligible_to_pay_online)
                     )
                     mBinding.placeBtn.isClickable = true
                 } else {
@@ -281,25 +278,25 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                     if (gullakAmount > 0 && gullakBal < gullakAmount) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.gullak_in_sufficient_balance)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.gullak_in_sufficient_balance)
                         )
                         mBinding.placeBtn.isClickable = true
                     } else if (ePayLaterLimit) {
                         Utils.setToast(
                             baseContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
                         )
                         mBinding.placeBtn.isClickable = true
                     } else if (isChqbookLimit || isChqbookBackLimit) {
                         if (isChqbookLimit) {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
                             )
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.checkBok_bill_value) + checkBookminiAmount
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkBok_bill_value) + checkBookminiAmount
                             )
                         }
                         mBinding.placeBtn.isClickable = true
@@ -307,18 +304,18 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                     ) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
                         )
                         mBinding.placeBtn.isClickable = true
                     } else if (scaleUpAmt > 0 && scaleUpLimit < scaleUpAmt) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
                         )
                     } else if (availableCODLimit != -1.0 && cashAmount > availableCODLimit) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.cod_limit_not_available)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cod_limit_not_available)
                         )
                         mBinding.placeBtn.isClickable = true
                     } else {
@@ -363,7 +360,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                                     } else {
                                         Utils.setToast(
                                             applicationContext,
-                                            MyApplication.getInstance().dbHelper.getString(
+                                            RetailerSDKApp.getInstance().dbHelper.getString(
                                                 R.string.no_sufficient_limit
                                             )
                                         )
@@ -375,7 +372,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                                     } else {
                                         Utils.setToast(
                                             applicationContext,
-                                            MyApplication.getInstance().dbHelper.getString(
+                                            RetailerSDKApp.getInstance().dbHelper.getString(
                                                 R.string.no_sufficient_limit
                                             )
                                         )
@@ -391,7 +388,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                                 mBinding.placeBtn.isClickable = true
                                 Utils.setToast(
                                     baseContext,
-                                    MyApplication.getInstance().dbHelper.getString(R.string.text_amount_does_not_match)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_amount_does_not_match)
                                 )
                             }
                         }
@@ -453,7 +450,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
             onBackPressed()
         }
@@ -488,7 +485,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                             `object`.getString("payment_mode")
                         )
                         // update analytics purchase
-                        MyApplication.getInstance().updateAnalyticPurchase(
+                        RetailerSDKApp.getInstance().updateAnalyticPurchase(
                             `object`.getString(AvenuesParams.TRACKING_ID),
                             hdfcTxtAmt,
                             0.0,
@@ -530,7 +527,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
             }
         } else if (requestCode == 9 && resultCode == RESULT_OK) {
             mBinding.tvGullakBal.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
                     applicationContext
                 ).getString(SharePrefs.GULLAK_BALANCE)
             mBinding.placeBtn.callOnClick()
@@ -579,7 +576,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                         )
 
                         // update analytics purchase
-                        MyApplication.getInstance().updateAnalyticPurchase(
+                        RetailerSDKApp.getInstance().updateAnalyticPurchase(
                             gatewayOrderId,
                             amount,
                             0.0,
@@ -627,7 +624,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                         "DirectUdhar"
                     )
                     // update analytics purchase
-                    MyApplication.getInstance().updateAnalyticPurchase(
+                    RetailerSDKApp.getInstance().updateAnalyticPurchase(
                         transactionRefNo,
                         amount,
                         0.0,
@@ -644,7 +641,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                 mBinding.placeBtn.isClickable = true
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                 )
                 insertPaymentStatusAPICall(
                     "Failed",
@@ -684,7 +681,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                 mBinding.placeBtn.isClickable = true
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                 )
                 insertPaymentStatusAPICall(
                     "Failed",
@@ -720,55 +717,55 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         utils = Utils(this)
         mBinding.toolbarPaymentPaynowOption.title.text =
-            MyApplication.getInstance().dbHelper.getString(
+            RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.payment_option
             )
         mBinding.tvTotalAmntHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amnt)
-        mBinding.tvPayOption.text = MyApplication.getInstance().dbHelper.getString(R.string.payon)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amnt)
+        mBinding.tvPayOption.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.payon)
         mBinding.tvOnlineH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.online_h)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.online_h)
         mBinding.tvCreditCardChargesH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.credit_card_charges_1_gst)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.credit_card_charges_1_gst)
         mBinding.tvPaybleAmountHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Amount_Payble)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Amount_Payble)
         mBinding.tvPayonDelivery.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payon)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payon)
         mBinding.tvCardCheckCash.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.cash_card_cheque)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cash_card_cheque)
         mBinding.tvPaySuc.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_success)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_success)
         mBinding.etAmountCash.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
         mBinding.tvTruPayHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.trupay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.trupay)
         mBinding.tvInstantOnline.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.instant_online_payment)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.instant_online_payment)
         mBinding.tvPaymentStatusHdfc.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_success)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_success)
         mBinding.etAmountHdfc.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
-        mBinding.name.text = MyApplication.getInstance().dbHelper.getString(R.string.epaylater)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
+        mBinding.name.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater)
         mBinding.tvDescription.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.interest_free_credit_limit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.interest_free_credit_limit)
         mBinding.tvPaymentStatusEpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_success)
-        mBinding.callBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.txt_call)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_success)
+        mBinding.callBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_call)
         mBinding.etAmountEpay.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
-        mBinding.placeBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.payment)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
+        mBinding.placeBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment)
         mBinding.tvSkCreditH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.direct_udhar)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.direct_udhar)
         mBinding.tvGullakBal.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
                 applicationContext
             ).getString(SharePrefs.GULLAK_BALANCE)
         mBinding.tvScaleUp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.scale_up_pay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.scale_up_pay)
         mBinding.tvRazorpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.pay_via_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_via_razorpay)
         mBinding.tvInstantRazorpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
         mBinding.radioGullak.setOnCheckedChangeListener(
             GenericCheckChangeListener(
                 mBinding.radioGullak
@@ -951,7 +948,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -972,7 +969,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         }
         val itemQty = DecimalFormat("##.##").format(itemqty.toLong())
         mBinding.tvItemCount.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_item) + " " + itemQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_item) + " " + itemQty
         if (orderList2!!.payNowOption != null && orderList2!!.payNowOption.equals(
                 "Both",
                 ignoreCase = true
@@ -1055,14 +1052,14 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
 
     private fun goToHome(orderStatus: String) {
         if (orderId != 0 && orderStatus.equals("success", ignoreCase = true)) {
-            MyApplication.getInstance().clearCartData()
+            RetailerSDKApp.getInstance().clearCartData()
             SharePrefs.getInstance(applicationContext).putBoolean(SharePrefs.IS_GULLAK_BAL, false)
             SharePrefs.getInstance(applicationContext).putString(SharePrefs.AVAIL_DIAL, "0")
             orderConformationPopup()
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.order_error_msg)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_error_msg)
             )
             startActivity(Intent(applicationContext, HomeActivity::class.java))
             Utils.rightTransaction(this)
@@ -1103,7 +1100,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                     canPostOrder = true
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.epaylater_message) + ePayLimit
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater_message) + ePayLimit
                     )
                 }
             } else if (isCheckBook) {
@@ -1116,7 +1113,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                     canPostOrder = true
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
                     )
                 }
             } else {
@@ -1534,13 +1531,13 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         val okBtn = mView.findViewById<TextView>(R.id.ok_btn)
         val description = mView.findViewById<TextView>(R.id.pd_description)
         val title = mView.findViewById<TextView>(R.id.pd_title)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
-        title.text = MyApplication.getInstance().dbHelper.getString(R.string.prepaid_order)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
+        title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.prepaid_order)
         //description.setText(getString(R.string.prepaid_order_mag) + " " + Html.fromHtml("<font color=#424242>&#8377; 700") + " " + getString(R.string.msg_orderless));
         description.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.prepaid_order_mag1) + DecimalFormat(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.prepaid_order_mag1) + DecimalFormat(
                 "##.##"
-            ).format(calPrepaidAmount) + MyApplication.getInstance().dbHelper.getString(
+            ).format(calPrepaidAmount) + RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.prepaid_order_mag2
             )
         okBtn.setOnClickListener { v: View? -> customDialog.dismiss() }
@@ -1585,16 +1582,16 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
             btnChangeDate.visibility = View.GONE
         }
         tv_congratulation!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Congratulation)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Congratulation)
         continueShopping!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_continue_shopping)
-        orderMsg!!.text = MyApplication.getInstance().dbHelper.getString(R.string.payment_done_msg)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_continue_shopping)
+        orderMsg!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_done_msg)
         tvDeliverByH!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_delivered_by_shopkirana)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_delivered_by_shopkirana)
         tvOrderId!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_order_id) + orderId
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_order_id) + orderId
         tvTotalAmount!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_order_amount) + mBinding.tvPayableamnt.text.toString()
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_order_amount) + mBinding.tvPayableamnt.text.toString()
         btnChangeDate.setOnClickListener { view: View? ->
             btnChangeDate.visibility = View.GONE
             tvDelayH.visibility = View.VISIBLE
@@ -1618,15 +1615,15 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
         val tvDesc = dialog.findViewById<TextView>(R.id.tvDesc)
         val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
-        tvTitle!!.text = MyApplication.getInstance().dbHelper.getString(R.string.maximum_pod_limit)
-        tvDesc!!.text = MyApplication.getInstance().dbHelper.getString(R.string.cod_limit_terms)
+        tvTitle!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.maximum_pod_limit)
+        tvDesc!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cod_limit_terms)
         ivClose!!.setOnClickListener { v: View? -> dialog.dismiss() }
         dialog.setOnShowListener { dialogInterface: DialogInterface? ->
             val bottomSheet = dialog.findViewById<FrameLayout>(R.id.design_bottom_sheet)
             BottomSheetBehavior.from(bottomSheet!!).setState(BottomSheetBehavior.STATE_EXPANDED)
         }
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("COD_limit_terms_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("COD_limit_terms_dialog")
     }
 
     private fun insertPaymentStatusAPICall(
@@ -2090,7 +2087,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                         mBinding.tvContactUs.visibility = View.VISIBLE
                         mBinding.tvContactUs.textSize = 14f
                         mBinding.tvContactUs.text =
-                            "( " + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                            "( " + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.checkbook_contact
                             ) + ")"
                         if (it.dynamicData != null) {
@@ -2112,7 +2109,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                 mBinding.tvContactUs.visibility = View.VISIBLE
                 mBinding.tvContactUs.textSize = 15f
                 mBinding.tvContactUs.text =
-                    "(" + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "(" + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountSkC.visibility = View.GONE
@@ -2135,7 +2132,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                                 "₹ " + DecimalFormat("##.##").format(ePayLimit) + "/-"
                         } else {
                             Toast.makeText(
-                                applicationContext, MyApplication.getInstance().dbHelper.getString(
+                                applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.net_connection_off
                                 ), Toast.LENGTH_SHORT
                             ).show()
@@ -2143,9 +2140,9 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                         if (ePayLimit == 0.0) {
                             mBinding.tvLimit.textSize = 15f
                             mBinding.tvLimit.text =
-                                "( " + MyApplication.getInstance().dbHelper.getString(
+                                "( " + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.contact_on
-                                ) + MyApplication.getInstance().dbHelper.getString(R.string.checkbook_contact) + ")"
+                                ) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkbook_contact) + ")"
                             mBinding.etAmountEpay.visibility = View.GONE
                             mBinding.callBtn.visibility = View.VISIBLE
                             mBinding.radioEpay.visibility = View.GONE
@@ -2163,7 +2160,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
             is Response.Error -> {
                 mBinding.tvLimit.textSize = 15f
                 mBinding.tvLimit.text =
-                    "( " + MyApplication.getInstance().dbHelper.getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "( " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountEpay.visibility = View.GONE
@@ -2233,11 +2230,11 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                                 availableCODLimit =
                                     jsonObject["AvailableCODLimit"].asDouble.toLong().toDouble()
                                 mBinding.tvCodLimit.text =
-                                    MyApplication.getInstance().noteRepository.getString(
+                                    RetailerSDKApp.getInstance().noteRepository.getString(
                                         R.string.maximum_cod_limit
                                     ) + " ₹" + cODLimit
                                 mBinding.tvCodLimitAvail.text =
-                                    MyApplication.getInstance().noteRepository.getString(
+                                    RetailerSDKApp.getInstance().noteRepository.getString(
                                         R.string.available_cod_limit
                                     ) + " ₹" + availableCODLimit
                                 mBinding.rlCodLimit.visibility = View.VISIBLE
@@ -2296,7 +2293,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
                 mBinding.tvContactUs.visibility = View.VISIBLE
                 mBinding.tvContactUs.textSize = 15f
                 mBinding.tvContactUs.text =
-                    "(" + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "(" + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountSu.visibility = View.GONE
@@ -2609,7 +2606,7 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }

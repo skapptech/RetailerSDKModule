@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryFragment.Companion.newInstance
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 
@@ -74,7 +74,7 @@ class CategoryItemAdapter internal constructor(
             analyticPost.baseCatId = "" + categories.baseCategoryId
             analyticPost.categoryId = categories.categoryid
             analyticPost.categoryName = categories.categoryName
-            MyApplication.getInstance().updateAnalytics("category_click", analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics("category_click", analyticPost)
         }
     }
 

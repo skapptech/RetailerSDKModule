@@ -9,7 +9,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.HomeDataModel
@@ -20,7 +19,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.store.StoreHomeFragment
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
@@ -86,7 +85,7 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (vh.itemViewType == BANNER) {
             if (!TextUtils.isNullOrEmpty(model.logo)) {
                 Picasso.get()
-                    .load(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + model.logo!!.trim())
+                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + model.logo!!.trim())
                     .placeholder(R.drawable.logo_grey)
                     .into((vh as RecyclerViewOtherTypeHolder).mBinding.ivItem)
             } else {
@@ -104,7 +103,7 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             (vh as RecyclerView3gridTypeOneHolder).mBinding.tvTextTitle.text = model.subCategoryName
             if (!TextUtils.isNullOrEmpty(model.logo)) {
                 Picasso.get()
-                    .load(EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + model.logo!!.trim())
+                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + model.logo!!.trim())
                     .placeholder(R.drawable.logo_grey)
                     .into(vh.mBinding.ivItemImage)
             } else {
@@ -162,7 +161,7 @@ class StoreItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     analyticPost.subCatId = storeItemModel.subCategoryId
                     analyticPost.subSubCatName = storeItemModel.subCategoryName
                     // update analytics
-                    MyApplication.getInstance().updateAnalytics("storeSectionClick", analyticPost)
+                    RetailerSDKApp.getInstance().updateAnalytics("storeSectionClick", analyticPost)
                     activity.pushFragments(StoreHomeFragment.newInstance(), false, true, args)
                 }
             }, 300)

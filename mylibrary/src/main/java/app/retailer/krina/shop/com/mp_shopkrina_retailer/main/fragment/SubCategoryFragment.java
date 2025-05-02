@@ -35,7 +35,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SectionPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AutoScrollViewPager;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -104,7 +104,7 @@ public class SubCategoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(activity,
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(activity,
                 this.getClass().getSimpleName(), null);
     }
 
@@ -131,8 +131,8 @@ public class SubCategoryFragment extends Fragment {
         refresh_layout = mBinding.swipeContainer;
         refresh_layout.setColorSchemeResources(R.color.colorAccent);
         mBinding.title.setText(categoryTittle);
-        mBinding.title.setText(MyApplication.getInstance().dbHelper.getString(R.string.shop_by_categories));
-        mBinding.noItems.setText(MyApplication.getInstance().dbHelper.getString(R.string.no_items_available));
+        mBinding.title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.shop_by_categories));
+        mBinding.noItems.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_available));
     }
 
     public void setupViewpager(ArrayList<SliderModel> list) {
@@ -164,7 +164,7 @@ public class SubCategoryFragment extends Fragment {
                 mBinding.progressSub.setVisibility(View.VISIBLE);
                 commonClassForAPI.fetchSubcategory(getSubCategory, ItemId, activity.custId, warehouseId, lang);
             } else {
-                Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
             }
         }
     }

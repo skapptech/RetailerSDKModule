@@ -10,7 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.Sales
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReturnOrderDetailsBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class ReturnOrderDetailsActivity : AppCompatActivity() {
@@ -52,12 +52,12 @@ class ReturnOrderDetailsActivity : AppCompatActivity() {
         binding.rvReturnOrderItemDetails.setHasFixedSize(true)
         binding.rvReturnOrderItemDetails.adapter = returnOrderDetailsAdapter
 
-        binding.tvItems.text = MyApplication.getInstance().dbHelper.getString(R.string.Items)
-        binding.tvQty.text = MyApplication.getInstance().dbHelper.getString(R.string.qty)
-        binding.tvRate.text = MyApplication.getInstance().dbHelper.getString(R.string.rate)
+        binding.tvItems.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.Items)
+        binding.tvQty.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.qty)
+        binding.tvRate.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rate)
         binding.tvTotalValue.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_value)
-        binding.tvOrderIdH.text = MyApplication.getInstance().dbHelper.getString(R.string.order_id)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_value)
+        binding.tvOrderIdH.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
     }
 
 

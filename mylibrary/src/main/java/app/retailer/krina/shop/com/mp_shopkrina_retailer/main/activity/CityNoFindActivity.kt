@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class CityNoFindActivity : AppCompatActivity() {
 
@@ -22,8 +22,8 @@ class CityNoFindActivity : AppCompatActivity() {
     private fun initView() {
         val cityNameTV = findViewById<TextView>(R.id.tv_not_found_city)
         val tv_oops = findViewById<TextView>(R.id.tv_oops)
-        cityNameTV.text = MyApplication.getInstance().dbHelper.getString(R.string.not_serving)
-        tv_oops.text = MyApplication.getInstance().dbHelper.getString(R.string.ooops)
+        cityNameTV.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_serving)
+        tv_oops.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ooops)
     }
 
     override fun onBackPressed() {

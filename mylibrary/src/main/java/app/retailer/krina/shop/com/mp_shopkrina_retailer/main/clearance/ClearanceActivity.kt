@@ -31,7 +31,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.Searc
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -60,7 +60,7 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_clearance)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = MyApplication.getInstance().noteRepository
+        supportActionBar?.title = RetailerSDKApp.getInstance().noteRepository
             .getString(R.string.clearance)
         custId = SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID)
         lang = LocaleHelper.getLanguage(this)
@@ -97,11 +97,11 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
 
     private fun init() {
         mBinding.noItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_item_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available)
         mBinding.tvTotalItemH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount)
         mBinding.btnCheckout.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.checkout)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkout)
 
         categoryAdapter = ClearanceCatAdapter(this, categoryList, this)
         mBinding.rvSubCategory.adapter = categoryAdapter
@@ -121,7 +121,7 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
         mBinding.btnCheckout.setOnClickListener {
@@ -179,12 +179,12 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
                 } else {
                     showAlert(
                         "Minimum Order Value",
-                        MyApplication.getInstance().dbHelper.getString(R.string.msg_orderlessthan700) + " " + DecimalFormat(
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_orderlessthan700) + " " + DecimalFormat(
                             "##.##"
                         ).format(
                             EndPointPref.getInstance(applicationContext)
                                 .getLong(EndPointPref.CLEARANCE_MIN_ORDER)
-                        ) + " " + MyApplication.getInstance().dbHelper.getString(R.string.msg_orderless)
+                        ) + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_orderless)
                     )
                 }
             } else {
@@ -247,7 +247,7 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
         if (this.categoryList.size > 1) {
             this.categoryList.add(
                 0,
-                CategoriesModel(MyApplication.getInstance().dbHelper.getString(R.string.all), 0)
+                CategoriesModel(RetailerSDKApp.getInstance().dbHelper.getString(R.string.all), 0)
             )
         }
         categoryAdapter?.notifyDataSetChanged()
@@ -307,13 +307,13 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
         val btnCancel = dialog.findViewById<Button>(R.id.btnCancel)
 
         tvTitle.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.terms_and_condition)
-        tvDesc.text = MyApplication.getInstance().noteRepository.getString(R.string.clearance_terms)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.terms_and_condition)
+        tvDesc.text = RetailerSDKApp.getInstance().noteRepository.getString(R.string.clearance_terms)
         cbTerms.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.accept_and_continue)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.accept_and_continue)
         btnContinue.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.txt_Continue)
-        btnCancel.text = MyApplication.getInstance().noteRepository.getString(R.string.cancel)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.txt_Continue)
+        btnCancel.text = RetailerSDKApp.getInstance().noteRepository.getString(R.string.cancel)
 
         btnContinue.setOnClickListener {
             if (cbTerms.isChecked) {
@@ -321,7 +321,7 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().noteRepository.getString(R.string.please_check_terms_conditions)
+                    RetailerSDKApp.getInstance().noteRepository.getString(R.string.please_check_terms_conditions)
                 )
             }
         }
@@ -476,7 +476,7 @@ class ClearanceActivity : AppCompatActivity(), SubCategoryInterface, OnButtonCli
                             } else {
                                 val msg = jsonObject["Msg"].asString
                                 android.app.AlertDialog.Builder(this@ClearanceActivity)
-                                    .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert))
+                                    .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert))
                                     .setMessage(msg).setNegativeButton(getString(R.string.ok), null)
                                     .show()
                             }

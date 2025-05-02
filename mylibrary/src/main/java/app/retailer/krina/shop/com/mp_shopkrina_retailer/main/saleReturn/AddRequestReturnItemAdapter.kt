@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.AddRequestItemsBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.ReturnOrderBatchItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.sk.user.agent.ui.component.returnOrder.OnCheckboxClick
@@ -76,19 +76,19 @@ class AddRequestReturnItemAdapter(
                     if (TextUtils.isNullOrEmpty(requestQty)) {
                         Utils.setToast(
                             mContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.please_enter_return_qty)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_return_qty)
                         )
                         binding.cbItemCheck.isChecked = false
                     } else if (requestQty.toLong() <= 0){
                         Utils.setToast(
                             mContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.please_enter_return_qty)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_return_qty)
                         )
                         binding.cbItemCheck.isChecked = false
                     }else if (model.returnableQty < requestQty.toLong()) {
                         Utils.setToast(
                             mContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.msg_you_can_not_return_qty)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_you_can_not_return_qty)
                         )
                         binding.cbItemCheck.isChecked = false
                     } else {
@@ -109,7 +109,7 @@ class AddRequestReturnItemAdapter(
                         EndPointPref.getInstance(context).getLong(EndPointPref.IMAGE_UPLOAD_QTY)
                     if (noOfImage != 0L && model.mImageList.size >= noOfImage) {
                         var des =
-                            MyApplication.getInstance().dbHelper.getString(R.string.valid_image_not_upload_more_then)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_image_not_upload_more_then)
                         des = des.replace("@", "$noOfImage")
                         Utils.setToast(
                             context, des

@@ -47,7 +47,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -66,7 +65,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.S
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMobileSignUpBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.firebase.FirebaseLanguageFetch
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
@@ -104,7 +102,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AnimatorUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -120,7 +118,6 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonObject
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
@@ -222,7 +219,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 "CreditLine"
             ) else args.putString("type", "FinBox")
             pushFragments(HomeFragment.newInstance(""), false, true, args)
-            MyApplication.getInstance().updateAnalytics("Finbox_click")
+            RetailerSDKApp.getInstance().updateAnalytics("Finbox_click")
         }
         if (SharePrefs.getInstance(this)
                 .getBoolean(SharePrefs.IS_UDHAAR_OVERDUE) && SharePrefs.getInstance(this)
@@ -270,12 +267,12 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     .equals("Flash Deal", ignoreCase = true)
             ) {
                 pushFragments(FlashDealOfferFragment.newInstance(), true, true, null)
-                MyApplication.getInstance().updateAnalytics("flashdeal_notification_click")
+                RetailerSDKApp.getInstance().updateAnalytics("flashdeal_notification_click")
             } else if (intent.hasExtra("notificationCategory") && intent.getStringExtra("notificationCategory")
                     .equals("offer", ignoreCase = true)
             ) {
                 pushFragments(OffersFragment.newInstance(), false, true, null)
-                MyApplication.getInstance().updateAnalytics("offer_notification_click")
+                RetailerSDKApp.getInstance().updateAnalytics("offer_notification_click")
             } else if (intent.hasExtra("notificationCategory") && intent.getStringExtra("notificationCategory")
                     .equals("category", ignoreCase = true)
             ) {
@@ -313,7 +310,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
             if (intent.extras != null && intent.hasExtra("notificationId")) {
                 val notificationId = intent.extras!!.getInt("notificationId")
-                MyApplication.getInstance().notificationView(notificationId)
+                RetailerSDKApp.getInstance().notificationView(notificationId)
                 intent.extras!!.clear()
             }
             if (intent.hasExtra("OfferAddMore")) {
@@ -336,7 +333,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             showChangeLangDialog()
         }
         callAPIs()
-        MyApplication.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
+        RetailerSDKApp.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
             if (totalAmt != null && totalAmt > 0) {
                 tvItemCount!!.visibility = View.VISIBLE
                 val sTotalAmount =
@@ -371,7 +368,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
             if (intent.extras != null && intent.hasExtra("notificationId")) {
                 val notificationId = intent.extras!!.getInt("notificationId")
-                MyApplication.getInstance().notificationView(notificationId)
+                RetailerSDKApp.getInstance().notificationView(notificationId)
                 intent.extras!!.clear()
             }
         }
@@ -422,7 +419,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         mBinding!!.tvRtgsAmt.text =
             "₹" + SharePrefs.getInstance(applicationContext).getString(SharePrefs.RTGS_BAL)
         callGullakAPI()
-        if (MyApplication.getInstance().noteRepository.cartCount == 0) {
+        if (RetailerSDKApp.getInstance().noteRepository.cartCount == 0) {
             tvItemCount!!.visibility = View.GONE
         }
     }
@@ -449,7 +446,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 doubleBackToExitPressedOnce = true
                 Snackbar.make(
                     mDrawerLayout!!,
-                    MyApplication.getInstance().dbHelper.getString(R.string.tap_again_to_exit),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.tap_again_to_exit),
                     Snackbar.LENGTH_SHORT
                 ).show()
                 Handler(Looper.getMainLooper()).postDelayed(
@@ -473,13 +470,13 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         mDrawerLayout!!.closeDrawers()
         when (v.id) {
             R.id.btnMurli -> {
-                MyApplication.getInstance().updateAnalytics("murli_menu_click")
+                RetailerSDKApp.getInstance().updateAnalytics("murli_menu_click")
                 showMenu()
             }
 
             R.id.menu_layout, R.id.fab -> hideMenu()
             R.id.btn_murli1 -> {
-                MyApplication.getInstance().updateAnalytics("murli_click")
+                RetailerSDKApp.getInstance().updateAnalytics("murli_click")
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.READ_MEDIA_IMAGES
@@ -513,7 +510,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
 
             R.id.btn_story -> {
-                MyApplication.getInstance().updateAnalytics("story_click")
+                RetailerSDKApp.getInstance().updateAnalytics("story_click")
                 mBinding!!.toolbarH.btnStory.isEnabled = false
                 mBinding!!.toolbarH.btnStory.isClickable = false
                 hideMenu()
@@ -523,23 +520,23 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
 
             R.id.fabClose -> {
-                MyApplication.getInstance().updateAnalytics("murli_close_click")
+                RetailerSDKApp.getInstance().updateAnalytics("murli_close_click")
                 mBinding!!.toolbarH.btnMurli1.callOnClick()
                 isMurliClicked = false
             }
 
             R.id.frag_search_edt, R.id.searchText -> {
-                MyApplication.getInstance().updateAnalytics("search_click")
+                RetailerSDKApp.getInstance().updateAnalytics("search_click")
                 pushFragments(SearchItemFragment.newInstance(), true, true, null)
             }
 
             R.id.fabAddIssue -> {
-                MyApplication.getInstance().updateAnalytics("app_home_issue_click")
+                RetailerSDKApp.getInstance().updateAnalytics("app_home_issue_click")
                 startActivity(Intent(applicationContext, AddIssueActivity::class.java))
             }
 
             R.id.notification -> {
-                MyApplication.getInstance().updateAnalytics("notification_bell_click")
+                RetailerSDKApp.getInstance().updateAnalytics("notification_bell_click")
                 startActivity(
                     Intent(applicationContext, NotificationActivity::class.java).putExtra(
                         "Notification",
@@ -550,7 +547,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
 
             R.id.menuButton -> mDrawerLayout!!.openDrawer(GravityCompat.START)
             R.id.ivBrands -> {
-                MyApplication.getInstance().updateAnalytics("brand_click")
+                RetailerSDKApp.getInstance().updateAnalytics("brand_click")
                 pushFragments(AllBrandFragItemList.newInstance(), true, true, null)
             }
 
@@ -562,14 +559,14 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     )
                 ) {
                     val phone = SharePrefs.getInstance(applicationContext).getString(SharePrefs.COMPANY_CONTACT)
-                    val msg = MyApplication.getInstance().dbHelper.getString(R.string.msg_cluster_null)+phone
+                    val msg = RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_cluster_null)+phone
                     AlertDialog.Builder(this@HomeActivity).setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.alert
                         )
                     ).setMessage(msg).setNegativeButton(getString(R.string.ok), null).show()
                 } else {
-                    MyApplication.getInstance().updateAnalytics("drawer_profile_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("drawer_profile_click")
                     startActivity(Intent(applicationContext, EditProfileActivity::class.java))
                     Utils.fadeTransaction(this)
                 }
@@ -577,12 +574,12 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
 
             R.id.liWallet -> {
-                MyApplication.getInstance().updateAnalytics("wallet_click")
+                RetailerSDKApp.getInstance().updateAnalytics("wallet_click")
                 startActivity(Intent(applicationContext, MyWalletActivity::class.java))
             }
 
             R.id.liGullak -> {
-                MyApplication.getInstance().updateAnalytics("gullak_click")
+                RetailerSDKApp.getInstance().updateAnalytics("gullak_click")
                 SharePrefs.getInstance(applicationContext)
                     .putBoolean(SharePrefs.IS_GULLAK_BAL, false)
                 callGullakAPI()
@@ -595,7 +592,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             }
 
             R.id.liRtgs -> {
-                MyApplication.getInstance().updateAnalytics("rtgs_menu_click")
+                RetailerSDKApp.getInstance().updateAnalytics("rtgs_menu_click")
                 SharePrefs.getInstance(applicationContext)
                     .putBoolean(SharePrefs.IS_GULLAK_BAL, false)
                 callGullakAPI()
@@ -608,7 +605,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             R.id.llSellerStore -> {
                 val analyticPost = AnalyticPost()
                 analyticPost.source = "home"
-                MyApplication.getInstance().updateAnalytics("community_click", analyticPost)
+                RetailerSDKApp.getInstance().updateAnalytics("community_click", analyticPost)
                 if (EndPointPref.getInstance(applicationContext)
                         .getBoolean(EndPointPref.showNewSocial)
                 ) startActivity(
@@ -676,7 +673,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         wId = SharePrefs.getInstance(this).getInt(SharePrefs.WAREHOUSE_ID)
         skCode = SharePrefs.getInstance(this).getString(SharePrefs.SK_CODE)
         if (custId == 0) {
-            MyApplication.getInstance().logout(this)
+            RetailerSDKApp.getInstance().logout(this)
         }
         mDrawerLayout = mBinding!!.drawer
         searchText = mBinding!!.toolbarH.searchText
@@ -689,24 +686,24 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         titletxt = mBinding!!.toolbarH.titletxt
         notification = mBinding!!.toolbarH.notification
         mBinding!!.toolbarH.tvBrandStore.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.brand_store)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.brand_store)
         mBinding!!.toolbarH.tvSellerStore.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.seller_store)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.seller_store)
         mBinding!!.toolbarH.fragSearchEdt.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_search)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_search)
         mBinding!!.toolbarH.tvAdviceT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.advice)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.advice)
         mBinding!!.toolbarH.tvStoryT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.story)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.story)
         mBinding!!.tvVersion.text = "App Version "
         mBinding!!.tvEditProfile.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.edit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.edit)
         mBinding!!.tvWalletPointH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.your_walet_total)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_walet_total)
         mBinding!!.tvGullakH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.gullak_balance)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.gullak_balance)
         mBinding!!.tvRtgsH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.rtgs_balance)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.rtgs_balance)
         topToolbarTitle = mBinding!!.toolbarH.titleTop
         bottomNavigationView = mBinding!!.toolbarH.navigation
         bottomNavigationView!!.itemIconTintList = null
@@ -826,23 +823,23 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         val trade = menu.findItem(R.id.trade)
         val offers = menu.findItem(R.id.offers)
         val basket = menu.findItem(R.id.basket)
-        home.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.title_home))
-        category.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.title_categories))
-        trade.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.title_direct))
-        offers.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.title_offers))
-        basket.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.checkout))
+        home.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_home))
+        category.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_categories))
+        trade.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_direct))
+        offers.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_offers))
+        basket.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkout))
         bottomNavigationView!!.setOnNavigationItemSelectedListener { item: MenuItem ->
             var selectedFragment: Fragment? = null
             when (item.itemId) {
                 R.id.home -> {
-                    MyApplication.getInstance().updateAnalytics("nav_home_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("nav_home_click")
                     if (SharePrefs.getInstance(this)
                             .getBoolean(SharePrefs.IS_WAREHOUSE_AVAIL)
                     ) selectedFragment = HomeFragment.newInstance(sectionName)
                 }
 
                 R.id.trade -> {
-                    MyApplication.getInstance().updateAnalytics("community_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("community_click")
                     if (EndPointPref.getInstance(applicationContext)
                             .getBoolean(EndPointPref.showNewSocial)
                     ) startActivity(
@@ -857,17 +854,17 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 }
 
                 R.id.category -> {
-                    MyApplication.getInstance().updateAnalytics("nav_category_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("nav_category_click")
                     selectedFragment = HomeCategoryFragment()
                 }
 
                 R.id.offers -> {
-                    MyApplication.getInstance().updateAnalytics("nav_offer_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("nav_offer_click")
                     selectedFragment = OffersFragment.newInstance()
                 }
 
                 R.id.basket -> {
-                    MyApplication.getInstance().updateAnalytics("nav_checkout_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("nav_checkout_click")
                     if (!apiRunning && !handler.hasMessages(0)) {
                         startActivity(Intent(applicationContext, ShoppingCartActivity::class.java))
                         Utils.fadeTransaction(this)
@@ -894,8 +891,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
 
     fun appStoryView() {
         builder = GuideView.Builder(this)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.menu_home))
-            .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.menu_home_detail))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.menu_home))
+            .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.menu_home_detail))
             .setGravity(
                 Gravity.center
             ).setDismissType(DismissType.anywhere).setTargetView(
@@ -903,21 +900,21 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             ).setGuideListener { view: View ->
                 when (view.id) {
                     R.id.menuButton -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.brand_home
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.brand_home_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.brand_home_detail))
                         .setTargetView(
                             mBinding!!.toolbarH.ivBrands
                         ).build()
 
                     R.id.ivBrands -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.notification_home
                         )
                     )
-                        .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.notification_home_detail))
+                        .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.notification_home_detail))
                         .setTargetView(
                             mBinding!!.toolbarH.notification
                         ).build()
@@ -937,7 +934,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
 
     private fun updateCartAllValue(mShoppingCart: ShopingCartItemDetailsResponse) {
         // save cart data here
-        MyApplication.getInstance().noteRepository.addToCart(mShoppingCart.shoppingCartItemDcs)
+        RetailerSDKApp.getInstance().noteRepository.addToCart(mShoppingCart.shoppingCartItemDcs)
     }
 
     fun postImageObserver() {
@@ -968,7 +965,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available_h)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available_h)
                         )
                         mBinding!!.toolbarH.btnMurli1.isEnabled = true
                         mBinding!!.toolbarH.btnMurli1.isClickable = true
@@ -1000,7 +997,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "SK Retailer App")
             var shareMessage = """
                 
-                ${MyApplication.getInstance().dbHelper.getString(R.string.share_msg)}
+                ${RetailerSDKApp.getInstance().dbHelper.getString(R.string.share_msg)}
                 
                 
                 """.trimIndent()
@@ -1010,7 +1007,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        MyApplication.getInstance().updateAnalyticShare(javaClass.simpleName, "App Share WhatsApp")
+        RetailerSDKApp.getInstance().updateAnalyticShare(javaClass.simpleName, "App Share WhatsApp")
     }
 
     private fun setFullWidth() {
@@ -1110,7 +1107,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             if (it) {
                 Snackbar.make(
                     mDrawerLayout!!,
-                    MyApplication.getInstance().dbHelper.getString(R.string.txt_Notify_msg),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Notify_msg),
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
@@ -1180,7 +1177,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
             } else {
                 val msg = it["Msg"].asString
                 AlertDialog.Builder(this@HomeActivity)
-                    .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert))
+                    .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert))
                     .setMessage(msg).setNegativeButton(getString(R.string.ok), null)
                     .show()
             }
@@ -1241,34 +1238,34 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         // Adding child data
         val moreToolList: MutableList<String> = ArrayList()
         if (SharePrefs.getInstance(applicationContext).getBoolean(SharePrefs.IS_SHOW_HISAB)) {
-            moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.hishab_kitab_wudu))
+            moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hishab_kitab_wudu))
         }
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.kisan_dan))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.kisan_dan))
         if (SharePrefs.getInstance(applicationContext)
                 .getBoolean(SharePrefs.IS_SHOW_RETURN_ORDER)
-        ) moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.title_activity_return_order))
+        ) moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_return_order))
         if (SharePrefs.getInstance(applicationContext).getBoolean(SharePrefs.IS_SHOW_VATM)) {
-            moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.v_atm))
+            moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.v_atm))
         }
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.title_business_card))
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.request_brand))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_business_card))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.request_brand))
         if (SharePrefs.getInstance(applicationContext).getBoolean(SharePrefs.IS_PRIME_ACTIVE)) {
             moreToolList.add(
                 SharePrefs.getInstance(applicationContext).getString(SharePrefs.PRIME_NAME)
             )
         }
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.feedback))
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.title_game))
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.txt_My_Favourite))
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.txt_My_Dream))
-        moreToolList.add(MyApplication.getInstance().dbHelper.getString(R.string.share))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.feedback))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_game))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_My_Favourite))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_My_Dream))
+        moreToolList.add(RetailerSDKApp.getInstance().dbHelper.getString(R.string.share))
 
         // Header data
         if (SharePrefs.getInstance(this).getBoolean(SharePrefs.IS_WAREHOUSE_AVAIL)) {
             if (EndPointPref.getInstance(this).getBoolean(EndPointPref.IS_SCALEUP))
                 listDataHeader!!.add(
                     HomeMenuHeaderModel(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.scale_up
                         ), false
                     )
@@ -1277,59 +1274,59 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     .getBoolean(SharePrefs.IS_DIRECT_UDHAR)
             ) listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.direct_udhar
                     ), false
                 )
             )
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.myOrder),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.myOrder),
                     null
                 )
             )
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_target),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target),
                     null
                 )
             )
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_ledger),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_ledger),
                     null
                 )
             )
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.my_agents),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_agents),
                     null
                 )
             )
 
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.more_tool),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.more_tool),
                     moreToolList
                 )
             )
         }
         listDataHeader!!.add(
             HomeMenuHeaderModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.contact),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact),
                 null
             )
         )
         if (SharePrefs.getInstance(this).getBoolean(SharePrefs.IS_WAREHOUSE_AVAIL))
             listDataHeader!!.add(
                 HomeMenuHeaderModel(
-                    MyApplication.getInstance().dbHelper.getString(R.string.refer_and_earn),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.refer_and_earn),
                     null
                 )
             )
         listDataHeader!!.add(
             HomeMenuHeaderModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.setting),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.setting),
                 null
             )
         )
@@ -1337,7 +1334,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 .getBoolean(SharePrefs.IS_SHOW_TICKET_MENU)
         ) listDataHeader!!.add(
             HomeMenuHeaderModel(
-                MyApplication.getInstance().dbHelper.getString(R.string.help),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.help),
                 null
             )
         )
@@ -1366,10 +1363,10 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 model.totalFreeItemQty = freeItemQty
                 model.totalFreeWalletPoint = totalFreeWalletPoint
                 // update cart database
-                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                 } else {
-                    MyApplication.getInstance().noteRepository.addToCart(model)
+                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                 }
                 if (lastItemId == itemId) {
                     handler.removeCallbacksAndMessages(null)
@@ -1387,7 +1384,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
             onItemClick.onItemClick(0, false)
         }
@@ -1410,7 +1407,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.unable_to_add_cart)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.unable_to_add_cart)
                             )
                             onItemClick!!.onItemClick(0, false)
                         }
@@ -1682,7 +1679,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         val tvTitle = dialog.findViewById<TextView>(R.id.pd_title)
         val okBtn = dialog.findViewById<Button>(R.id.ok_btn)
         tvTitle.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.location_address_not_updated)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.location_address_not_updated)
         okBtn.setOnClickListener { v: View? ->
             dialog.dismiss()
             val intent = Intent(applicationContext, CustomerAddressActivity::class.java)
@@ -1700,7 +1697,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         )
         dialog.show()
         // update analytic
-        MyApplication.getInstance().updateAnalytics("locationDialog")
+        RetailerSDKApp.getInstance().updateAnalytics("locationDialog")
     }
 
     private fun showChangeLangDialog() {
@@ -1710,9 +1707,9 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         dialog.setCanceledOnTouchOutside(false)
         val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
         val tvDesc = dialog.findViewById<TextView>(R.id.tvDesc)
-        tvTitle.text = MyApplication.getInstance().dbHelper.getString(R.string.select_language)
+        tvTitle.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_language)
         tvDesc.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.if_want_to_change_lang)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.if_want_to_change_lang)
         val radioHindi = dialog.findViewById<RadioButton>(R.id.radioHindi)
         val radioEnglish = dialog.findViewById<RadioButton>(R.id.radioEnglish)
         val btnContinue = dialog.findViewById<Button>(R.id.btnContinue)
@@ -1729,7 +1726,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 isChanged = true
             }
             if (isChanged) {
-                MyApplication.getInstance().clearLangData()
+                RetailerSDKApp.getInstance().clearLangData()
                 val database = FirebaseDatabase.getInstance()
                 val language = database.reference
                 language.addChildEventListener(object : ChildEventListener {
@@ -1739,7 +1736,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     ) {
                         dialog.dismiss()
                         Utils.showProgressDialog(this@HomeActivity)
-                        MyApplication.getInstance().dbHelper.deleteAndUpdateTable(snapshot)
+                        RetailerSDKApp.getInstance().dbHelper.deleteAndUpdateTable(snapshot)
                     }
 
                     override fun onChildChanged(
@@ -1778,7 +1775,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             try {
-                val model = MyApplication.getInstance().noteRepository.getCartItem1(msg.what)
+                val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(msg.what)
                 callAddToCartAPI(
                     model.itemId,
                     model.qty,
@@ -1905,18 +1902,18 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                                     tvItemCount!!.text = Html.fromHtml(sTotalAmount)
                                 } else {
                                     tvItemCount!!.visibility = View.GONE
-                                    MyApplication.getInstance().noteRepository.truncateCart()
+                                    RetailerSDKApp.getInstance().noteRepository.truncateCart()
                                 }
                             } else {
                                 tvItemCount!!.visibility = View.GONE
-                                MyApplication.getInstance().noteRepository.truncateCart()
+                                RetailerSDKApp.getInstance().noteRepository.truncateCart()
                             }
                         } else {
                             tvItemCount!!.visibility = View.GONE
-                            MyApplication.getInstance().noteRepository.truncateCart()
+                            RetailerSDKApp.getInstance().noteRepository.truncateCart()
                         }
                     } else {
-                        MyApplication.getInstance().clearCartData()
+                        RetailerSDKApp.getInstance().clearCartData()
                     }
 
                 }
@@ -2039,7 +2036,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                     } else {
                         val msg = it["message"].asString
                         AlertDialog.Builder(this@HomeActivity)
-                            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert))
+                            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert))
                             .setMessage(msg).setNegativeButton(getString(R.string.ok), null)
                             .show()
                     }
@@ -2084,7 +2081,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                                 } else {
                                     Utils.setToast(
                                         applicationContext,
-                                        MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available)
+                                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available)
                                     )
                                     mBinding!!.toolbarH.btnMurli1.isEnabled = true
                                     mBinding!!.toolbarH.btnMurli1.isClickable = true
@@ -2101,7 +2098,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                             mBinding!!.toolbarH.btnMurli1.isClickable = true
                             Toast.makeText(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available),
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -2115,7 +2112,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 hideMurliProgressDialog()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_try_again_later)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_try_again_later)
                 )
                 mBinding!!.toolbarH.btnMurli1.isEnabled = true
                 mBinding!!.toolbarH.btnMurli1.isClickable = true
@@ -2181,7 +2178,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                         } else {
                             Utils.setToast(
                                 baseContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.no_story_available)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_story_available)
                             )
                         }
                     } catch (e: Exception) {
@@ -2194,7 +2191,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener, OnButtonClick {
                 Utils.hideProgressDialog()
                 Utils.setToast(
                     baseContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_story_available)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_story_available)
                 )
             }
         }

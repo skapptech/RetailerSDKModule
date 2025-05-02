@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyUdharIncomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class MyUdharIncomeActivity : AppCompatActivity(), View.OnClickListener {
     private var mBinding: ActivityMyUdharIncomeBinding? = null
@@ -56,9 +56,9 @@ class MyUdharIncomeActivity : AppCompatActivity(), View.OnClickListener {
         incomeRateSP = mBinding!!.spIncomeRate
         val nextBT = mBinding!!.btNext
         mBinding!!.toolbarUdharIncome.title.text =
-            MyApplication.getInstance().dbHelper.getData("txt_My_Udhaar")
-        mBinding!!.tvSelectIncome.text = MyApplication.getInstance().dbHelper.getData("txt_how_old")
-        mBinding!!.btNext.text = MyApplication.getInstance().dbHelper.getData("next")
+            RetailerSDKApp.getInstance().dbHelper.getData("txt_My_Udhaar")
+        mBinding!!.tvSelectIncome.text = RetailerSDKApp.getInstance().dbHelper.getData("txt_how_old")
+        mBinding!!.btNext.text = RetailerSDKApp.getInstance().dbHelper.getData("next")
         mBinding!!.toolbarUdharIncome.back.setOnClickListener(this)
         nextBT.setOnClickListener(this)
         incomeTimeData()
@@ -83,7 +83,7 @@ class MyUdharIncomeActivity : AppCompatActivity(), View.OnClickListener {
         if (returnYearSt.equals("Please Select", ignoreCase = true)) {
             Toast.makeText(
                 this,
-                MyApplication.getInstance().dbHelper.getData("Please_Select_year"),
+                RetailerSDKApp.getInstance().dbHelper.getData("Please_Select_year"),
                 Toast.LENGTH_SHORT
             ).show()
         } else {

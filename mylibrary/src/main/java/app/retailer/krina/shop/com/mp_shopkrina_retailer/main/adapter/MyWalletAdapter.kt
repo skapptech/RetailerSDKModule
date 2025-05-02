@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.wallet.MyWalletModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.MyWalletAdapterBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class MyWalletAdapter(private val context: Context, private val mylist: ArrayList<MyWalletModel>) :
@@ -29,7 +29,7 @@ class MyWalletAdapter(private val context: Context, private val mylist: ArrayLis
         holder.mBinding.tvEarnFrom.text = mylist[position].through
         if (model.orderId != 0) {
             holder.mBinding.txtOrderId.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.order_id_colon) + model.orderId
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id_colon) + model.orderId
         } else {
             holder.mBinding.txtOrderId.text = ""
         }

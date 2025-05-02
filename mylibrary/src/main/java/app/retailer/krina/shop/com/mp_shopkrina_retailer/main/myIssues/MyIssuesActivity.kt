@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.MyIssueLis
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.MyIssuesResponseModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -43,8 +43,8 @@ class MyIssuesActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         init()
         mBinding.tvNoTicket.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_ticket)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.title_activity_my_issue)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_ticket)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_my_issue)
     }
 
     override fun attachBaseContext(newBase: Context?) {
@@ -102,7 +102,7 @@ class MyIssuesActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.no_internet)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_internet)
             )
         }
     }

@@ -780,14 +780,14 @@ public class Utils {
                 shareIntent.setPackage("com.whatsapp");
             }
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.app_name));
-            String shareMessage = "\n" + MyApplication.getInstance().dbHelper.getString(R.string.referral_share_message) + "\n\n";
+            String shareMessage = "\n" + RetailerSDKApp.getInstance().dbHelper.getString(R.string.referral_share_message) + "\n\n";
             shareMessage = shareMessage + "play.google.com/store/apps/details?id=" + context.getPackageName() + "&referrer=" + skCode;
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             context.startActivity(Intent.createChooser(shareIntent, "Choose one"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        MyApplication.getInstance().updateAnalyticShare("Referral", "App Share");
+        RetailerSDKApp.getInstance().updateAnalyticShare("Referral", "App Share");
     }
 
     public void showOfferView(View v, @Nullable View anchorView, String s) {

@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.NoInterne
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.CustomerTargetResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
 import io.reactivex.observers.DisposableObserver
@@ -96,32 +96,32 @@ class CustomerTargetActivity : AppCompatActivity() {
 
 
     private fun initView() {
-        mBinding.title.text = MyApplication.getInstance().dbHelper.getString(R.string.my_target)
+        mBinding.title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target)
         mBinding.tvHurryup.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.hurry_up)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hurry_up)
         mBinding.tvOnComplitingTarget.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.on_completing_target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.on_completing_target)
         mBinding.tvPoints.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.get_giftcard)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.get_giftcard)
         mBinding.tvStatic.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.wallet_points_sec)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.wallet_points_sec)
         mBinding.tvYourTotal.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.your_total)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_total)
         mBinding.tvNotDelivered.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.not_delivered)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_delivered)
         mBinding.tvAchievedTotal.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.achieved_total_calculated_on_delivered_value_only)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.achieved_total_calculated_on_delivered_value_only)
         mBinding.tvCongratulations.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Congratulation)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Congratulation)
         mBinding.tvCompleteMonthTarget.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.completed_month_target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.completed_month_target)
         mBinding.tvStatic1.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.dream_points)
-        mBinding.btnClaim.text = MyApplication.getInstance().dbHelper.getString(R.string.claim)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.dream_points)
+        mBinding.btnClaim.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
         mBinding.tvComingSoon1.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.coming_soon)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.coming_soon)
         mBinding.tvCheckback.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_check_back_later)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_check_back_later)
     }
 
 
@@ -146,7 +146,7 @@ class CustomerTargetActivity : AppCompatActivity() {
                                 mBinding.tvCoins1.visibility = View.GONE
                                 mBinding.tvStatic1.visibility = View.GONE
                                 mBinding.tvNotice.text =
-                                    MyApplication.getInstance().dbHelper.getString(R.string.reward_order_created)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.reward_order_created)
                             } else if (response.getTargetData.type.contains("Point")) {
                                 mBinding.giftImage1.setImageResource(R.drawable.component_178_1)
                                 mBinding.tvCoins1.text =
@@ -154,7 +154,7 @@ class CustomerTargetActivity : AppCompatActivity() {
                                 mBinding.tvCoins1.visibility = View.VISIBLE
                                 mBinding.tvStatic1.visibility = View.VISIBLE
                                 mBinding.tvNotice.text =
-                                    MyApplication.getInstance().dbHelper.getString(R.string.reward_points_added_to_wallet)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.reward_points_added_to_wallet)
                             } else if (response.getTargetData.type.contains("Offer")) {
                                 if (response.getTargetData.offerType == 0)
                                     mBinding.tvCoins1.text = response.getTargetData.offerValue + "%"
@@ -176,13 +176,13 @@ class CustomerTargetActivity : AppCompatActivity() {
                                     mBinding.giftImage
                                 )
                                 mBinding.tvPoints.text =
-                                    MyApplication.getInstance().dbHelper.getString(R.string.get_giftcard)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.get_giftcard)
                                 mBinding.tvCoins.visibility = View.GONE
                                 mBinding.tvStatic.visibility = View.GONE
                             } else if (response.getTargetData.type.contains("Point")) {
                                 mBinding.giftImage.setImageResource(R.drawable.component_178_1)
                                 mBinding.tvPoints.text =
-                                    MyApplication.getInstance().dbHelper.getString(R.string.get_giftcard)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.get_giftcard)
                                 mBinding.tvCoins.text =
                                     response.getTargetData.value.toInt().toString()
                                 mBinding.tvCoins.visibility = View.VISIBLE
@@ -196,9 +196,9 @@ class CustomerTargetActivity : AppCompatActivity() {
                             }
                         }
                         mBinding.tvMonth.text =
-                            (MyApplication.getInstance().dbHelper.getString(R.string.achieve_your) + " " +
+                            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.achieve_your) + " " +
                                     SimpleDateFormat("MMMM", Locale.ENGLISH).format(Date())
-                                    + " " + MyApplication.getInstance().dbHelper.getString(R.string.month_target))
+                                    + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.month_target))
                         mBinding.tvTarget.text = "₹" + response.getTargetData.targetAmount.toInt()
                         mBinding.tvPurchaseAmt.text =
                             "₹" + response.getTargetData.totalPurchaseAmount.toInt()
@@ -213,7 +213,7 @@ class CustomerTargetActivity : AppCompatActivity() {
                             response.getTargetData.achivePercent.toInt().toString() + "%"
                         mBinding.tvDaysLeft.text =
                             response.getTargetData.leftDays.toString() + " " +
-                                    MyApplication.getInstance().dbHelper.getString(R.string.days_left)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.days_left)
                         if (response.getTargetData.isClaimed) {
                             mBinding.btnClaim.visibility = View.GONE
                         }

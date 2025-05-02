@@ -24,7 +24,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.HKImageAda
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.CustomerRes;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.HisabDetailModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 
 public class TransactionDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -124,7 +124,7 @@ public class TransactionDetailActivity extends AppCompatActivity implements View
             sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path));
             sendIntent.setType("image/url");
             startActivity(sendIntent);
-            MyApplication.getInstance().updateAnalyticShare(getClass().getSimpleName(), "Transaction Share On WhatsApp");
+            RetailerSDKApp.getInstance().updateAnalyticShare(getClass().getSimpleName(), "Transaction Share On WhatsApp");
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Whatsapp not installed.", Toast.LENGTH_SHORT).show();

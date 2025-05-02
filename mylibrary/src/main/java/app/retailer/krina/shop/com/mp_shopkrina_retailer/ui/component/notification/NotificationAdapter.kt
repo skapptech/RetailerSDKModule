@@ -22,7 +22,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.settings.ChangeLanguageActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -61,35 +61,35 @@ class NotificationAdapter(
             holder.mBinding.btnAdd.visibility = View.VISIBLE
             if (notificationModel.notificationCategory.equals("Category", ignoreCase = true)) {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
             } else if (notificationModel.notificationCategory.equals(
                     "SubCategory",
                     ignoreCase = true
                 )
             ) {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
             } else if (notificationModel.notificationCategory.equals(
                     "SubSubCategory",
                     ignoreCase = true
                 )
             ) {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
             } else if (notificationModel.notificationCategory.equals("Brand", ignoreCase = true)) {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
             } else if (notificationModel.notificationCategory.equals("Item", ignoreCase = true)) {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_to_cart_notification)
             } else {
                 holder.mBinding.btnAdd.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_click_here)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_click_here)
             }
         } else {
             holder.mBinding.btnAdd.visibility = View.GONE
             holder.mBinding.btnAdd.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.text_click_here)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_click_here)
         }
         var imageurl: String
         if (!TextUtils.isNullOrEmpty(notificationModel.notifyType)) {

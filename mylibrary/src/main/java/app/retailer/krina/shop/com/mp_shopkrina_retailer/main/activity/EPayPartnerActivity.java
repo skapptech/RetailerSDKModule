@@ -25,7 +25,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassFor
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityEpayPartnerBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.EPayPartnerModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
@@ -46,20 +46,20 @@ public class EPayPartnerActivity extends AppCompatActivity implements View.OnCli
         mBinding.etDob.setOnClickListener(this);
         mBinding.btnSubmit.setOnClickListener(this);
 
-        mBinding.proprietorFN.setHint(MyApplication.getInstance().dbHelper.getString(R.string.proprietor_first_name));
-        mBinding.proprietorLN.setHint(MyApplication.getInstance().dbHelper.getString(R.string.proprietor_last_name));
-        mBinding.mobNo.setHint(MyApplication.getInstance().dbHelper.getString(R.string.mobile_number));
-        mBinding.whatsAppNo.setHint(MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number));
-        mBinding.email.setHint(MyApplication.getInstance().dbHelper.getString(R.string.email));
-        mBinding.dob.setHint(MyApplication.getInstance().dbHelper.getString(R.string.dob));
-        mBinding.panNo.setHint(MyApplication.getInstance().dbHelper.getString(R.string.pannumber));
-        mBinding.country.setHint(MyApplication.getInstance().dbHelper.getString(R.string.country));
-        mBinding.state.setHint(MyApplication.getInstance().dbHelper.getString(R.string.state));
-        mBinding.city.setHint(MyApplication.getInstance().dbHelper.getString(R.string.city));
-        mBinding.zipCode.setHint(MyApplication.getInstance().dbHelper.getString(R.string.pincode));
-        mBinding.tvAllMandatory.setHint(MyApplication.getInstance().dbHelper.getString(R.string.all_partner_details_are_mandatory));
+        mBinding.proprietorFN.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.proprietor_first_name));
+        mBinding.proprietorLN.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.proprietor_last_name));
+        mBinding.mobNo.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mobile_number));
+        mBinding.whatsAppNo.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number));
+        mBinding.email.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.email));
+        mBinding.dob.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.dob));
+        mBinding.panNo.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.pannumber));
+        mBinding.country.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.country));
+        mBinding.state.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.state));
+        mBinding.city.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.city));
+        mBinding.zipCode.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.pincode));
+        mBinding.tvAllMandatory.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.all_partner_details_are_mandatory));
 
-        mBinding.btnSubmit.setHint(MyApplication.getInstance().dbHelper.getString(R.string.submit));
+        mBinding.btnSubmit.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit));
     }
 
     @Override
@@ -183,7 +183,7 @@ public class EPayPartnerActivity extends AppCompatActivity implements View.OnCli
             System.out.println("the selected" + mDay);
             DatePickerDialog dialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new mDateSetListenerForDob(), mYear, mMonth, mDay);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, MyApplication.getInstance().dbHelper.getString(R.string.cancel), (dialog1, which) -> {
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel), (dialog1, which) -> {
                 mBinding.etDob.setText("");
             });
             dialog.show();

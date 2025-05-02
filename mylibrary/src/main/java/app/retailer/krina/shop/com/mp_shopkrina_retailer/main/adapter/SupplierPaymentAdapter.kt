@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemSupplierPaymentBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.LadgerEntryListModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.text.DecimalFormat
 
@@ -33,7 +33,7 @@ class SupplierPaymentAdapter(
         viewHolder.mbinding.tvDate.text =
             Utils.getDateFormat(model.createdDate)
         viewHolder.mbinding.tvOrderId.text =
-            MyApplication.getInstance().dbHelper.getData("order_id_colon") + " " + +model.id
+            RetailerSDKApp.getInstance().dbHelper.getData("order_id_colon") + " " + +model.id
         if (model.credit > 0.0) {
             viewHolder.mbinding.view.setBackgroundColor(context.resources.getColor(R.color.colorAccent))
             viewHolder.mbinding.tvAmt.text = Html.fromHtml(

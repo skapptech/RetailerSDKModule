@@ -119,7 +119,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.SignupRes
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.SupplierPaymentResponce;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.TradeOfferResponse;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.wallet.WalletResponse;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -133,7 +133,7 @@ public class CommonClassForAPI {
 
 
     public static CommonClassForAPI getInstance(Activity activity) {
-        MyApplication.getInstance().activity = activity;
+        RetailerSDKApp.getInstance().activity = activity;
         if (commonClassForAPI == null) {
             commonClassForAPI = new CommonClassForAPI(activity);
         }
@@ -144,7 +144,7 @@ public class CommonClassForAPI {
     }
 
     private CommonClassForAPI(Activity activity) {
-        MyApplication.getInstance().activity = activity;
+        RetailerSDKApp.getInstance().activity = activity;
     }
 
 

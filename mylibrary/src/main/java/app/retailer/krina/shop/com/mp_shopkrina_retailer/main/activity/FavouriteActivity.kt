@@ -25,7 +25,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddIt
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonObject
 import io.reactivex.observers.DisposableObserver
@@ -50,13 +50,13 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_favourite)
         mBinding.toolbarFav.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.myFavourite)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.myFavourite)
         mBinding.fragSearchEdt.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.search_item)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_item)
         mBinding.checkoutBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.checkout)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkout)
         mBinding.noOneFav.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_one_is_favorite_item)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_one_is_favorite_item)
         // back Btn
         mBinding.toolbarFav.back.setOnClickListener(this)
         // check out btn
@@ -74,7 +74,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        MyApplication.getInstance().noteRepository.tasks.observe(this) { itemListModels: List<FavItemsDetails> ->
+        RetailerSDKApp.getInstance().noteRepository.tasks.observe(this) { itemListModels: List<FavItemsDetails> ->
             favItemList.clear()
             for (i in itemListModels.indices) favItemList.add(FavItemsDetails(itemListModels[i].itemId))
             // fav json
@@ -131,7 +131,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -139,15 +139,15 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
     private fun setAdapterValue() {
         mFaveAdapter = FavItemListAdapter(this, mItemListArrayList)
         mBinding.rvFav.adapter = mFaveAdapter
-        MyApplication.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
+        RetailerSDKApp.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
                 if (totalAmt != null && totalAmt > 0) {
                     mBinding.tvTotalPrice.text =
-                        MyApplication.getInstance().dbHelper.getData("txt_total_amount") + ":" + DecimalFormat(
+                        RetailerSDKApp.getInstance().dbHelper.getData("txt_total_amount") + ":" + DecimalFormat(
                             "##.##"
                         ).format(totalAmt)
-                    val count = MyApplication.getInstance().noteRepository.cartCount
+                    val count = RetailerSDKApp.getInstance().noteRepository.cartCount
                     mBinding.saveTotalItem.text =
-                        MyApplication.getInstance().dbHelper.getData("itequantity") + " : " + count
+                        RetailerSDKApp.getInstance().dbHelper.getData("itequantity") + " : " + count
                 }
             }
     }
@@ -175,10 +175,10 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
                 model.offerFreeItemQuantity = "" + freeItemQty
                 model.offerWalletPoint = totalFreeWalletPoint
                 // update cart database
-                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                 } else {
-                    MyApplication.getInstance().noteRepository.addToCart(model)
+                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                 }
                 if (lastItemId == itemId) {
                     handler.removeCallbacksAndMessages(null)
@@ -196,7 +196,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getData("internet_connection")
+                RetailerSDKApp.getInstance().dbHelper.getData("internet_connection")
             )
             onItemClick.onItemClick(0, false)
         }
@@ -207,7 +207,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             try {
-                val model = MyApplication.getInstance().noteRepository.getCartItem1(msg.what)
+                val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(msg.what)
                 callAddToCartAPI(
                     model.itemId,
                     model.qty,
@@ -237,7 +237,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
                     } else {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getData("unable_to_add_cart")
+                            RetailerSDKApp.getInstance().dbHelper.getData("unable_to_add_cart")
                         )
                         onItemClick!!.onItemClick(0, false)
                     }
@@ -274,7 +274,7 @@ class FavouriteActivity : AppCompatActivity(), View.OnClickListener {
                     if (jsonArray) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.txt_Notify_msg)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Notify_msg)
                         )
                     }
                 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.feed.PostLikeModelRequest
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.CommentPostModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.PostModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Network
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SingleLiveEvent
@@ -42,38 +42,38 @@ class CommentViewModel constructor(private val repository: CommentRepository) : 
 
 
     fun getCommentList(postId: String, userId: Int) {
-        if (Network.checkConnectivity(MyApplication.getInstance())) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance())) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.getCommentList(postId, userId).collect() {
                     _commentListResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun postComment(commentCount: Int, model: CommentPostModel) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postComment(commentCount, model).collect() {
                     _postCommentResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun postCommentLike(postId: String, commentId: String, model: PostLikeModelRequest) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postCommentLike(model).collect() {
                     _likeCommentResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
@@ -83,50 +83,50 @@ class CommentViewModel constructor(private val repository: CommentRepository) : 
         commentCount: Int,
         model: CommentPostModel
     ) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.postCommentReply(postId, commentCount, model).collect() {
                     _postReplyCommentResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun editComment(postId: String, commentId: String, model: PostModel) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.editComment(postId, commentId, model).collect() {
                     _editCommentResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun deleteComment(postId: String, commentId: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.deleteComment(postId, commentId).collect() {
                     _deleteCommentResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 
     fun deleteReplyInComment(postId: String, commentId: String) {
-        if (Network.checkConnectivity(MyApplication.getInstance()!!)) {
+        if (Network.checkConnectivity(RetailerSDKApp.getInstance()!!)) {
             viewModelScope.launch(Dispatchers.IO) {
                 repository.deleteReplyInComment(postId, commentId).collect() {
                     _deleteCommentReplyResponse.postValue(it)
                 }
             }
         } else {
-            Utils.setToast(MyApplication.getInstance(), "No internet connectivity")
+            Utils.setToast(RetailerSDKApp.getInstance(), "No internet connectivity")
         }
     }
 }

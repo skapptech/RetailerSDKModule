@@ -30,7 +30,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.freeb
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.freebies.FreebiesViewModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.freebies.FreebiesViewModelFactory
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.util.Collections
 
@@ -128,10 +128,10 @@ class StoreFreebiesActivity : AppCompatActivity(), View.OnClickListener, AddToCa
                 model.totalFreeItemQty = freeItemQty
                 model.totalFreeWalletPoint = totalFreeWalletPoint
                 // update cart database
-                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                 } else {
-                    MyApplication.getInstance().noteRepository.addToCart(model)
+                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                 }
                 if (lastItemId == itemId) {
                     handler.removeCallbacksAndMessages(null)
@@ -158,13 +158,13 @@ class StoreFreebiesActivity : AppCompatActivity(), View.OnClickListener, AddToCa
         mBinding!!.toolbarFreebies.back.setOnClickListener(this)
         mBinding!!.checkoutBtn.setOnClickListener(this)
         mBinding!!.toolbarFreebies.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.freebies)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.freebies)
         mBinding!!.tvNoOffer.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_offer)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer)
         mBinding!!.saveTotalItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount)
         mBinding!!.checkoutBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.checkout)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkout)
     }
 
     fun callFreebiesItemApi() {
@@ -184,7 +184,7 @@ class StoreFreebiesActivity : AppCompatActivity(), View.OnClickListener, AddToCa
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             try {
-                val model = MyApplication.getInstance().noteRepository.getCartItem1(msg.what)
+                val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(msg.what)
                 callAddToCartAPI(
                     model.itemId,
                     model.qty,

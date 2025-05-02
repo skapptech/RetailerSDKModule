@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityTermsConditionBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class TermsAndConditionActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityTermsConditionBinding
@@ -35,8 +35,8 @@ class TermsAndConditionActivity : AppCompatActivity() {
     private fun initView() {
         toolBarBackLL = mBinding.toolbarTermsAndCondition.back
         mBinding.toolbarTermsAndCondition.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.terms_and_condition)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_and_condition)
         mBinding.tvpolicy.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_terms_cond_text)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_terms_cond_text)
     }
 }

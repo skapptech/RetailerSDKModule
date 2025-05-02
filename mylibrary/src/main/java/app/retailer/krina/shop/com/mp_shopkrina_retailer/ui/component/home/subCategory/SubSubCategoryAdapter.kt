@@ -11,7 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.subCatego
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemSubSubcategoryBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.SubSubCategoryFilterInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 
@@ -71,7 +71,7 @@ class SubSubCategoryAdapter(
                 analyticPost.categoryId = model.categoryid
                 analyticPost.subCatId = model.subcategoryid
                 analyticPost.subSubCatId = model.subcategoryid
-                MyApplication.getInstance()
+                RetailerSDKApp.getInstance()
                     .updateAnalytics(model.subsubcategoryname + "_click", analyticPost)
             } else {
                 vh.mBinding.subSubCategoryLayout.background =

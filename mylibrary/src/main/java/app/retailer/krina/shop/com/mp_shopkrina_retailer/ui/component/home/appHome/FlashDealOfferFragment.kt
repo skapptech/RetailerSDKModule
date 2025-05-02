@@ -23,7 +23,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit
 class FlashDealOfferFragment : Fragment() {
     private var activity: HomeActivity? = null
     private val TAG = FlashDealOfferFragment::class.java.name
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var mBinding: FragmentFlashDealOfferBinding
     private lateinit var appHomeViewModel: AppHomeViewModel
     private var mFlashDealItemListAdapter: FlashDealItemListAdapter? = null
@@ -63,7 +63,7 @@ class FlashDealOfferFragment : Fragment() {
     override fun onAttach(_context: Context) {
         super.onAttach(_context)
         activity = _context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
 
     }
 
@@ -130,7 +130,7 @@ class FlashDealOfferFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName, null
         )
@@ -162,12 +162,12 @@ class FlashDealOfferFragment : Fragment() {
         warehouseId = SharePrefs.getInstance(activity).getInt(SharePrefs.WAREHOUSE_ID)
         customerId = SharePrefs.getInstance(activity).getInt(SharePrefs.CUSTOMER_ID)
         mBinding.NoFlashDealAvailable.text =
-            MyApplication.getInstance().dbHelper.getData("No_flash_Deal_available")
+            RetailerSDKApp.getInstance().dbHelper.getData("No_flash_Deal_available")
         mBinding.tvLeftTimeMsg.text =
-            MyApplication.getInstance().dbHelper.getData("tv_get_ready_to_in")
-        mBinding.tvPrimeText.text = MyApplication.getInstance().dbHelper.getData("text_prime")
+            RetailerSDKApp.getInstance().dbHelper.getData("tv_get_ready_to_in")
+        mBinding.tvPrimeText.text = RetailerSDKApp.getInstance().dbHelper.getData("text_prime")
         mBinding.tvNoPrimeText.text =
-            MyApplication.getInstance().dbHelper.getData("text_no_prime")
+            RetailerSDKApp.getInstance().dbHelper.getData("text_no_prime")
         val rvFlashDealOffer = mBinding.rvFlashDeal
         rvFlashDealOffer.layoutManager = LinearLayoutManager(activity)
         mFlashDealItemListAdapter =

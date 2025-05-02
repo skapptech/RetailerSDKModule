@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.db.LangModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 
 public class FirebaseLanguageFetch {
     private final Context context;
@@ -42,7 +42,7 @@ public class FirebaseLanguageFetch {
         @Override
         protected Void doInBackground(Void... arg0) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            MyApplication.getInstance().dbHelper.truncateLangTable();
+            RetailerSDKApp.getInstance().dbHelper.truncateLangTable();
             DatabaseReference language = database.getReference();
             language.addChildEventListener(new ChildEventListener() {
                 @Override
@@ -59,7 +59,7 @@ public class FirebaseLanguageFetch {
                             for (DataSnapshot langSnapshot : postSnapshot.getChildren()) {
                                 list.add(new LangModel(langSnapshot.getKey(), langSnapshot.getValue() + ""));
                             }
-                            MyApplication.getInstance().noteRepository.insertLangs(list);
+                            RetailerSDKApp.getInstance().noteRepository.insertLangs(list);
                         }
                     }
                     SharePrefs.getInstance(context).putBoolean(SharePrefs.IS_FETCH_LANGUAGE, false);

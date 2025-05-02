@@ -30,7 +30,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.La
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.SupplierDocModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -71,14 +71,14 @@ class LedgerSummaryActivity : AppCompatActivity() {
         type = args.getString("type")
         if (type.equals("SR", ignoreCase = true)) {
             supportActionBar!!.title =
-                MyApplication.getInstance().dbHelper.getData("ledger_summary")
+                RetailerSDKApp.getInstance().dbHelper.getData("ledger_summary")
         } else {
-            supportActionBar!!.title = MyApplication.getInstance().dbHelper.getData("details")
+            supportActionBar!!.title = RetailerSDKApp.getInstance().dbHelper.getData("details")
         }
-        mBinding.tvFromD.text = MyApplication.getInstance().dbHelper.getData("from")
-        mBinding.tvToD.text = MyApplication.getInstance().dbHelper.getData("to")
-        mBinding.tvOpeningBal.text = MyApplication.getInstance().dbHelper.getData("opening_balance")
-        mBinding.tvClosingBal.text = MyApplication.getInstance().dbHelper.getData("closing_balance")
+        mBinding.tvFromD.text = RetailerSDKApp.getInstance().dbHelper.getData("from")
+        mBinding.tvToD.text = RetailerSDKApp.getInstance().dbHelper.getData("to")
+        mBinding.tvOpeningBal.text = RetailerSDKApp.getInstance().dbHelper.getData("opening_balance")
+        mBinding.tvClosingBal.text = RetailerSDKApp.getInstance().dbHelper.getData("closing_balance")
         val openBal = args.getString("open")
         val closeBal = args.getString("close")
         mBinding.txtOpenBal.text = Html.fromHtml(
@@ -141,7 +141,7 @@ class LedgerSummaryActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getData("internet_connection")
+                RetailerSDKApp.getInstance().dbHelper.getData("internet_connection")
             )
         }
     }
@@ -196,7 +196,7 @@ class LedgerSummaryActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getData("internet_connection")
+                RetailerSDKApp.getInstance().dbHelper.getData("internet_connection")
             )
         }
     }
@@ -241,7 +241,7 @@ class LedgerSummaryActivity : AppCompatActivity() {
                     if (supplierDocModel.isStatus) {
                         if (supplierDocModel.isURL != null) {
                             val Url =
-                                EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + supplierDocModel.isURL
+                                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + supplierDocModel.isURL
                             val fileName = Url.substring(Url.lastIndexOf("/") + 1)
                             val request = DownloadManager.Request(Uri.parse(Url))
                             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

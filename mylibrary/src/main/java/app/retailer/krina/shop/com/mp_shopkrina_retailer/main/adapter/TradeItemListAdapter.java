@@ -40,7 +40,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListM
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.NotifyModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import pl.droidsonroids.gif.GifImageView;
@@ -76,13 +76,13 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         try {
             ItemListModel model = list.get(i);
             //set String
-            viewHolder.mBinding.tvMrpText.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_mrp));
-            viewHolder.mBinding.tvRemainingQtyText.setText(MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty) + " ");
-            viewHolder.btnAdd.setText(MyApplication.getInstance().dbHelper.getString(R.string.add_btn));
+            viewHolder.mBinding.tvMrpText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp));
+            viewHolder.mBinding.tvRemainingQtyText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty) + " ");
+            viewHolder.btnAdd.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn));
 
             viewHolder.mBinding.btItemNotyfy.setOnClickListener(v -> {
                 activity.getNotifyItems(model.getWarehouseId(), model.getItemNumber());
-                MyApplication.getInstance().noteRepository.insertNotifyItemTask(new NotifyModel(model.getItemId()));
+                RetailerSDKApp.getInstance().noteRepository.insertNotifyItemTask(new NotifyModel(model.getItemId()));
                 viewHolder.mBinding.btItemNotyfy.setBackground(activity.getResources().getDrawable(R.drawable.background_for_buttons_disble));
                 viewHolder.mBinding.btItemNotyfy.setClickable(false);
                 viewHolder.mBinding.btItemNotyfy.setEnabled(false);
@@ -97,9 +97,9 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
                 viewHolder.tvMoq.setVisibility(View.VISIBLE);
                 viewHolder.tvMultiMoq.setVisibility(View.GONE);
             }
-            viewHolder.tvMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_moq)
+            viewHolder.tvMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq)
                     + " " + model.getMinOrderQty());
-            viewHolder.tvMultiMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_moq)
+            viewHolder.tvMultiMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq)
                     + " " + model.getMinOrderQty());
             //viewHolder.tvItemName.setText(model.getItemname());
             if (!TextUtils.isNullOrEmpty(model.getLogoUrl())) {
@@ -154,11 +154,11 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
                 ImageView ivClose = dialogLayout.findViewById(R.id.ivClose);
                 ivClose.setOnClickListener(v1 -> dialog.dismiss());
 
-                tvDSelectQty.setText(MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for));
-                tvDMoq.setText(MyApplication.getInstance().dbHelper.getString(R.string.moq));
-                tvDMrp.setText(MyApplication.getInstance().dbHelper.getString(R.string.mrp));
-                tvDRs.setText(MyApplication.getInstance().dbHelper.getString(R.string.rs));
-                tvDMargin.setText(MyApplication.getInstance().dbHelper.getString(R.string.margins_d));
+                tvDSelectQty.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for));
+                tvDMoq.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq));
+                tvDMrp.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp));
+                tvDRs.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs));
+                tvDMargin.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d));
 
                 ListView mMoqPriceList = dialogLayout.findViewById(R.id.listview_moq_price);
                 item_name.setText(model.itemname);
@@ -197,13 +197,13 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
     }
 
     private void addRemoveFav(ItemListModel model, @NonNull ViewHolder viewHolder) {
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.getItemId())) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.getItemId())) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite);
-            MyApplication.getInstance().noteRepository.deleteTask(model.getItemId());
+            RetailerSDKApp.getInstance().noteRepository.deleteTask(model.getItemId());
             Utils.addFav(model.getItemId(), false, activity);
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red);
-            MyApplication.getInstance().noteRepository.insertTask(model);
+            RetailerSDKApp.getInstance().noteRepository.insertTask(model);
             Utils.addFav(model.getItemId(), true, activity);
         }
     }
@@ -233,14 +233,14 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
     //Value set
     private void setValueInUI(@NonNull ViewHolder viewHolder, ItemListModel model) {
         // check item in wishList
-        if (MyApplication.getInstance().noteRepository.isItemWishList(model.getItemId())) {
+        if (RetailerSDKApp.getInstance().noteRepository.isItemWishList(model.getItemId())) {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favorite_red);
         } else {
             viewHolder.mBinding.favItem.setImageResource(R.drawable.ic_favourite);
         }
         viewHolder.tvItemName.setText(model.itemname);
         String sPRICE = "| <font color=#FF4500>&#8377; " + new DecimalFormat("##.##").format(model.getUnitPrice()) + "</font>";
-        String sMargin = MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " +
+        String sMargin = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " +
                 (new DecimalFormat("##.##").format(Double.parseDouble(model.marginPoint))) + "%";
         String sMRP = new DecimalFormat("##.##").format(model.price);
         // set values
@@ -250,13 +250,13 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         viewHolder.mBinding.tvMargin.setText(sMargin);
         viewHolder.mBinding.tvOffer.setText("Mrgn" + System.getProperty("line.separator") +
                 (new DecimalFormat("##.##").format(Double.parseDouble(model.marginPoint))) + "%");
-        viewHolder.tvDreamPoint.setText(MyApplication.getInstance().dbHelper.getString(R.string.Dp)
+        viewHolder.tvDreamPoint.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp)
                 + " " + model.dreamPoint);
         // set prime item price
         if (model.isPrimeItem) {
             viewHolder.mBinding.liPrime.setVisibility(View.VISIBLE);
             viewHolder.mBinding.tvPPrice.setText(SharePrefs.getInstance(activity).getString(SharePrefs.PRIME_NAME)
-                    + " " + MyApplication.getInstance().dbHelper.getString(R.string.price)
+                    + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.price)
                     + ": ₹" + new DecimalFormat("##.##").format(model.getPrimePrice()));
             viewHolder.mBinding.tvPrice.setTextColor(activity.getResources().getColor(R.color.grey));
         } else {
@@ -271,7 +271,7 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
             viewHolder.mBinding.tvUnlock.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock, 0, R.drawable.ic_right_arrow, 0);
         }
 
-        ItemListModel cartModel = MyApplication.getInstance().noteRepository.getItemByMrpId(model.getItemId(), model.getItemMultiMRPId());
+        ItemListModel cartModel = RetailerSDKApp.getInstance().noteRepository.getItemByMrpId(model.getItemId(), model.getItemMultiMRPId());
 
         // set UI for ItemLimit
         if (model.isItemLimit) {
@@ -330,20 +330,20 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         }
 
         if (model.getActive()) {
-            viewHolder.mBinding.tvMrpText.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_mrp) + " ");
+            viewHolder.mBinding.tvMrpText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp) + " ");
             viewHolder.mBinding.btItemNotyfy.setVisibility(View.GONE);
             viewHolder.btnAdd.setVisibility(View.VISIBLE);
         } else {
-            viewHolder.mBinding.tvMrpText.setText(MyApplication.getInstance().dbHelper.getString(R.string.text_out_of_stock));
+            viewHolder.mBinding.tvMrpText.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_out_of_stock));
             viewHolder.mBinding.tvMrpText.setTextColor(activity.getResources().getColor(R.color.colorAccent));
             viewHolder.mBinding.btItemNotyfy.setVisibility(View.VISIBLE);
             viewHolder.btnAdd.setVisibility(View.GONE);
             viewHolder.mBinding.tvMrp.setVisibility(View.GONE);
             viewHolder.mBinding.tvPrice.setVisibility(View.GONE);
             viewHolder.mBinding.tvMargin.setVisibility(View.GONE);
-            viewHolder.mBinding.tvSelectedItemPrice.setText(MyApplication.getInstance().dbHelper.getString(R.string.item_mrp) + " " + sMRP);
+            viewHolder.mBinding.tvSelectedItemPrice.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp) + " " + sMRP);
 
-            if (MyApplication.getInstance().noteRepository.isNotifyDisable(model.getItemId())) {
+            if (RetailerSDKApp.getInstance().noteRepository.isNotifyDisable(model.getItemId())) {
                 viewHolder.mBinding.btItemNotyfy.setBackground(activity.getResources().getDrawable(R.drawable.background_for_buttons_disble));
                 viewHolder.mBinding.btItemNotyfy.setClickable(false);
                 viewHolder.mBinding.btItemNotyfy.setEnabled(false);
@@ -433,9 +433,9 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
     }
 
     private boolean setLimit(ViewHolder viewHolder, ItemListModel model, boolean addFlag, int itemQuantity, boolean add) {
-        int total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
+        int total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
         int availqty;
-        int totalItemqty = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(model.getItemMultiMRPId());
+        int totalItemqty = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(model.getItemMultiMRPId());
         int itemlimitqty;
         if (add) {
             totalItemqty += model.getMinOrderQty();
@@ -446,9 +446,9 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         if (total > 0) {
             if (add) {
                 if (total + itemQuantity > itemlimitqty) {
-                    Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.additemToast)
+                    Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast)
                             + " " + model.getItemLimitQty() + " " +
-                            MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2));
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2));
                 } else {
                     if (model.getBillLimitQty() != 0) {
                         addFlag = setBillLimit(viewHolder, model, addFlag, itemQuantity);
@@ -478,9 +478,9 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         } else {
             if (itemQuantity > 0) {
                 if (itemQuantity > model.getItemLimitQty()) {
-                    Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.additemToast)
+                    Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast)
                             + " " + model.getItemLimitQty() + " " +
-                            MyApplication.getInstance().dbHelper.getString(R.string.additemToast_2));
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast_2));
                 } else {
                     if (model.getBillLimitQty() != 0) {
                         addFlag = setBillLimit(viewHolder, model, addFlag, itemQuantity);
@@ -506,12 +506,12 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
 
     private boolean setBillLimit(@NonNull ViewHolder viewHolder, ItemListModel model, boolean addFlag, int itemQuantity) {
         try {
-            int total = MyApplication.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
+            int total = RetailerSDKApp.getInstance().noteRepository.getQtyByMultiMrp(model.getItemId(), model.getItemMultiMRPId());
             int itemlimitqty;
             itemlimitqty = model.getBillLimitQty();
             if (total > 0) {
                 if (total + itemQuantity > itemlimitqty) {
-                    Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text)
+                    Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text)
                             + " " + model.getBillLimitQty() + " item");
                 } else {
                     viewHolder.tvselectedItemQuantity.setText("" + itemQuantity);
@@ -520,7 +520,7 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
             } else {
                 if (itemQuantity > 0) {
                     if (itemQuantity > model.getBillLimitQty()) {
-                        Utils.setToast(activity, MyApplication.getInstance().dbHelper.getString(R.string.bill_limit_text)
+                        Utils.setToast(activity, RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_limit_text)
                                 + " " + model.getBillLimitQty() + " item");
                     } else {
                         viewHolder.tvselectedItemQuantity.setText("" + itemQuantity);

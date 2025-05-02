@@ -35,7 +35,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.freeb
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.payment.PaymentOptionActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
@@ -319,7 +319,7 @@ class WebViewActivity : AppCompatActivity() {
      """
         )
         startActivity(Intent.createChooser(share, "Share with"))
-        MyApplication.getInstance()
+        RetailerSDKApp.getInstance()
             .updateAnalyticShare(javaClass.simpleName, "Wudu Share On WhatsApp")
     }
 
@@ -328,7 +328,7 @@ class WebViewActivity : AppCompatActivity() {
         share.type = "text/plain"
         share.putExtra(Intent.EXTRA_TEXT, "$body\n http://dl.trade.er15.xyz/$returnPath")
         startActivity(Intent.createChooser(share, "Share Product"))
-        MyApplication.getInstance()
+        RetailerSDKApp.getInstance()
             .updateAnalyticShare(javaClass.simpleName, "App Share On WhatsApp")
     }
 
@@ -372,7 +372,7 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     private fun updateCartAllValue(mShoppingCart: ShopingCartItemDetailsResponse) {
-        MyApplication.getInstance().noteRepository.addToCart(mShoppingCart.shoppingCartItemDcs)
+        RetailerSDKApp.getInstance().noteRepository.addToCart(mShoppingCart.shoppingCartItemDcs)
     }
 
     inner class JavaScriptInterface internal constructor(private val context: Context) {

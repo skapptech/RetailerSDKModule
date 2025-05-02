@@ -35,7 +35,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.DBoyR
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.SalesRateFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.flexbox.FlexboxLayout
@@ -89,21 +89,21 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
 
     fun initialization() {
         mBinding!!.toolbarOd.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_details)
         mBinding!!.tvDetail.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_detail)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_detail)
         mBinding!!.tvDeliveryDateH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.your_selected_delivery_date)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_selected_delivery_date)
         mBinding!!.tvOrderDetailH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_details)
         mBinding!!.tvOrderAmtH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_amount)
         mBinding!!.tvAmtPayableH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.amount_payble)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount_payble)
         mBinding!!.tvItemNameH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_name)
-        mBinding!!.tvQtyHead.text = MyApplication.getInstance().dbHelper.getString(R.string.qty)
-        mBinding!!.tvAmountH.text = MyApplication.getInstance().dbHelper.getString(R.string.amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_name)
+        mBinding!!.tvQtyHead.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.qty)
+        mBinding!!.tvAmountH.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount)
 
         mBinding!!.toolbarOd.back.setOnClickListener { onBackPressed() }
 
@@ -139,7 +139,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
                     override fun onComplete() {
                     }
                 },
-                EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + orderId
+                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetDboyRatingOrder/" + orderId
             )
             CommonClassForAPI.getInstance(this).getAppHomeBottomData(
                 object :
@@ -158,7 +158,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
                     override fun onComplete() {
                     }
                 },
-                EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + orderId
+                EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/RetailerApp/GetSalesManRatingOrder/" + orderId
             )
         }
 
@@ -187,7 +187,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
             orderMaster.orderid = orderList!![0].orderid
             orderMaster.playedWheelCount = 0
 
-            MyApplication.getInstance().updateAnalytics("play_dial_click_by_order_screen")
+            RetailerSDKApp.getInstance().updateAnalytics("play_dial_click_by_order_screen")
             val bundle = Bundle()
             bundle.putSerializable(
                 Constant.ORDER_MODEL,
@@ -225,7 +225,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
         val rvDetail = dialog.findViewById<RecyclerView>(R.id.rv_detail)
 
         tvDTotalAmount!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount)
         totalamnt!!.text = "" + grossAmount
         rvDetail!!.adapter =
             OrderPaymentDetailAdapter(applicationContext, orderList!![0].orderPayments)
@@ -249,13 +249,13 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
         val btnSave = dialog.findViewById<Button>(R.id.btnSave)
 
         val orderIdText =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_order_id) + "<font color=#000000>" + orderId
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_order_id) + "<font color=#000000>" + orderId
         tvOrderId!!.text = Html.fromHtml(orderIdText)
         tvETAH!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.expected_normal_delivery)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.expected_normal_delivery)
         tvETA!!.text = Utils.getDateMonthFormat(etaDate)
-        tvDelayH!!.text = MyApplication.getInstance().dbHelper.getString(R.string.delay_delivery)
-        btnSave!!.text = MyApplication.getInstance().dbHelper.getString(R.string.update)
+        tvDelayH!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.delay_delivery)
+        btnSave!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.update)
 
         val viewList: MutableList<TextView> = ArrayList()
         for (i in etaDatesList!!.indices) {
@@ -303,7 +303,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
             ) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.select_delivery_date)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_delivery_date)
                 )
             } else {
                 Utils.showProgressDialog(
@@ -395,7 +395,7 @@ class OrderDetailsNewActivity : AppCompatActivity(), OnButtonClick {
         rvStatus!!.adapter = adapter
 
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("order_status_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("order_status_dialog")
     }
 
 

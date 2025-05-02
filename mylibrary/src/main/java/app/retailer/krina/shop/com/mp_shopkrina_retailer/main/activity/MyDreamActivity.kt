@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.Dream
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.wallet.WalletResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonElement
 import io.reactivex.observers.DisposableObserver
@@ -60,18 +60,18 @@ class MyDreamActivity : AppCompatActivity(), MyDreamInterface {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
 
     fun initialization() {
         mBinding!!.toolbarDream.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.mydream)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.mydream)
         mBinding!!.customerName.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.customer_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.customer_name)
         mBinding!!.totalPoint.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.totalpoint)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.totalpoint)
         list = ArrayList()
         utils = Utils(this)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
@@ -95,7 +95,7 @@ class MyDreamActivity : AppCompatActivity(), MyDreamInterface {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -106,7 +106,7 @@ class MyDreamActivity : AppCompatActivity(), MyDreamInterface {
             override fun onNext(response: WalletResponse) {
                 Utils.hideProgressDialog()
                 mBinding!!.totalPoint.text =
-                    (MyApplication.getInstance().dbHelper.getString(R.string.totalpoint)
+                    (RetailerSDKApp.getInstance().dbHelper.getString(R.string.totalpoint)
                             + " : " + DecimalFormat("##.##")
                         .format(response.wallet?.totalAmount!!.toDouble()))
                 SharePrefs.getInstance(applicationContext)

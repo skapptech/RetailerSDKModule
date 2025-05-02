@@ -28,7 +28,7 @@ import java.util.Map;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.ContactUploadModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import io.reactivex.observers.DisposableObserver;
 
 public class ContactService extends IntentService {
@@ -101,7 +101,7 @@ public class ContactService extends IntentService {
             try {
                 if (contactList != null && contactList.size() > 0) {
                     contactList = clearListFromDuplicateFirstName(contactList);
-                    CommonClassForAPI.getInstance(MyApplication.getInstance().activity).uploadContacts(observer, contactList);
+                    CommonClassForAPI.getInstance(RetailerSDKApp.getInstance().activity).uploadContacts(observer, contactList);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

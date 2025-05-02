@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemExpiringWalletPointsBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MyExpiringWalletModel;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 
 public class MyExpiringWalletAdapter extends RecyclerView.Adapter<MyExpiringWalletAdapter.ViewHolder> {
@@ -39,7 +39,7 @@ public class MyExpiringWalletAdapter extends RecyclerView.Adapter<MyExpiringWall
         holder.mBinding.txtEarnPoint.setText(mylist.get(position).getThrough());
         holder.mBinding.txtDate.setText("");
         if (mylist.get(position).getExpiringDate() != null && !model.getExpiringDate().equals("null")) {
-            holder.mBinding.txtOrderId.setText(MyApplication.getInstance().dbHelper.getString(R.string.expire_on) + " " + Utils.getDateTimeFormate(mylist.get(position).getExpiringDate()));
+            holder.mBinding.txtOrderId.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.expire_on) + " " + Utils.getDateTimeFormate(mylist.get(position).getExpiringDate()));
         } else {
             holder.mBinding.txtOrderId.setText("");
         }

@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemReturnOrderListBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.returnrefund.ReturnOrderDetailActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderListModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class ReturnOrderListAdapter(
@@ -31,12 +31,12 @@ class ReturnOrderListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mBinding.tvStatus1.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.status)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.status)
         val model = list[position]
         holder.mBinding.tvOrderId.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + model.orderId
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + model.orderId
         holder.mBinding.tvDate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_date_colon) + " " + Utils.getChangeDateFormatInProfile(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_date_colon) + " " + Utils.getChangeDateFormatInProfile(
                 model.modifiedDate
             )
         holder.mBinding.tvStatus.text = "" + model.status

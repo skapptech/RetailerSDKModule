@@ -99,7 +99,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.OfferCheck
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
@@ -125,11 +125,8 @@ import java.util.Calendar
 import java.util.Collections
 import java.util.Date
 import java.util.Locale
-import java.util.Random
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 
 class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelectClick,
     OnApplyOfferClick, PaymentResultWithDataListener {
@@ -296,7 +293,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                             if (enterRewardPoint > currentRewardPoints) {
                                 Utils.setToast(
                                     applicationContext,
-                                    MyApplication.getInstance().dbHelper.getString(
+                                    RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.you_do_not_have_enough_points
                                     )
                                 )
@@ -325,7 +322,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                             } else {
                                 Utils.setToast(
                                     applicationContext,
-                                    MyApplication.getInstance().dbHelper.getString(
+                                    RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.maximum_redeem_wallet_points
                                     ) + " " + DecimalFormat("##.##").format(maxWalletUseAmount1)
                                 )
@@ -359,7 +356,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                         } else if (enterRewardPoint > currentRewardPoints) {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().noteRepository.getString(
+                                RetailerSDKApp.getInstance().noteRepository.getString(
                                     R.string.do_not_have_enough_points
                                 )
                             )
@@ -432,7 +429,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                 )
                                 Utils.setToast(
                                     applicationContext,
-                                    MyApplication.getInstance().dbHelper.getString(
+                                    RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.you_can_not_use_points
                                     )
                                 )
@@ -523,7 +520,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
             onBackPressed()
         }
@@ -532,17 +529,17 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
     override fun onClick(v: View) {
         when (v.id) {
             R.id.rl_apply_coupon, R.id.rl_bill_discount -> {
-                MyApplication.getInstance().updateAnalytics("coupon_click")
+                RetailerSDKApp.getInstance().updateAnalytics("coupon_click")
                 if (isOfferApiCalled) if (discountList != null && discountList!!.size > 0 && orderPlacedNewResponse == null) {
                     showBillDiscountDialog()
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.no_discount_available)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_discount_available)
                     )
                 } else Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_wait)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_wait)
                 )
             }
 
@@ -577,7 +574,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
             }
 
             R.id.btnCallSu -> {
-                val phone = MyApplication.getInstance().dbHelper.getString(R.string.scaleUpContact)
+                val phone = RetailerSDKApp.getInstance().dbHelper.getString(R.string.scaleUpContact)
                 if (!TextUtils.isNullOrEmpty(phone)) {
                     startActivity(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null)))
                 }
@@ -615,23 +612,23 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                     if (availableCODLimit != -1L && cashAmount > 0 && cashAmount > availableCODLimit) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.cod_limit_not_available)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cod_limit_not_available)
                         )
                     } else if (ePayLaterLimit) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
                         )
                     } else if (isChqbookLimit || isChqbookBackLimit) {
                         if (isChqbookLimit) {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
                             )
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.checkBok_bill_value) + checkBookminiAmount
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkBok_bill_value) + checkBookminiAmount
                             )
                         }
                     } else if (gullakAmount > 0 && gullakBal < gullakAmount) {
@@ -643,13 +640,13 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                     } else if (skCreditAmt > 0 && skCreditRes!!.dynamicData!!.amount < skCreditAmt) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
                         )
                         return
                     } else if (scaleUpAmt > 0 && scaleUpAmt >= scaleUpLimit) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_sufficient_limit)
                         )
                         return
                     } else {
@@ -694,7 +691,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                         } else {
                                             Utils.setToast(
                                                 applicationContext,
-                                                MyApplication.getInstance().dbHelper.getString(
+                                                RetailerSDKApp.getInstance().dbHelper.getString(
                                                     R.string.no_sufficient_limit
                                                 )
                                             )
@@ -705,7 +702,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                         } else {
                                             Utils.setToast(
                                                 applicationContext,
-                                                MyApplication.getInstance().dbHelper.getString(
+                                                RetailerSDKApp.getInstance().dbHelper.getString(
                                                     R.string.no_sufficient_limit
                                                 )
                                             )
@@ -723,7 +720,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                         } else {
                                             Utils.setToast(
                                                 applicationContext,
-                                                MyApplication.getInstance().dbHelper.getString(
+                                                RetailerSDKApp.getInstance().dbHelper.getString(
                                                     R.string.update_your_app
                                                 )
                                             )
@@ -733,7 +730,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                     mBinding.placeBtn.isClickable = true
                                     Utils.setToast(
                                         applicationContext,
-                                        MyApplication.getInstance().dbHelper.getString(
+                                        RetailerSDKApp.getInstance().dbHelper.getString(
                                             R.string.amount_does_not_match_with_order_amount
                                         )
                                     )
@@ -749,13 +746,13 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                         mBinding.placeBtn.isClickable = true
                                         Utils.setToast(
                                             applicationContext,
-                                            MyApplication.getInstance().dbHelper.getString(
+                                            RetailerSDKApp.getInstance().dbHelper.getString(
                                                 R.string.amount_does_not_match_with_order_amount
                                             )
                                         )
                                     }
                                 } else {
-                                    MyApplication.getInstance().updateAnalytics("discount_api_call")
+                                    RetailerSDKApp.getInstance().updateAnalytics("discount_api_call")
                                     viewModel.checkBillDiscountOffer(custId, billDiscountId)
                                 }
                             }
@@ -764,7 +761,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.update_your_app)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.update_your_app)
                     )
                 }
             }
@@ -953,7 +950,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
             }
         } else if (requestCode == 9 && resultCode == RESULT_OK) {
             mBinding.tvGullakBal.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
                     applicationContext
                 ).getString(SharePrefs.GULLAK_BALANCE)
             mBinding.placeBtn.callOnClick()
@@ -984,7 +981,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                 mBinding.placeBtn.isClickable = true
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                 )
                 insertPaymentStatusAPICall(
                     "Failed",
@@ -1024,7 +1021,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                 mBinding.placeBtn.isClickable = true
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                 )
                 insertPaymentStatusAPICall(
                     "Failed",
@@ -1097,108 +1094,108 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         maxWalletUseAmount =
             SharePrefs.getInstance(this).getString(SharePrefs.MAX_WALLET_POINT_USED)
         isUdharOrderOverDue = SharePrefs.getInstance(this).getBoolean(SharePrefs.IS_UDHAAR_ORDER)
-        mBinding.toolbarPaymentOption.title.text = MyApplication.getInstance().dbHelper.getString(
+        mBinding.toolbarPaymentOption.title.text = RetailerSDKApp.getInstance().dbHelper.getString(
             R.string.payment_option
         )
         mBinding.tvApplyCodeT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Apply_coupon_code)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Apply_coupon_code)
         mBinding.tvOffer.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.discount_applied)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.discount_applied)
         mBinding.tvPromoDetails.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.promo_code_details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.promo_code_details)
         mBinding.tvNextBillDiscountText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.post_bill_text_o)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.post_bill_text_o)
         mBinding.tvWalletText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Wallet_Points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Wallet_Points)
         mBinding.txtWlletPnt.text =
-            MyApplication.getInstance().dbHelper.getString(R.string._10_dp_1_rs)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string._10_dp_1_rs)
         mBinding.tvPriceDetailsT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Price_Details)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Price_Details)
         mBinding.tvOrderValueT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_value)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_value)
         mBinding.tvDChargesT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Delivery_Charges)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Delivery_Charges)
         mBinding.tvDeliveryCharges.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.free)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.free)
         mBinding.tvTotalAmountT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amnt)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amnt)
         mBinding.tvCouponDT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.coupon_discount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.coupon_discount)
         mBinding.tvFreeItemT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.bill_free_item_added)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_free_item_added)
         mBinding.tvWalletAmountT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.wallet_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.wallet_amount)
         mBinding.tvAmountPayT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Amount_Payble)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Amount_Payble)
         mBinding.tvPreferOption.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.prefer_payment_option)
-        mBinding.tvPayonT.text = MyApplication.getInstance().dbHelper.getString(R.string.payon)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.prefer_payment_option)
+        mBinding.tvPayonT.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.payon)
         mBinding.tvCashT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.cash_card_cheque)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cash_card_cheque)
         mBinding.etAmountCash.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
         mBinding.tvOnlinePayT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.trupay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.trupay)
         mBinding.tvInstantT.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.instant_online_payment)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.instant_online_payment)
         mBinding.tvPaymentStatusHdfc.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_success)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_success)
         mBinding.etAmountHdfc.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
-        mBinding.name.text = MyApplication.getInstance().dbHelper.getString(R.string.epaylater)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
+        mBinding.name.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater)
         mBinding.tvDescription.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.interest_free_credit_limit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.interest_free_credit_limit)
         mBinding.tvPaymentStatusEpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment_success)
-        mBinding.callBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.txt_call)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_success)
+        mBinding.callBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_call)
         mBinding.etAmountEpay.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_amount)
         mBinding.tvEarningPntDp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.earn_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.earn_points)
         mBinding.placeBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.place_order)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.place_order)
         mBinding.tvGullakHead.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.pay_from_gullak)
-        mBinding.tvChqB.text = MyApplication.getInstance().dbHelper.getString(R.string.checkBok)
-        mBinding.tvCashH.text = MyApplication.getInstance().dbHelper.getString(R.string.cash_h)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_from_gullak)
+        mBinding.tvChqB.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkBok)
+        mBinding.tvCashH.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cash_h)
         mBinding.tvOnlineH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.online_h)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.online_h)
         mBinding.tvCreditCardChargesH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.credit_card_charges_1_gst)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.credit_card_charges_1_gst)
         mBinding.tvPayLaterH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.paylater_h)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.paylater_h)
         mBinding.tvGullakBal.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.balance) + " " + SharePrefs.getInstance(
                 applicationContext
             ).getString(SharePrefs.GULLAK_BALANCE)
         // direct udhar
         mBinding.tvSkCreditH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.direct_udhar)
-        mBinding.tvTcsH.text = MyApplication.getInstance().dbHelper.getString(R.string.tcs_charge)
-        mBinding.tvRtgs.text = MyApplication.getInstance().dbHelper.getString(R.string.van_rtgs)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.direct_udhar)
+        mBinding.tvTcsH.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.tcs_charge)
+        mBinding.tvRtgs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.van_rtgs)
         mBinding.tvDesRtgs.text =
-            Html.fromHtml(MyApplication.getInstance().dbHelper.getString(R.string.van_rtgs_terms_description))
+            Html.fromHtml(RetailerSDKApp.getInstance().dbHelper.getString(R.string.van_rtgs_terms_description))
         mBinding.tvLimitRtgs.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.balance) + "₹ " + SharePrefs.getInstance(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.balance) + "₹ " + SharePrefs.getInstance(
                 applicationContext
             ).getString(SharePrefs.RTGS_BAL)
         mBinding.tvDesRtgs.paintFlags =
             mBinding.tvDesRtgs.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         mBinding.tvScaleUp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.scale_up_pay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.scale_up_pay)
         mBinding.tvRazorpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.pay_via_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_via_razorpay)
         mBinding.tvInstantRazorpay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
         mBinding.tvICICIPay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.pay_via_icici_pay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.pay_via_icici_pay)
         mBinding.tvInstantICICIPay.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_instant_payment_razorpay)
         if (!TextUtils.isNullOrEmpty(maxWalletUseAmount) && maxWalletUseAmount != "0" && maxWalletUseAmount != "0.0") {
             mBinding.txtMaxWalletPnt.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.text_max_wallet) + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_max_wallet) + DecimalFormat(
                     "##.##"
-                ).format(maxWalletUseAmount.toDouble()) + MyApplication.getInstance().dbHelper.getString(
+                ).format(maxWalletUseAmount.toDouble()) + RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.wallet_points
                 )
         } else {
@@ -1394,11 +1391,11 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
     private fun setValues() {
         mBinding.pointEt.hint = "0"
         mBinding.tvItemCount.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_item) + " " + mShoppingCart!!.totalQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_item) + " " + mShoppingCart!!.totalQty
         mBinding.txtWlletPnt.text =
-            "10" + " " + MyApplication.getInstance().dbHelper.getString(R.string.total_dp) + " = 1 RS."
+            "10" + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_dp) + " = 1 RS."
         mBinding.tvEarningPntDp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_dreamPoint) + " " + mShoppingCart!!.deamPoint
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_dreamPoint) + " " + mShoppingCart!!.deamPoint
         cashAmount = finalAmount.toLong()
         if (deliveryCharges == 0.0) {
             mBinding.tvDeliveryCharges.text = "Free"
@@ -1546,15 +1543,15 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
         val recyclerView = dialog!!.findViewById<RecyclerView>(R.id.recycler_bill_discount)
         val tvPromoT = dialog!!.findViewById<TextView>(R.id.tvPromoT)
         val tvNoOfferT = dialog!!.findViewById<TextView>(R.id.tvNoOfferT)
-        tvPromoT!!.text = MyApplication.getInstance().dbHelper.getString(R.string.promotions)
+        tvPromoT!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.promotions)
         tvNoOfferT!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_offer_available)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_offer_available)
         recyclerView!!.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = discountAdapter
         discountAdapter!!.notifyDataSetChanged()
         ivClose!!.setOnClickListener { v: View? -> dialog!!.dismiss() }
         dialog!!.show()
-        MyApplication.getInstance().updateAnalytics("discount_dialog_open")
+        RetailerSDKApp.getInstance().updateAnalytics("discount_dialog_open")
     }
 
     private fun openScratchDialog(position: Int, discountList: ArrayList<BillDiscountModel>?) {
@@ -1603,7 +1600,7 @@ class PaymentOptionActivity : AppCompatActivity(), View.OnClickListener, OnSelec
                                     discountList[position].isScratchBDCode = true
                                     discountAdapter!!.setBillDiscount(discountList)
                                     // update analytic apply promotion
-                                    MyApplication.getInstance()
+                                    RetailerSDKApp.getInstance()
                                         .updateAnalyticPromotion(discountList[position])
                                 } catch (e: Exception) {
                                     e.printStackTrace()
@@ -1663,7 +1660,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                 }
             }.start()
         }
-        MyApplication.getInstance().updateAnalytics("scratch_dialog_open")
+        RetailerSDKApp.getInstance().updateAnalytics("scratch_dialog_open")
         dialog.show()
     }
 
@@ -1736,9 +1733,9 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         val okBtn = dialog.findViewById<TextView>(R.id.ok_btn)
         val cancelBtn = dialog.findViewById<TextView>(R.id.cancel_btn)
         val title = dialog.findViewById<TextView>(R.id.pd_title)
-        title.text = MyApplication.getInstance().dbHelper.getString(R.string.msg_ask_paymenttype)
-        cancelBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+        title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_ask_paymenttype)
+        cancelBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         okBtn.setOnClickListener { v: View? ->
             dialog.dismiss()
             okBtn.isClickable = false
@@ -1973,7 +1970,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             if (mShoppingCart!!.isHikeCharge) mShoppingCart!!.hikeCharges else 0.0
         )
         println("asd " + Gson().toJson(orderPlaceModel))
-        MyApplication.getInstance()
+        RetailerSDKApp.getInstance()
             .updateAnalyticBC(cartTotalAmount, mShoppingCart!!.applyOfferId, mShopingItemCartList)
         viewModel.getOrderPlaced(orderPlaceModel)
     }
@@ -2009,7 +2006,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     canPostOrder = true
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.epaylater_message) + " " + ePayLimit
                     )
                 }
             } else if (isCheckBook) {
@@ -2022,7 +2019,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     canPostOrder = true
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.checkbook_message) + " " + checkBookLimit
                     )
                 }
             } else {
@@ -2032,7 +2029,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } else {
             val d = (total - amount).toDouble()
             mBinding.tvRemainingAmount.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.remaining_amt) + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_amt) + DecimalFormat(
                     "##.##"
                 ).format(d)
         }
@@ -2102,7 +2099,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -2120,7 +2117,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -2357,10 +2354,10 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         val okBtn = mView.findViewById<TextView>(R.id.ok_btn)
         val description = mView.findViewById<TextView>(R.id.pd_description)
         val title = mView.findViewById<TextView>(R.id.pd_title)
-        title.text = MyApplication.getInstance().dbHelper.getString(R.string.prepaid_order)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+        title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.prepaid_order)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         description.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.prepaid_order_mag1) + calPrepaidAmount + MyApplication.getInstance().dbHelper.getString(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.prepaid_order_mag1) + calPrepaidAmount + RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.prepaid_order_mag2
             )
         okBtn.setOnClickListener { v: View? -> customDialog.dismiss() }
@@ -2383,7 +2380,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         popupWindow.showAsDropDown(anchor)
         val tvDeliveryCharges = contentView.findViewById<TextView>(R.id.tvDeliveryCharges)
         tvDeliveryCharges.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.other_charges_for_payments_exceeding_each_slab)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.other_charges_for_payments_exceeding_each_slab)
     }
 
     private val orderDividePercentCheck: Boolean
@@ -2574,19 +2571,19 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         val tvHeavyDeliveryLoadMsg = dialog.findViewById<TextView>(R.id.tvHeavyDeliveryLoadMsg)
         val btnChangeDate = dialog.findViewById<Button>(R.id.btnChangeDate)
         tv_congratulation!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Congratulation)
-        orderMsg!!.text = MyApplication.getInstance().dbHelper.getString(R.string.order_done_msg)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Congratulation)
+        orderMsg!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_done_msg)
         continueShopping!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_continue_shopping)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_continue_shopping)
         tvETAH!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.expected_normal_delivery)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.expected_normal_delivery)
         tvETA!!.text = Utils.getDateMonthFormat(
             orderPlacedNewResponse!!.orderMaster!!.expectedETADate
         )
         tvDeliverByH!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_delivered_by_shopkirana)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_delivered_by_shopkirana)
         tvHeavyDeliveryLoadMsg!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.msg_heavy_load)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_heavy_load)
         if (orderPlacedNewResponse!!.orderMaster!!.isDefaultDeliveryChange) {
             tvHeavyDeliveryLoadMsg.visibility = View.VISIBLE
         }
@@ -2595,12 +2592,12 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             tvNextOrderWallet!!.visibility = View.VISIBLE
             if (LocaleHelper.getLanguage(applicationContext) == "en") {
                 tvNextOrderWallet.text =
-                    earnWalletPoint.toString() + MyApplication.getInstance().dbHelper.getString(
+                    earnWalletPoint.toString() + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.wallet_added_after_order_text
                     )
             } else {
                 tvNextOrderWallet.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.wallet_added_after_order_text) + earnWalletPoint + MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.wallet_added_after_order_text) + earnWalletPoint + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.wallet_added_after_order_text2
                     )
             }
@@ -2608,7 +2605,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         if (kisanDanAmount > 0) {
             tvKisanDanAmount!!.visibility = View.VISIBLE
             val kisanDaanAmount =
-                MyApplication.getInstance().dbHelper.getString(R.string.kisan_daan_text) + "<font color=#000000>&#8377; " + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.kisan_daan_text) + "<font color=#000000>&#8377; " + DecimalFormat(
                     "##.##"
                 ).format(kisanDanAmount)
             tvKisanDanAmount.text = Html.fromHtml(kisanDaanAmount)
@@ -2616,21 +2613,21 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } else {
             tvKisanDanAmount!!.visibility = View.VISIBLE
             val kisanDaanAmount =
-                MyApplication.getInstance().dbHelper.getString(R.string.no_kisan_daan_text) + "<font color=#000000>&#8377; " + DecimalFormat(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_kisan_daan_text) + "<font color=#000000>&#8377; " + DecimalFormat(
                     "##.##"
                 ).format(kisanDanAmount)
             tvKisanDanAmount.text = Html.fromHtml(kisanDaanAmount)
             ivKisanDan!!.setImageResource(R.drawable.no_kisan_daan_icon)
         }
         val orderIdText =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_order_id) + "<font color=#000000>" + orderId
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_order_id) + "<font color=#000000>" + orderId
         tvOrderId!!.text = Html.fromHtml(orderIdText)
         val totalAmountText =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_order_amount) + "<font color=#000000>" + mBinding.tvPayableAmt.text.toString()
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_order_amount) + "<font color=#000000>" + mBinding.tvPayableAmt.text.toString()
         tvTotalAmount!!.text = Html.fromHtml(totalAmountText)
         if (flag == 0) {
             continueShopping.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.continue_shopping)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.continue_shopping)
             tvDialValue!!.visibility = View.GONE
             continueShopping.setOnClickListener { v: View? ->
                 callUpdateETA(eTADate[0])
@@ -2644,17 +2641,17 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             }
         } else if (flag == 1) {
             continueShopping.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.play_dial)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.play_dial)
             if (wheelCount >= 0) {
                 tvDialValue!!.visibility = View.VISIBLE
                 tvDialValue.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.you_won_dial) + wheelCount + MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_won_dial) + wheelCount + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.diaql_for_this_order
                     )
             }
             continueShopping.setOnClickListener { v: View? ->
                 callUpdateETA(eTADate[0])
-                MyApplication.getInstance().updateAnalytics("play_dial_click")
+                RetailerSDKApp.getInstance().updateAnalytics("play_dial_click")
                 dialog.dismiss()
                 val bundle = Bundle()
                 bundle.putSerializable(Constant.ORDER_MODEL, orderMaster)
@@ -2718,7 +2715,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             BottomSheetBehavior.from(bottomSheet!!).setState(BottomSheetBehavior.STATE_EXPANDED)
         }
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("order_confirm_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("order_confirm_dialog")
     }
 
     private fun callUpdateETA(date: String?) {
@@ -2804,9 +2801,9 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
         val tvDesc = dialog.findViewById<TextView>(R.id.tvDesc)
         val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
-        var des = MyApplication.getInstance().dbHelper.getString(R.string.cod_limit_terms)
+        var des = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cod_limit_terms)
         des = des.replace("₹50,000", "" + codLimit)
-        tvTitle!!.text = MyApplication.getInstance().dbHelper.getString(R.string.maximum_pod_limit)
+        tvTitle!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.maximum_pod_limit)
         tvDesc!!.text = "" + des
         ivClose!!.setOnClickListener { v: View? -> dialog.dismiss() }
         dialog.setOnShowListener { dialogInterface: DialogInterface? ->
@@ -2814,7 +2811,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             BottomSheetBehavior.from(bottomSheet!!).setState(BottomSheetBehavior.STATE_EXPANDED)
         }
         dialog.show()
-        MyApplication.getInstance().updateAnalytics("COD_limit_terms_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("COD_limit_terms_dialog")
     }
 
     private fun goToHome(orderStatus: String) {
@@ -2831,7 +2828,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.order_error_msg)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_error_msg)
             )
             startActivity(
                 Intent(
@@ -2843,7 +2840,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
     }
 
     private fun clearCartData() {
-        MyApplication.getInstance().noteRepository.truncateCart()
+        RetailerSDKApp.getInstance().noteRepository.truncateCart()
     }
 
     // Check the internet connection.
@@ -2890,8 +2887,8 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
 
     private fun exitAlertDialog() {
         val builder1 = AlertDialog.Builder(this)
-        builder1.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
-        builder1.setMessage(MyApplication.getInstance().dbHelper.getString(R.string.exit_payment_screen_msg))
+        builder1.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
+        builder1.setMessage(RetailerSDKApp.getInstance().dbHelper.getString(R.string.exit_payment_screen_msg))
         builder1.setCancelable(true)
         builder1.setPositiveButton("Yes") { dialog: DialogInterface, id: Int -> dialog.cancel() }
         builder1.setNegativeButton("No") { dialog: DialogInterface, id: Int -> dialog.cancel() }
@@ -2903,9 +2900,9 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
 
     private fun appStoryView() {
         builder = GuideView.Builder(this)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.apply_coupon))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.apply_coupon))
             .setContentText(
-                MyApplication.getInstance().dbHelper.getString(
+                RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.apply_coupon_detail
                 )
             ).setGravity(Gravity.center).setDismissType(DismissType.anywhere).setTargetView(
@@ -2913,11 +2910,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             ).setGuideListener { view: View ->
                 when (view.id) {
                     R.id.rl_apply_coupon -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.wallet_Point
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.wallet_Point_deatil
                         )
                     ).setTargetView(
@@ -2925,11 +2922,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     ).build()
 
                     R.id.pointEt -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.cod
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.cod_detail
                         )
                     )
@@ -2937,11 +2934,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                         .build()
 
                     R.id.et_amount_cash -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_online
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_online_detail
                         )
                     ).setTargetView(
@@ -2949,11 +2946,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     ).build()
 
                     R.id.et_amount_hdfc -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_epay_Later
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_epay_Later_call
                         )
                     ).setTargetView(
@@ -2961,11 +2958,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     ).build()
 
                     R.id.callBtn -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_epay_Later
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Pay_epay_Later_amount
                         )
                     ).setTargetView(
@@ -2973,11 +2970,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     ).build()
 
                     R.id.et_amount_epay -> builder!!.setTitle(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Place_Order
                         )
                     ).setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.Place_Order_detail
                         )
                     ).setTargetView(
@@ -3004,7 +3001,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
 
     private fun showAlert(message: String?) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
+        builder.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
         builder.setMessage(message)
         builder.setCancelable(false)
         builder.setNegativeButton("ok") { dialog: DialogInterface, id: Int -> dialog.cancel() }
@@ -3016,7 +3013,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
 
     private fun showAlertGoToShoppingCart(message: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(MyApplication.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
+        builder.setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert_for_exit_screen))
         builder.setMessage(message)
         builder.setCancelable(false)
         builder.setNegativeButton("ok") { dialog: DialogInterface, id: Int ->
@@ -3724,7 +3721,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                         mBinding.tvContactUs.visibility = View.VISIBLE
                         mBinding.tvContactUs.textSize = 14f
                         mBinding.tvContactUs.text =
-                            "( " + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                            "( " + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.checkbook_contact
                             ) + ")"
                         mBinding.tvContactUs.autoLinkMask = Linkify.PHONE_NUMBERS
@@ -3749,7 +3746,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                 mBinding.tvContactUs.visibility = View.VISIBLE
                 mBinding.tvContactUs.textSize = 15f
                 mBinding.tvContactUs.text =
-                    "(" + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "(" + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountSkC.visibility = View.GONE
@@ -3776,7 +3773,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                                 "₹ " + DecimalFormat("##.##").format(ePayLimit) + "/-"
                         } else {
                             Utils.setToast(
-                                applicationContext, MyApplication.getInstance().dbHelper.getString(
+                                applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.no_data_available
                                 )
                             )
@@ -3784,7 +3781,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                         if (ePayLimit == 0.0) {
                             mBinding.tvLimit.textSize = 15f
                             mBinding.tvLimit.text =
-                                "( " + MyApplication.getInstance().dbHelper.getString(
+                                "( " + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.contact_on
                                 ) + SharePrefs.getInstance(
                                     applicationContext
@@ -3806,7 +3803,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             is Response.Error -> {
                 mBinding.tvLimit.textSize = 14f
                 mBinding.tvLimit.text =
-                    "(" + MyApplication.getInstance().dbHelper.getString(R.string.contact_on) + " +91" + SharePrefs.getInstance(
+                    "(" + RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact_on) + " +91" + SharePrefs.getInstance(
                         applicationContext
                     ).getString(SharePrefs.COMPANY_CONTACT) + ")"
                 mBinding.etAmountEpay.visibility = View.GONE
@@ -3838,7 +3835,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                     if (checkBookLimit == 0.0) {
                         mBinding.tvLimitCb.textSize = 15f
                         mBinding.tvLimitCb.text =
-                            "( " + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                            "( " + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                                 R.string.checkbook_contact
                             ) + ")"
                         mBinding.etAmountCb.visibility = View.GONE
@@ -3855,7 +3852,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
             is Response.Error -> {
                 mBinding.tvLimitCb.textSize = 14f
                 mBinding.tvLimitCb.text =
-                    "(" + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "(" + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountCb.visibility = View.GONE
@@ -3880,11 +3877,11 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                             codLimit = jsonObject["CODLimit"].asDouble
                             availableCODLimit = jsonObject["AvailableCODLimit"].asDouble.toLong()
                             mBinding.tvCodLimit.text =
-                                MyApplication.getInstance().noteRepository.getString(
+                                RetailerSDKApp.getInstance().noteRepository.getString(
                                     R.string.maximum_cod_limit
                                 ) + " ₹" + codLimit
                             mBinding.tvCodLimitAvail.text =
-                                MyApplication.getInstance().noteRepository.getString(
+                                RetailerSDKApp.getInstance().noteRepository.getString(
                                     R.string.available_cod_limit
                                 ) + " ₹" + availableCODLimit
                             mBinding.rlCodLimit.visibility = View.VISIBLE
@@ -3940,7 +3937,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                 mBinding.tvContactUs.visibility = View.VISIBLE
                 mBinding.tvContactUs.textSize = 15f
                 mBinding.tvContactUs.text =
-                    "(" + getString(R.string.contact_on) + MyApplication.getInstance().dbHelper.getString(
+                    "(" + getString(R.string.contact_on) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.checkbook_contact
                     ) + ")"
                 mBinding.etAmountSu.visibility = View.GONE
@@ -4054,7 +4051,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                             mBinding.placeBtn.isClickable = true
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.amount_does_not_match_with_order_amount)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount_does_not_match_with_order_amount)
                             )
                         }
                     } else {
@@ -4247,7 +4244,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                             SharePrefs.getInstance(applicationContext)
                                 .putBoolean(SharePrefs.IS_GULLAK_BAL, false)
                             // clear cart
-                            MyApplication.getInstance().noteRepository.truncateCart()
+                            RetailerSDKApp.getInstance().noteRepository.truncateCart()
                             if (!TextUtils.isNullOrEmpty(
                                     orderPlacedNewResponse!!.cart!!.createdDate
                                 )
@@ -4283,7 +4280,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                                     } else {
                                         Utils.setToast(
                                             applicationContext,
-                                            MyApplication.getInstance().dbHelper.getString(
+                                            RetailerSDKApp.getInstance().dbHelper.getString(
                                                 R.string.no_sufficient_limit
                                             )
                                         )
@@ -4322,7 +4319,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                                     goToHome("success")
                                 }
                                 // update purchase analytics
-                                MyApplication.getInstance().updateAnalyticPurchase(
+                                RetailerSDKApp.getInstance().updateAnalyticPurchase(
                                     "" + orderId,
                                     orderPlacedNewResponse!!.orderMaster!!.totalamount,
                                     mShoppingCart!!.deliveryCharges,
@@ -4413,7 +4410,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                             if (!IsSuccess) {
                                 Utils.setToast(
                                     applicationContext,
-                                    MyApplication.getInstance().dbHelper.getString(R.string.payment_cancel)
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment_cancel)
                                 )
                                 startActivity(
                                     Intent(

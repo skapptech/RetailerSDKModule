@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCustomSearchPlaceBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.PlacesAutoCompleteAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.libraries.places.api.Places
@@ -32,16 +32,16 @@ class CustomSearchPlaceActivity : AppCompatActivity(), PlacesAutoCompleteAdapter
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_custom_search_place)
 
         mBinding.back.setOnClickListener { onBackPressed() }
-        mBinding.etSearchKeyword.text = MyApplication.getInstance().dbHelper.getString(R.string.search_city)
+        mBinding.etSearchKeyword.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_city)
         mBinding.address.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_serach_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address)
         if (intent != null) {
             cityName = intent.getStringExtra(Constant.CITY_NAME)
             searchCity = intent.getBooleanExtra(Constant.IS_SEARCH_CITY, false)
         }
         if (searchCity) {
             mBinding.address.hint =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_city_hint)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city_hint)
         }
         Places.initialize(
             applicationContext,
@@ -93,12 +93,12 @@ class CustomSearchPlaceActivity : AppCompatActivity(), PlacesAutoCompleteAdapter
             if (searchCity) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_enter_city_name)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_city_name)
                 )
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.please_enter_address_p)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_address_p)
                 )
             }
         } else {

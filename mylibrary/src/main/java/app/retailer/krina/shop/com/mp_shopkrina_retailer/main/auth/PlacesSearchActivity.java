@@ -33,7 +33,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfile
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomSearchPlaceActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
@@ -60,14 +60,14 @@ public class PlacesSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_places_search);
 
-        mBinding.etSearchKeyword.setText(MyApplication.getInstance().dbHelper.getString(R.string.title_serach_address));
-        mBinding.address.setHint(MyApplication.getInstance().dbHelper.getString(R.string.search_delivery_address));
-        mBinding.city.setHint(MyApplication.getInstance().dbHelper.getString(R.string.city));
-        mBinding.state.setHint(MyApplication.getInstance().dbHelper.getString(R.string.state_astrick));
-        mBinding.pincode.setHint(MyApplication.getInstance().dbHelper.getString(R.string.pin_code));
-        mBinding.flateOrFloorNumber.setHint(MyApplication.getInstance().dbHelper.getString(R.string.address_field_number));
-        mBinding.landmark.setHint(MyApplication.getInstance().dbHelper.getString(R.string.landmark_optional));
-        mBinding.btnSave.setHint(MyApplication.getInstance().dbHelper.getString(R.string.save));
+        mBinding.etSearchKeyword.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address));
+        mBinding.address.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_delivery_address));
+        mBinding.city.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.city));
+        mBinding.state.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.state_astrick));
+        mBinding.pincode.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.pin_code));
+        mBinding.flateOrFloorNumber.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.address_field_number));
+        mBinding.landmark.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.landmark_optional));
+        mBinding.btnSave.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.save));
 
         mGeocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
         if (getIntent() != null) {
@@ -123,13 +123,13 @@ public class PlacesSearchActivity extends AppCompatActivity {
                     zipcode = mBinding.etPincode.getText().toString();
                 }
                 if (TextUtils.isNullOrEmpty(address)) {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.enter_delivery_address));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_delivery_address));
                 } else if (TextUtils.isNullOrEmpty(city) && REDIRECT_FLAG == 1) {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.select_city));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city));
                 } else if (TextUtils.isNullOrEmpty(zipcode)) {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number));
                 } else if (zipcode.length() < 6) {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number));
                 } else {
                     if (REDIRECT_FLAG == 3) {
                         if (utils.isNetworkAvailable()) {
@@ -140,7 +140,7 @@ public class PlacesSearchActivity extends AppCompatActivity {
                                         place.getLatLng().longitude, address, flateOrFloorNumber), "Place API");
                             }
                         } else {
-                            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
                         }
                     } else {
 //                        validatePincode(intentCityName, zipcode);
@@ -154,7 +154,7 @@ public class PlacesSearchActivity extends AppCompatActivity {
                     }
                 }
             } catch (Exception e) {
-                Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.not_getting_proper_address));
+                Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_getting_proper_address));
                 e.printStackTrace();
             }
         });
@@ -249,7 +249,7 @@ public class PlacesSearchActivity extends AppCompatActivity {
                 } else {
                     if (response.getCustomers() != null) {
                         CustomerResponse customer = response.getCustomers();
-                        Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.succesfullSubmitted));
+                        Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.succesfullSubmitted));
                         SharePrefs.getInstance(getApplicationContext()).putInt(SharePrefs.CUSTOMER_ID, customer.customerId);
                         SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.SK_CODE, customer.getSkcode());
                         SharePrefs.getInstance(getApplicationContext()).putString(SharePrefs.MOBILE_NUMBER, customer.getMobile());

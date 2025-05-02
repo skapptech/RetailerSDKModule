@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemRelated
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryFragment.Companion.newInstance
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
@@ -34,12 +34,12 @@ class CategoryRelatedItemViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //set String
-        holder.mBinding.tvMargin.text = MyApplication.getInstance().dbHelper.getData("margins")
+        holder.mBinding.tvMargin.text = RetailerSDKApp.getInstance().dbHelper.getData("margins")
         if (!TextUtils.isNullOrEmpty(list[position].itemname)) {
             holder.mBinding.tvTitle.text = "" + list[position].itemname
         }
         if (!TextUtils.isNullOrEmpty(list[position].price.toString())) {
-            holder.mBinding.tvMrp.text = (MyApplication.getInstance().dbHelper.getData("item_mrp")
+            holder.mBinding.tvMrp.text = (RetailerSDKApp.getInstance().dbHelper.getData("item_mrp")
                     + " " + list[position].price!!.toDouble().toInt())
         }
         if (!TextUtils.isNullOrEmpty(list[position].logoUrl)) {

@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityFullNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.OnSwipeTouchListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -45,7 +45,7 @@ class FullNotificationActivity : AppCompatActivity(), View.OnTouchListener {
         super.onPostCreate(savedInstanceState)
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
     }

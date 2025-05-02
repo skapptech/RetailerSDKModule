@@ -29,7 +29,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.TargetView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonObject
@@ -68,7 +68,7 @@ class TargetOrderListActivity : AppCompatActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        MyApplication.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
+        RetailerSDKApp.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
             if (totalAmt != null && totalAmt > 0) {
                 mBinding.tvCount.visibility = View.VISIBLE
                 val sTotalAmount =
@@ -165,7 +165,7 @@ class TargetOrderListActivity : AppCompatActivity() {
                     if (jsonArray) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.txt_Notify_msg)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Notify_msg)
                         )
                     }
                 }
@@ -201,10 +201,10 @@ class TargetOrderListActivity : AppCompatActivity() {
                 model.totalFreeItemQty = freeItemQty
                 model.totalFreeWalletPoint = totalFreeWalletPoint
                 // update cart database
-                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                 } else {
-                    MyApplication.getInstance().noteRepository.addToCart(model)
+                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                 }
                 if (lastItemId == itemId) {
                     handler.removeCallbacksAndMessages(null)
@@ -222,7 +222,7 @@ class TargetOrderListActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
             onItemClick.onItemClick(0, false)
         }
@@ -298,7 +298,7 @@ class TargetOrderListActivity : AppCompatActivity() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             try {
-                val model = MyApplication.getInstance().noteRepository.getCartItem1(msg.what)
+                val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(msg.what)
                 callAddToCartAPI(
                     model.itemId, model.qty, model.unitPrice, model.isPrimeItem,
                     onItemClicked!!

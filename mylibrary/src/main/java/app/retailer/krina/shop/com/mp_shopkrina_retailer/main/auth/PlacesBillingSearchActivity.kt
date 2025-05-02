@@ -23,7 +23,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Custo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomerRegistrationViewModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomerRegistrationViewModelFactory
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.libraries.places.api.Places
@@ -63,17 +63,17 @@ class PlacesBillingSearchActivity : AppCompatActivity() {
             CustomerRegistrationViewModelFactory(application, appRepository)
         )[CustomerRegistrationViewModel::class.java]
         mBinding!!.etSearchKeyword.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_serach_address)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address)
         mBinding!!.address.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.search_delivery_address)
-        mBinding!!.city.hint = MyApplication.getInstance().dbHelper.getString(R.string.city)
-        mBinding!!.state.hint = MyApplication.getInstance().dbHelper.getString(R.string.state_astrick)
-        mBinding!!.pincode.hint = MyApplication.getInstance().dbHelper.getString(R.string.pin_code)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_delivery_address)
+        mBinding!!.city.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.city)
+        mBinding!!.state.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.state_astrick)
+        mBinding!!.pincode.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pin_code)
         mBinding!!.flateOrFloorNumber.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.address_field_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.address_field_number)
         mBinding!!.landmark.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.landmark_optional)
-        mBinding!!.btnSave.hint = MyApplication.getInstance().dbHelper.getString(R.string.save)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.landmark_optional)
+        mBinding!!.btnSave.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.save)
         mBinding!!.landmark.visibility = View.GONE
         mBinding!!.flateOrFloorNumber.visibility = View.GONE
         mGeocoder = Geocoder(applicationContext, Locale.ENGLISH)
@@ -142,22 +142,22 @@ class PlacesBillingSearchActivity : AppCompatActivity() {
                 if (TextUtils.isNullOrEmpty(address)) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.enter_delivery_address)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_delivery_address)
                     )
                 } else if (TextUtils.isNullOrEmpty(city) && REDIRECT_FLAG == 1) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.select_city)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_city)
                     )
                 } else if (TextUtils.isNullOrEmpty(zipcode)) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number)
                     )
                 } else if (zipcode.length < 6) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_pincode_number)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_pincode_number)
                     )
                 } else {
                     val model = AddressModel(
@@ -174,7 +174,7 @@ class PlacesBillingSearchActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.not_getting_proper_address)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_getting_proper_address)
                 )
                 e.printStackTrace()
             }

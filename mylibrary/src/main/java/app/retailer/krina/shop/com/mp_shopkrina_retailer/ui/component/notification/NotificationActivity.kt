@@ -24,7 +24,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
@@ -39,7 +39,7 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!MyApplication.getInstance().prefManager.isLoggedIn) {
+        if (!RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
             finish()
         }
@@ -95,11 +95,11 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initialization() {
         mBinding.toolbarNotification.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_notification)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_notification)
         mBinding.tvNoNot.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_notification)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_notification)
         mBinding.tvNoNot.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_notification)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_notification)
         mBinding.toolbarNotification.back.setOnClickListener(this)
         val custId = SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
         val commonClassForAPI = CommonClassForAPI.getInstance(this)

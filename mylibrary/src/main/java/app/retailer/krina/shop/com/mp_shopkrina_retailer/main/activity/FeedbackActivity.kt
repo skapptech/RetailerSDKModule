@@ -20,7 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.Fe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -50,7 +50,7 @@ class FeedbackActivity : AppCompatActivity() {
             if (rateUs!!.rating.toDouble() == 0.0) {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.select_rating),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_rating),
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (edtFeedbackComment!!.text.toString().trim { it <= ' ' }
@@ -60,7 +60,7 @@ class FeedbackActivity : AppCompatActivity() {
                     .isEmpty()) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.feedback_empty_field)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.feedback_empty_field)
                 )
             } else {
                 if (utils!!.isNetworkAvailable) {
@@ -81,7 +81,7 @@ class FeedbackActivity : AppCompatActivity() {
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             }
@@ -123,13 +123,13 @@ class FeedbackActivity : AppCompatActivity() {
         SubmitFeedback = mBinding.submitFeedback
         rateUs = mBinding.rateUs
         mBinding.toolbarFeedback.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Tiltle_feedback)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Tiltle_feedback)
         mBinding.tvfeedback.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_feedback)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_feedback)
         mBinding.edtFeedbackComment.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint)
         mBinding.submitFeedback.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.submit_requestbrand)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit_requestbrand)
     }
 
     // post feedback
@@ -139,7 +139,7 @@ class FeedbackActivity : AppCompatActivity() {
                 Utils.hideProgressDialog()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.toast_submitted)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_submitted)
                 )
                 onBackPressed()
             }

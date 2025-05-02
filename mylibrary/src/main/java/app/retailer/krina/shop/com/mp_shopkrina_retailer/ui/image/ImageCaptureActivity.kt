@@ -16,11 +16,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityImageCaptureBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -50,7 +49,7 @@ class ImageCaptureActivity : AppCompatActivity() {
             if (isGalleryOption) {
                 mBinding.tvGallery.visibility = View.VISIBLE
             }else
-                mBinding.tvAddPhotoHead.text = MyApplication.getInstance().dbHelper.getString(R.string.please_take_shop_image)
+                mBinding.tvAddPhotoHead.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_take_shop_image)
         }
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -74,9 +73,9 @@ class ImageCaptureActivity : AppCompatActivity() {
                 pickFromCamera()
             }
         }*/
-        mBinding.tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        mBinding.tvCamera!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
-        mBinding.tvGallery!!.text = MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+        mBinding.tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        mBinding.tvCamera!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
+        mBinding.tvGallery!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         mBinding.tvCamera.setOnClickListener {
             IMAGE_FROM = CAPTURE_IMAGE_CAMERA
             pickFromCamera()

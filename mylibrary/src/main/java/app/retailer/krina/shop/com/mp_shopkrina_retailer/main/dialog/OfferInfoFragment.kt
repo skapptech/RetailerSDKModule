@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.BillDiscountModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.DecimalFormat
 
@@ -49,16 +49,16 @@ class OfferInfoFragment : BottomSheetDialogFragment() {
         if (model.billDiscountOfferOn == "Percentage") {
             tvDiscountMsg.text = DecimalFormat(
                 "##.##"
-            ).format(model.discountPercentage) + "% " + MyApplication.getInstance().dbHelper.getString(
+            ).format(model.discountPercentage) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(
                 R.string.bill_discount
             )
         } else if (model.billDiscountOfferOn == "FreeItem") {
             tvDiscountMsg.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.free_item_offer)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_item_offer)
         } else if (model.billDiscountOfferOn.equals("DynamicAmount", ignoreCase = true)) {
             tvDiscountMsg.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) +
-                        DecimalFormat("##.##").format(model.billDiscountWallet) + " " + MyApplication.getInstance().dbHelper.getString(
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) +
+                        DecimalFormat("##.##").format(model.billDiscountWallet) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.off
                 )
         } else {
@@ -68,14 +68,14 @@ class OfferInfoFragment : BottomSheetDialogFragment() {
             if (model.walletType == "WalletPercentage") {
                 tvDiscountMsg.text = DecimalFormat(
                     "##.##"
-                ).format(model.billDiscountWallet) + "% " + MyApplication.getInstance().dbHelper.getString(
+                ).format(model.billDiscountWallet) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.off
                 ) + msgPostBill
             } else {
                 tvDiscountMsg.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
                         "##.##"
-                    ).format(model.billDiscountWallet / 10) + MyApplication.getInstance().dbHelper.getString(
+                    ).format(model.billDiscountWallet / 10) + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.off
                     ) + msgPostBill
             }
@@ -110,7 +110,7 @@ class OfferInfoFragment : BottomSheetDialogFragment() {
         tvDiscountDetailsMsg.text = model.description
         ivClose.setOnClickListener { dialog?.dismiss() }
 
-        MyApplication.getInstance().updateAnalytics("offer_info_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("offer_info_dialog")
     }
 
 companion object{

@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MyDreamMod
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.DreamItemDetails
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.DreamModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
@@ -36,7 +36,7 @@ class MyDreamAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val model = list[position]
         viewHolder.mBinding.btnBuy.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.buy)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.buy)
         if (model.isDeleted || !model.isActive) {
             viewHolder.mBinding.liItem.visibility = View.GONE
             viewHolder.mBinding.cardView.visibility = View.GONE
@@ -47,7 +47,7 @@ class MyDreamAdapter(
         viewHolder.mBinding.tvItemName.text = model.getrItem()
         viewHolder.mBinding.tvDes.text = model.description
         viewHolder.mBinding.tvPointValue.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_points) + model.getrPoint()
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_points) + model.getrPoint()
         viewHolder.mBinding.tvQty.text = "" + model.qty
         if (!TextUtils.isNullOrEmpty(
                 SharePrefs.getInstance(
@@ -102,13 +102,13 @@ class MyDreamAdapter(
                     )
                     Utils.setToast(
                         context,
-                        MyApplication.getInstance().dbHelper.getString(R.string.toast_walletpoint)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_walletpoint)
                     )
                 }
             } else {
                 Utils.setToast(
                     context,
-                    MyApplication.getInstance().dbHelper.getString(R.string.toast_selectitem)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_selectitem)
                 )
             }
         }
@@ -122,7 +122,7 @@ class MyDreamAdapter(
             } else {
                 Utils.setToast(
                     context,
-                    MyApplication.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.qty
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.additemToast) + " " + model.qty
                 )
             }
         }

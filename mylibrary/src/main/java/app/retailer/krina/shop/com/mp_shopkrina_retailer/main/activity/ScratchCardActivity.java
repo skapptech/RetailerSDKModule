@@ -20,7 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityScr
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.BillDiscountModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.CheckBillDiscountResponse;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -64,10 +64,10 @@ public class ScratchCardActivity extends AppCompatActivity {
 
 
     private void initializeViews() {
-        mBinding.tvName.setText(MyApplication.getInstance().dbHelper.getString(R.string.scratch_card));
-        mBinding.tvDetail.setText(MyApplication.getInstance().dbHelper.getString(R.string.scratch_amp_win));
-        mBinding.btnApply.setText(MyApplication.getInstance().dbHelper.getString(R.string.apply_code));
-        mBinding.tvTime.setText(MyApplication.getInstance().dbHelper.getString(R.string.offer_date_noffer_expires_in_2_00_hrs));
+        mBinding.tvName.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.scratch_card));
+        mBinding.tvDetail.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.scratch_amp_win));
+        mBinding.btnApply.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.apply_code));
+        mBinding.tvTime.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.offer_date_noffer_expires_in_2_00_hrs));
 
         mBinding.ivClose.setOnClickListener(v -> onBackPressed());
         mBinding.btnApply.setOnClickListener(v -> {

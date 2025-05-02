@@ -11,7 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.CartDealResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.CompanyWheelConfig
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SingleLiveEvent
 import com.google.gson.JsonObject
@@ -233,7 +233,7 @@ class ShoppingCartViewModel(
                     addItemInCartLiveData.postValue(Response.Success(result.body()))
                 } else {
                     addItemInCartLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {

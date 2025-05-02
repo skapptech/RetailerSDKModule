@@ -31,7 +31,7 @@ public class LocaleHelper {
         //return SharePrefs.getInstance(context).getString(SharePrefs.SELECTED_LANGUAGE);
         //return getPersistedData(context, Locale.getDefault().getLanguage());
         try {
-            return MyApplication.getInstance().dbHelper.getString(R.string.language_code);
+            return RetailerSDKApp.getInstance().dbHelper.getString(R.string.language_code);
         } catch (Exception e) {
             e.printStackTrace();
         }

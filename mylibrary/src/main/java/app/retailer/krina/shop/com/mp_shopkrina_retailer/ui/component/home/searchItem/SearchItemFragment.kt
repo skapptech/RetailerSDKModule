@@ -52,7 +52,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.Gson
@@ -65,7 +65,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     SubCatClicked, BrandClicked {
     private val SPEECH_REQUEST_CODE = 123
     private var activity: HomeActivity? = null
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var viewModel: SearchItemViewModel
     private var mBinding: FragmentSearchItemListBinding? = null
     private var categoryList: ArrayList<BasecategoryModel>? = null
@@ -102,7 +102,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -123,7 +123,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             activity!!,
             this.javaClass.simpleName,
             null
@@ -175,8 +175,8 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             searchString = result!![0]
             mBinding!!.fragSearchEdt.setText(searchString)
             callApi()
-            MyApplication.getInstance().updateAnalyticSearch(searchString)
-            MyApplication.getInstance().updateAnalytics("voice_search")
+            RetailerSDKApp.getInstance().updateAnalyticSearch(searchString)
+            RetailerSDKApp.getInstance().updateAnalytics("voice_search")
         } else if (requestCode == 222 && resultCode == Activity.RESULT_OK) {
             callApi()
         }
@@ -192,7 +192,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                     cat!!, mBaseCategoryIdList!!, maxprice, minprice, custId, searchString, lang, ""
                 )
             viewModel.getSearchData(searchDataPostModel)
-            MyApplication.getInstance().updateAnalyticSearch(searchString)
+            RetailerSDKApp.getInstance().updateAnalyticSearch(searchString)
         }
     }
 
@@ -294,13 +294,13 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                 mItemListArrayList
             )
         mBinding!!.fragSearchEdt.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.hint_search_kisan)
-        mBinding!!.txtPrice.text = MyApplication.getInstance().dbHelper.getString(R.string.price)
-        mBinding!!.tvFilter.text = MyApplication.getInstance().dbHelper.getString(R.string.Filter)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_search_kisan)
+        mBinding!!.txtPrice.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.price)
+        mBinding!!.tvFilter.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.Filter)
         mBinding!!.checkoutBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.check_cart)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.check_cart)
         mBinding!!.relEmptyItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.itemavailable)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.itemavailable)
         mBinding!!.llFilter.setOnClickListener { v: View? -> SearchFilterPopup() }
         mBinding!!.llPriceFilter.setOnClickListener { view: View? -> priceFilter() }
         mBinding!!.fragSearchEdt.addTextChangedListener(object : TextWatcher {
@@ -358,15 +358,15 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         )
         // set text
         mBindingFilter.tvHeader.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Tiltle_BaseCategories)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Tiltle_BaseCategories)
         mBindingFilter.tvCatHeader.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.title_categories)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_categories)
         mBindingFilter.tvSubCatHeader.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Tiltle_SubCategories)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Tiltle_SubCategories)
         mBindingFilter.tvSubSubCatHeader.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Tiltle_brand)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Tiltle_brand)
         mBindingFilter.btnApply.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.apply)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.apply)
         setRangeSeekbar1(mBindingFilter)
         popupWindow!!.height = WindowManager.LayoutParams.MATCH_PARENT
         popupWindow!!.width = WindowManager.LayoutParams.WRAP_CONTENT
@@ -409,11 +409,11 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                         ""
                     )
                 viewModel.getSearchData(searchDataPostModel)
-                MyApplication.getInstance().updateAnalyticSearch(searchString)
+                RetailerSDKApp.getInstance().updateAnalyticSearch(searchString)
             } else {
                 Toast.makeText(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.first_search_something),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.first_search_something),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -425,7 +425,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             setAdapterValue(mBindingFilter)
             Utils.setToast(
                 activity,
-                MyApplication.getInstance().dbHelper.getString(R.string.clear_filter)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.clear_filter)
             )
         }
         mBindingFilter.llPrice.setOnClickListener { view: View? ->
@@ -461,7 +461,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             if (!baseCateChecked) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.first_select_base_category)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.first_select_base_category)
                 )
             } else {
                 if (mBindingFilter.rvCatChild.visibility == View.VISIBLE) {
@@ -484,7 +484,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             if (!cateChecked) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.first_select_category)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.first_select_category)
                 )
             } else {
                 if (mBindingFilter.rvSubcatChild.visibility == View.VISIBLE) {
@@ -507,7 +507,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             if (!subcateChecked) {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.first_select_subcat)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.first_select_subcat)
                 )
             } else {
                 if (mBindingFilter.rvBrandChild.visibility == View.VISIBLE) {
@@ -718,7 +718,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                     ""
                 )
             viewModel.getSearchData(searchDataPostModel)
-            MyApplication.getInstance().updateAnalyticSearch(searchString)
+            RetailerSDKApp.getInstance().updateAnalyticSearch(searchString)
 
         }
     }
@@ -732,11 +732,11 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         try {
             startActivityForResult(intent, SPEECH_REQUEST_CODE)
-            MyApplication.getInstance().updateAnalytics("voice_search_click")
+            RetailerSDKApp.getInstance().updateAnalytics("voice_search_click")
         } catch (a: ActivityNotFoundException) {
             Toast.makeText(
                 context,
-                MyApplication.getInstance().dbHelper.getString(R.string.your_device_not_supported),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_device_not_supported),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -766,7 +766,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             historyItemList!!.add(
                 SearchItemHistoryTitleList(
                     createMOQ(searchHintModel.recentSearchItem),
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_recent_search)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_recent_search)
                 )
             )
         }
@@ -774,7 +774,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             historyItemList!!.add(
                 SearchItemHistoryTitleList(
                     createMOQ(searchHintModel.mostSellingProduct),
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_most_selling)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_most_selling)
                 )
             )
         }
@@ -782,7 +782,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             historyItemList!!.add(
                 SearchItemHistoryTitleList(
                     createMOQ(searchHintModel.recentPurchase),
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_recent_purchase)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_recent_purchase)
                 )
             )
         }
@@ -790,7 +790,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             historyItemList!!.add(
                 SearchItemHistoryTitleList(
                     createMOQ(searchHintModel.custFavoriteItem),
-                    MyApplication.getInstance().dbHelper.getString(R.string.title_your_favourite)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_your_favourite)
                 )
             )
         }
@@ -884,7 +884,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                 mBinding!!.pbLoader.visibility = View.GONE
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_response)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_response)
                 )
             }
         }
@@ -907,7 +907,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                 Utils.hideProgressDialog()
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_response)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_response)
                 )
             }
         }
@@ -931,7 +931,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
             is Response.Error -> {
                 Utils.setToast(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_response)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_response)
                 )
             }
         }
@@ -1018,10 +1018,10 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
                                 }
                             }
                             // analytics data
-                            if (mItemListArrayList!!.size > 0) MyApplication.getInstance()
+                            if (mItemListArrayList!!.size > 0) RetailerSDKApp.getInstance()
                                 .updateAnalyticVSR(mItemListArrayList)
                             // add item to database
-                            MyApplication.getInstance().noteRepository.addToSearch(
+                            RetailerSDKApp.getInstance().noteRepository.addToSearch(
                                 mItemListArrayList,
                                 searchString
                             )

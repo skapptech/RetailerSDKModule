@@ -32,7 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClic
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ProgressDialog
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -43,8 +43,6 @@ import com.nabinbhandari.android.permissions.Permissions
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,7 +113,7 @@ class AddPollActivity : AppCompatActivity(), OnButtonClick {
 
                         Glide.with(this)
                             .load(
-                                SharePrefs.getInstance(MyApplication.getInstance())
+                                SharePrefs.getInstance(RetailerSDKApp.getInstance())
                                     .getString(SharePrefs.TRADE_WEB_URL) + fileFullPath
                             )
                             .into(binding.ivAdd)
@@ -146,7 +144,7 @@ class AddPollActivity : AppCompatActivity(), OnButtonClick {
                         finish()
                         analyticPost.eventName = "newPostUpload"
                         analyticPost.postType = "Poll"
-                        MyApplication.getInstance().updateAnalytics(analyticPost)
+                        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
                     } else {
                         binding.toolbarPost.btnPost.visibility = View.VISIBLE
                         Utils.setToast(applicationContext, it.data.get("res").asString)
@@ -286,10 +284,10 @@ class AddPollActivity : AppCompatActivity(), OnButtonClick {
         val tvVideo = dialog.findViewById<TextView>(R.id.tvVideo)
         val cancel = dialog.findViewById<TextView>(R.id.liCancel)
         tvVideo?.visibility = View.GONE
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener {
             try {
                 val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

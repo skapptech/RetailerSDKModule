@@ -31,7 +31,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.Dismiss
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.Gravity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.showcaseviewlib.GuideView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -66,7 +66,7 @@ class MyWalletActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
     }
@@ -120,15 +120,15 @@ class MyWalletActivity : AppCompatActivity() {
     private fun init() {
         // set data
         mBinding.toolbarMyWallet.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.myWallet)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.myWallet)
         mBinding.tvTotalBalPt.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_balance_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_balance_points)
         mBinding.tvOnTheWayPoint.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_on_the_way_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_on_the_way_points)
         mBinding.tvSpendPoint.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.text_spent_coins)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_spent_coins)
         mBinding.tvExPt.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.expiring_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.expiring_points)
 
         utils = Utils(this)
         walletList = ArrayList()
@@ -167,7 +167,7 @@ class MyWalletActivity : AppCompatActivity() {
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_expiring_point)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_expiring_point)
                 )
             }
         }
@@ -180,8 +180,8 @@ class MyWalletActivity : AppCompatActivity() {
 
     private fun appStoryView() {
         builder = GuideView.Builder(this)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.info))
-            .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.info_details))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.info))
+            .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.info_details))
             .setGravity(Gravity.center)
             .setDismissType(DismissType.anywhere)
             .setTargetView(mBinding.toolbarMyWallet.ImgInfo)
@@ -209,7 +209,7 @@ class MyWalletActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -222,8 +222,8 @@ class MyWalletActivity : AppCompatActivity() {
         val okBtn = dialog.findViewById<TextView>(R.id.ok_btn)
         val pdTitle = dialog.findViewById<TextView>(R.id.pd_title)
         val pdDesc = dialog.findViewById<TextView>(R.id.pd_description)
-        pdTitle.text = MyApplication.getInstance().dbHelper.getString(R.string.terms_and_conditions)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+        pdTitle.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.terms_and_conditions)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         pdDesc.text = Html.fromHtml("" + walletUsed)
         okBtn.setOnClickListener { v: View? -> dialog.dismiss() }
         dialog.window!!.setLayout(

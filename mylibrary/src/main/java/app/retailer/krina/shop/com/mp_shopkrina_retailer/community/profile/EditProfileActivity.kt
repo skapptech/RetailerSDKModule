@@ -29,7 +29,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Custo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DateUtilskotlin
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.libraries.places.api.model.Place
@@ -40,8 +40,6 @@ import com.squareup.picasso.Picasso
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -182,7 +180,7 @@ class EditProfileActivity : AppCompatActivity() {
                         fileName = it.data.get("FileName").asString
                         relativePath = it.data.get("RelativePath").asString
                         fileFullPath = it.data.get("FileFullpath").asString
-                        Picasso.get().load(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + fileFullPath)
+                        Picasso.get().load(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + fileFullPath)
                             .into(mBinding.profileImage)
                     } else {
                         Utils.setToast(applicationContext, "error")
@@ -217,8 +215,8 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
         //analysis
-        MyApplication.getInstance().mixpanel.timeEvent("editProfileExit")
-        MyApplication.getInstance().updateAnalytics("editProfileView")
+        RetailerSDKApp.getInstance().mixpanel.timeEvent("editProfileExit")
+        RetailerSDKApp.getInstance().updateAnalytics("editProfileView")
     }
 
     private fun showImageUploadPhoto() {
@@ -232,10 +230,10 @@ class EditProfileActivity : AppCompatActivity() {
         val tvVideo = dialog.findViewById<TextView>(R.id.tvVideo)
         val cancel = dialog.findViewById<TextView>(R.id.liCancel)
         tvVideo?.visibility = View.GONE
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener {
             try {
                 val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -398,7 +396,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        MyApplication.getInstance().updateAnalytics("editProfileExit")
+        RetailerSDKApp.getInstance().updateAnalytics("editProfileExit")
     }
 
 }

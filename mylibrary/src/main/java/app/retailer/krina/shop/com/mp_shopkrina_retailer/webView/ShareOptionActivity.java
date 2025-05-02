@@ -39,7 +39,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.CustomerRe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -163,7 +163,7 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
                 commonClassForAPI.GetHisabKitabInvoice(Getinvoice, SharePrefs.getInstance(this).getString(SharePrefs.HISAB_KITAB_ID), customersContactModel.getId(), Type);
             }
         } else {
-            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
         }
     }
 
@@ -223,7 +223,7 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
             sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path));
             sendIntent.setType("image/url");
             startActivity(sendIntent);
-            MyApplication.getInstance().updateAnalyticShare(getClass().getSimpleName(), "App Share On WhatsApp");
+            RetailerSDKApp.getInstance().updateAnalyticShare(getClass().getSimpleName(), "App Share On WhatsApp");
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "WhatsApp not installed.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -266,7 +266,7 @@ public class ShareOptionActivity extends AppCompatActivity implements View.OnCli
             try {
                 if (response != null) {
                     filePath = response;
-                    String invoiceURl = EndPointPref.getInstance(MyApplication.getInstance()).getTradeEndpoint() + response;
+                    String invoiceURl = EndPointPref.getInstance(RetailerSDKApp.getInstance()).getTradeEndpoint() + response;
                     downloadFileFromUrl(invoiceURl, response);
                 }
             } catch (Exception ex) {

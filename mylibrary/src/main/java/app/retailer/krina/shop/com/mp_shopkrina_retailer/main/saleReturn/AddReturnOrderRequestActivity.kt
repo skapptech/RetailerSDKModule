@@ -15,7 +15,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -25,14 +24,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddReturnOrderRequestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.DialogClearImageInfoBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.flip.AphidLog.format
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.KKReturnReplaceDetailDC
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.PostKKReturnReplaceRequestDc
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.ReturnItemModel
@@ -41,7 +38,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.saleReturn.SaleR
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -51,9 +48,6 @@ import com.sk.user.agent.ui.component.returnOrder.OnCheckboxClick
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -94,7 +88,7 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
             if (mReturnOrderBatchItemList.size==0){
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.valid_search_select_item)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_search_select_item)
                 )
             }else {
                 val mDetailsList : ArrayList<KKReturnReplaceDetailDC> = ArrayList()
@@ -123,11 +117,11 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
                     }
                 }
                 if (isUploadImage) {
-                    Utils.setToast(applicationContext, MyApplication.getInstance().dbHelper.getString(R.string.valid_upload_image_in_items))
+                    Utils.setToast(applicationContext, RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_upload_image_in_items))
                 } else if (mDetailsList.size == 0) {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.valid_enter_qty_checked)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_enter_qty_checked)
                     )
                 }else{
                     val model =  PostKKReturnReplaceRequestDc(customerId,0,mDetailsList)
@@ -161,7 +155,7 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
                     if (TextUtils.isNullOrEmpty(v.text.toString().trim())) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.please_enter_item_name)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_enter_item_name)
                         )
                     } else {
                         val keyValue = v.text.toString()
@@ -214,13 +208,13 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
                 }
             }
 
-        binding.tvAddRequest.text = MyApplication.getInstance().dbHelper.getString(R.string.text_add_request)
-        binding.tvSubmitRequest.text = MyApplication.getInstance().dbHelper.getString(R.string.submit)
-        binding.tvOrderId.text = MyApplication.getInstance().dbHelper.getString(R.string.order_id)
-        binding.tvBatchCode.text = MyApplication.getInstance().dbHelper.getString(R.string.batch_code)
-        binding.tvQty.text = MyApplication.getInstance().dbHelper.getString(R.string.qty)
-        binding.tvRate.text = MyApplication.getInstance().dbHelper.getString(R.string.rate)
-        binding.tvReturnQty.text = MyApplication.getInstance().dbHelper.getString(R.string.return_qty)
+        binding.tvAddRequest.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_add_request)
+        binding.tvSubmitRequest.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
+        binding.tvOrderId.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id)
+        binding.tvBatchCode.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.batch_code)
+        binding.tvQty.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.qty)
+        binding.tvRate.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rate)
+        binding.tvReturnQty.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.return_qty)
 
     }
     private fun uploadImagePath(file: File) {
@@ -459,7 +453,7 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
             }
             is Response.Error -> {
                 Utils.hideProgressDialog()
-                Utils.setToast(this,MyApplication.getInstance().dbHelper.getString(R.string.return_request_not_submitted))
+                Utils.setToast(this, RetailerSDKApp.getInstance().dbHelper.getString(R.string.return_request_not_submitted))
             }
         }
     }
@@ -511,9 +505,9 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
         val okBtn = dialog.findViewById<TextView>(R.id.ok_btn)
         val description = dialog.findViewById<TextView>(R.id.pd_description)
         val pd_title = dialog.findViewById<TextView>(R.id.pd_title)
-        pd_title.text = MyApplication.getInstance().dbHelper.getString(R.string.cart_item_clear)
-        description.text = MyApplication.getInstance().dbHelper.getString(R.string.msg_return_request)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+        pd_title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cart_item_clear)
+        description.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_return_request)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
         okBtn.setOnClickListener { v: View? ->
             startActivity(Intent(this,ReturnOrderActivity::class.java))
             Utils.rightTransaction(this)

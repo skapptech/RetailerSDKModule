@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.google.firebase.FirebaseApp;
 
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
+
 public class AppController extends Application {
 
     @Override
@@ -12,6 +14,6 @@ public class AppController extends Application {
         if (FirebaseApp.getApps(this).isEmpty()) {
             FirebaseApp.initializeApp(this);
         }
-       // DirectSDK.initialize(this);
+        RetailerSDKApp.initialize(this);
     }
 }

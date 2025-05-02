@@ -327,20 +327,20 @@ class OfferCheck(
 //                } else
                 if (discountModel.billAmount > totalamount) {
                     totalamount = 0.0
-                    message += MyApplication.getInstance().noteRepository.getString(R.string.add_item_worth_rs) + (discountModel.billAmount - totalamount) + MyApplication.getInstance().noteRepository.getString(
+                    message += RetailerSDKApp.getInstance().noteRepository.getString(R.string.add_item_worth_rs) + (discountModel.billAmount - totalamount) + RetailerSDKApp.getInstance().noteRepository.getString(
                         R.string.to_unlock
                     )
                 }
                 if (discountModel.lineItem > 0 && discountModel.lineItem > orderLineItems) {
                     totalamount = 0.0
-                    message += "\n" + MyApplication.getInstance().noteRepository.getString(R.string.add) +
+                    message += "\n" + RetailerSDKApp.getInstance().noteRepository.getString(R.string.add) +
                             (discountModel.lineItem - orderLineItems) +
-                            MyApplication.getInstance().noteRepository.getString(R.string.more_line_items_to_unlock)
+                            RetailerSDKApp.getInstance().noteRepository.getString(R.string.more_line_items_to_unlock)
                 }
                 if (discountModel.offerOn == "ScratchBillDiscount" && !discountModel.isScratchBDCode) {
                     totalamount = 0.0
                     message =
-                        MyApplication.getInstance().noteRepository.getString(R.string.scratch_the_card_first)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.scratch_the_card_first)
                 }
                 if (totalamount > 0) {
                     // Code for offer applicable or not

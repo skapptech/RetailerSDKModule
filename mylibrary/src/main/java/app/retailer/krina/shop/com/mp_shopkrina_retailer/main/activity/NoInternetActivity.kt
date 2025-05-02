@@ -7,13 +7,12 @@ import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.LayoutNoInternetBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class NoInternetActivity : AppCompatActivity() {
@@ -25,14 +24,14 @@ class NoInternetActivity : AppCompatActivity() {
             this,
             R.layout.layout_no_internet
         )
-        title = MyApplication.getInstance().dbHelper.getString(R.string.no_internet)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_internet)
         mBinding.tvNotConnected.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.not_connected_to_internet)
-        mBinding.retry.text = MyApplication.getInstance().dbHelper.getString(R.string.retry)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.not_connected_to_internet)
+        mBinding.retry.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.retry)
         mBinding.retry.setOnClickListener {
             Toast.makeText(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.retrying),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.retrying),
                 Toast.LENGTH_SHORT
             ).show()
             val status = Utils.getConnectivityStatusString(
@@ -44,7 +43,7 @@ class NoInternetActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.still_not_connected),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.still_not_connected),
                     Toast.LENGTH_SHORT
                 ).show()
             }

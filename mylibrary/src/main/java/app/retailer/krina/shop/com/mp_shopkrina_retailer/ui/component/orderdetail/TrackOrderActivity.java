@@ -88,7 +88,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.UploadAudi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.DirectionsJSONParser;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -130,7 +130,7 @@ public class TrackOrderActivity extends AppCompatActivity implements OnMapReadyC
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_track_order);
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(MyApplication.getInstance().dbHelper.getString(R.string.track_order));
+        setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.track_order));
 
         activity = this;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

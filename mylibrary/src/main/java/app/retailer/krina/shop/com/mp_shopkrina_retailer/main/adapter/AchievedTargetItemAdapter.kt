@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemAchievedTargetBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.TargetCustomerDC
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class AchievedTargetItemAdapter(
     private val context: Context,
@@ -30,9 +30,9 @@ class AchievedTargetItemAdapter(
         try {
             val model = list!![i]
             viewHolder.mBinding.tvTargetIat.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.text_target)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_target)
             viewHolder.mBinding.tvCurrentIat.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.text_current_value)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_current_value)
             if (model.isBrand) {
                 viewHolder.mBinding.tvItemBrandName.text = model.brandName
             } else {

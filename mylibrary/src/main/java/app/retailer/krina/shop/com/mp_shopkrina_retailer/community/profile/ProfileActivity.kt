@@ -39,7 +39,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.DialogUpdat
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ProgressDialog
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -86,7 +86,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         callApi()
 
         if (comeFrom.equals("Bottom")) {
-            MyApplication.getInstance().noteRepository.fetchProfileFeeds(SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID).toString()
+            RetailerSDKApp.getInstance().noteRepository.fetchProfileFeeds(SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID).toString()
             ).observe(this) {
                 if (feedList != null && feedList!!.isNotEmpty()) {
                     feedList?.clear()
@@ -96,7 +96,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
             }
         } else if (comeFrom.equals("Notifiction")) {
 
-            MyApplication.getInstance().noteRepository.fetchNotifctinFeedsontop(intent.getStringExtra("userId")!!, intent.getStringExtra("postID"))
+            RetailerSDKApp.getInstance().noteRepository.fetchNotifctinFeedsontop(intent.getStringExtra("userId")!!, intent.getStringExtra("postID"))
                 .observe(this) {
                 if (feedList != null && feedList!!.isNotEmpty()) {
                     feedList?.clear()
@@ -106,7 +106,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
               }
            }
         } else if (comeFrom.equals("Profile")) {
-            MyApplication.getInstance().noteRepository.fetchProfileFeeds(intent.getStringExtra("userId")!!).observe(this) {
+            RetailerSDKApp.getInstance().noteRepository.fetchProfileFeeds(intent.getStringExtra("userId")!!).observe(this) {
                 if (feedList != null && feedList!!.isNotEmpty()) {
                     feedList?.clear()
                     feedList?.addAll(it)
@@ -119,13 +119,13 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         if (source.equals("icon") || source.equals("navbar")) {
             analyticPost.eventName = "myProfileView"
             analyticPost.source = source
-            MyApplication.getInstance().mixpanel.timeEvent("myProfileExit")
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().mixpanel.timeEvent("myProfileExit")
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         } else {
             analyticPost.eventName = "userProfileView"
             analyticPost.source = source
-            MyApplication.getInstance().mixpanel.timeEvent("userProfileExit")
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().mixpanel.timeEvent("userProfileExit")
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         }
     }
 
@@ -134,11 +134,11 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         if (source.equals("icon") || source.equals("navbar")) {
             analyticPost.eventName = "myProfileExit"
             analyticPost.source = source
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         } else {
             analyticPost.eventName = "userProfileExit"
             analyticPost.source = source
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         }
     }
 
@@ -660,12 +660,12 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         analyticPost.postId = postId
         analyticPost.postType = postType
         analyticPost.source = "Profile"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
 
     }
 
     override fun openComments(model: FeedPostModel) {
-        MyApplication.getInstance().isCommentOpen = true
+        RetailerSDKApp.getInstance().isCommentOpen = true
         CommentDialog.newInstance(model).show(supportFragmentManager, "a")
     }
 
@@ -674,7 +674,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         share.type = "text/*"
         share.putExtra(
             Intent.EXTRA_TEXT,
-            "" + model.desc + "\n" + SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + "/" + model.userId + "/" + model.postId
+            "" + model.desc + "\n" + SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL) + "/" + model.userId + "/" + model.postId
         )
         startActivity(Intent.createChooser(share, "Share Post"))
 
@@ -685,7 +685,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         analyticPost.likeCount = model.likeCount
         analyticPost.postType = model.postType
         analyticPost.commentCount = model.commentCount
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun following(userID: String) {
@@ -719,7 +719,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
         analyticPost.postType = model.postType
         analyticPost.likeCount = model.likeCount
         analyticPost.commentCount = model.commentCount
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun editPost(feeModel: FeedPostModel) {
@@ -821,7 +821,7 @@ class ProfileActivity : AppCompatActivity(), FeedListener, LikeListAdapter.LikeU
             analyticPost.eventName = "followersPopUp"
         }
         analyticPost.source = "Profile"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
 
     }
 

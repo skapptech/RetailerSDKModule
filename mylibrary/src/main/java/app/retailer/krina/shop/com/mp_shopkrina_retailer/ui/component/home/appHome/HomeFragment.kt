@@ -26,7 +26,6 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import androidx.core.app.ActivityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +44,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.H
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.store.StoreItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.BucketGameInterface
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.DynamicHtmlInterface
@@ -82,7 +80,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GPSTracker
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GpsUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RxBus
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -107,7 +105,7 @@ import java.util.Collections
 class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     DynamicHtmlInterface, StoreApiInterface, BucketGameInterface {
     private val TAG = this.javaClass.name
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private var mBinding: FragmentHome1Binding? = null
     private lateinit var appHomeViewModel: AppHomeViewModel
     private var rlHeader: RelativeLayout? = null
@@ -137,7 +135,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     override fun onAttach(context: Context) {
         super.onAttach(context)
         homeActivity = context as? HomeActivity
-        appCtx = homeActivity?.application as MyApplication
+        appCtx = homeActivity?.application as RetailerSDKApp
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -169,8 +167,8 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
 
     override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().logScreenAnalytics(this.javaClass)
-        MyApplication.getInstance().mFirebaseAnalytics.setCurrentScreen(
+        RetailerSDKApp.getInstance().logScreenAnalytics(this.javaClass)
+        RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
             homeActivity!!,
             this.javaClass.simpleName,
             this.javaClass.simpleName
@@ -184,8 +182,8 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         if (mHomeAdapter != null) {
             mHomeAdapter!!.notifyDataSetChanged()
         }
-        if (MyApplication.getInstance().isReloadCart) {
-            MyApplication.getInstance().isReloadCart = false
+        if (RetailerSDKApp.getInstance().isReloadCart) {
+            RetailerSDKApp.getInstance().isReloadCart = false
             updateCartInList()
         }
         homeActivity?.searchText!!.visibility = View.VISIBLE
@@ -780,9 +778,9 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
         val layoutManager = LinearLayoutManager(activity)
         mBinding!!.rvHome.layoutManager = layoutManager
         mBinding!!.thisSiteIsUnderMaintenance.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.this_site_is_under_maintenance)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.this_site_is_under_maintenance)
         mBinding!!.weArePreparingToServeYouBetter.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.we_are_preparing_to_serve_you_better)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.we_are_preparing_to_serve_you_better)
         mHomeAdapter = HomeAdapter(
             homeActivity!!, homeDataList, this,
             this, this, this, this
@@ -932,7 +930,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                         }
                         SharePrefs.getInstance(activity)
                             .putBoolean(SharePrefs.IS_DIALOG_SHOWN, true)
-                        MyApplication.getInstance().updateAnalytics("popup_view")
+                        RetailerSDKApp.getInstance().updateAnalytics("popup_view")
                     }
 
                     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
@@ -1026,7 +1024,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     homeActivity!!.pushFragments(SubCategoryFragment.newInstance(), false, true, args)
                 }
                 // update analytics
-                MyApplication.getInstance().updateAnalytics("appHome_basCat_click", analyticPost)
+                RetailerSDKApp.getInstance().updateAnalytics("appHome_basCat_click", analyticPost)
             }
 
             "Brand" -> if (model.viewType != null && !model.viewType!!.isEmpty() && model.viewType.equals(
@@ -1237,7 +1235,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     }
                 }
                 // update analytics
-                MyApplication.getInstance().updateAnalytics("popup_click", analyticPost)
+                RetailerSDKApp.getInstance().updateAnalytics("popup_click", analyticPost)
             }
         }
     }
@@ -1334,19 +1332,19 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     // add Cart To AppHome
     private fun addCartToList() {
         if (homeDataList.size > 1 && EndPointPref.getInstance(activity).cartPosition != 0) {
-            val cartData = MyApplication.getInstance().noteRepository.cart
+            val cartData = RetailerSDKApp.getInstance().noteRepository.cart
             val observer: Observer<List<ItemListModel>> = object : Observer<List<ItemListModel>> {
                 override fun onChanged(list: List<ItemListModel>) {
                     println("addCartToList ")
                     if (list != null && list.size > 0) {
-                        var total = MyApplication.getInstance().noteRepository.cartValue1
+                        var total = RetailerSDKApp.getInstance().noteRepository.cartValue1
                         if (total == null) {
                             total = 0.0
                         }
                         homeDataList.add(
                             EndPointPref.getInstance(activity).cartPosition, HomeDataModel(
                                 "cart",
-                                MyApplication.getInstance().dbHelper.getString(R.string.resume_your_purchase),
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.resume_your_purchase),
                                 list[0].itemname,
                                 list[0].unitPrice,
                                 list[0].price,
@@ -1367,19 +1365,19 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     // update Cart In AppHome
     private fun updateCartInList() {
         if (homeDataList.size > 1 && EndPointPref.getInstance(activity).cartPosition != 0) {
-            val cartData = MyApplication.getInstance().noteRepository.cart
+            val cartData = RetailerSDKApp.getInstance().noteRepository.cart
             val observer: Observer<List<ItemListModel>> = object : Observer<List<ItemListModel>> {
                 override fun onChanged(list: List<ItemListModel>) {
                     println("updateCartInList")
                     if (list != null && list.size > 0) {
-                        var total = MyApplication.getInstance().noteRepository.cartValue1
+                        var total = RetailerSDKApp.getInstance().noteRepository.cartValue1
                         if (total == null) {
                             total = 0.0
                         }
                         homeDataList[EndPointPref.getInstance(activity).cartPosition] =
                             HomeDataModel(
                                 "cart",
-                                MyApplication.getInstance().dbHelper.getString(R.string.resume_your_purchase),
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.resume_your_purchase),
                                 list[0].itemname,
                                 list[0].unitPrice,
                                 list[0].price,
@@ -1401,7 +1399,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     // add Recent Search Items To AppHome
     private fun addRecentSearchToList() {
         if (EndPointPref.getInstance(activity).searchPosition != 0) {
-            val searchData = MyApplication.getInstance().noteRepository.searchItem
+            val searchData = RetailerSDKApp.getInstance().noteRepository.searchItem
             val searchObserver: Observer<List<SearchItemDTO>> =
                 object : Observer<List<SearchItemDTO>> {
                     override fun onChanged(searchList: List<SearchItemDTO>) {
@@ -1418,7 +1416,7 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                             homeDataList.add(
                                 HomeDataModel(
                                     "search",
-                                    MyApplication.getInstance().dbHelper.getString(R.string.continue_your_search),
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.continue_your_search),
                                     searchList[0].itemName,
                                     searchList[0].unitPrice,
                                     searchList[0].price,

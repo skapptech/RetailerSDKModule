@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.MyAccountAd
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.*
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.target.CustomerSubCategoryTargetActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.order.MyOrderActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class MyAccountAdapter(private val _context: Context, private val mylist: ArrayList<String>) :
@@ -52,37 +52,37 @@ class MyAccountAdapter(private val _context: Context, private val mylist: ArrayL
             var intent: Intent? = null
             when (position) {
                 0 -> {
-                    MyApplication.getInstance().updateAnalytics("my_order_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("my_order_click")
                     intent = Intent(_context, MyOrderActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)
                 }
                 1 -> {
-                    MyApplication.getInstance().updateAnalytics("wallet_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("wallet_click")
                     intent = Intent(_context, MyWalletActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)
                 }
                 2 -> {
-                    MyApplication.getInstance().updateAnalytics("myFavourite_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("myFavourite_click")
                     intent = Intent(_context, FavouriteActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)
                 }
                 3 -> {
-                    MyApplication.getInstance().updateAnalytics("my_dream_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("my_dream_click")
                     intent = Intent(_context, MyDreamActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)
                 }
                 4 -> {
-                    MyApplication.getInstance().updateAnalytics("ledger_payment_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("ledger_payment_click")
                     intent = Intent(_context, LegerPaymentActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)
                 }
                 5 -> {
-                    MyApplication.getInstance().updateAnalytics("target_click")
+                    RetailerSDKApp.getInstance().updateAnalytics("target_click")
                     intent = Intent(_context, CustomerSubCategoryTargetActivity::class.java)
                     _context.startActivity(intent)
                     Utils.fadeTransaction(_context as Activity)

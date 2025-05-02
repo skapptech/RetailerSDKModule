@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.BillFreeItemsBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.RetailerBillDiscountFreeItemDcs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class BillDiscountFreeItemAdapter(
     private val context: Context,
@@ -31,7 +31,7 @@ class BillDiscountFreeItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvItemName.text = (mylist[position].itemName
                 + " (" + mylist[position].qty + " " +
-                MyApplication.getInstance().dbHelper.getString(R.string.text_qty) + ")")
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_qty) + ")")
     }
 
     override fun getItemCount(): Int {

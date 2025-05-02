@@ -10,8 +10,6 @@ import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.bumptech.glide.Glide
 

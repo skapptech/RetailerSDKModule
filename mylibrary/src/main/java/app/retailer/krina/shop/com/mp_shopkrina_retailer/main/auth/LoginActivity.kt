@@ -20,7 +20,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.CustomerResponse
@@ -28,7 +27,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.OTPRespon
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.TokenResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.UserAuth
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityLoginBinding
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityTestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ContactUsActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.postModels.LoginModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.LoginResponse
@@ -41,7 +39,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.Spl
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.AppSignatureHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Validation
@@ -122,13 +120,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 mBinding!!.llResendotp.visibility = View.GONE
             }
         }
-        mBinding!!.etEmaillogin.setHint(MyApplication.getInstance().dbHelper.getString(R.string.mobile_number))
-        mBinding!!.etPasswordlogin.setHint(MyApplication.getInstance().dbHelper.getString(R.string.hint_passwordr))
-        mBinding!!.tvForgotpassword.setText(MyApplication.getInstance().dbHelper.getString(R.string.forget_passwordr))
-        mBinding!!.tvResendotp.setText(MyApplication.getInstance().dbHelper.getString(R.string.resend_otp))
-        mBinding!!.btnLogin.setText(MyApplication.getInstance().dbHelper.getString(R.string.login))
-        mBinding!!.tvDontHaveAccount.setText(MyApplication.getInstance().dbHelper.getString(R.string.don_t_have_an_account))
-        mBinding!!.tvSignUp.setText(MyApplication.getInstance().dbHelper.getString(R.string.sign_up))
+        mBinding!!.etEmaillogin.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mobile_number))
+        mBinding!!.etPasswordlogin.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_passwordr))
+        mBinding!!.tvForgotpassword.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.forget_passwordr))
+        mBinding!!.tvResendotp.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.resend_otp))
+        mBinding!!.btnLogin.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.login))
+        mBinding!!.tvDontHaveAccount.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.don_t_have_an_account))
+        mBinding!!.tvSignUp.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.sign_up))
         mBinding!!.etPasswordlogin.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
                 attemptLogin()
@@ -139,21 +137,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         mBinding!!.etEmaillogin.removeTextChangedListener(textWatcher)
         mBinding!!.btnLogin.setOnClickListener(this)
         mBinding!!.tvSignUp.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalytics("signup_click")
+            RetailerSDKApp.getInstance().updateAnalytics("signup_click")
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
             Utils.leftTransaction(this)
         }
         // forgot pass fun
         mBinding!!.tvForgotpassword.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalytics("forgot_password_click")
+            RetailerSDKApp.getInstance().updateAnalytics("forgot_password_click")
             forgotPasswordPopup()
         }
         mBinding!!.llResendotp.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalytics("resend_otp_click")
+            RetailerSDKApp.getInstance().updateAnalytics("resend_otp_click")
             val email = mBinding!!.etEmaillogin.text.toString().trim { it <= ' ' }
             if (TextUtils.isNullOrEmpty(email)) {
                 mBinding!!.etEmaillogin.error =
-                    MyApplication.getInstance().dbHelper.getString(R.string.enter_mobile_number)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_mobile_number)
                 mBinding!!.etEmaillogin.requestFocus()
             } else {
                 if (utils!!.isNetworkAvailable) {
@@ -162,7 +160,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             }
@@ -207,24 +205,24 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         val password = mBinding!!.etPasswordlogin.text.toString().trim { it <= ' ' }
         if (TextUtils.isNullOrEmpty(mobileNumber)) {
             mBinding!!.etEmaillogin.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_mobile_number)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_mobile_number)
             mBinding!!.etEmaillogin.requestFocus()
         } else if (Validation.chkmobileNo(mobileNumber)) {
             mBinding!!.etEmaillogin.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_proper_mobile_number)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_proper_mobile_number)
             mBinding!!.etEmaillogin.requestFocus()
         } else if (TextUtils.isNullOrEmpty(password.trim { it <= ' ' })) {
             mBinding!!.etPasswordlogin.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_password)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_password)
             mBinding!!.etPasswordlogin.requestFocus()
         } else if (password.trim { it <= ' ' }.length < 3) {
             mBinding!!.etPasswordlogin.error =
-                MyApplication.getInstance().dbHelper.getString(R.string.enter_valid_password)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_valid_password)
             mBinding!!.etPasswordlogin.requestFocus()
         } else if (utils!!.isNetworkAvailable) {
             Utils.showProgressDialog(this)
             if (commonClassForAPI != null) {
-                MyApplication.getInstance().updateAnalytics("login_attempt")
+                RetailerSDKApp.getInstance().updateAnalytics("login_attempt")
                 Utils.showProgressDialog(this)
                 commonClassForAPI!!.fetchLoginData(
                     callLoginDes, LoginModel(
@@ -243,7 +241,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -259,17 +257,17 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         val tvFPHead = mView.findViewById<TextView>(R.id.tvFPHead)
         val etMobileNo = mView.findViewById<EditText>(R.id.et_Mobile_No)
         val tvEnterMobile = mView.findViewById<TextView>(R.id.tvEnterMobile)
-        tvFPHead.setText(MyApplication.getInstance().dbHelper.getString(R.string.forgot_password_title))
-        tvEnterMobile.setText(MyApplication.getInstance().dbHelper.getString(R.string.entermobilenumber))
-        etMobileNo.setHint(MyApplication.getInstance().dbHelper.getString(R.string.mobile_number))
-        cancelBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.cancel))
-        okBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.ok))
+        tvFPHead.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.forgot_password_title))
+        tvEnterMobile.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.entermobilenumber))
+        etMobileNo.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.mobile_number))
+        cancelBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel))
+        okBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok))
         okBtn.setOnClickListener { v: View? ->
             if (etMobileNo.text.toString().trim { it <= ' ' }
                     .equals("", ignoreCase = true)) {
                 Toast.makeText(
                     this,
-                    MyApplication.getInstance().dbHelper.getString(R.string.enter_mobile_number),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_mobile_number),
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (TextUtils.isValidMobileNo(etMobileNo.text.toString().trim { it <= ' ' })) {
@@ -282,13 +280,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             } else {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.validMobilenumbe),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.validMobilenumbe),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -307,9 +305,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         val cancelBtn = mView.findViewById<TextView>(R.id.cancel_btn)
         val tvAuthMsg = mView.findViewById<TextView>(R.id.auth_msg)
         val tvTitleAuth = mView.findViewById<TextView>(R.id.tvTitleAuth)
-        tvTitleAuth.setText(MyApplication.getInstance().dbHelper.getString(R.string.alert))
-        cancelBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.no_title))
-        okBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.yes_title))
+        tvTitleAuth.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.alert))
+        cancelBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_title))
+        okBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.yes_title))
         tvAuthMsg.text = authMsg
         okBtn.setOnClickListener { v: View? ->
             customDialog!!.dismiss()
@@ -329,10 +327,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
 
     private fun gotoActiveScreen() {
         // start analytic new session
-        MyApplication.getInstance().startAnalyticSession()
-        MyApplication.getInstance().prefManager.setLoggedIn(true)
-        MyApplication.getInstance().prefManager.setShowcaseFirstTimeLaunch(true)
-        MyApplication.getInstance().clearLocalData()
+        RetailerSDKApp.getInstance().startAnalyticSession()
+        RetailerSDKApp.getInstance().prefManager.setLoggedIn(true)
+        RetailerSDKApp.getInstance().prefManager.setShowcaseFirstTimeLaunch(true)
+        RetailerSDKApp.getInstance().clearLocalData()
         startActivity(
             Intent(applicationContext, SplashScreenActivity::class.java)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -348,9 +346,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         val okBtn = mView.findViewById<TextView>(R.id.ok_btn)
         val tvFPTitle = mView.findViewById<TextView>(R.id.tvFPTitle)
         val tvForgotResult = mView.findViewById<TextView>(R.id.tvForgotResult)
-        okBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.ok))
-        tvFPTitle.setText(MyApplication.getInstance().dbHelper.getString(R.string.forgot_password_title))
-        tvForgotResult.setText(MyApplication.getInstance().dbHelper.getString(R.string.forgot_password_result_title))
+        okBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok))
+        tvFPTitle.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.forgot_password_title))
+        tvForgotResult.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.forgot_password_result_title))
         okBtn.setOnClickListener { v: View? -> customDialog!!.dismiss() }
         customDialog!!.show()
     }
@@ -423,7 +421,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.forgot_password_not_changed)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.forgot_password_not_changed)
                     )
                 }
             }
@@ -528,7 +526,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                             SharePrefs.getInstance(applicationContext)
                                 .putString(SharePrefs.CLUSTER_ID, customer!!.clusterId)
                             val regApk: UserAuth = customer!!.registeredApk!!
-                            MyApplication.getInstance().updateAnalyticAuth(
+                            RetailerSDKApp.getInstance().updateAnalyticAuth(
                                 FirebaseAnalytics.Event.LOGIN,
                                 "password",
                                 mobileNumber
@@ -566,7 +564,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 e.printStackTrace()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.server_error)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.server_error)
                 )
                 if (this != null) {
                     dispose()
@@ -609,7 +607,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 Utils.hideProgressDialog()
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.server_error)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.server_error)
                 )
                 if (this != null) {
                     dispose()

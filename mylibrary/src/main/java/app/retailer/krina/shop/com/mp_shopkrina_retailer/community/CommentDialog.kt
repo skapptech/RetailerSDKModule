@@ -32,7 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.RestClient
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.ProgressDialog
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
@@ -331,7 +331,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
                 analyticPost.source = "Profile"
                 analyticPost.likeCount = model.likeCount
                 analyticPost.commentCount = model.commentCount
-                MyApplication.getInstance().updateAnalytics(analyticPost)
+                RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
 
 
                 etComment.setText("")
@@ -344,7 +344,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
             (dialog as? BottomSheetDialog)?.behavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
         dialog?.setOnDismissListener {
-            MyApplication.getInstance().isCommentOpen = false
+            RetailerSDKApp.getInstance().isCommentOpen = false
             dialog?.dismiss()
             // notify changes
             onButtonClick?.onButtonClick(position, true)
@@ -352,7 +352,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
             analyticPost.eventName = "CommentPopUpExit"
             analyticPost.likeCount = model.likeCount
             analyticPost.commentCount = model.commentCount
-            MyApplication.getInstance().updateAnalytics(analyticPost)
+            RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
         }
 
         // analytic
@@ -362,8 +362,8 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
         analyticPost.postType = model.postType
         analyticPost.likeCount = model.likeCount
         analyticPost.commentCount = model.commentCount
-        MyApplication.getInstance().mixpanel.timeEvent("CommentPopUpExit")
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().mixpanel.timeEvent("CommentPopUpExit")
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun getDialog(): Dialog? {
@@ -372,7 +372,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
 
     override fun onResume() {
         super.onResume()
-        if (!MyApplication.getInstance().isCommentOpen) {
+        if (!RetailerSDKApp.getInstance().isCommentOpen) {
             dismiss()
         }
     }
@@ -401,7 +401,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
         }
         analyticPost.postId = postId
         analyticPost.source = "Profile"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun commentReplyClick(
@@ -436,7 +436,7 @@ class CommentDialog : BottomSheetDialogFragment(), CommentListener {
         }
         analyticPost.postId = postId
         analyticPost.source = "Profile"
-        MyApplication.getInstance().updateAnalytics(analyticPost)
+        RetailerSDKApp.getInstance().updateAnalytics(analyticPost)
     }
 
     override fun commentUserProfileOpen(userID: String) {

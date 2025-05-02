@@ -52,7 +52,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.Su
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import io.reactivex.observers.DisposableObserver;
 
@@ -116,12 +116,12 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
                         commonClassForAPI.CustomerPendingPayment(pedingobj, customerId);
                     }
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
                 }
             } else {
                 if (CheckDates(startDate, endDate)) {
                     if (details.equalsIgnoreCase("Please select Option")) {
-                        Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_ledger_type), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_ledger_type), Toast.LENGTH_SHORT).show();
                         return;
                     } else {
                         if (utils.isNetworkAvailable()) {
@@ -131,7 +131,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
                                 commonClassForAPI.CustomerLedgerForRetailerApp(customerLedger, supplierPaymentModel);
                             }
                         } else {
-                            Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                            Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
                         }
                     }
                 } else {
@@ -190,15 +190,15 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
         commonClassForAPI = CommonClassForAPI.getInstance(this);
         utils = new Utils(this);
 
-        mBinding.toolbarMyLedger.title.setText(MyApplication.getInstance().dbHelper.getString(R.string.my_ledger));
-        mBinding.tvComingSoonL.setText(MyApplication.getInstance().dbHelper.getString(R.string.coming_soon));
-        mBinding.tvCheckLater.setText(MyApplication.getInstance().dbHelper.getString(R.string.please_check_back_later));
-        mBinding.tvLedgerNote.setText(MyApplication.getInstance().dbHelper.getString(R.string.ledger_note));
-        mBinding.tvFinYr.setText(MyApplication.getInstance().dbHelper.getString(R.string.financial_year));
-        mBinding.tvFromL.setText(MyApplication.getInstance().dbHelper.getString(R.string.From));
-        mBinding.tvToL.setText(MyApplication.getInstance().dbHelper.getString(R.string.To));
-        mBinding.tvLedgerType.setText(MyApplication.getInstance().dbHelper.getString(R.string.ledger_type));
-        mBinding.getData.setText(MyApplication.getInstance().dbHelper.getString(R.string.hint_search));
+        mBinding.toolbarMyLedger.title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_ledger));
+        mBinding.tvComingSoonL.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.coming_soon));
+        mBinding.tvCheckLater.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_check_back_later));
+        mBinding.tvLedgerNote.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.ledger_note));
+        mBinding.tvFinYr.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.financial_year));
+        mBinding.tvFromL.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.From));
+        mBinding.tvToL.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.To));
+        mBinding.tvLedgerType.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.ledger_type));
+        mBinding.getData.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.hint_search));
 
         mBinding.toolbarMyLedger.back.setOnClickListener(v -> onBackPressed());
 
@@ -260,7 +260,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
         startDate = "";
         endDate = "";
         if (selectedYear.equalsIgnoreCase(getString(R.string.Please_Select_year))) {
-            Toast.makeText(this, MyApplication.getInstance().dbHelper.getString(R.string.please_select_year),
+            Toast.makeText(this, RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_year),
                     Toast.LENGTH_SHORT).show();
         } else {
             String[] separated = selectedYear.split("-");
@@ -277,10 +277,10 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
 
     private void EndDate() {
         if (selectedYear.equals(getString(R.string.Please_Select_year))) {
-            Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_year), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_year), Toast.LENGTH_SHORT).show();
         } else if (StartDate.getText().toString().trim().length() == 0) {
 
-            Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_start_date), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_start_date), Toast.LENGTH_SHORT).show();
         } else {
             String[] separated = selectedYear.split("-");
             String strYear = separated[0].trim();
@@ -317,9 +317,9 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
         TextView okBtn = mView.findViewById(R.id.ok_btn);
         TextView cancelBtn = mView.findViewById(R.id.cancel_btn);
         TextView title = mView.findViewById(R.id.pd_title);
-        okBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.pdf));
-        title.setText(MyApplication.getInstance().dbHelper.getString(R.string.more_than_days));
-        cancelBtn.setText(MyApplication.getInstance().dbHelper.getString(R.string.cancel));
+        okBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.pdf));
+        title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.more_than_days));
+        cancelBtn.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel));
         okBtn.setOnClickListener(v -> {
             if (isStoragePermissionGranted()) {
                 convertPDF();
@@ -373,7 +373,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
     private void convertPDF() {
         if (StartEpochTime <= EndEpochTime) {
             if (details.equalsIgnoreCase("Please select Option")) {
-                Toast.makeText(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.please_select_any_option), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_any_option), Toast.LENGTH_SHORT).show();
             } else {
                 if (utils.isNetworkAvailable()) {
                     SupplierPaymentModel supplierPaymentModel = new SupplierPaymentModel(customerId, startDate, endDate, 1, false, details);
@@ -382,7 +382,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
                         commonClassForAPI.CustomerLedgerPDF(customerLedgerPDF, supplierPaymentModel);
                     }
                 } else {
-                    Utils.setToast(getApplicationContext(), MyApplication.getInstance().dbHelper.getString(R.string.internet_connection));
+                    Utils.setToast(getApplicationContext(), RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection));
                 }
             }
         } else {
@@ -455,7 +455,7 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
                 SupplierDocModel supplierDocModel = new Gson().fromJson(response.toString(), SupplierDocModel.class);
                 if (supplierDocModel.isStatus()) {
                     if (supplierDocModel.isURL() != null) {
-                        String Url = EndPointPref.getInstance(MyApplication.getInstance()).getBaseUrl() + supplierDocModel.isURL();
+                        String Url = EndPointPref.getInstance(RetailerSDKApp.getInstance()).getBaseUrl() + supplierDocModel.isURL();
                         String fileName = Url.substring(Url.lastIndexOf("/") + 1);
                         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Url));
                         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

@@ -11,7 +11,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemPrimePlanListBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.MembershipPlanModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class PrimePlanAdapter(
@@ -36,16 +36,16 @@ class PrimePlanAdapter(
         holder.mBinding.tvName.text = model.memberShipName
         if (model.memberShipInMonth == 12) {
             holder.mBinding.btnBuy.text =
-                (MyApplication.getInstance().dbHelper.getString(R.string.join_prime_at)
-                        + model.amount + MyApplication.getInstance().dbHelper.getString(R.string.per_year))
+                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.join_prime_at)
+                        + model.amount + RetailerSDKApp.getInstance().dbHelper.getString(R.string.per_year))
         } else if (model.memberShipInMonth == 1) {
             holder.mBinding.btnBuy.text =
-                (MyApplication.getInstance().dbHelper.getString(R.string.join_prime_at)
-                        + model.amount + MyApplication.getInstance().dbHelper.getString(R.string.per_month))
+                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.join_prime_at)
+                        + model.amount + RetailerSDKApp.getInstance().dbHelper.getString(R.string.per_month))
         } else {
             holder.mBinding.btnBuy.text =
-                (MyApplication.getInstance().dbHelper.getString(R.string.join_prime_at)
-                        + model.amount + MyApplication.getInstance().dbHelper.getString(R.string.for_) + model.memberShipInMonth + MyApplication.getInstance().dbHelper.getString(
+                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.join_prime_at)
+                        + model.amount + RetailerSDKApp.getInstance().dbHelper.getString(R.string.for_) + model.memberShipInMonth + RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.month
                 ))
         }
@@ -59,7 +59,7 @@ class PrimePlanAdapter(
                 holder.mBinding.btnRenew.visibility = View.VISIBLE
                 holder.mBinding.btnBuy.visibility = View.GONE
                 holder.mBinding.btnRenew.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.renew_prime_at) + model.amount + model.memberShipInMonth
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.renew_prime_at) + model.amount + model.memberShipInMonth
             } else {
                 holder.mBinding.btnRenew.visibility = View.GONE
                 holder.mBinding.btnBuy.visibility = View.VISIBLE

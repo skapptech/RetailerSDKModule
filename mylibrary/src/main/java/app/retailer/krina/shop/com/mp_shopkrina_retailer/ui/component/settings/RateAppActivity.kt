@@ -10,7 +10,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassFor
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfileResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityRateAppBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.JsonIOException
 import com.google.gson.JsonObject
@@ -39,21 +39,21 @@ class RateAppActivity : AppCompatActivity() {
         val utils = Utils(this)
         val commonClassForAPI = CommonClassForAPI.getInstance(this)
         mBinding.toolbarRateApp.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_rate_the_app)
         mBinding.tvHelpUsImprove.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.help_us_improve_our_service)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.help_us_improve_our_service)
         mBinding.tvHowWouldYouRate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.how_would_you_rate_our_app)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.how_would_you_rate_our_app)
         mBinding.tvEnterFeedback.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.enter_your_valuable_feedback)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.enter_your_valuable_feedback)
         mBinding.editFeedback.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.type_here)
-        mBinding.submitRating.text = MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.type_here)
+        mBinding.submitRating.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         mBinding.submitRating.setOnClickListener { v: View? ->
             if (mBinding.rateUs.rating.toDouble() == 0.0) {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.select_rating),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_rating),
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (mBinding.editFeedback.text.toString().trim { it <= ' ' }
@@ -63,7 +63,7 @@ class RateAppActivity : AppCompatActivity() {
                     .isEmpty()) {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.feedback_empty_field)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.feedback_empty_field)
                 )
             } else {
                 if (utils.isNetworkAvailable) {
@@ -88,7 +88,7 @@ class RateAppActivity : AppCompatActivity() {
                 } else {
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                     )
                 }
             }
@@ -105,7 +105,7 @@ class RateAppActivity : AppCompatActivity() {
                     if (response != null && response.isStatus) {
                         Utils.setToast(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.toast_submitted)
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.toast_submitted)
                         )
                     }
                     if (this@RateAppActivity != null) onBackPressed()

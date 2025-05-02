@@ -5,7 +5,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.feed.PostLike
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.CommentPostModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.post.PostModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.profile.UserFollowingModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkResult
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -25,7 +25,7 @@ class CommentRepository constructor(private val apiServices: APIServiceCom) {
         emit(NetworkResult.Loading(true))
         val response = apiServices.postLike(postLikeModelRequest)
         if (response)
-            MyApplication.getInstance().noteRepository.updateLike(
+            RetailerSDKApp.getInstance().noteRepository.updateLike(
                 postLikeModelRequest.postId, postLikeModelRequest.likeStatus, likeCount
             )
 
@@ -62,7 +62,7 @@ class CommentRepository constructor(private val apiServices: APIServiceCom) {
         emit(NetworkResult.Loading(true))
         val response = apiServices.postComment(model)
         if (response != null)
-            MyApplication.getInstance().noteRepository.updateCommentCount(
+            RetailerSDKApp.getInstance().noteRepository.updateCommentCount(
                 model.PostId,
                 commentCount + 1
             )
@@ -84,7 +84,7 @@ class CommentRepository constructor(private val apiServices: APIServiceCom) {
             emit(NetworkResult.Loading(true))
             val response = apiServices.postCommentReply(model)
             if (response != null)
-                MyApplication.getInstance().noteRepository.updateCommentCount(
+                RetailerSDKApp.getInstance().noteRepository.updateCommentCount(
                     postId,
                     commentCount + 1
                 )
@@ -105,8 +105,8 @@ class CommentRepository constructor(private val apiServices: APIServiceCom) {
         emit(NetworkResult.Loading(true))
         val response = apiServices.deleteComment(commentId)
         if (response != null) {
-            val count = MyApplication.getInstance().noteRepository.getCommentCount(postId)
-            MyApplication.getInstance().noteRepository.updateCommentCount(postId, count - 1)
+            val count = RetailerSDKApp.getInstance().noteRepository.getCommentCount(postId)
+            RetailerSDKApp.getInstance().noteRepository.updateCommentCount(postId, count - 1)
         }
         emit(NetworkResult.Success(response))
     }.catch { e ->
@@ -117,8 +117,8 @@ class CommentRepository constructor(private val apiServices: APIServiceCom) {
         emit(NetworkResult.Loading(true))
         val response = apiServices.deleteReplyInComment(commentId)
         if (response != null) {
-            val count = MyApplication.getInstance().noteRepository.getCommentCount(postId)
-            MyApplication.getInstance().noteRepository.updateCommentCount(postId, count - 1)
+            val count = RetailerSDKApp.getInstance().noteRepository.getCommentCount(postId)
+            RetailerSDKApp.getInstance().noteRepository.updateCommentCount(postId, count - 1)
         }
         emit(NetworkResult.Success(response))
     }.catch { e ->

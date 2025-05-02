@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Mobil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.splash.CompanyInfoResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import io.reactivex.observers.DisposableObserver
 
@@ -41,11 +41,11 @@ class ContactUsActivity : AppCompatActivity() {
         } else if (type.equals("ResetPasswordActivity", ignoreCase = true)) {
             mBinding.llMeassage.visibility = View.VISIBLE
             mBinding.txtMessage.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.reset_pass_text)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.reset_pass_text)
         } else {
             mBinding.llMeassage.visibility = View.VISIBLE
             mBinding.txtMessage.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.inactive_accnt)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_accnt)
         }
         mBinding.btnOk.setOnClickListener { v: View? ->
             if (type.equals("ResetPasswordActivity", ignoreCase = true)) {
@@ -70,7 +70,7 @@ class ContactUsActivity : AppCompatActivity() {
         } else {
             Utils.setToast(
                 applicationContext,
-                MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
             )
         }
     }
@@ -103,10 +103,10 @@ class ContactUsActivity : AppCompatActivity() {
         utils = Utils(this)
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         mBinding.toolbarCu.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.customer_support)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.customer_support)
         mBinding.tvAnyIssue.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.if_any_issue_please_contact_us)
-        mBinding.btnOk.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.if_any_issue_please_contact_us)
+        mBinding.btnOk.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
     }
 
 
@@ -115,15 +115,15 @@ class ContactUsActivity : AppCompatActivity() {
             override fun onNext(response: CompanyInfoResponse) {
                 Utils.hideProgressDialog()
                 if (response.isStatus) {
-                    val text1 = MyApplication.getInstance().dbHelper.getString(R.string.contact) +
+                    val text1 = RetailerSDKApp.getInstance().dbHelper.getString(R.string.contact) +
                             ":" + "  " + "<font color=#FF4500> +91 " + response.companyDetails?.contact + "</font>"
                     mBinding.callus.text = Html.fromHtml(text1)
                     mBinding.callus.autoLinkMask = Linkify.PHONE_NUMBERS
                     mBinding.email.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.email) +
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.email) +
                                 ":" + "  " + response.companyDetails?.email
                     mBinding.website.text =
-                        (MyApplication.getInstance().dbHelper.getString(R.string.Name)
+                        (RetailerSDKApp.getInstance().dbHelper.getString(R.string.Name)
                                 + "  " + response.companyDetails?.name)
                 } else {
                     Utils.setToast(

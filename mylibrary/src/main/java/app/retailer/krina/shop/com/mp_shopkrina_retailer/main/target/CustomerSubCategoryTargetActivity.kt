@@ -28,7 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.NewTargetM
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.CustomerTargetResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -53,21 +53,21 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
             DataBindingUtil.setContentView(this, R.layout.activity_customer_sub_category_target)
 
         mBinding.toolbar.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.my_target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target)
         mBinding.btnCheckLevel.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.check_level)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.check_level)
         mBinding.btnCheckTarget.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.check_target)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.check_target)
         mBinding.tvCurrentlyNoBrand.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.currently_no_brand_target_assigned_you_to_get_connected_with_us)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.currently_no_brand_target_assigned_you_to_get_connected_with_us)
         mBinding.tvDate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.target_objects)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.target_objects)
         mBinding.tvTargetObject.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.target_object_not_created)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.target_object_not_created)
         mBinding.tvComingSoon.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.coming_soon)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.coming_soon)
         mBinding.tvPleaseCheck.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_check_back_later)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_check_back_later)
 
         list = ArrayList()
         adapter = CustomerSubCategoryItemAdapter(this, list, this)
@@ -113,7 +113,7 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
         super.onPostCreate(savedInstanceState)
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
     }
@@ -282,11 +282,11 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
         val alert = dialog.findViewById<TextView>(R.id.tv_alert)
         val btnCancel = dialog.findViewById<TextView>(R.id.cancel_btn)
 
-        alert.text = MyApplication.getInstance().dbHelper.getString(R.string.congratulations)
-        pdTitle.text = MyApplication.getInstance().dbHelper.getString(R.string.licence_update_msg)
+        alert.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.congratulations)
+        pdTitle.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.licence_update_msg)
         tvInfo.text = ""
-        btnCancel.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok_d)
+        btnCancel.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok_d)
         pdTitle.text = message
 
         okBtn.setOnClickListener {
@@ -316,11 +316,11 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
                         adapter?.notifyDataSetChanged()
 
                         mBinding.tvDateTarget.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.your) + " " + SimpleDateFormat(
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your) + " " + SimpleDateFormat(
                                 "MMMM", Locale.ENGLISH
                             ).format(
                                 Date()
-                            ) + " " + MyApplication.getInstance().dbHelper.getString(R.string.month_target)
+                            ) + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.month_target)
                     } else {
                         if (list != null && list!!.size > 0) {
                             mBinding.llTargetObject.visibility = View.VISIBLE
@@ -370,11 +370,11 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
                         mBinding.llTargetObject.visibility = View.VISIBLE
                         mBinding.llTargetObjectEmpty.visibility = View.GONE
                         mBinding.tvDateTarget.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.your) + " " + SimpleDateFormat(
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your) + " " + SimpleDateFormat(
                                 "MMMM", Locale.ENGLISH
                             ).format(
                                 Date()
-                            ) + " " + MyApplication.getInstance().dbHelper.getString(R.string.month_target)
+                            ) + " " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.month_target)
                         list!!.add(
                             NewTargetModel(
                                 response.getTargetData.targetMonth,

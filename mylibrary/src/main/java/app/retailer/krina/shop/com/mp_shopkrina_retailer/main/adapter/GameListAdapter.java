@@ -13,13 +13,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemGamesBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.GamesWebActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.GameModel;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHolder> {
     private final ArrayList<GameModel> list;
@@ -62,13 +61,13 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             mBinding.getRoot().setOnClickListener(v -> {
                 if (!list.get(getAdapterPosition()).getWalletPointOnPlay()) {
                     if (list.get(getAdapterPosition()).getGameUrl() != null && list.get(getAdapterPosition()).getGameUrl().length() > 0) {
-                        MyApplication.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
+                        RetailerSDKApp.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
                         activity.startActivity(new Intent(activity, GamesWebActivity.class)
                                 .putExtra("title", list.get(getAdapterPosition()).getGameName())
                                 .putExtra("url", list.get(getAdapterPosition()).getGameUrl()));
                     } else {
                         if (list.get(getAdapterPosition()).getGameName().equalsIgnoreCase("solitare")) {
-                            MyApplication.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
+                            RetailerSDKApp.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
                             Intent intent = new Intent();
                             intent.setClassName("app.retailer.krina.shop.com.mp_shopkrina_retailer" , "com.sk.solitare.SolitaireActivity");
                             try {
@@ -77,7 +76,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                                 e.printStackTrace();
                             }
                         } else if (list.get(getAdapterPosition()).getGameName().equalsIgnoreCase("block builder")) {
-                            MyApplication.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
+                            RetailerSDKApp.getInstance().updateAnalytics(list.get(getAdapterPosition()).getGameName());
                             Intent intent = new Intent();
                             intent.setClassName("app.retailer.krina.shop.com.mp_shopkrina_retailer" , "com.sk.blocks.activities.MainActivity");
                             try {

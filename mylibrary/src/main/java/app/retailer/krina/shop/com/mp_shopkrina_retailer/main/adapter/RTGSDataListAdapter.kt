@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemRtgsHistoryBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.GullakModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.text.DecimalFormat
 
@@ -45,13 +45,13 @@ class RTGSDataListAdapter(
                 if (model.amount!! < 0) {
                     binding.tvId.text = model.comment
                     binding.tvComment.text =
-                        MyApplication.getInstance().noteRepository.getString(R.string.order_placed)
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.order_placed)
                     binding.iconGroup.setImageResource(R.drawable.ic_group_1105_rupe_new)
                     binding.tvAmt.text = DecimalFormat("##.##").format(model.amount!!)
                     binding.tvAmt.setTextColor(activity.resources.getColor(R.color.red))
                 } else {
                     binding.tvId.text =
-                        MyApplication.getInstance().noteRepository.getString(R.string.transaction_id) + ":" + model.refNo
+                        RetailerSDKApp.getInstance().noteRepository.getString(R.string.transaction_id) + ":" + model.refNo
                     binding.tvComment.text = model.comment
                     binding.iconGroup.setImageResource(R.drawable.ic_rupe_greeen)
                     binding.tvAmt.text = "+" + DecimalFormat("#.##").format(model.amount!!)

@@ -50,7 +50,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.Mobil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.payment.PaymentOptionActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -90,7 +90,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!MyApplication.getInstance().prefManager.isLoggedIn) {
+        if (!RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
             finish()
         }
@@ -149,7 +149,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
             } else {
                 Utils.setToast(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_items_available)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_items_available)
                 )
             }
         }
@@ -157,7 +157,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
             if (mBinding!!.dialAvailable.text.toString().equals("0", ignoreCase = true)) {
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.no_dial_available),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_dial_available),
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
@@ -194,7 +194,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
         }
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
     }
@@ -246,13 +246,13 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
         val cancelBtn = dialog.findViewById<TextView>(R.id.cancel_btn)
         val description = dialog.findViewById<TextView>(R.id.pd_description)
         val pd_title = dialog.findViewById<TextView>(R.id.pd_title)
-        pd_title.text = MyApplication.getInstance().dbHelper.getString(R.string.cart_item_clear)
+        pd_title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cart_item_clear)
         description.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_delete_item_in_cart)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
-        cancelBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_delete_item_in_cart)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
+        cancelBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         okBtn.setOnClickListener { v: View? ->
-            MyApplication.getInstance().updateAnalyticRCart(
+            RetailerSDKApp.getInstance().updateAnalyticRCart(
                 FirebaseAnalytics.Event.REMOVE_FROM_CART,
                 itemId, wId.toString()
             )
@@ -276,7 +276,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                 try {
                     if (it["Status"].asBoolean) {
                         // update cart data
-                        MyApplication.getInstance().noteRepository.deleteCartItem1(
+                        RetailerSDKApp.getInstance().noteRepository.deleteCartItem1(
                             itemId
                         )
                         val checkoutCart = Gson().fromJson(
@@ -305,25 +305,25 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
         observe(viewModel.getCartDealItemData, ::handleCartDealItemResult)
 
         mBinding!!.toolbarBasket.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.shopping_cart)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.shopping_cart)
         mBinding!!.toolbarBasket.llCartClear.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Clear_all)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Clear_all)
         mBinding!!.tvNoCartItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.Noitemincart)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.Noitemincart)
         mBinding!!.tvMissingSomething.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.missed_something)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.missed_something)
         mBinding!!.relEmptyItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.itemavailable)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.itemavailable)
         mBinding!!.cartFragAddMoreItems.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_more_items)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_more_items)
         mBinding!!.dialAvailableUse.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.use_dial)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.use_dial)
         mBinding!!.checkoutBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Continue)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Continue)
         mBinding!!.tvEmpty.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.cart_empty_message)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.cart_empty_message)
         mBinding!!.tvCartDeals.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.deals_for_you)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.deals_for_you)
         lang = LocaleHelper.getLanguage(this)
         utils = Utils(this)
         val title = ArrayList<String>()
@@ -365,10 +365,10 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
         val pd_title = dialog.findViewById<TextView>(R.id.pd_title)
         val cancelBtn = dialog.findViewById<TextView>(R.id.cancel_btn)
         val description = dialog.findViewById<TextView>(R.id.pd_description)
-        pd_title.text = MyApplication.getInstance().dbHelper.getString(R.string.cart_item_clear)
-        description.text = MyApplication.getInstance().dbHelper.getString(R.string.txt_cart_clear)
-        okBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.ok)
-        cancelBtn.text = MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+        pd_title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cart_item_clear)
+        description.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cart_clear)
+        okBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.ok)
+        cancelBtn.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
         okBtn.setOnClickListener { v: View? ->
             Utils.showProgressDialog(this)
             viewModel.clearCartItem(
@@ -417,15 +417,15 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
 
     private fun appStoryView() {
         builder = GuideView.Builder(this)
-            .setTitle(MyApplication.getInstance().dbHelper.getString(R.string.clear_cart))
-            .setContentText(MyApplication.getInstance().dbHelper.getString(R.string.clear_cart_deatil))
+            .setTitle(RetailerSDKApp.getInstance().dbHelper.getString(R.string.clear_cart))
+            .setContentText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.clear_cart_deatil))
             .setGravity(Gravity.center)
             .setDismissType(DismissType.anywhere)
             .setTargetView(mBinding!!.toolbarBasket.llCartClear)
             .setGuideListener { view: View ->
                 when (view.id) {
                     R.id.ll_cart_clear -> builder!!.setTitle("").setContentText(
-                        MyApplication.getInstance().dbHelper.getString(
+                        RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.checkout_btn
                         )
                     ).setTargetView(
@@ -527,20 +527,20 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                             try {
                                 // update cart database
                                 if (saveQty == 0) {
-                                    MyApplication.getInstance().noteRepository.deleteCartItem1(
+                                    RetailerSDKApp.getInstance().noteRepository.deleteCartItem1(
                                         saveModel!!.itemId
                                     )
                                 } else {
                                     saveModel!!.qty = saveQty
-                                    if (MyApplication.getInstance().noteRepository.isItemInCart(
+                                    if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(
                                             saveItemId
                                         )
                                     ) {
-                                        MyApplication.getInstance().noteRepository.updateCartItem(
+                                        RetailerSDKApp.getInstance().noteRepository.updateCartItem(
                                             saveModel
                                         )
                                     } else {
-                                        MyApplication.getInstance().noteRepository.addToCart(
+                                        RetailerSDKApp.getInstance().noteRepository.addToCart(
                                             saveModel
                                         )
                                     }
@@ -571,7 +571,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                         } else {
                             Utils.setToast(
                                 applicationContext,
-                                MyApplication.getInstance().dbHelper.getString(R.string.unable_to_add_cart)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.unable_to_add_cart)
                             )
                             onItemClick.onItemClick(0, false)
                         }
@@ -606,20 +606,20 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
 
     private fun setTotalItemValue(mShopingCart: ShopingCartItemDetailsResponse?) {
         mBinding!!.tvTotalPrice.text =
-            (MyApplication.getInstance().dbHelper.getString(R.string.total_amount)
+            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount)
                     + " " + DecimalFormat("##.##")
                 .format(mShopingCart!!.cartTotalAmt + mShopingCart.totalDiscountAmt))
         mBinding!!.tvTotalItemQuantity.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_item) + " " + mShopingCart.totalQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_item) + " " + mShopingCart.totalQty
         //tvCartFragTotalDpPointTv.setText((getString(R.string.total_dreamPoint) + mShopingCart.getDeamPoint()));
         mBinding!!.dialAvailable.text = "" + mShopingCart.wheelCount
         mBinding!!.cartFragDeliveryChargesTv.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.delivery_charges) + " " + mShopingCart.deliveryCharges
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.delivery_charges) + " " + mShopingCart.deliveryCharges
     }
 
     private fun clearCartData() {
-        MyApplication.getInstance().noteRepository.truncateCart()
-        MyApplication.getInstance().updateAnalytics("clear_cart")
+        RetailerSDKApp.getInstance().noteRepository.truncateCart()
+        RetailerSDKApp.getInstance().updateAnalytics("clear_cart")
     }
 
     private fun retrieveData(list: ArrayList<ItemListModel>) {
@@ -762,7 +762,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
             if (list.size != 0) {
                 shopingCartAdapter!!.setShopingCartItem(mShoppingItemCartList)
                 setTotalItemValue(mShopingCart)
-                MyApplication.getInstance().noteRepository.addToCart(mShoppingItemCartList)
+                RetailerSDKApp.getInstance().noteRepository.addToCart(mShoppingItemCartList)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -853,7 +853,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
             } else {
                 val msg = it["Msg"].asString
                 AlertDialog.Builder(this@ShoppingCartActivity).setTitle(
-                    MyApplication.getInstance().dbHelper.getString(
+                    RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.alert
                     )
                 ).setMessage(msg).setNegativeButton(getString(R.string.ok), null).show()
@@ -880,16 +880,16 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                             val description = mView.findViewById<TextView>(R.id.pd_description)
                             val title = mView.findViewById<TextView>(R.id.pd_title)
                             title.text =
-                                MyApplication.getInstance().dbHelper.getString(R.string.msg_yourorder)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_yourorder)
                             okBtn.text =
-                                MyApplication.getInstance().dbHelper.getString(R.string.msg_addmore)
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_addmore)
                             description.text =
-                                (MyApplication.getInstance().dbHelper.getString(R.string.msg_orderlessthan700) +
+                                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_orderlessthan700) +
                                         " " + Html.fromHtml(
                                     "<font color=#424242>&#8377; " +
                                             DecimalFormat("##.##").format(it)
                                 ) + " "
-                                        + MyApplication.getInstance().dbHelper.getString(R.string.msg_orderless))
+                                        + RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_orderless))
                             okBtn.setOnClickListener {
                                 customDialog.dismiss()
                                 startActivity(Intent(applicationContext, HomeActivity::class.java))
@@ -952,7 +952,7 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                         if (it.status) {
                             mShopingCart = it.shoppingCartItemDetailsResponse
                             setShoppingCartInAdapter(mShopingCart)
-                            if (mShopingCart!!.shoppingCartItemDcs != null) MyApplication.getInstance()
+                            if (mShopingCart!!.shoppingCartItemDcs != null) RetailerSDKApp.getInstance()
                                 .updateAnalyticVC(
                                     mShopingCart!!.cartTotalAmt, mShopingCart!!.shoppingCartItemDcs
                                 )
@@ -993,24 +993,24 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
                         if (lineItem > 0 && OrderAmount > 0) {
                             mBinding!!.tvWheelConfig.visibility = View.VISIBLE
                             wheelMgs =
-                                (MyApplication.getInstance().dbHelper.getString(R.string.free_wheel_on_min_order) + " "
+                                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_wheel_on_min_order) + " "
                                         + DecimalFormat("##.##").format(Math.round(OrderAmount))
-                                        + MyApplication.getInstance().dbHelper.getString(R.string.and) +
-                                        lineItem + MyApplication.getInstance().dbHelper.getString(R.string.line_items))
+                                        + RetailerSDKApp.getInstance().dbHelper.getString(R.string.and) +
+                                        lineItem + RetailerSDKApp.getInstance().dbHelper.getString(R.string.line_items))
                             mBinding!!.tvWheelConfig.text = wheelMgs
                         } else if (lineItem > 0) {
                             mBinding!!.tvWheelConfig.visibility = View.VISIBLE
                             wheelMgs =
-                                MyApplication.getInstance().dbHelper.getString(R.string.free_wheel) +
-                                        " " + lineItem + MyApplication.getInstance().dbHelper.getString(
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_wheel) +
+                                        " " + lineItem + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.line_items
                                 )
                             mBinding!!.tvWheelConfig.text = wheelMgs
                         } else if (OrderAmount > 0) {
                             mBinding!!.tvWheelConfig.visibility = View.VISIBLE
                             wheelMgs =
-                                (MyApplication.getInstance().dbHelper.getString(R.string.free_wheel_on_min_order) + " "
-                                        + MyApplication.getInstance().dbHelper.getString(R.string.and)
+                                (RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_wheel_on_min_order) + " "
+                                        + RetailerSDKApp.getInstance().dbHelper.getString(R.string.and)
                                         + DecimalFormat("##.##").format(Math.round(OrderAmount)))
                             mBinding!!.tvWheelConfig.text = wheelMgs
                         } else {

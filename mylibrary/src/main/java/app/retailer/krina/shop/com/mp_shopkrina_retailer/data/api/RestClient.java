@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Aes256;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils;
 import okhttp3.MediaType;
@@ -98,7 +98,7 @@ public class RestClient {
                         request = chain.request();
                         response = chain.proceed(request);
                         if (response.code() == 401 && !request.url().toString().contains("api/RetailerApp/Customerprofile")) {
-                            MyApplication.getInstance().token();
+                            RetailerSDKApp.getInstance().token();
                         }
                         if (response.code() == 200) {
                             if (!request.url().toString().contains("/GetCompanyDetailsForRetailerWithToken") &&
@@ -143,12 +143,12 @@ public class RestClient {
                 })
                 .addInterceptor(chain -> {
                     request = chain.request().newBuilder()
-                            .header("username", Utils.getCustMobile(MyApplication.getInstance()))
-                            .header("customerType", Utils.getCustomerType(MyApplication.getInstance()))
-                            .header("activity", MyApplication.getInstance().activity == null ? "" : MyApplication.getInstance().activity.getClass().getSimpleName())
+                            .header("username", Utils.getCustMobile(RetailerSDKApp.getInstance()))
+                            .header("customerType", Utils.getCustomerType(RetailerSDKApp.getInstance()))
+                            .header("activity", RetailerSDKApp.getInstance().activity == null ? "" : RetailerSDKApp.getInstance().activity.getClass().getSimpleName())
                             .header("section", TextUtils.isNullOrEmpty(mSectionType) ? "" : mSectionType)
-                            .header("deviceId", MyApplication.getInstance().activity == null ? "" : Utils.getDeviceUniqueID(MyApplication.getInstance().activity))
-                            .addHeader("authorization", "Bearer " + Utils.getToken(MyApplication.getInstance().activity))
+                            .header("deviceId", RetailerSDKApp.getInstance().activity == null ? "" : Utils.getDeviceUniqueID(RetailerSDKApp.getInstance().activity))
+                            .addHeader("authorization", "Bearer " + Utils.getToken(RetailerSDKApp.getInstance().activity))
 //                            .addHeader("NoEncryption", "1")
                             .build();
                     return chain.proceed(request);
@@ -161,7 +161,7 @@ public class RestClient {
                 .create();
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(MyApplication.getInstance()).getBaseUrl())
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getBaseUrl())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
@@ -184,21 +184,21 @@ public class RestClient {
                 .create();
         if (url.equalsIgnoreCase("epay")) {
             retrofit1 = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(MyApplication.getInstance()).getEpayEndpoint())
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getEpayEndpoint())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build();
         } else if (url.equalsIgnoreCase("cb")) {
             retrofit3 = new Retrofit.Builder()
-                    .baseUrl(EndPointPref.getInstance(MyApplication.getInstance()).getString(EndPointPref.CHECKBOOK_ENDPOINT))
+                    .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getString(EndPointPref.CHECKBOOK_ENDPOINT))
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
                     .build();
         } else {
             retrofit4 = new Retrofit.Builder()
-                    .baseUrl(SharePrefs.getInstance(MyApplication.getInstance()).getString(SharePrefs.TRADE_WEB_URL))
+                    .baseUrl(SharePrefs.getInstance(RetailerSDKApp.getInstance()).getString(SharePrefs.TRADE_WEB_URL))
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
@@ -247,8 +247,8 @@ public class RestClient {
                 })
                 .addInterceptor(chain -> {
                     request = chain.request().newBuilder()
-                            .header("HKCustomerId", Utils.getHKCustomerID(MyApplication.getInstance().activity))
-                            .addHeader("authorization", "Bearer " + Utils.getToken(MyApplication.getInstance().activity))
+                            .header("HKCustomerId", Utils.getHKCustomerID(RetailerSDKApp.getInstance().activity))
+                            .addHeader("authorization", "Bearer " + Utils.getToken(RetailerSDKApp.getInstance().activity))
                             .addHeader("NoEncryption", "1")
                             .build();
                     return chain.proceed(request);
@@ -262,7 +262,7 @@ public class RestClient {
                 .create();
 
         retrofit2 = new Retrofit.Builder()
-                .baseUrl(EndPointPref.getInstance(MyApplication.getInstance()).getTradeEndpoint())
+                .baseUrl(EndPointPref.getInstance(RetailerSDKApp.getInstance()).getTradeEndpoint())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

@@ -14,7 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCut
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.TargetClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.target.TargetOrderListActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.NewTargetModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 
@@ -60,12 +60,12 @@ class CustomerSubCategoryItemAdapter(
 
             if (model.achivePercent >= 100) {
                 viewHolder.mBinding.btOrderNow.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.claim)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
                 viewHolder.mBinding.tvleftDay.text = context.getString(R.string.congratulations)
                 viewHolder.mBinding.tvCleamedAmount.text = "" + model.value
             } else {
                 viewHolder.mBinding.btOrderNow.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.order_now)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_now)
                 viewHolder.mBinding.tvleftDay.text = "" + model.leftDays + " Days Left"
                 viewHolder.mBinding.tvTargetMonth.text = model.targetMonth + " Target"
             }
@@ -81,7 +81,7 @@ class CustomerSubCategoryItemAdapter(
                 viewHolder.mBinding.llTargetDone.visibility = View.VISIBLE
                 viewHolder.mBinding.recyclerTargetAssine.visibility = View.VISIBLE
                 viewHolder.mBinding.btOrderNow.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.claimed)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.claimed)
                 val targetProcessAdapter =
                     TargetProcessAdapter(context, list!![position].model, true)
                 viewHolder.mBinding.recyclerTargetAssine.adapter = targetProcessAdapter
@@ -90,10 +90,10 @@ class CustomerSubCategoryItemAdapter(
                 viewHolder.mBinding.recyclerTargetAssine.visibility = View.VISIBLE
                 if (model.achivePercent >= 100)
                     viewHolder.mBinding.btOrderNow.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.claim)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
                 else
                     viewHolder.mBinding.btOrderNow.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.order_now)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_now)
                 val targetProcessAdapter =
                     TargetProcessAdapter(context, list!![position].model, model.isClaimed)
                 viewHolder.mBinding.recyclerTargetAssine.adapter = targetProcessAdapter
@@ -139,14 +139,14 @@ class CustomerSubCategoryItemAdapter(
 
             if (modelBrand.isClaimed) {
                 viewHolder.mBindingBrand.btOrderNow.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.claimed)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.claimed)
             } else {
                 if (modelBrand.achivePercent >= 100) {
                     viewHolder.mBindingBrand.btOrderNow.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.claim)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.claim)
                 } else {
                     viewHolder.mBindingBrand.btOrderNow.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.order_now)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_now)
                 }
             }
 

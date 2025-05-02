@@ -19,7 +19,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.produ
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -44,9 +44,9 @@ class SearchHistoryItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
         val model = list!![i]
         holder.mBinding.singleMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         holder.mBinding.multiMoq.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.minOrderQty
         holder.mBinding.tvMarginPercent.text =
             DecimalFormat("##.##").format(model.marginPoint!!.toDouble()) + "%"
         if (!TextUtils.isNullOrEmpty(model.logoUrl)) {
@@ -59,7 +59,7 @@ class SearchHistoryItemAdapter(
         }
         holder.mBinding.tvTitle.text = model.itemname
         holder.mBinding.tvMrp.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.item_mrp) + " " + model.price
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp) + " " + model.price
                 .toInt()
         if (model.isPrimeItem) {
             holder.mBinding.liPrime.visibility = View.VISIBLE
@@ -111,11 +111,11 @@ class SearchHistoryItemAdapter(
             val ivClose = dialogLayout.findViewById<ImageView>(R.id.ivClose)
             ivClose.setOnClickListener { v1: View? -> dialog.dismiss() }
             tvDSelectQty.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.select_quantities_for)
-            tvDMoq.text = MyApplication.getInstance().dbHelper.getString(R.string.moq)
-            tvDMrp.text = MyApplication.getInstance().dbHelper.getString(R.string.mrp)
-            tvDRs.text = MyApplication.getInstance().dbHelper.getString(R.string.rs)
-            tvDMargin.text = MyApplication.getInstance().dbHelper.getString(R.string.margins_d)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_quantities_for)
+            tvDMoq.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq)
+            tvDMrp.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.mrp)
+            tvDRs.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.rs)
+            tvDMargin.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.margins_d)
             val mMoqPriceList = dialogLayout.findViewById<ListView>(R.id.listview_moq_price)
             item_name.text = list[i].itemname
             val listener = AdapterInterface { pos ->

@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.Fe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.GetOrderAtFeedbackModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.gson.Gson
@@ -54,15 +54,15 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
     fun initialization() {
         mBinding.tvShopName.text = SharePrefs.getInstance(this).getString(SharePrefs.SHOP_NAME)
         mBinding.ivReactionImage.setBackgroundResource(R.drawable.feedback5)
-        mBinding.title.text = MyApplication.getInstance().dbHelper.getString(R.string.msg_yourorder)
+        mBinding.title.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.msg_yourorder)
         mBinding.tvAmountPaid.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.amount_paid)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.amount_paid)
         mBinding.etComment.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.write_your_comment_here)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.write_your_comment_here)
         mBinding.btnSubmitFeedback.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         mBinding.tvReactionText.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.rating_accroding)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.rating_accroding)
         radioList = ArrayList()
         questionList = ArrayList()
         commonClassForAPI = CommonClassForAPI.getInstance(this)
@@ -157,7 +157,7 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
                 if (ids == "") {
                     Toast.makeText(
                         this,
-                        MyApplication.getInstance().dbHelper.getString(R.string.select_any_one_option),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.select_any_one_option),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
@@ -189,7 +189,7 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this,
-                MyApplication.getInstance().dbHelper.getString(R.string.please_select_any_one_rating),
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_select_any_one_rating),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -230,7 +230,7 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
                 Utils.hideProgressDialog()
                 Toast.makeText(
                     applicationContext,
-                    MyApplication.getInstance().dbHelper.getString(R.string.thank_you_for_your_feedback),
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.thank_you_for_your_feedback),
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
@@ -255,10 +255,10 @@ class DeliveryFeedbackActivity : AppCompatActivity() {
                         orderid = `object`.orderid
                         val date = `object`.ordereddate.substring(0, 10).split("-").toTypedArray()
                         mBinding.tvDeliveryDate.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.delivered_on) + " " + date[2] + "-" + date[1] + "-" + date[0]
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.delivered_on) + " " + date[2] + "-" + date[1] + "-" + date[0]
                         mBinding.tvAmount.text = "₹" + `object`.grossamount
                         mBinding.tvOrderId.text =
-                            MyApplication.getInstance().dbHelper.getString(R.string.order_id) + " " + orderid
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id) + " " + orderid
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

@@ -13,7 +13,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepo
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AppHomeItemGoldenDealModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.NetworkUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.SingleLiveEvent
 import com.google.gson.JsonObject
@@ -223,7 +223,7 @@ class AppHomeViewModel(
                     getGameBannersLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getGameBannersLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -252,7 +252,7 @@ class AppHomeViewModel(
                     getFlashDealItemLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getFlashDealItemLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -283,7 +283,7 @@ class AppHomeViewModel(
                     getFlashDealItemLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getFlashDealItemLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -309,7 +309,7 @@ class AppHomeViewModel(
                     getSubCategoryOfferLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getSubCategoryOfferLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -338,7 +338,7 @@ class AppHomeViewModel(
                     getStoreHomeLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getStoreHomeLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -367,7 +367,7 @@ class AppHomeViewModel(
                     getSubCategoryLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getSubCategoryLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {
@@ -395,7 +395,7 @@ class AppHomeViewModel(
                     getFlashDealExistsTimeLiveData.postValue(Response.Success(result.body()))
                 } else {
                     getFlashDealExistsTimeLiveData.postValue(
-                        Response.Error(MyApplication.getInstance().noteRepository.getString(R.string.server_error))
+                        Response.Error(RetailerSDKApp.getInstance().noteRepository.getString(R.string.server_error))
                     )
                 }
             } else {

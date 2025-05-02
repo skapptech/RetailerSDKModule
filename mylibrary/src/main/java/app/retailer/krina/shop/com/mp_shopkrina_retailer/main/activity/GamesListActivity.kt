@@ -15,7 +15,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityGamesListBinding
@@ -29,7 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
@@ -53,7 +52,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = Color.parseColor("#DE6037")
         }
-        if (!MyApplication.getInstance().prefManager.isLoggedIn) {
+        if (!RetailerSDKApp.getInstance().prefManager.isLoggedIn) {
             startActivity(Intent(applicationContext, MobileSignUpActivity::class.java))
             finish()
         }
@@ -69,7 +68,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_games_list)
         setSupportActionBar(mBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        title = MyApplication.getInstance().dbHelper.getString(R.string.title_activity_game)
+        title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_game)
         initView()
     }
 
@@ -98,7 +97,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
         splitInstallManager.startInstall(request)
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
     }
@@ -115,7 +114,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/game_terms_hindi.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/game_terms_hindi.html"
                         )
                 )
             } else {
@@ -123,7 +122,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/game_terms.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/game_terms.html"
                         )
                 )
             }
@@ -172,7 +171,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
     private fun initView() {
         commonClassForAPI = CommonClassForAPI.getInstance(this)
         mBinding.tvPlayGamesWallet.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.play_games_amp_get_wallet_points)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.play_games_amp_get_wallet_points)
         list = ArrayList()
         adapter = GameListAdapter(this, list, this)
         mBinding.rvGames.adapter = adapter
@@ -184,7 +183,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
 
     private fun openGame() {
         if (list!![pos].gameUrl != null && list!![pos].gameUrl.length > 0) {
-            MyApplication.getInstance().updateAnalytics(list!![pos].gameName)
+            RetailerSDKApp.getInstance().updateAnalytics(list!![pos].gameName)
             startActivity(
                 Intent(applicationContext, GamesWebActivity::class.java)
                     .putExtra("title", list!![pos].gameName)
@@ -192,7 +191,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
             )
         } else {
             if (list!![pos].gameName.equals("solitare", ignoreCase = true)) {
-                MyApplication.getInstance().updateAnalytics(list!![pos].gameName)
+                RetailerSDKApp.getInstance().updateAnalytics(list!![pos].gameName)
                 val intent = Intent()
                 intent.setClassName(applicationContext.packageName , "com.sk.solitare.SolitaireActivity")
                 try {
@@ -201,7 +200,7 @@ class GamesListActivity : AppCompatActivity(), OnButtonClick {
                     e.printStackTrace()
                 }
             } else if (list!![pos].gameName.equals("block builder", ignoreCase = true)) {
-                MyApplication.getInstance().updateAnalytics(list!![pos].gameName)
+                RetailerSDKApp.getInstance().updateAnalytics(list!![pos].gameName)
                 val intent = Intent()
                 intent.setClassName(
                     applicationContext.packageName ,

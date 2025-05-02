@@ -12,7 +12,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemClearanceStockBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ClearanceItemModel
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
@@ -38,9 +38,9 @@ class ClearanceItemAdapter(
         val model = list!![i]
         // set String
         holder.mBinding.tvRemainingQtyText.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.remaining_qty) + " "
         holder.mBinding.btnAddItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_btn)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn)
         if (!TextUtils.isNullOrEmpty(model.imageUrl)) {
             Picasso.get().load(model.imageUrl)
                 .placeholder(R.drawable.logo_grey)
@@ -51,9 +51,9 @@ class ClearanceItemAdapter(
         }
         holder.mBinding.tvItemName.text = model.ItemName
         holder.mBinding.tvMoq.text =
-            (MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.moq)
+            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.moq)
         holder.mBinding.tvMultiMoq.text =
-            (MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.moq)
+            (RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + model.moq)
 
         val sPRICE = "| ₹" + DecimalFormat("##.##").format(model.unitPrice)
         val sMRP = DecimalFormat("##.##").format(model.MRP)
@@ -81,8 +81,8 @@ class ClearanceItemAdapter(
             holder.mBinding.btnAddItem.visibility = View.VISIBLE
         }
         holder.mBinding.tvSelfLife.text =
-            MyApplication.getInstance().noteRepository.getString(R.string.shelf_life) +
-                    model.shelfLife + " " + MyApplication.getInstance().noteRepository.getString(R.string.days)
+            RetailerSDKApp.getInstance().noteRepository.getString(R.string.shelf_life) +
+                    model.shelfLife + " " + RetailerSDKApp.getInstance().noteRepository.getString(R.string.days)
 
         // Minus Btn clicked
         holder.mBinding.minusBtn.setOnClickListener {
@@ -114,7 +114,7 @@ class ClearanceItemAdapter(
             } else {
                 Toast.makeText(
                     activity,
-                    MyApplication.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.remainingStockQty,
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + model.remainingStockQty,
                     Toast.LENGTH_SHORT
                 ).show()
             }

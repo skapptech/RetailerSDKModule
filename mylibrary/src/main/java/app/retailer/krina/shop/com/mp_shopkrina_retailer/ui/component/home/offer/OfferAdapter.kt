@@ -27,7 +27,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.scratchCard.ScratchCard
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
 import io.reactivex.observers.DisposableObserver
@@ -74,7 +74,7 @@ class OfferAdapter(
                 )
             //set String
             holder.mBinding.tvDes.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + model.billAmount
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + model.billAmount
             if (EndPointPref.getInstance(activity)
                     .getBoolean(EndPointPref.showOfferBtn)
             ) holder.mBinding.rlApply.visibility =
@@ -88,7 +88,7 @@ class OfferAdapter(
                     )
                 ) {
                     holder.mBinding.tvOffer.text =
-                        DecimalFormat("##.##").format(model.discountPercentage) + "% " + MyApplication.getInstance().dbHelper.getString(
+                        DecimalFormat("##.##").format(model.discountPercentage) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.bill_discount
                         )
                 } else if (model.billDiscountOfferOn != null && model.billDiscountOfferOn.equals(
@@ -97,23 +97,23 @@ class OfferAdapter(
                     )
                 ) {
                     holder.mBinding.tvOffer.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
                             "##.##"
-                        ).format(model.billDiscountWallet) + " " + MyApplication.getInstance().dbHelper.getString(
+                        ).format(model.billDiscountWallet) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.off
                         )
                 } else {
                     holder.mBinding.tvOffer.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
                             "##.##"
-                        ).format(convertToAmount(model.billDiscountWallet)) + " " + MyApplication.getInstance().dbHelper.getString(
+                        ).format(convertToAmount(model.billDiscountWallet)) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.off
                         )
                 }
                 // ((ScratchCardHolder) holder).mBinding.tvTime.setTextColor(activity.getResources().getColor(R.color.text_color));
             } else {
                 holder.mBinding.tvOffer.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.text_scratch_win)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.text_scratch_win)
                 holder.mBinding.tvTime.text = "00:00"
                 // ((ScratchCardHolder) holder).mBinding.tvTime.setTextColor(activity.getResources().getColor(android.R.color.holo_red_dark));
             }
@@ -186,19 +186,19 @@ class OfferAdapter(
                 holder.mBinding.ivImage.setImageResource(R.drawable.logo_sk)
             }
             holder.mBinding.tvOfferDes.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + list[pos].billAmount
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + list[pos].billAmount
             holder.mBinding.tvSelect.tag = pos
             holder.mBinding.rlBillItem.visibility = View.GONE
             if (model.billDiscountOfferOn.equals("Percentage", ignoreCase = true)) {
                 holder.mBinding.tvOffer.text =
-                    DecimalFormat("##.##").format(model.discountPercentage) + "% " + MyApplication.getInstance().dbHelper.getString(
+                    DecimalFormat("##.##").format(model.discountPercentage) + "% " + RetailerSDKApp.getInstance().dbHelper.getString(
                         R.string.bill_discount
                     )
                 holder.mBinding.tvItemName.visibility = View.GONE
             } else if (model.billDiscountOfferOn.equals("FreeItem", ignoreCase = true)) {
                 holder.mBinding.rlBillItem.visibility = View.VISIBLE
                 holder.mBinding.tvOffer.text =
-                    MyApplication.getInstance().dbHelper.getString(R.string.free_item_offer)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.free_item_offer)
                 val discountItemAdapter = BillDiscountFreeItemAdapter(
                     activity, model.retailerBillDiscountFreeItemDcs!!
                 )
@@ -216,21 +216,21 @@ class OfferAdapter(
                     if (model.applyOn.equals("PostOffer", ignoreCase = true)) " PostOffer" else ""
                 if (model.walletType.equals("WalletPercentage", ignoreCase = true)) {
                     holder.mBinding.tvOffer.text =
-                        DecimalFormat("##.##").format(model.billDiscountWallet) + "%  " + MyApplication.getInstance().dbHelper.getString(
+                        DecimalFormat("##.##").format(model.billDiscountWallet) + "%  " + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.off
                         ) + msgPostBill
                 } else {
                     holder.mBinding.tvOffer.text =
-                        MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) + DecimalFormat(
                             "##.##"
-                        ).format(convertToAmount(model.billDiscountWallet)) + MyApplication.getInstance().dbHelper.getString(
+                        ).format(convertToAmount(model.billDiscountWallet)) + RetailerSDKApp.getInstance().dbHelper.getString(
                             R.string.off
                         ) + msgPostBill
                 }
                 holder.mBinding.tvItemName.visibility = View.GONE
             }
             holder.mBinding.tvMinQty.text =
-                "( " + MyApplication.getInstance().dbHelper.getString(R.string.min_ord_value) + DecimalFormat(
+                "( " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.min_ord_value) + DecimalFormat(
                     "##.##"
                 ).format(model.billAmount) + " )"
             // timer
@@ -402,7 +402,7 @@ Offer Expires in ${hour % 24}:${min % 60}:${sec % 60} hrs"""
                 }
             }.start()
         }
-        MyApplication.getInstance().updateAnalytics("scratch_dialog_open")
+        RetailerSDKApp.getInstance().updateAnalytics("scratch_dialog_open")
         dialog.show()
     }
 

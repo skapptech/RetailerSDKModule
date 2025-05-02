@@ -18,7 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.squareup.picasso.Picasso
 import io.reactivex.observers.DisposableObserver
@@ -35,7 +35,7 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_membership)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Sk " + SharePrefs.getInstance(applicationContext)
-            .getString(SharePrefs.PRIME_NAME) + MyApplication.getInstance().dbHelper.getString(R.string.membership)
+            .getString(SharePrefs.PRIME_NAME) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.membership)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,7 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/prime_terms_hindi.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/prime_terms_hindi.html"
                         )
                 )
             } else {
@@ -65,7 +65,7 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
                     Intent(applicationContext, WebViewActivity::class.java)
                         .putExtra(
                             "url",
-                            EndPointPref.getInstance(MyApplication.getInstance()).baseUrl + "/images/game/prime_terms.html"
+                            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/images/game/prime_terms.html"
                         )
                 )
             }
@@ -106,13 +106,13 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
     private fun initialize() {
         mBinding.tvTerms.text = getString(R.string.app_name) + " " +
                 SharePrefs.getInstance(applicationContext).getString(SharePrefs.PRIME_NAME) +
-                MyApplication.getInstance().dbHelper.getString(R.string.shopkirana_prime_terms_and_conditions)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.shopkirana_prime_terms_and_conditions)
         mBinding.tvRenewal.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.renewal_and_next_payment)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.renewal_and_next_payment)
         mBinding.btnRenew.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.renew_membership)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.renew_membership)
         mBinding.tvMembershipBenefits.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.your_benefits)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.your_benefits)
         mBinding.btnRenew.setOnClickListener(this)
         mBinding.tvTerms.setOnClickListener(this)
         val commonClassForAPI = CommonClassForAPI.getInstance(this)
@@ -131,21 +131,21 @@ class MembershipActivity : AppCompatActivity(), View.OnClickListener {
     private fun setData(model: MembershipModel) {
         Picasso.get().load(model.logo).into(mBinding.ivImage)
         mBinding.tvTitle.text = SharePrefs.getInstance(applicationContext)
-            .getString(SharePrefs.PRIME_NAME) + " " + MyApplication.getInstance().dbHelper.getString(
+            .getString(SharePrefs.PRIME_NAME) + " " + RetailerSDKApp.getInstance().dbHelper.getString(
             R.string.savings
         )
         mBinding.tvAmount.text = "₹" + model.totalBenefit
         mBinding.tvDuration.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.since_you_joined) + Utils.getDateMonthFormat(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.since_you_joined) + Utils.getDateMonthFormat(
                 model.startDate
             )
         mBinding.tvName.text = model.memberShipName
         mBinding.tvStartDate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.valid_from) + Utils.getDateTimeFormate(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_from) + Utils.getDateTimeFormate(
                 model.startDate
             )
         mBinding.tvEndDate.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.valid_till) + Utils.getDateTimeFormate(
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.valid_till) + Utils.getDateTimeFormate(
                 model.endDate
             )
         mBinding.webView.loadData(

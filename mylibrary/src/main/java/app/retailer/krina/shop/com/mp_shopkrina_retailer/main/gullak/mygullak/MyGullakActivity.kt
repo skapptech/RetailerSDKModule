@@ -16,7 +16,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.SectionsPa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.gullak.AddPaymentActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.gullak.RtgsInfoActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 
 class MyGullakActivity : AppCompatActivity() {
@@ -30,16 +30,16 @@ class MyGullakActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbarG.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.my_gullak)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_gullak)
         tvInfo = binding.toolbarG.llCartClear
         binding.toolbarG.llCartClear.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.add_money)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_money)
 
         binding.toolbarG.back.setOnClickListener {
             onBackPressed()
         }
         binding.toolbarG.llCartClear.setOnClickListener {
-            if (binding.toolbarG.llCartClear.text == MyApplication.getInstance().dbHelper.getString(
+            if (binding.toolbarG.llCartClear.text == RetailerSDKApp.getInstance().dbHelper.getString(
                     R.string.add_money
                 ))
                 startActivityForResult(
@@ -59,7 +59,7 @@ class MyGullakActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
         if (intent.extras != null && intent.hasExtra("notificationId")) {
             val notificationId = intent.extras!!.getInt("notificationId")
-            MyApplication.getInstance().notificationView(notificationId)
+            RetailerSDKApp.getInstance().notificationView(notificationId)
             intent.extras!!.clear()
         }
 
@@ -102,11 +102,11 @@ class MyGullakActivity : AppCompatActivity() {
         val adapter = SectionsPagerAdapter(supportFragmentManager)
         adapter.addFragment(
             GullakFragment.newInstance(),
-            MyApplication.getInstance().dbHelper.getString(R.string.my_gullak)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_gullak)
         )
         adapter.addFragment(
             RtgsFragment.newInstance(),
-            MyApplication.getInstance().dbHelper.getString(R.string.van_rtgs)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.van_rtgs)
         )
         viewPager.adapter = adapter
         if (intent.extras != null && intent.getIntExtra("screen", 0) == 2) {

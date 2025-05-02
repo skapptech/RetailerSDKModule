@@ -17,7 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.RatingMod
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.RatingModel.UserRatingDetailDc
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.google.android.flexbox.FlexboxLayout
@@ -26,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.Picasso
 
 class SalesRateFragment : BottomSheetDialogFragment() {
-    private lateinit var appCtx: MyApplication
+    private lateinit var appCtx: RetailerSDKApp
     private lateinit var homeViewModel: HomeViewModel
     private var activity: AppCompatActivity? = null
     private var ratingList: ArrayList<RatingModel>? = null
@@ -39,7 +39,7 @@ class SalesRateFragment : BottomSheetDialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as AppCompatActivity
-        appCtx = activity!!.application as MyApplication
+        appCtx = activity!!.application as RetailerSDKApp
         onButtonClick = context as OnButtonClick
     }
 
@@ -81,14 +81,14 @@ class SalesRateFragment : BottomSheetDialogFragment() {
         val fbVisit = view.findViewById<FlexboxLayout>(R.id.fbVisit)
         val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
         tvPleaseRateH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_rate_sales_person_service)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_rate_sales_person_service)
         tvRateAgentH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.please_rate_sales_person_service)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_rate_sales_person_service)
         tvTimeVisitH.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.How_many_times_sales_person_visit)
-        btnSubmit.text = MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.How_many_times_sales_person_visit)
+        btnSubmit.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         tvOrderId.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + ratingList!![0].orderId
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.order_id_colon) + " " + ratingList!![0].orderId
         val timeArray = activity!!.resources.getStringArray(R.array.salesman_times)
         fbVisit.removeAllViews()
         val viewList: MutableList<TextView> = ArrayList()
@@ -195,7 +195,7 @@ class SalesRateFragment : BottomSheetDialogFragment() {
             BottomSheetBehavior.from(bottomSheet)
                 .setState(BottomSheetBehavior.STATE_EXPANDED)
         }
-        MyApplication.getInstance().updateAnalytics("delivery_date_dialog")
+        RetailerSDKApp.getInstance().updateAnalytics("delivery_date_dialog")
         observe(homeViewModel.getAddRatingData, ::handleAddRatingResult)
 
     }

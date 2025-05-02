@@ -14,7 +14,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.appHome.HomeDataModel
@@ -31,7 +30,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.fragment.SubCatego
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubSubCategoryFragment
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -372,7 +371,7 @@ class StoreSectionAdapter(
                                 )
                             }
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_app_home_basCat_"
                                         + homeDataDetailsModel.tileName + "_click", analyticPost
                             )
@@ -438,7 +437,7 @@ class StoreSectionAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_app_home_brand_"
                                         + homeDataDetailsModel.tileName + "_click", analyticPost
                             )
@@ -495,7 +494,7 @@ class StoreSectionAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_app_home_category_"
                                         + homeDataDetailsModel.tileName + "_click", analyticPost
                             )
@@ -551,7 +550,7 @@ class StoreSectionAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_app_home_subCat_"
                                         + homeDataDetailsModel.tileName + "_click", analyticPost
                             )
@@ -607,7 +606,7 @@ class StoreSectionAdapter(
                                 }
                             }
                             // update analytics
-                            MyApplication.getInstance().updateAnalytics(
+                            RetailerSDKApp.getInstance().updateAnalytics(
                                 "store_app_home_default_"
                                         + homeDataDetailsModel.tileName + "_click", analyticPost
                             )

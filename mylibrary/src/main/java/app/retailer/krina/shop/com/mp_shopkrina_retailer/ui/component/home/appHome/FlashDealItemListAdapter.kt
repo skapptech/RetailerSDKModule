@@ -29,7 +29,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnableNonPrime
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnablePrime
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Logger
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -83,26 +83,26 @@ class FlashDealItemListAdapter(
         try {
             //set String
             viewHolder.mBinding.tvMrpText.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.item_mrp)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_mrp)
             viewHolder.mBinding.tvItemLeftText.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.item_left)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_left)
             viewHolder.mBinding.tvFreeItemNotActiveText.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.inactive_customer_msg_flash)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.inactive_customer_msg_flash)
             viewHolder.mBinding.addItemBtn.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.add_btn)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.add_btn)
             viewHolder.mBinding.tvFlashDealEndTxt.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.flash_sale_end_in)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.flash_sale_end_in)
             viewHolder.mBinding.tvNoPrimeText.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.tv_non_prime_text_regular)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.tv_non_prime_text_regular)
             viewHolder.mBinding.tvDealPriceText.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.deal_price)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.deal_price)
             viewHolder.mBinding.tvFlashDealStartTxt.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.flash_sale_start_in)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.flash_sale_start_in)
             val vectorDrawable = AppCompatResources.getDrawable(activity, R.drawable.logo_grey)
             val listModel = itemListArrayList!![i]
             viewHolder.tvItemName.text = listModel.itemname
             viewHolder.tvMoq.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.item_moq) + " " + listModel.minOrderQty
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.item_moq) + " " + listModel.minOrderQty
             /*for inactive customer*/if (!SharePrefs.getInstance(activity)
                     .getBoolean(SharePrefs.CUST_ACTIVE)
             ) {
@@ -184,7 +184,7 @@ class FlashDealItemListAdapter(
             val sPRICE =
                 "| <font color=#FF4500>&#8377; " + DecimalFormat("##.##").format(listModel.unitPrice) + "</font>"
             val sMargin =
-                "| " + MyApplication.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
+                "| " + RetailerSDKApp.getInstance().dbHelper.getString(R.string.moq_margin) + " " + DecimalFormat(
                     "##.##"
                 ).format(listModel.marginPoint!!.toDouble()) + "%"
             val sMRP = DecimalFormat("##.##").format(listModel.price)
@@ -199,9 +199,9 @@ class FlashDealItemListAdapter(
             viewHolder.tvPrice.text = Html.fromHtml(sPRICE)
             viewHolder.tvMargin.text = sMargin
             viewHolder.tvDreamPoint.text =
-                MyApplication.getInstance().dbHelper.getString(R.string.Dp) + " " + listModel.dreamPoint
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.Dp) + " " + listModel.dreamPoint
             val cartModel =
-                MyApplication.getInstance().noteRepository.getCartItem1(listModel.itemId)
+                RetailerSDKApp.getInstance().noteRepository.getCartItem1(listModel.itemId)
             var isItemFound: Boolean
             if (cartModel != null) {
                 isItemFound = true
@@ -293,7 +293,7 @@ class FlashDealItemListAdapter(
                     )
                 } else {
                     // analytics for remove from cart
-                    MyApplication.getInstance()
+                    RetailerSDKApp.getInstance()
                         .updateAnalyticsCart(FirebaseAnalytics.Event.REMOVE_FROM_CART, listModel)
                 }
             }
@@ -322,7 +322,7 @@ class FlashDealItemListAdapter(
                             } else {
                                 Toast.makeText(
                                     activity,
-                                    MyApplication.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + listModel.billLimitQty + " " + MyApplication.getInstance().dbHelper.getString(
+                                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_can_not_add_more_than) + " " + listModel.billLimitQty + " " + RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.item_t
                                     ),
                                     Toast.LENGTH_SHORT
@@ -355,13 +355,13 @@ class FlashDealItemListAdapter(
                     if (listModel.offerQtyAvaiable <= itemQuantity) {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.no_item_available),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_item_available),
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + listModel.flashDealMaxQtyPersonCanTake,
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.only_add_maximum_item) + " " + listModel.flashDealMaxQtyPersonCanTake,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -398,20 +398,20 @@ class FlashDealItemListAdapter(
                                 0.0, false, this
                             )
                             // analytics for add to cart
-                            MyApplication.getInstance()
+                            RetailerSDKApp.getInstance()
                                 .updateAnalyticsCart(FirebaseAnalytics.Event.ADD_TO_CART, listModel)
                         }
                     } else {
                         Toast.makeText(
                             activity,
-                            MyApplication.getInstance().dbHelper.getString(R.string.qty_is_not_available),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.qty_is_not_available),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
                     Toast.makeText(
                         activity,
-                        MyApplication.getInstance().dbHelper.getString(R.string.you_already_taken_flash_deal),
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.you_already_taken_flash_deal),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

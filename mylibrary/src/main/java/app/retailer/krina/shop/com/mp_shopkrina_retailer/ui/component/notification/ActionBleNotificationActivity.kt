@@ -26,7 +26,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCa
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import java.text.DecimalFormat
 import java.util.Collections
@@ -78,7 +78,7 @@ class ActionBleNotificationActivity : AppCompatActivity(), View.OnClickListener 
         if (mNotificationClick) {
             viewModel.notificationClick(custId, notificationId)
         }
-        MyApplication.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
+        RetailerSDKApp.getInstance().noteRepository.cartValue.observe(this) { totalAmt: Double? ->
             if (totalAmt != null && totalAmt > 0) {
                 mBinding!!.tvTotalPrice.visibility = View.VISIBLE
                 mBinding!!.tvTotalPrice.text = "" + DecimalFormat("##.##").format(totalAmt)
@@ -160,13 +160,13 @@ class ActionBleNotificationActivity : AppCompatActivity(), View.OnClickListener 
 
     private fun initialization() {
         mBinding!!.saveTotalItem.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.total_amount)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.total_amount)
         mBinding!!.checkoutBtn.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.payment)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.payment)
         mBinding!!.tvNoNotification.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.no_notification)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.no_notification)
         mBinding!!.toolbar.title.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.notification_item)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.notification_item)
         lang = LocaleHelper.getLanguage(this)
         custId = SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
         mBinding!!.toolbar.back.setOnClickListener(this)
@@ -198,10 +198,10 @@ class ActionBleNotificationActivity : AppCompatActivity(), View.OnClickListener 
                 model.totalFreeItemQty = freeItemQty
                 model.totalFreeWalletPoint = totalFreeWalletPoint
                 // update cart database
-                if (MyApplication.getInstance().noteRepository.isItemInCart(itemId)) {
-                    MyApplication.getInstance().noteRepository.updateCartItem(model)
+                if (RetailerSDKApp.getInstance().noteRepository.isItemInCart(itemId)) {
+                    RetailerSDKApp.getInstance().noteRepository.updateCartItem(model)
                 } else {
-                    MyApplication.getInstance().noteRepository.addToCart(model)
+                    RetailerSDKApp.getInstance().noteRepository.addToCart(model)
                 }
                 if (lastItemId == itemId) {
                     handler.removeCallbacksAndMessages(null)
@@ -286,7 +286,7 @@ class ActionBleNotificationActivity : AppCompatActivity(), View.OnClickListener 
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             try {
-                val model = MyApplication.getInstance().noteRepository.getCartItem1(msg.what)
+                val model = RetailerSDKApp.getInstance().noteRepository.getCartItem1(msg.what)
                 callAddToCartAPI(
                     model.itemId,
                     model.qty,

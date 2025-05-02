@@ -32,7 +32,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityEpayLaterBinding
@@ -42,7 +41,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.GpsUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MyApplication
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Utils
 import com.bumptech.glide.Glide
@@ -58,9 +57,7 @@ import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -210,7 +207,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
             }
             Utils.setToast(
                 this,
-                MyApplication.getInstance().dbHelper.getString(R.string.txt_capture)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_capture)
             )
             if (utils!!.isNetworkAvailable) {
                 println("UploadMultipart: $fileName")
@@ -218,7 +215,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
             } else {
                 Utils.setToast(
                     this,
-                    MyApplication.getInstance().dbHelper.getString(R.string.internet_connection)
+                    RetailerSDKApp.getInstance().dbHelper.getString(R.string.internet_connection)
                 )
             }
             Log.e("TAG", selectedImage.toString() + "")
@@ -357,41 +354,41 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
         utils = Utils(this)
         GpsUtils(this).turnGPSOn { isGPSEnable: Boolean -> }
         mBinding.tilEnterSK.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.sk_code)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.sk_code)
         mBinding.shopName.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_shop_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_shop_name)
         mBinding.proprietorFN.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.proprietor_first_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.proprietor_first_name)
         mBinding.proprietorLN.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.proprietor_last_name)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.proprietor_last_name)
         mBinding.mobNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.mobile_number)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.mobile_number)
         mBinding.whatsAppNo.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number)
-        mBinding.email.hint = MyApplication.getInstance().dbHelper.getString(R.string.email)
-        mBinding.dob.hint = MyApplication.getInstance().dbHelper.getString(R.string.dob)
-        mBinding.panNo.hint = MyApplication.getInstance().dbHelper.getString(R.string.pannumber)
-        mBinding.country.hint = MyApplication.getInstance().dbHelper.getString(R.string.country)
-        mBinding.state.hint = MyApplication.getInstance().dbHelper.getString(R.string.state)
-        mBinding.city.hint = MyApplication.getInstance().dbHelper.getString(R.string.city)
-        mBinding.zipCode.hint = MyApplication.getInstance().dbHelper.getString(R.string.pincode)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_cust_whatsApp_number)
+        mBinding.email.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.email)
+        mBinding.dob.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.dob)
+        mBinding.panNo.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pannumber)
+        mBinding.country.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.country)
+        mBinding.state.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.state)
+        mBinding.city.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.city)
+        mBinding.zipCode.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.pincode)
         mBinding.tvLicence.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_License)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_License)
         mBinding.tvUploadGST.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.upload_gst)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.upload_gst)
         mBinding.tvFSSAI.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.choose_fssai_image)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.choose_fssai_image)
         mBinding.tvGovApp.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.choose_govt_approved_reg_no)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.choose_govt_approved_reg_no)
         mBinding.btnPartner1.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.partner_1)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.partner_1)
         mBinding.btnPartner2.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.partner_2)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.partner_2)
         mBinding.btnPartner3.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.partner_3)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.partner_3)
         mBinding.btnPartner4.hint =
-            MyApplication.getInstance().dbHelper.getString(R.string.partner_4)
-        mBinding.btnSubmit.hint = MyApplication.getInstance().dbHelper.getString(R.string.submit)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.partner_4)
+        mBinding.btnSubmit.hint = RetailerSDKApp.getInstance().dbHelper.getString(R.string.submit)
         custId = SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID)
         skCode = SharePrefs.getInstance(this).getString(SharePrefs.SK_CODE)
         mBinding.etSkCode.setText(SharePrefs.getInstance(this).getString(SharePrefs.SK_CODE))
@@ -468,10 +465,10 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
         val gallery = dialog.findViewById<TextView>(R.id.gallery)
         val Cancel = dialog.findViewById<TextView>(R.id.liCancel)
         val tvAddPhotoHead = dialog.findViewById<TextView>(R.id.tvAddPhotoHead)
-        tvAddPhotoHead!!.text = MyApplication.getInstance().dbHelper.getString(R.string.addphoto)
-        takePhoto!!.text = MyApplication.getInstance().dbHelper.getString(R.string.takephoto)
+        tvAddPhotoHead!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.addphoto)
+        takePhoto!!.text = RetailerSDKApp.getInstance().dbHelper.getString(R.string.takephoto)
         gallery!!.text =
-            MyApplication.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
+            RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_Choose_from_Library)
         takePhoto.setOnClickListener { v: View? ->
             if (ContextCompat.checkSelfPermission(
                     this,
@@ -638,7 +635,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
         ) {
             Utils.setToast(
                 this,
-                MyApplication.getInstance().dbHelper.getString(R.string.please_upload_at_least_one_document)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.please_upload_at_least_one_document)
             )
         } else {
             if (location != null) {
@@ -692,7 +689,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setButton(
                 DialogInterface.BUTTON_NEGATIVE,
-                MyApplication.getInstance().dbHelper.getString(R.string.cancel)
+                RetailerSDKApp.getInstance().dbHelper.getString(R.string.cancel)
             ) { dialog1: DialogInterface?, which: Int -> mBinding.etDob.setText("") }
             dialog.show()
         } catch (e: Exception) {
@@ -809,7 +806,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
                     } else {
                         Toast.makeText(
                             applicationContext,
-                            MyApplication.getInstance().dbHelper.getString(R.string.unable_to_uploaded_image),
+                            RetailerSDKApp.getInstance().dbHelper.getString(R.string.unable_to_uploaded_image),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -865,7 +862,7 @@ class EpayLaterFormActivity : AppCompatActivity(), View.OnClickListener,
                     }
                     Utils.setToast(
                         applicationContext,
-                        MyApplication.getInstance().dbHelper.getString(R.string.data_saved_successfully)
+                        RetailerSDKApp.getInstance().dbHelper.getString(R.string.data_saved_successfully)
                     )
                 } catch (e: Exception) {
                     e.printStackTrace()

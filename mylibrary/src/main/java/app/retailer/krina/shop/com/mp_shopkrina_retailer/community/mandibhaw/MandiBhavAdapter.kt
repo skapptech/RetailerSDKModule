@@ -15,10 +15,11 @@ class MandiBhavAdapter(
     private var context: Context,
     private var mandiDataModelList: ArrayList<MandiDataModel>?,
 ): RecyclerView.Adapter<MandiBhavAdapter.ViewHolder?>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemMandiBhavBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
+                LayoutInflater.from(parent.context),
                 parent, false
             )
         )

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -32,18 +31,18 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.CategoryOrderItemsBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.db.QtyDTO;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.CategoryOrderItemsBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AdapterInterface;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.MoqInterface;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.MembershipPlanActivity;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.productDetails.ProductDetailsActivity;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.CategoryItemOrderInfo;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.MoqAdapter;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.productDetails.ProductDetailsActivity;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.CustomRunnable;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.TextUtils;
@@ -75,8 +74,7 @@ public class ItemListOfferAdapter extends RecyclerView.Adapter<ItemListOfferAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                R.layout.category_order_items, viewGroup, false));
+        return new ViewHolder(CategoryOrderItemsBinding.inflate(LayoutInflater.from(viewGroup.getContext()), viewGroup, false));
     }
 
     @Override
@@ -826,7 +824,7 @@ public class ItemListOfferAdapter extends RecyclerView.Adapter<ItemListOfferAdap
         }
 
         public void bind(CategoryItemOrderInfo obj) {
-            mBinding.executePendingBindings();
+//            mBinding.executePendingBindings();
         }
 
         void timerExpire(long endTime) {

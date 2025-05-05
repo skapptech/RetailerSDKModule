@@ -8,6 +8,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.Spl
 
 class MainActivityTest : AppCompatActivity() {
     private lateinit var binding: ActivityMainTestBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainTestBinding.inflate(layoutInflater)

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +34,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size10">
 
-
                     <TextView
                         android:id="@+id/tvProductName"
                         android:layout_width="match_parent"
@@ -46,8 +43,6 @@
                         android:text="जीरा"
                         android:textColor="#213346"
                         android:textSize="@dimen/size15" />
-
-
                 </RelativeLayout>
 
                 <TextView
@@ -60,7 +55,6 @@
                     android:textColor="#213346"
                     android:textSize="@dimen/size12" />
 
-
                 <TextView
                     android:id="@+id/tvProductRate"
                     android:layout_width="match_parent"
@@ -70,7 +64,6 @@
                     android:text="5000/क्विंटल"
                     android:textColor="#213346"
                     android:textSize="@dimen/size18" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,7 +118,6 @@
                         android:text="5500"
                         android:textColor="#213346"
                         android:textSize="@dimen/size12" />
-
                 </LinearLayout>
 
                 <TextView
@@ -139,11 +131,7 @@
                     android:text=""
                     android:textColor="#707070"
                     android:textSize="@dimen/size10" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </layout>

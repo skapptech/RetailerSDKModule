@@ -54,11 +54,15 @@ dependencies {
     implementation(libs.lifecycle.runtime)
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+//    firebase
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.config)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.appcheck)
+//    google
     implementation(libs.play.analytics)
     implementation(libs.play.auth)
     implementation(libs.places)

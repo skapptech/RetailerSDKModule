@@ -18,11 +18,6 @@ lifecycle-livedata = "2.8.7"
 lifecycle-viewmodel = "2.8.7"
 lifecycle-runtime = "2.8.7"
 coroutines = "1.6.0"
-firebase-messaging = "22.0.0"
-firebase-config = "21.0.2"
-firebase-analytics = "21.0.0"
-firebase-firestore = "24.1.2"
-firebase-crashlytics = "18.2.11"
 play-analytics = "18.0.1"
 play-auth = "21.1.0"
 places = "2.6.0"
@@ -59,11 +54,19 @@ razorpay = "1.6.39"
 ucrop = "2.2.8"
 playServicesMeasurementApi = "21.0.0"
 swiperefreshlayout = "1.1.0"
+google-services = "4.4.1"
+#
+firebase-messaging = "22.0.0"
+firebase-config = "21.0.2"
+firebase-analytics = "21.0.0"
+firebase-firestore = "24.1.2"
+firebase-crashlytics = "18.2.11"
+firebase-appcheck = "16.0.0"
 firebaseDatabaseKtx = "20.3.0"
 firebaseCommon = "21.0.0"
-google-services = "4.4.1"
-firebase-bom = "33.12.0"
+firebase-bom = "33.13.0"
 firebase-crashlytics-gradle = "2.9.9"
+#
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -90,6 +93,7 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebase-firestore" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebase-crashlytics" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabaseKtx" }
+firebase-appcheck = { group = "com.google.firebase", name = "firebase-appcheck", version.ref = "firebase-appcheck" }
 
 play-analytics = { group = "com.google.android.gms", name = "play-services-analytics", version.ref = "play-analytics" }
 play-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-auth" }

@@ -9,6 +9,8 @@ import android.os.Parcelable;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
@@ -24,16 +26,16 @@ import java.util.Locale;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.BuildConfig;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.db.NoteRepository;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.BillDiscountModel;
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.TokenResponse;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.offer.BillDiscountModel;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.PrefManager;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SectionPref;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.StorePref;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.MobileSignUpActivity;
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -81,8 +83,15 @@ public class RetailerSDKApp {
 
 //    @Override
     public void onCreate() {
-//        super.onCreate();
-        // FirebaseApp.initializeApp(context);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setApplicationId("1:921589543133:android:da37214b30a35292") // Required
+                .setApiKey("AIzaSyArpfoMw5Y-x11JKSbRp7gDFa0gabZR5s4") // Required
+                .setDatabaseUrl("https://retailerapp-cff3b.firebaseio.com") // Optional
+                .setProjectId("retailerapp-cff3b") // Optional
+                .build();
+        if (FirebaseApp.getApps(context).isEmpty()) {
+            FirebaseApp.initializeApp(context, options);
+        }
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         noteRepository = dbHelper = new NoteRepository(context);
         prefManager = new PrefManager(context);

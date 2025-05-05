@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "921589543133",
+    "firebase_url": "https://retailerapp-cff3b.firebaseio.com",
+    "project_id": "retailerapp-cff3b",
+    "storage_bucket": "retailerapp-cff3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921589543133:android:da37214b30a35292",
+        "android_client_info": {
+          "package_name": "app.retailer.krina.shop.com.shopkrina_retailer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921589543133-v5pb1l32suendnfiaa0ftiov3uaffesd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO6wh3EsEmOiZ0ptDdyy-sSAss40kp1nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921589543133-v5pb1l32suendnfiaa0ftiov3uaffesd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921589543133:android:2066eac99ebe1e2c",
+        "android_client_info": {
+          "package_name": "app.retailer.krina.shop.com.shopkrina_retailer.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921589543133-4je7h5mlpij4u1hg8mj8rc1rcm1gvlrk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.retailer.krina.shop.com.shopkrina_retailer.debug",
+            "certificate_hash": "9411e7eb656c30c6f87aae835cbee8a988423a61"
+          }
+        },
+        {
+          "client_id": "921589543133-v5pb1l32suendnfiaa0ftiov3uaffesd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO6wh3EsEmOiZ0ptDdyy-sSAss40kp1nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921589543133-v5pb1l32suendnfiaa0ftiov3uaffesd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

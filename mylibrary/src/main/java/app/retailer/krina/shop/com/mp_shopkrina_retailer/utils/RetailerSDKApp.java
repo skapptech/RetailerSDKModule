@@ -113,8 +113,8 @@ public class RetailerSDKApp {
             mixpanel.getPeople().set("shopName", SharePrefs.getInstance(context).getString(SharePrefs.SHOP_NAME));
             mixpanel.getPeople().set("SkCode", SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));
             mixpanel.getPeople().set("clusterId", SharePrefs.getInstance(context).getString(SharePrefs.CLUSTER_ID));
-            mixpanel.getPeople().set("warehouse", SharePrefs.getInstance(context).getInt(SharePrefs.WAREHOUSE_ID));
-            mixpanel.getPeople().set("isLoggedIn", true);
+            mixpanel.getPeople().set("warehouse", ""+SharePrefs.getInstance(context).getInt(SharePrefs.WAREHOUSE_ID));
+            mixpanel.getPeople().set("isLoggedIn", ""+true);
             // firebase
             mFirebaseAnalytics.setUserId(SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));
             mFirebaseAnalytics.setUserProperty("SkCode", SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));
@@ -141,7 +141,7 @@ public class RetailerSDKApp {
             mixpanel.getPeople().set("shopName", SharePrefs.getInstance(context).getString(SharePrefs.SHOP_NAME));
             mixpanel.getPeople().set("SkCode", SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));
             mixpanel.getPeople().set("clusterId", SharePrefs.getInstance(context).getString(SharePrefs.CLUSTER_ID));
-            mixpanel.getPeople().set("warehouse", SharePrefs.getInstance(context).getInt(SharePrefs.WAREHOUSE_ID));
+            mixpanel.getPeople().set("warehouse", ""+SharePrefs.getInstance(context).getInt(SharePrefs.WAREHOUSE_ID));
             // firebase
             mFirebaseAnalytics.setUserId(SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));
             mFirebaseAnalytics.setUserProperty("SkCode", SharePrefs.getInstance(context).getString(SharePrefs.SK_CODE));

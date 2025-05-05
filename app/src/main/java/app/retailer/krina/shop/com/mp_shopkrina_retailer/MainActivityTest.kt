@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMainTestBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.splash.SplashScreenActivity
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
 
 class MainActivityTest : AppCompatActivity() {
     private lateinit var binding: ActivityMainTestBinding
@@ -16,6 +17,7 @@ class MainActivityTest : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         binding.fab.setOnClickListener {
+            RetailerSDKApp.initialize(application)
             val intent = Intent(applicationContext, SplashScreenActivity::class.java)
             startActivity(intent)
         }

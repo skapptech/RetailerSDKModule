@@ -671,6 +671,11 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
+        <provider
+            android:name=".utils.MySDKInitializerProvider"
+            android:authorities="app.retailer.krina.shop.com.mp_shopkrina_retailer.mysdkinitializer"
+            android:exported="false" />
+
         <service
             android:name=".services.ContactService"
             android:enabled="true"

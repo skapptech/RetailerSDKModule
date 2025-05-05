@@ -60,9 +60,10 @@ class ItemListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<CategoryOrderItemsBinding>(
+            CategoryOrderItemsBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.category_order_items, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }
@@ -952,9 +953,9 @@ class ItemListAdapter(
             customRunnable = CustomRunnable(handler, mBinding.tvRemaingSecand, 10000)
         }
 
-        fun bind(obj: CategoryItemOrderInfo?) {
-            mBinding.executePendingBindings()
-        }
+//        fun bind(obj: CategoryItemOrderInfo?) {
+//            mBinding.executePendingBindings()
+//        }
 
         fun timerExpire(endTime: Long) {
             handler.removeCallbacks(customRunnable!!)

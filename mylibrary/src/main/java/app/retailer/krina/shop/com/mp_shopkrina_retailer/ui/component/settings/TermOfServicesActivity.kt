@@ -15,7 +15,7 @@ class TermOfServicesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_terms_services)
+        mBinding =ActivityTermsServicesBinding.inflate(layoutInflater)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         initialization()
     }

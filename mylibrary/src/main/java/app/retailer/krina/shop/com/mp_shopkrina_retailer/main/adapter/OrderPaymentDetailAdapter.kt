@@ -20,9 +20,10 @@ class OrderPaymentDetailAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            MyOrderPaymendetailBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.my_order_paymendetail, parent, false
+                parent,
+                false
             )
         )
     }

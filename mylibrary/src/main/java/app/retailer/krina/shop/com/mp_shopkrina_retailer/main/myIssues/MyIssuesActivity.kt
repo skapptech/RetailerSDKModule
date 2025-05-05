@@ -39,7 +39,8 @@ class MyIssuesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_issue)
+         mBinding = ActivityMyIssueBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         init()
         mBinding.tvNoTicket.text =

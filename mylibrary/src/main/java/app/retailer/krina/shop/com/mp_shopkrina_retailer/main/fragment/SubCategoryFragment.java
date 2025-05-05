@@ -72,7 +72,7 @@ public class SubCategoryFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sub_category, container, false);
+        mBinding = FragmentSubCategoryBinding.inflate(inflater, container, false);
         if (getArguments() != null) {
             ItemId = getArguments().getString("ItemId");
             baseCatId = getArguments().getInt("BaseCategoryId");

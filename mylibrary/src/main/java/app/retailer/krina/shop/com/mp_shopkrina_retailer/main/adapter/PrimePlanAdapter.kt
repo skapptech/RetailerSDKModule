@@ -22,11 +22,10 @@ class PrimePlanAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    activity
-                ),
-                R.layout.item_prime_plan_list, parent, false
+            ItemPrimePlanListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }

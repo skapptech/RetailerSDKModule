@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:id="@+id/sub_sub_category_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="3dp">
+<LinearLayout android:id="@+id/sub_sub_category_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/sub_cat_img"
@@ -33,5 +31,3 @@
             android:textColor="@color/black"
             android:textSize="12sp" />
     </LinearLayout>
-
-</layout>

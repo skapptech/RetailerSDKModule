@@ -81,8 +81,8 @@ public class LegerPaymentActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_supplier_payment);
-
+        mBinding = ActivitySupplierPaymentBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         intView();
         if (!SharePrefs.getInstance(getApplicationContext()).getBoolean(SharePrefs.IS_SHOW_LEDGER)) {
             llCommingSoon.setVisibility(View.VISIBLE);

@@ -24,9 +24,9 @@ class MandiCityAdapter(
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemMandiCityBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_mandi_city, parent, false
+                 parent, false
             )
         )
     }

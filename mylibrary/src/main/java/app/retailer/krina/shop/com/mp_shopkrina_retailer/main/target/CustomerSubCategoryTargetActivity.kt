@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAchievedTargetBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCustomerSubCategoryTargetBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.PopupMoreInfoBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.TargetClick
@@ -49,9 +50,8 @@ class CustomerSubCategoryTargetActivity : AppCompatActivity(), TargetClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_customer_sub_category_target)
-
+        mBinding = ActivityCustomerSubCategoryTargetBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding.toolbar.title.text =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_target)
         mBinding.btnCheckLevel.text =

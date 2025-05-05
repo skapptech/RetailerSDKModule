@@ -33,7 +33,8 @@ class ReturnOrderListActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_return_order_list)
+        mBinding = ActivityReturnOrderListBinding.inflate(getLayoutInflater());
+        setContentView(mBinding!!.getRoot());
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getData("title_activity_return_order")
         initViews()

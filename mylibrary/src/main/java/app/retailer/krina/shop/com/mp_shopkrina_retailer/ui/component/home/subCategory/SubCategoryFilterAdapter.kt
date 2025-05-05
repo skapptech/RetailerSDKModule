@@ -35,9 +35,9 @@ class SubCategoryFilterAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemSubcategoryBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_subcategory, viewGroup, false
+                viewGroup, false
             )
         )
     }

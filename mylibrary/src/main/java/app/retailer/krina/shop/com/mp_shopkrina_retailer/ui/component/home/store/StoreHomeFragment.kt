@@ -833,7 +833,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                DecimalFormat("##.##").format(list[i].discountPercentage) + RetailerSDKApp.getInstance().dbHelper.getString(
+                                DecimalFormat("##.##").format(list[i].discountPercentage) + MyApplication.getInstance().dbHelper.getString(
                                     R.string.per_of_min_per
                                 ) + list[i].billAmount
                             //offerList.add(offerMag);
@@ -844,7 +844,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
+                                MyApplication.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
                             // offerList.add(offerMag);
                             "$offerMag* $offerText  "
                         } else {
@@ -852,14 +852,14 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                     "PostOffer",
                                     ignoreCase = true
                                 )
-                            ) RetailerSDKApp.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
+                            ) MyApplication.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
                             if (list[i].walletType.equals(
                                     "WalletPercentage",
                                     ignoreCase = true
                                 )
                             ) {
                                 val offerText =
-                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + RetailerSDKApp.getInstance().dbHelper.getString(
+                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + MyApplication.getInstance().dbHelper.getString(
                                         R.string.per_of_min_per
                                     ) + DecimalFormat("##.##").format(
                                         list[i].billAmount
@@ -868,9 +868,9 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                 "$offerMag* $offerText  "
                             } else {
                                 val offerText =
-                                    (RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) +
+                                    (MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) +
                                             DecimalFormat("##.##").format(convertToAmount(list[i].billDiscountWallet))
-                                            + RetailerSDKApp.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
+                                            + MyApplication.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
                                         "##.##"
                                     ).format(
                                         list[i].billAmount

@@ -40,9 +40,9 @@ class NotificationAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            NotificationListRowBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.notification_list_row, viewGroup, false
+                 viewGroup, false
             )
         )
     }

@@ -37,9 +37,9 @@ class BucketGameViewPagerAdapter : RecyclerView.Adapter<BucketGameViewPagerAdapt
     @NonNull
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            DataBindingUtil.inflate(
+            RowItemBucketGamePagerBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.row_item_bucket_game_pager, parent, false
+                 parent, false
             )
         )
     }

@@ -17,9 +17,9 @@ class MandiBhavAdapter(
 ): RecyclerView.Adapter<MandiBhavAdapter.ViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemMandiBhavBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_mandi_bhav, parent, false
+                parent, false
             )
         )
     }

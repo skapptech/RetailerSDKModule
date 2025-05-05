@@ -45,9 +45,10 @@ class MyOrderAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ActivityMyOrderItemBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.activity_my_order_item, parent, false
+                parent,
+                false
             )
         )
     }

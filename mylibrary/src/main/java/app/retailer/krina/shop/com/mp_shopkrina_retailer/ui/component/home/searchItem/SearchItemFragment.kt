@@ -111,8 +111,8 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_search_item_list, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+            FragmentSearchItemListBinding.inflate(inflater, container, false)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         viewModel =
             ViewModelProvider(
                 activity!!,

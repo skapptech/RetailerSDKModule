@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <RelativeLayout
-        android:id="@+id/rlMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/rectangle_grey_8dp_corner"
-        android:padding="1dp">
+<RelativeLayout android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/rectangle_grey_8dp_corner"
+    android:padding="1dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout
             android:id="@+id/rl_bill"
@@ -107,7 +106,7 @@
                     android:contentDescription="@string/app_name"
                     android:gravity="center"
                     android:src="@drawable/ic_info_outline_black_24dp"
-                    android:tint="@android:color/white" />
+                    app:tint="@android:color/white" />
             </FrameLayout>
 
             <LinearLayout
@@ -154,4 +153,3 @@
         </RelativeLayout>
 
     </RelativeLayout>
-</layout>

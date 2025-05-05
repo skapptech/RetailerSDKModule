@@ -17,9 +17,10 @@ class ReturnOrderDetailAdapter(
 ) : RecyclerView.Adapter<ReturnOrderDetailAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemReturnOrderDetailBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_return_order_detail, parent, false
+                parent,
+                false
             )
         )
     }

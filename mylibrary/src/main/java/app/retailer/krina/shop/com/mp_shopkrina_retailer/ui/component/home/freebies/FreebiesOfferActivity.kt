@@ -26,6 +26,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.AddToCartInt
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMandiBhavBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
@@ -50,7 +51,8 @@ class FreebiesOfferActivity : AppCompatActivity(), View.OnClickListener, AddToCa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_freebies_offers)
+        mBinding = ActivityFreebiesOffersBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.CheckoutItemsBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemMainListSectionBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ShoppingCartHeaderBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.RemoveItemInterface
@@ -51,27 +52,24 @@ class ShoppingCartAdapter(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             HEADER -> HeaderViewHolder(
-                DataBindingUtil.inflate<ShoppingCartHeaderBinding>(
+                ShoppingCartHeaderBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.shopping_cart_header,
                     viewGroup,
                     false
                 )
             )
 
             VIEW -> ViewHolder(
-                DataBindingUtil.inflate<CheckoutItemsBinding>(
+                CheckoutItemsBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.checkout_items,
                     viewGroup,
                     false
                 )
             )
 
             else -> ViewHolder(
-                DataBindingUtil.inflate<CheckoutItemsBinding>(
+                CheckoutItemsBinding.inflate(
                     LayoutInflater.from(viewGroup.context),
-                    R.layout.checkout_items,
                     viewGroup,
                     false
                 )

@@ -18,7 +18,8 @@ class ShowImageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.fragment_image_sho)
+        mBinding = FragmentImageShoBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val extras = intent.extras
         if (extras != null) {
             irImagesModels =

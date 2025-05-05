@@ -46,18 +46,16 @@ class OfferAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == 0) {
             ScratchCardHolder(
-                DataBindingUtil.inflate<ItemOffersScratchCardListBinding>(
+                ItemOffersScratchCardListBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_offers_scratch_card_list,
                     parent,
                     false
                 )
             )
         } else {
             BillDiscountHolder(
-                DataBindingUtil.inflate<ItemOffersBillDiscountBinding>(
+                ItemOffersBillDiscountBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_offers_bill_discount,
                     parent,
                     false
                 )

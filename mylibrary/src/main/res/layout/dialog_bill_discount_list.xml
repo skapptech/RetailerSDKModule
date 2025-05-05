@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.BillDiscountListActivity">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="9dp"
-        app:cardElevation="3dp">
+    app:cardCornerRadius="9dp"
+    app:cardElevation="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:id="@+id/design_bottom_sheet"
@@ -97,4 +94,3 @@
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</layout>

@@ -35,7 +35,8 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_story)
+        mBinding = ActivityStoryBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         mBinding!!.flipView.isOverFlipEnabled = true
         mBinding!!.flipView.isFlipByTouchEnabled = true
         mBinding!!.flipView.onViewFlipListener = this
@@ -171,7 +172,7 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
                 mBinding!!.progressBar.visibility = View.VISIBLE
 
                 Glide.with(this@StoryActivity)
-                    .load(EndPointPref.getInstance(RetailerSDKApp.application).baseUrl + list[position].imagePath)
+                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + list[position].imagePath)
                     .error(R.drawable.murli_story_end_page)
                     .into(ivImage1)
             }

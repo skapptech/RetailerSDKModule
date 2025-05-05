@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/rl_confirmation_popup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size10"
-        android:layout_marginRight="@dimen/size10"
-        android:orientation="vertical"
-        app:cardCornerRadius="@dimen/size10"
-        app:cardElevation="@dimen/cardview_default_elevation">
+
+<androidx.cardview.widget.CardView android:id="@+id/rl_confirmation_popup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size10"
+    android:layout_marginRight="@dimen/size10"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/size10"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
             android:id="@+id/design_bottom_sheet"
@@ -208,4 +208,3 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</layout>

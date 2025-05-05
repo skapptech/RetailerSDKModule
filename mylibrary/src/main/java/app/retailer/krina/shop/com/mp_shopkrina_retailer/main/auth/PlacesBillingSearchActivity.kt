@@ -56,7 +56,8 @@ class PlacesBillingSearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_places_search)
+        mBinding = ActivityPlacesSearchBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

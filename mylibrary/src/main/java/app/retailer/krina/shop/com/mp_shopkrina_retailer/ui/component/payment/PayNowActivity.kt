@@ -165,7 +165,8 @@ class PayNowActivity : AppCompatActivity(), View.OnClickListener, PaymentResultW
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_paynow)
+        mBinding = ActivityPaynowBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

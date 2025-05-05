@@ -30,7 +30,8 @@ class ContactUsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_contact_us)
+        mBinding = ActivityContactUsBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         setValue()
         mBinding.toolbarCu.back.setOnClickListener { v: View? -> onBackPressed() }
         val intent = intent

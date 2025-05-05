@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:id="@+id/llCommission"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible">
+<LinearLayout android:id="@+id/llCommission"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                             android:layout_height="40dp"
                             android:padding="@dimen/size8"
                             android:layout_gravity="center"
-                            android:tint="@android:color/black"
+                            app:tint="@android:color/black"
                             android:src="@drawable/ic_back" />
 
                         <TextView
@@ -235,4 +234,3 @@
         </RelativeLayout>
 
     </LinearLayout>
-</layout>

@@ -39,6 +39,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.Membershi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.shoppingCart.ShoppingCartActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.NotifyModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyAccountBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
@@ -81,7 +82,8 @@ class ProductDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private val FORMAT = "%02d:%02d:%02d"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
+        mBinding = ActivityProductDetailBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

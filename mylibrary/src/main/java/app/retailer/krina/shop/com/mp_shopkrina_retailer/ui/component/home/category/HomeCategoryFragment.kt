@@ -47,8 +47,8 @@ open class HomeCategoryFragment : Fragment() {
     ): View? {
         if (rootView == null) {
             mBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_home_category, container, false)
-            val appRepository = AppRepository(activity!!.applicationContext)
+                FragmentHomeCategoryBinding.inflate(inflater, container, false)
+            val appRepository = AppRepository(homeActivity!!.applicationContext)
             homeCategoryViewModel =
                 ViewModelProvider(
                     activity!!,

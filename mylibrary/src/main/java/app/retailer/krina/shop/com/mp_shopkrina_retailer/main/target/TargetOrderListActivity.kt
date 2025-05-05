@@ -22,6 +22,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.CartAddItemModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCustomerTargetBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityTargetOrderListBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.SearchInterface
@@ -59,7 +60,8 @@ class TargetOrderListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_target_order_list)
+        mBinding = ActivityTargetOrderListBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         if (intent.extras != null) {
             companyId = intent.getIntExtra("companyId", 0)
         }

@@ -100,7 +100,8 @@ class ProductShareActivity : AppCompatActivity(), View.OnClickListener {
     private var urlwarehouseId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
+        mBinding = ActivityProductDetailBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.txt_product_deatils)
         vectorDrawable = AppCompatResources.getDrawable(this, R.drawable.logo_grey)

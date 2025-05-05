@@ -49,8 +49,7 @@ class ShopbyBrandFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_shop_by_brand, container, false)
+      mBinding = FragmentShopByBrandBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 

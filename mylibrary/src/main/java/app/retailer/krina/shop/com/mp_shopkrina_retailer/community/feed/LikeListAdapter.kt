@@ -24,9 +24,9 @@ interface LikeUserCall{
 }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemLikeListBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_like_list, parent, false
+                 parent, false
             )
         )
     }

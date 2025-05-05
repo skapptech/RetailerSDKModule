@@ -1,9 +1,7 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -36,7 +34,7 @@
                         android:paddingEnd="@dimen/size30"
                         android:paddingBottom="@dimen/size16"
                         android:src="@drawable/ic_back"
-                        android:tint="@android:color/black" />
+                        app:tint="@android:color/black" />
                 </LinearLayout>
 
                 <TextView
@@ -89,4 +87,3 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-</layout>

@@ -18,10 +18,10 @@ class AchievedGiftItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(
-                    parent.context
-                ), R.layout.item_achieved_gift, parent, false
+            ItemAchievedGiftBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }

@@ -42,8 +42,8 @@ class OffersFragment : Fragment() {
     ): View? {
         if (rootView == null) {
             mBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_offers_text, container, false)
-            val appRepository = AppRepository(activity!!.applicationContext)
+                FragmentOffersTextBinding.inflate(inflater, container, false)
+            val appRepository = AppRepository(homeActivity!!.applicationContext)
             viewModel =
                 ViewModelProvider(
                     activity!!,

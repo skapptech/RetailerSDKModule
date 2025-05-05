@@ -28,6 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.RestClient
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.FeedActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.feed.ImageObjEntity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddPollBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityUserNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AnalyticPost
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -70,7 +71,8 @@ class AddPollActivity : AppCompatActivity(), OnButtonClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_poll)
+        binding = ActivityAddPollBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val repository = PostRepository(RestClient.getInstance4().service4)
         postViewModel = ViewModelProvider(this, PostFactory(repository))[PostViewModel::class.java]
 

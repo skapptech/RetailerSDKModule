@@ -72,9 +72,9 @@ class FlashDealItemListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<FlashDealBinding>(
+            FlashDealBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.flash_deal, viewGroup, false
+               viewGroup, false
             )
         )
     }

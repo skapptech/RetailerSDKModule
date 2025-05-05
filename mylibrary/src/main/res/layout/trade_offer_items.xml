@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="categoryItemOrderInfo"
-            type="app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.CategoryItemOrderInfo" />
-    </data>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
-        app:cardUseCompatPadding="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -439,4 +431,3 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</layout>

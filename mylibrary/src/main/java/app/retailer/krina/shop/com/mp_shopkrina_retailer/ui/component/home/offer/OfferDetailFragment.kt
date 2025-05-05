@@ -102,7 +102,7 @@ class OfferDetailFragment : Fragment(), SubSubCategoryFilterInterface, SubCatego
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_offer_detail, container, false)
+            FragmentOfferDetailBinding.inflate(inflater, container, false)
         val appRepository = AppRepository(activity.applicationContext)
         offerViewModel =
             ViewModelProvider(

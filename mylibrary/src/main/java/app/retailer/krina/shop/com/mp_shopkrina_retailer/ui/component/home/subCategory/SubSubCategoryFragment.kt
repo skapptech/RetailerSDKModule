@@ -123,7 +123,7 @@ class SubSubCategoryFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_sub_sub_category, container, false)
+            FragmentSubSubCategoryBinding.inflate(inflater, container, false)
         val appRepository = AppRepository(activity.applicationContext)
         subSubCatViewModel =
             ViewModelProvider(

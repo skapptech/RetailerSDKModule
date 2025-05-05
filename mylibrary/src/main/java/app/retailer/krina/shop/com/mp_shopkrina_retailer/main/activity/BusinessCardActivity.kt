@@ -25,6 +25,7 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityBusinessCardBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyAccountBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -45,7 +46,8 @@ class BusinessCardActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_business_card)
+        mBinding = ActivityBusinessCardBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title =
             RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_business_card)

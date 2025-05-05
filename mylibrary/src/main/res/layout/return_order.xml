@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/llBody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/size5"
-        android:paddingBottom="@dimen/size5">
+
+<LinearLayout android:id="@+id/llBody"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/size5"
+    android:paddingBottom="@dimen/size5"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,4 +82,3 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</layout>

@@ -1,12 +1,12 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.appcompat.widget.Toolbar
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
-        app:elevation="2dp">
+        app:elevation="2dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:paddingEnd="@dimen/size30"
                 android:paddingBottom="@dimen/size16"
                 android:src="@drawable/ic_back"
-                android:tint="@android:color/black" />
+                app:tint="@color/Black" />
 
             <TextView
                 android:id="@+id/title"
@@ -51,4 +51,3 @@
                 android:tint="@android:color/black" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-</layout>

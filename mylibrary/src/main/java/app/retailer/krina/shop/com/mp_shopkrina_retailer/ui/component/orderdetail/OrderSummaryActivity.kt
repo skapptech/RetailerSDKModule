@@ -29,7 +29,8 @@ class OrderSummaryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mbinding = DataBindingUtil.setContentView(this, R.layout.activity_ordersummary)
+        mbinding = ActivityOrdersummaryBinding.inflate(layoutInflater)
+        setContentView(mbinding!!.root)
         //init view
         initialization()
         // back btn

@@ -49,8 +49,8 @@ class ReturnReplaceActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_return_replace)
-
+        mBinding = ActivityReturnReplaceBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         // setContentView(R.layout.activity_return_replace)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_activity_return_order)

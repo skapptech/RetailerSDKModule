@@ -25,9 +25,8 @@ class GalleryImageAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(viewGroup.context),
-                R.layout.grid_item_layout, viewGroup, false
+            GridItemLayoutBinding.inflate(
+                LayoutInflater.from(viewGroup.context), viewGroup, false
             )
         )
     }

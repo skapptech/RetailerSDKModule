@@ -23,9 +23,10 @@ class MyIssueListAdapter(
         i: Int
     ): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemIssueTicketsBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_issue_tickets, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

@@ -14,6 +14,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.observe
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentAllbrandsBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AllBrandsModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
@@ -25,12 +26,12 @@ class AllBrandFragItemList : Fragment() {
     private lateinit var viewModel: AllBrandViewModel
     private lateinit var appCtx: RetailerSDKApp
     private var mAllBrandListView: GridView? = null
-    private var activity: HomeActivity? = null
+    var homeActivity = activity as? HomeActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
+        homeActivity = context as HomeActivity
+        appCtx = homeActivity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -38,11 +39,11 @@ class AllBrandFragItemList : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_allbrands, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+        mBinding = FragmentAllbrandsBinding.inflate(inflater, container, false)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         viewModel =
             ViewModelProvider(
-                activity!!,
+                homeActivity!!,
                 AllBrandViewModelFactory(RetailerSDKApp.application, appRepository)
             )[AllBrandViewModel::class.java]
         // init view
@@ -50,8 +51,8 @@ class AllBrandFragItemList : Fragment() {
 
         // All brand API calling
         viewModel.getAllBrands(
-            activity!!.custId,
-            activity!!.wId,
+            homeActivity!!.custId,
+            homeActivity!!.wId,
             LocaleHelper.getLanguage(activity)
         )
         observe(viewModel.getAllBrandsData, ::handleAllBrandsResult)
@@ -70,7 +71,7 @@ class AllBrandFragItemList : Fragment() {
                     val list = it.sortedBy { it.subsubcategoryName }
                     mAllBrandListView!!.adapter =
                         AllBrandsAdapter(
-                            activity!!,
+                            homeActivity!!,
                             R.layout.all_brands_item,
                             list
                         )
@@ -91,24 +92,24 @@ class AllBrandFragItemList : Fragment() {
     override fun onResume() {
         super.onResume()
         RetailerSDKApp.getInstance().mFirebaseAnalytics.setCurrentScreen(
-            activity!!,
+            homeActivity!!,
             this.javaClass.simpleName,
             null
         )
-        activity!!.mBinding!!.toolbarH.ivBrands.isEnabled = false
+        homeActivity!!.mBinding!!.toolbarH.ivBrands.isEnabled = false
     }
 
     override fun onPause() {
         super.onPause()
-        activity!!.mBinding!!.toolbarH.ivBrands.isEnabled = true
+        homeActivity!!.mBinding!!.toolbarH.ivBrands.isEnabled = true
     }
 
 
     private fun initView() {
-        activity!!.searchText!!.visibility = View.VISIBLE
+        homeActivity!!.searchText!!.visibility = View.VISIBLE
         mAllBrandListView = mBinding.allBrandList
         mAllBrandListView!!.isFastScrollEnabled = true
-        activity!!.bottomNavigationView!!.visibility = View.VISIBLE
+        homeActivity!!.bottomNavigationView!!.visibility = View.VISIBLE
     }
 
 

@@ -36,7 +36,8 @@ public class RazorPayPaymentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_razor_pay_payment);
+        mBinding = ActivityRazorPayPaymentBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         activity = this;
         initViews();
     }

@@ -15,9 +15,10 @@ class MyWalletAdapter(private val context: Context, private val mylist: ArrayLis
     RecyclerView.Adapter<MyWalletAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<MyWalletAdapterBinding>(
+            MyWalletAdapterBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.my_wallet_adapter, parent, false
+                parent,
+                false
             )
         )
     }

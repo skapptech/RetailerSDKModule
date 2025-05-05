@@ -34,9 +34,9 @@ class SearchHistoryItemAdapter(
     private val handler = Handler()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate<SearchViewadapterBinding>(
+            SearchViewadapterBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.search_viewadapter, parent, false
+                parent, false
             )
         )
     }

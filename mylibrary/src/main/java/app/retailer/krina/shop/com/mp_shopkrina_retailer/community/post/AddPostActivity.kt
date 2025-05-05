@@ -78,7 +78,8 @@ class AddPostActivity : AppCompatActivity(), ImageAdapter.PostImageFromGallery {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_post)
+        binding = ActivityAddPostBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val repository = PostRepository(RestClient.getInstance4().service4)
         postViewModel = ViewModelProvider(this, PostFactory(repository))[PostViewModel::class.java]
 

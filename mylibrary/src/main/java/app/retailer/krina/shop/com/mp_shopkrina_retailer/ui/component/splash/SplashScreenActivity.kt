@@ -198,7 +198,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     val isICICIpayPayment = mFirebaseRemoteConfig!!.getBoolean("isICICIPayment")
                     val isScaleUpSdk = mFirebaseRemoteConfig!!.getBoolean("isScaleUpSdk")
                     val hdfcNewUI = mFirebaseRemoteConfig!!.getBoolean("hdfcNewUI")
-
+                    println("baseUrl>>>>>>>>"+baseUrl)
                     EndPointPref.getInstance(applicationContext)
                         .putString(EndPointPref.API_ENDPOINT, baseUrl)
                     EndPointPref.getInstance(applicationContext)

@@ -16,9 +16,10 @@ class OrderDetailsAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemOrderDetailsBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_order_details, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

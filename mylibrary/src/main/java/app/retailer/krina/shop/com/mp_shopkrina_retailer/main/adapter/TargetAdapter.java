@@ -45,8 +45,11 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(DataBindingUtil.inflate
-                (LayoutInflater.from(parent.getContext()), R.layout.target_adapter, parent, false));
+        return new ViewHolder( TargetAdapterBinding.inflate(
+                LayoutInflater.from(parent.getContext()),
+                parent,
+                false
+        ));
     }
 
     @Override

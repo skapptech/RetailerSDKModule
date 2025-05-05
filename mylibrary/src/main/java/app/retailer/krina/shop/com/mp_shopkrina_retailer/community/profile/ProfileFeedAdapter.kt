@@ -42,18 +42,16 @@ class ProfileFeedAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             THE_SINGLE_POST_VIEW -> SinGlePostView(
-                DataBindingUtil.inflate(
+                ItemProfileSingleImageBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_profile_single_image,
                     parent,
                     false
                 )
             )
 
             THE_POLL -> POllView(
-                DataBindingUtil.inflate(
+                ItemProfilePollViewBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_profile_poll_view,
                     parent,
                     false
                 )
@@ -69,9 +67,8 @@ class ProfileFeedAdapter(
             )
 
             else -> SinGlePostView(
-                DataBindingUtil.inflate(
+                ItemProfileSingleImageBinding.inflate(
                     LayoutInflater.from(parent.context),
-                    R.layout.item_profile_single_image,
                     parent,
                     false
                 )

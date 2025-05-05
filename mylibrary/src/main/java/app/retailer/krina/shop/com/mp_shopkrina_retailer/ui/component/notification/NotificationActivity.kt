@@ -17,6 +17,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.notification.N
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.notification.NotificationResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityActionNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityNotificationBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.direct.TradeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
@@ -53,7 +54,7 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(Intent(applicationContext, TradeActivity::class.java))
             finish()
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_notification)
+        mBinding = ActivityNotificationBinding.inflate(layoutInflater)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

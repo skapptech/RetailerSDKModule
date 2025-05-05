@@ -30,7 +30,8 @@ class ExpiringPointsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_expiring_points)
+        mBinding = ActivityExpiringPointsBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         mBinding.toolbarMyWallet.title.text =
             RetailerSDKApp.getInstance().dbHelper.getData("expiring_points")
         //init view

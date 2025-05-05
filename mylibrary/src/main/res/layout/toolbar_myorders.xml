@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+<androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorPrimary"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?colorPrimary">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="@dimen/size60"
-                android:layout_height="@dimen/size50"
-                android:clickable="true"
-                android:contentDescription="@string/app_name"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:paddingTop="@dimen/size16"
-                android:paddingEnd="@dimen/size30"
-                android:paddingBottom="@dimen/size16"
-                android:tint="@android:color/black"
-                android:src="@drawable/ic_back" />
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/size60"
+            android:layout_height="@dimen/size50"
+            android:clickable="true"
+            android:contentDescription="@string/app_name"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:paddingTop="@dimen/size16"
+            android:paddingEnd="@dimen/size30"
+            android:paddingBottom="@dimen/size16"
+            android:src="@drawable/ic_back"
+            app:tint="@android:color/black" />
 
             <TextView
                 android:id="@+id/otp_title"
@@ -56,4 +57,3 @@
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-</layout>

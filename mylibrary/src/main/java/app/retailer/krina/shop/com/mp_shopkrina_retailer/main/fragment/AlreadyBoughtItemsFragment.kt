@@ -18,6 +18,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.TargetItem
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.target.TargetOrderListActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.TargetResponseModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.LocaleHelper
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -52,12 +53,8 @@ class AlreadyBoughtItemsFragment : Fragment(), SearchInterface {
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_already_bought_items,
-                container,
-                false
-            )
+
+            FragmentAlreadyBoughtItemsBinding.inflate(inflater, container, false)
 
         init()
 

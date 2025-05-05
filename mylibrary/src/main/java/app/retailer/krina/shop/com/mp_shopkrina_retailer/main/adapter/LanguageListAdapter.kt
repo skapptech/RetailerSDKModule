@@ -20,9 +20,10 @@ class LanguageListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemLanguageBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_language, parent, false
+                parent,
+                false
             )
         )
     }

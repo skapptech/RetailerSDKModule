@@ -29,8 +29,11 @@ public class MyExpiringWalletAdapter extends RecyclerView.Adapter<MyExpiringWall
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.item_expiring_wallet_points, parent, false));
+        return new ViewHolder(ItemExpiringWalletPointsBinding.inflate(
+                LayoutInflater.from(parent.getContext()),
+                parent,
+                false
+        ));
     }
 
     @Override

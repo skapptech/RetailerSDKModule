@@ -76,7 +76,8 @@ class PanCardUploadActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_pan_card_upload)
+        mBinding = ActivityPanCardUploadBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         CustomerId = SharePrefs.getInstance(applicationContext).getInt(SharePrefs.CUSTOMER_ID)
         if (!RetailerSDKApp.getInstance().CHECK_FROM_COME) {

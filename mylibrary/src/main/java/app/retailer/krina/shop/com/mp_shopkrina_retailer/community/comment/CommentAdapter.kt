@@ -24,9 +24,9 @@ class CommentAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemCommentListBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_comment_list, parent, false
+                 parent, false
             )
         )
     }

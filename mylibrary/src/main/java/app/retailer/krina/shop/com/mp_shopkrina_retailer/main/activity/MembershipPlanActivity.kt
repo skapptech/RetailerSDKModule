@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfileResponse
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMembershipBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMembershipPlanBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.PrimeBannerAdapter
@@ -51,7 +52,8 @@ class MembershipPlanActivity : AppCompatActivity(), OnButtonClick, View.OnClickL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_membership_plan)
+        mBinding = ActivityMembershipPlanBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "SK " + SharePrefs.getInstance(applicationContext)
             .getString(SharePrefs.PRIME_NAME) + RetailerSDKApp.getInstance().dbHelper.getString(R.string.membership)

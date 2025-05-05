@@ -22,9 +22,8 @@ public class RazorPayWebviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.fragment_web_view);
-
-
+        mBinding = FragmentWebViewBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         intentUrl = getIntent().getStringExtra("Url");
 
         WebSettings webSettings = mBinding.webView.getSettings();

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityBusinessCardBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCheckSignUpBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomerAddressActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
@@ -29,7 +30,8 @@ class CheckSignUpActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_check_sign_up)
+        mBinding = ActivityCheckSignUpBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val intent = intent
         if (intent != null) {
             tittleHeader = intent.getStringExtra(Constant.ACTIVATION_TITLE)

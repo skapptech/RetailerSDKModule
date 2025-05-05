@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
     <LinearLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
@@ -9,7 +7,8 @@
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
         android:layout_marginTop="6dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/iv_store_logo"
@@ -35,5 +34,3 @@
             android:textColor="@color/color_orange"
             android:textSize="18sp" />
     </LinearLayout>
-
-</layout>

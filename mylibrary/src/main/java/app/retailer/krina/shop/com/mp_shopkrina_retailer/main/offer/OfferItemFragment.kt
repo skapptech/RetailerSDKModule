@@ -20,6 +20,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.Cat
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.categoryBean.SubCategoriesModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.subCategory.SubSubCategoriesModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.home.ItemListModel
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentHome1Binding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.ItemListAdapter
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.subCategory.SubCategoryFilterAdapter
@@ -67,8 +68,7 @@ open class OfferItemFragment : Fragment(), SubSubCategoryFilterInterface, SubCat
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.activity_offer_item, container, false)
+        binding = ActivityOfferItemBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -28,6 +28,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.NewSignup
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.SignupResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAddressSearchBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCustomerAddressBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.auth.SignupActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.EndPointPref
@@ -81,7 +82,8 @@ class CustomerAddressActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_customer_address)
+        mBinding = ActivityCustomerAddressBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

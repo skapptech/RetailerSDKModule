@@ -25,9 +25,10 @@ class CategoryRelatedItemViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemRelatedProductBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_related_product, parent, false
+                parent,
+                false
             )
         )
     }

@@ -59,7 +59,8 @@ class LedgerSummaryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_ledger_summary)
+        mBinding = ActivityLedgerSummaryBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val args = intent.getBundleExtra("BUNDLE")
         ladgerEntryList = args!!.getSerializable("data") as ArrayList<LadgerEntryListModel>?

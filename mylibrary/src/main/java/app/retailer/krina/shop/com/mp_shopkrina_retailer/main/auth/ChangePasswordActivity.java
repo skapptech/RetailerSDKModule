@@ -43,7 +43,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_changepassord);
+        mBinding = ActivityChangepassordBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         mBinding.toolbarCp.title.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.changepassword));
         SharePrefs.getInstance(ChangePasswordActivity.this).putString(SharePrefs.IsSignup, "true");
 

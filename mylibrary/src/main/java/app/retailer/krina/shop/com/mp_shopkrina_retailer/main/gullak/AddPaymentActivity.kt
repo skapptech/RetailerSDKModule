@@ -73,7 +73,8 @@ class AddPaymentActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_payment)
+        binding = ActivityAddPaymentBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.gullak_balance)
 

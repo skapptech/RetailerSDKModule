@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.community.FeedActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyordersBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityProductDetailBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnButtonClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.NoInternetActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.SectionsPagerAdapter
@@ -57,7 +58,8 @@ class MyOrderActivity : AppCompatActivity(), OnButtonClick {
                 startActivity(Intent(applicationContext, TradeActivity::class.java))
             finish()
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_myorders)
+        mBinding = ActivityMyordersBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         setSupportActionBar(mBinding.toolbarOrderDetails.toolbar)
         supportActionBar?.elevation = 0F
     }

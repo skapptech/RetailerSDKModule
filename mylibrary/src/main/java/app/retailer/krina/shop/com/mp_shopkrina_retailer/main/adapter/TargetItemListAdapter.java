@@ -75,9 +75,13 @@ public class TargetItemListAdapter extends RecyclerView.Adapter<TargetItemListAd
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                R.layout.category_order_items, viewGroup, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ViewHolder(
+                CategoryOrderItemsBinding.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        parent,
+                        false
+                ));
     }
 
     @Override
@@ -844,7 +848,7 @@ public class TargetItemListAdapter extends RecyclerView.Adapter<TargetItemListAd
         }
 
         public void bind(CategoryItemOrderInfo obj) {
-            mBinding.executePendingBindings();
+          //  mBinding.executePendingBindings();
         }
 
         void timerExpire(long endTime) {

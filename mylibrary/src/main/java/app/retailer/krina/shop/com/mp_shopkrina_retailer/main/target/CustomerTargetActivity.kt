@@ -31,7 +31,8 @@ class CustomerTargetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_customer_target)
+        mBinding = ActivityCustomerTargetBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         mBinding.back.setOnClickListener { onBackPressed() }
         initView()
 

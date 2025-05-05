@@ -58,7 +58,8 @@ public class PlacesSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_places_search);
+        mBinding = ActivityPlacesSearchBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
         mBinding.etSearchKeyword.setText(RetailerSDKApp.getInstance().dbHelper.getString(R.string.title_serach_address));
         mBinding.address.setHint(RetailerSDKApp.getInstance().dbHelper.getString(R.string.search_delivery_address));

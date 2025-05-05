@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI;
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReturnItemDetailBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityReturnOrderDetailBinding;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.ReturnOrderDetailAdapter;
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.ReturnOrderItemModel;
@@ -43,7 +44,8 @@ public class ReturnOrderDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_return_order_detail);
+        mBinding = ActivityReturnOrderDetailBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getIntent().getExtras() != null) {

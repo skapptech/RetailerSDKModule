@@ -3,9 +3,7 @@ package app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.BR
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ItemPaymentAdapterBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.PendingPaymentModel
@@ -19,9 +17,10 @@ class PendingPaymentAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemPaymentAdapterBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_payment_adapter, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }
@@ -45,8 +44,8 @@ class PendingPaymentAdapter(
         mBinding.root
     ) {
         fun bind(obj: PendingPaymentModel?) {
-            mBinding.setVariable(BR.pendingPaymentModel, obj)
-            mBinding.executePendingBindings()
+           // mBinding.setVariable(BR.pendingPaymentModel, obj)
+          //  mBinding.executePendingBindings()
         }
     }
 }

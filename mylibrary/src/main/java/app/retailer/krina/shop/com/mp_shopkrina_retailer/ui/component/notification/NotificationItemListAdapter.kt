@@ -68,9 +68,9 @@ class NotificationItemListAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            CategoryOrderItemsBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.category_order_items, viewGroup, false
+                 viewGroup, false
             )
         )
     }
@@ -860,7 +860,7 @@ class NotificationItemListAdapter(
         var relItemDetails: RelativeLayout? = null
         var LLItemMain: LinearLayout
         fun bind(obj: CategoryItemOrderInfo?) {
-            mBinding.executePendingBindings()
+           // mBinding.executePendingBindings()
         }
 
         fun timerExpire(endTime: Long) {

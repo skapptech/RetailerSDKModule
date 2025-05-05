@@ -24,7 +24,8 @@ class MyAgentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_agent)
+        mBinding = ActivityMyAgentBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = RetailerSDKApp.getInstance().dbHelper.getString(R.string.my_agents)
 

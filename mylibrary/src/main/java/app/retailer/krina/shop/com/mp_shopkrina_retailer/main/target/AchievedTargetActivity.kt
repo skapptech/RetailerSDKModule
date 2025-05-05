@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.api.CommonClassForAPI
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityAchievedTargetBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityMyAccountBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.home.HomeActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.NoInternetActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.adapter.AchievedGiftItemAdapter
@@ -48,7 +49,8 @@ class AchievedTargetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_achieved_target)
+        mBinding = ActivityAchievedTargetBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val bundle = intent.extras
         if (bundle != null) {
             subCategoryTargetModel =

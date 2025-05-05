@@ -19,9 +19,8 @@ class BillDiscountFreeItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            BillFreeItemsBinding.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.bill_free_items,
                 parent,
                 false
             )

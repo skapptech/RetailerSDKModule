@@ -15,9 +15,9 @@ class DistrictAdapter(
 ): RecyclerView.Adapter<DistrictAdapter.ViewHolder?>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemMandiDistrictBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_mandi_district, parent, false
+                 parent, false
             )
         )
     }

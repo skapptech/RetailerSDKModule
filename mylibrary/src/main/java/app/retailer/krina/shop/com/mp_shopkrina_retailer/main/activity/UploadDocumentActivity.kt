@@ -72,7 +72,8 @@ class UploadDocumentActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_upload_document)
+        mBinding = ActivityUploadDocumentBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         CustomerId = SharePrefs.getInstance(this).getInt(SharePrefs.CUSTOMER_ID)
 

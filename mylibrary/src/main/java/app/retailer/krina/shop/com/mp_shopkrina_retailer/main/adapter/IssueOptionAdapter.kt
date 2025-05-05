@@ -28,9 +28,10 @@ class IssueOptionAdapter(
         i: Int
     ): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
+            ItemTicketUsersBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
-                R.layout.item_ticket_users, viewGroup, false
+                viewGroup,
+                false
             )
         )
     }

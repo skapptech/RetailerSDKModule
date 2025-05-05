@@ -22,7 +22,8 @@ class PendingPaymentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_pending_payment)
+        mBinding = ActivityPendingPaymentBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         initview()
 
         val data = intent.getStringExtra("data")

@@ -32,6 +32,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.shoppingCart.S
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.repository.AppRepository
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.response.Response
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityCheckoutBinding
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.ActivityHomeBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.BasketFilterClicked
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.OnItemClick
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.interfaces.RemoveItemInterface
@@ -102,7 +103,8 @@ class ShoppingCartActivity : AppCompatActivity(), BasketFilterClicked, RemoveIte
             startActivity(Intent(applicationContext, TradeActivity::class.java))
             finish()
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_checkout)
+        mBinding = ActivityCheckoutBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         val appRepository = AppRepository(applicationContext)
         viewModel = ViewModelProvider(
             this,

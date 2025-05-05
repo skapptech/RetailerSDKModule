@@ -77,7 +77,8 @@ class AddReturnOrderRequestActivity : AppCompatActivity(), AdapterView.OnItemSel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_return_order_request)
+        binding = ActivityAddReturnOrderRequestBinding.inflate(layoutInflater);
+        setContentView(binding.getRoot());
         val appRepository = AppRepository(applicationContext)
         returnOrderViewModel = ViewModelProvider(
             this,

@@ -17,7 +17,8 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_reset_pass)
+        mBinding = ActivityResetPassBinding.inflate(layoutInflater)
+        setContentView(mBinding!!.root)
         setValue()
         mBinding.btnOk.setOnClickListener { v: View? ->
             startActivity(

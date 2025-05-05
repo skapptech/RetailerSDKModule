@@ -73,8 +73,8 @@ class FlashDealOfferFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_flash_deal_offer, container, false)
-        val appRepository = AppRepository(activity!!.applicationContext)
+            FragmentFlashDealOfferBinding.inflate(inflater, container, false)
+        val appRepository = AppRepository(homeActivity!!.applicationContext)
         appHomeViewModel =
             ViewModelProvider(
                 activity!!,

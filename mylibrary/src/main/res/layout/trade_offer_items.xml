@@ -3,6 +3,7 @@
 <androidx.cardview.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="6dp"
     app:cardUseCompatPadding="true"
     xmlns:android="http://schemas.android.com/apk/res/android">

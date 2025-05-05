@@ -588,7 +588,7 @@ public class TradeItemListAdapter extends RecyclerView.Adapter<TradeItemListAdap
         }
 
         public void bind() {
-            mBinding.executePendingBindings();
+          //  mBinding.executePendingBindings();
         }
     }
 

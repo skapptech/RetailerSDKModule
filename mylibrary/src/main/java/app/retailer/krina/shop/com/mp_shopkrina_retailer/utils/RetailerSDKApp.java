@@ -90,7 +90,7 @@ public class RetailerSDKApp {
                 .setProjectId("retailerapp-cff3b") // Optional
                 .build();
         if (FirebaseApp.getApps(context).isEmpty()) {
-           // FirebaseApp.initializeApp(context);
+            FirebaseApp.initializeApp(context, options);
         }
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         noteRepository = dbHelper = new NoteRepository(context);

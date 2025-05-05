@@ -29,7 +29,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.R
@@ -38,7 +37,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.EditProfi
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.data.dto.auth.MyProfileResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.databinding.FragmentEditProfileBinding
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.EditProfileActivity
-import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.settings.RateAppActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.main.activity.ShopDetailsActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.AddressModel
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.model.CustomerHoliday
@@ -46,6 +44,7 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.Co
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.models.responseModel.ImageResponse
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.preference.SharePrefs
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.auth.CustomerAddressActivity
+import app.retailer.krina.shop.com.mp_shopkrina_retailer.ui.component.settings.RateAppActivity
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Constant
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.MarshmallowPermissions
 import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.RetailerSDKApp
@@ -206,7 +205,13 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
             } else if (requestCode == GALLERY_REQUST && resultCode == Activity.RESULT_OK && null != data) {
                 val selectedImageUri = data.data
                 val projection = arrayOf(MediaStore.MediaColumns.DATA)
-                val cursor = editProfileActivity!!.managedQuery(selectedImageUri, projection, null, null, null)
+                val cursor = editProfileActivity!!.managedQuery(
+                    selectedImageUri,
+                    projection,
+                    null,
+                    null,
+                    null
+                )
                 val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
                 cursor.moveToFirst()
                 val selectedImagePath = cursor.getString(column_index)
@@ -229,9 +234,12 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
                         data.getParcelableExtra<AddressModel>(Constant.CUSTOMER_ADDRESS)
                     mBinding.tvCustAddress.text = addressModel!!.address
                     if (addressModel.address != null) {
-                        editProfileActivity!!.editProfileModel!!.shippingAddress = addressModel.address
-                        editProfileActivity!!.editProfileModel!!.lat = addressModel.latitude.toString()
-                        editProfileActivity!!.editProfileModel!!.lg = addressModel.longitude.toString()
+                        editProfileActivity!!.editProfileModel!!.shippingAddress =
+                            addressModel.address
+                        editProfileActivity!!.editProfileModel!!.lat =
+                            addressModel.latitude.toString()
+                        editProfileActivity!!.editProfileModel!!.lg =
+                            addressModel.longitude.toString()
                         editProfileActivity!!.editProfileModel!!.zipCode = addressModel.pincode
                         editProfileActivity!!.editProfileModel!!.shippingAddress1 =
                             addressModel.flateOrFloorNumber
@@ -381,12 +389,12 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
 
     private fun requestWritePermission() {
         if (ContextCompat.checkSelfPermission(
-                activity,
+                RetailerSDKApp.context,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                activity,
+                editProfileActivity!!,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 WRITE_PERMISSION
             )
@@ -450,8 +458,8 @@ class EditProfileHomeFragment : Fragment(), View.OnClickListener {
         val photoFile: File
         photoFile = createImageFile()
         val photoUri = FileProvider.getUriForFile(
-            activity,
-            editProfileActivity!!.packageName  + ".provider",
+            RetailerSDKApp.context,
+            editProfileActivity!!.packageName + ".provider",
             photoFile
         )
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)

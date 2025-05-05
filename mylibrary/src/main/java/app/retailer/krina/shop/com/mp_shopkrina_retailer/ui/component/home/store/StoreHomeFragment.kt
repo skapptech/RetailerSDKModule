@@ -124,7 +124,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                 container,
                 false
             )
-            val appRepository = AppRepository(activity!!.applicationContext)
+            val appRepository = AppRepository(RetailerSDKApp.application)
             appHomeViewModel =
                 ViewModelProvider(
                     activity!!,
@@ -215,77 +215,80 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
             val webView = holder.mBinding.webviewItem
             webView.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null)
         } else {
-            CommonClassForAPI.getInstance(activity).fetchDynamicHtml(object : DisposableObserver<String?>() {
-                override fun onNext(response: String) {
-                    if (!TextUtils.isNullOrEmpty(response)) {
-                        try {
-                            (holder as StoreDashAdapter.DynamicViewHolder).mBinding.webviewItem.visibility =
-                                View.VISIBLE
-                            val webView = holder.mBinding.webviewItem
-                            webView.loadDataWithBaseURL(
-                                null,
-                                response,
-                                "text/html",
-                                "UTF-8",
-                                null
-                            )
-                            StorePref.getInstance(activity)
-                                .putString(StorePref.PRODUCT_LIST + url, response)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
-                                View.GONE
-                        }
-                    } else {
-                        (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
-                            View.GONE
-                    }
-                }
-                override fun onError(e: Throwable) {
-                    e.printStackTrace()
-                    (holder as DynamicViewHolder).mBinding.webviewItem.visibility = View.GONE
-                }
-                override fun onComplete() {}
-            }, url)
-
-          /*  appHomeViewModel.getDynamicHtm(url)
-            appHomeViewModel.getDynamicHtmlData.observe(activity!!) {
-                when (it) {
-                    is Response.Loading -> {}
-                    is Response.Success -> {
-                        it.data?.let {
-                            if (!TextUtils.isNullOrEmpty(it)) {
-                                try {
-                                    (holder as StoreDashAdapter.DynamicViewHolder).mBinding.webviewItem.visibility =
-                                        View.VISIBLE
-                                    val webView = holder.mBinding.webviewItem
-                                    webView.loadDataWithBaseURL(
-                                        null,
-                                        it,
-                                        "text/html",
-                                        "UTF-8",
-                                        null
-                                    )
-                                    StorePref.getInstance(activity)
-                                        .putString(StorePref.PRODUCT_LIST + url, it)
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                    (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
-                                        View.GONE
-                                }
-                            } else {
+            CommonClassForAPI.getInstance(activity)
+                .fetchDynamicHtml(object : DisposableObserver<String?>() {
+                    override fun onNext(response: String) {
+                        if (!TextUtils.isNullOrEmpty(response)) {
+                            try {
+                                (holder as StoreDashAdapter.DynamicViewHolder).mBinding.webviewItem.visibility =
+                                    View.VISIBLE
+                                val webView = holder.mBinding.webviewItem
+                                webView.loadDataWithBaseURL(
+                                    null,
+                                    response,
+                                    "text/html",
+                                    "UTF-8",
+                                    null
+                                )
+                                StorePref.getInstance(activity)
+                                    .putString(StorePref.PRODUCT_LIST + url, response)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
                                 (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
                                     View.GONE
                             }
+                        } else {
+                            (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
+                                View.GONE
                         }
                     }
 
-                    is Response.Error -> {
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
                         (holder as DynamicViewHolder).mBinding.webviewItem.visibility = View.GONE
                     }
-                }
 
-            }*/
+                    override fun onComplete() {}
+                }, url)
+
+            /*  appHomeViewModel.getDynamicHtm(url)
+              appHomeViewModel.getDynamicHtmlData.observe(activity!!) {
+                  when (it) {
+                      is Response.Loading -> {}
+                      is Response.Success -> {
+                          it.data?.let {
+                              if (!TextUtils.isNullOrEmpty(it)) {
+                                  try {
+                                      (holder as StoreDashAdapter.DynamicViewHolder).mBinding.webviewItem.visibility =
+                                          View.VISIBLE
+                                      val webView = holder.mBinding.webviewItem
+                                      webView.loadDataWithBaseURL(
+                                          null,
+                                          it,
+                                          "text/html",
+                                          "UTF-8",
+                                          null
+                                      )
+                                      StorePref.getInstance(activity)
+                                          .putString(StorePref.PRODUCT_LIST + url, it)
+                                  } catch (e: Exception) {
+                                      e.printStackTrace()
+                                      (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
+                                          View.GONE
+                                  }
+                              } else {
+                                  (holder as DynamicViewHolder).mBinding.webviewItem.visibility =
+                                      View.GONE
+                              }
+                          }
+                      }
+
+                      is Response.Error -> {
+                          (holder as DynamicViewHolder).mBinding.webviewItem.visibility = View.GONE
+                      }
+                  }
+
+              }*/
         }
     }
 
@@ -329,97 +332,29 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
             }
         } else {
 
-            CommonClassForAPI.getInstance(activity).getItemBySection(object : DisposableObserver<JsonObject?>() {
-                override fun onNext(jsonObject: JsonObject) {
-                    try {
-                        progressBar.visibility = View.GONE
-                        val appHomeItemModel =
-                            Gson().fromJson(jsonObject.toString(), AppHomeItemModel::class.java)
-                        if (appHomeItemModel.isStatus) {
-                            StorePref.getInstance(activity).putString(
-                                StorePref.PRODUCT_LIST + sectionId,
-                                jsonObject.toString()
-                            )
-                            val itemList = appHomeItemModel.itemListModels
-                            val list = appHomeViewModel.getMoqList(itemList)
-                            if (list.size != 0) {
-                                if (!tileSlider) {
-                                    if (list.size > 2) {
-                                        listSize = 2
-                                        appHomeItemAdapter.setItemListCategory(
-                                            list,
-                                            listSize
-                                        )
-                                        llLordMore.visibility = View.VISIBLE
-                                    } else {
-                                        listSize = list.size
-                                        llLordMore.visibility = View.GONE
-                                        if (list.size != 0) {
+            CommonClassForAPI.getInstance(activity)
+                .getItemBySection(object : DisposableObserver<JsonObject?>() {
+                    override fun onNext(jsonObject: JsonObject) {
+                        try {
+                            progressBar.visibility = View.GONE
+                            val appHomeItemModel =
+                                Gson().fromJson(jsonObject.toString(), AppHomeItemModel::class.java)
+                            if (appHomeItemModel.isStatus) {
+                                StorePref.getInstance(activity).putString(
+                                    StorePref.PRODUCT_LIST + sectionId,
+                                    jsonObject.toString()
+                                )
+                                val itemList = appHomeItemModel.itemListModels
+                                val list = appHomeViewModel.getMoqList(itemList)
+                                if (list.size != 0) {
+                                    if (!tileSlider) {
+                                        if (list.size > 2) {
+                                            listSize = 2
                                             appHomeItemAdapter.setItemListCategory(
                                                 list,
                                                 listSize
                                             )
-                                        }
-                                    }
-                                } else {
-                                    listSize = list.size
-                                    llLordMore.visibility = View.GONE
-                                    if (list.size != 0) {
-                                        appHomeItemAdapter.setItemListCategory(
-                                            list,
-                                            listSize
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-
-                override fun onError(e: Throwable) {
-                    progressBar.visibility = View.GONE
-                }
-                override fun onComplete() {}
-            }, customerId, warehouseId, sectionId, lang)
-
-        /*    appHomeViewModel.getItemBySection(customerId, warehouseId, sectionId, lang)
-            appHomeViewModel.getItemBySectionData.observe(activity!!) {
-                when (it) {
-                    is Response.Loading -> {}
-                    is Response.Success -> {
-                        it.data?.let {
-                            try {
-                                progressBar.visibility = View.GONE
-                                val appHomeItemModel =
-                                    Gson().fromJson(it.toString(), AppHomeItemModel::class.java)
-                                if (appHomeItemModel.isStatus) {
-                                    StorePref.getInstance(activity).putString(
-                                        StorePref.PRODUCT_LIST + sectionId,
-                                        it.toString()
-                                    )
-                                    val itemList = appHomeItemModel.itemListModels
-                                    val list = appHomeViewModel.getMoqList(itemList)
-                                    if (list.size != 0) {
-                                        if (!tileSlider) {
-                                            if (list.size > 2) {
-                                                listSize = 2
-                                                appHomeItemAdapter.setItemListCategory(
-                                                    list,
-                                                    listSize
-                                                )
-                                                llLordMore.visibility = View.VISIBLE
-                                            } else {
-                                                listSize = list.size
-                                                llLordMore.visibility = View.GONE
-                                                if (list.size != 0) {
-                                                    appHomeItemAdapter.setItemListCategory(
-                                                        list,
-                                                        listSize
-                                                    )
-                                                }
-                                            }
+                                            llLordMore.visibility = View.VISIBLE
                                         } else {
                                             listSize = list.size
                                             llLordMore.visibility = View.GONE
@@ -430,20 +365,90 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                                 )
                                             }
                                         }
+                                    } else {
+                                        listSize = list.size
+                                        llLordMore.visibility = View.GONE
+                                        if (list.size != 0) {
+                                            appHomeItemAdapter.setItemListCategory(
+                                                list,
+                                                listSize
+                                            )
+                                        }
                                     }
                                 }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
                             }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
                     }
 
-                    is Response.Error -> {
+                    override fun onError(e: Throwable) {
                         progressBar.visibility = View.GONE
                     }
-                }
 
-            }*/
+                    override fun onComplete() {}
+                }, customerId, warehouseId, sectionId, lang)
+
+            /*    appHomeViewModel.getItemBySection(customerId, warehouseId, sectionId, lang)
+                appHomeViewModel.getItemBySectionData.observe(activity!!) {
+                    when (it) {
+                        is Response.Loading -> {}
+                        is Response.Success -> {
+                            it.data?.let {
+                                try {
+                                    progressBar.visibility = View.GONE
+                                    val appHomeItemModel =
+                                        Gson().fromJson(it.toString(), AppHomeItemModel::class.java)
+                                    if (appHomeItemModel.isStatus) {
+                                        StorePref.getInstance(activity).putString(
+                                            StorePref.PRODUCT_LIST + sectionId,
+                                            it.toString()
+                                        )
+                                        val itemList = appHomeItemModel.itemListModels
+                                        val list = appHomeViewModel.getMoqList(itemList)
+                                        if (list.size != 0) {
+                                            if (!tileSlider) {
+                                                if (list.size > 2) {
+                                                    listSize = 2
+                                                    appHomeItemAdapter.setItemListCategory(
+                                                        list,
+                                                        listSize
+                                                    )
+                                                    llLordMore.visibility = View.VISIBLE
+                                                } else {
+                                                    listSize = list.size
+                                                    llLordMore.visibility = View.GONE
+                                                    if (list.size != 0) {
+                                                        appHomeItemAdapter.setItemListCategory(
+                                                            list,
+                                                            listSize
+                                                        )
+                                                    }
+                                                }
+                                            } else {
+                                                listSize = list.size
+                                                llLordMore.visibility = View.GONE
+                                                if (list.size != 0) {
+                                                    appHomeItemAdapter.setItemListCategory(
+                                                        list,
+                                                        listSize
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        }
+
+                        is Response.Error -> {
+                            progressBar.visibility = View.GONE
+                        }
+                    }
+
+                }*/
         }
     }
 
@@ -515,7 +520,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                     appHomeItemAdapter.setItemListCategory(list, listSize)
                                 }
                             }
-                        }else{
+                        } else {
                             val param = vh.itemView.layoutParams as RecyclerView.LayoutParams
                             vh.itemView.visibility = View.GONE
                             param.height = 0
@@ -532,6 +537,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                         vh.itemView.layoutParams = param
                     }
                 }
+
                 override fun onError(@NotNull e: Throwable) {
                     vh.mBinding.progressBarCyclic.visibility = View.GONE
                     val param = vh.itemView.layoutParams as RecyclerView.LayoutParams
@@ -540,6 +546,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                     param.width = 0
                     vh.itemView.layoutParams = param
                 }
+
                 override fun onComplete() {}
             }, url)
             /*appHomeViewModel.getOtherItemsHome(url)
@@ -761,7 +768,8 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             StoreDashAdapter(
                                 activity!!, it,
                                 this@StoreHomeFragment, this@StoreHomeFragment,
-                                this@StoreHomeFragment)
+                                this@StoreHomeFragment
+                            )
                         mBinding!!.recyclerCategories.adapter = dashboardAdapter
                         dashboardAdapter!!.subCatId = subCatId
                     } catch (e: Exception) {
@@ -833,7 +841,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                DecimalFormat("##.##").format(list[i].discountPercentage) + MyApplication.getInstance().dbHelper.getString(
+                                DecimalFormat("##.##").format(list[i].discountPercentage) + RetailerSDKApp.getInstance().dbHelper.getString(
                                     R.string.per_of_min_per
                                 ) + list[i].billAmount
                             //offerList.add(offerMag);
@@ -844,7 +852,7 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                             )
                         ) {
                             val offerText =
-                                MyApplication.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
+                                RetailerSDKApp.getInstance().dbHelper.getString(R.string.bill_free_item) + list[i].billAmount
                             // offerList.add(offerMag);
                             "$offerMag* $offerText  "
                         } else {
@@ -852,14 +860,14 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                     "PostOffer",
                                     ignoreCase = true
                                 )
-                            ) MyApplication.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
+                            ) RetailerSDKApp.getInstance().dbHelper.getString(R.string.post_bill_text) else ""
                             if (list[i].walletType.equals(
                                     "WalletPercentage",
                                     ignoreCase = true
                                 )
                             ) {
                                 val offerText =
-                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + MyApplication.getInstance().dbHelper.getString(
+                                    DecimalFormat("##.##").format(list[i].billDiscountWallet) + RetailerSDKApp.getInstance().dbHelper.getString(
                                         R.string.per_of_min_per
                                     ) + DecimalFormat("##.##").format(
                                         list[i].billAmount
@@ -868,9 +876,9 @@ class StoreHomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterf
                                 "$offerMag* $offerText  "
                             } else {
                                 val offerText =
-                                    (MyApplication.getInstance().dbHelper.getString(R.string.flat_rs) +
+                                    (RetailerSDKApp.getInstance().dbHelper.getString(R.string.flat_rs) +
                                             DecimalFormat("##.##").format(convertToAmount(list[i].billDiscountWallet))
-                                            + MyApplication.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
+                                            + RetailerSDKApp.getInstance().dbHelper.getString(R.string.per_of_min_per_wallet) + DecimalFormat(
                                         "##.##"
                                     ).format(
                                         list[i].billAmount

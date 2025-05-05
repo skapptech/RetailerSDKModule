@@ -23,7 +23,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -65,7 +64,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     SubCatClicked, BrandClicked {
     private val SPEECH_REQUEST_CODE = 123
     private var activity: HomeActivity? = null
-    private lateinit var appCtx: RetailerSDKApp
+
     private lateinit var viewModel: SearchItemViewModel
     private var mBinding: FragmentSearchItemListBinding? = null
     private var categoryList: ArrayList<BasecategoryModel>? = null
@@ -102,7 +101,6 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
     }
 
     override fun onCreateView(
@@ -112,7 +110,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
     ): View {
         mBinding =
             FragmentSearchItemListBinding.inflate(inflater, container, false)
-        val appRepository = AppRepository(homeActivity!!.applicationContext)
+        val appRepository = AppRepository(RetailerSDKApp.application)
         viewModel =
             ViewModelProvider(
                 activity!!,
@@ -131,8 +129,7 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
         if (netConnectionReceiver != null) {
             activity!!.registerReceiver(
                 netConnectionReceiver,
-                IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
-                , Context.RECEIVER_NOT_EXPORTED
+                IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"), Context.RECEIVER_NOT_EXPORTED
             )
         }
         if (mSearchFlag) {
@@ -352,9 +349,9 @@ class SearchItemFragment : Fragment(), BaseCatClicked, Searchclick, CategoryClic
 
     private fun SearchFilterPopup() {
         Utils.hideKeyboard(activity, view)
-        val mBindingFilter = DataBindingUtil.inflate<SearchFilterPopupBinding>(
+        val mBindingFilter = SearchFilterPopupBinding.inflate(
             layoutInflater,
-            R.layout.search_filter_popup, null, false
+            null, false
         )
         // set text
         mBindingFilter.tvHeader.text =

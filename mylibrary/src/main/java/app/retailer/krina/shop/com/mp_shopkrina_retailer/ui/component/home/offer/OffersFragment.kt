@@ -43,7 +43,7 @@ class OffersFragment : Fragment() {
         if (rootView == null) {
             mBinding =
                 FragmentOffersTextBinding.inflate(inflater, container, false)
-            val appRepository = AppRepository(homeActivity!!.applicationContext)
+            val appRepository = AppRepository(RetailerSDKApp.application)
             viewModel =
                 ViewModelProvider(
                     activity!!,

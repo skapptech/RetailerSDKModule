@@ -47,7 +47,7 @@ class Constant {
 
         @JvmField
         var CALLBACK_URL =
-            EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + "/api/Transaction/paymentcallback"
+            EndPointPref.getInstance(RetailerSDKApp.context).baseUrl + "/api/Transaction/paymentcallback"
 
         //Share url
         @JvmField

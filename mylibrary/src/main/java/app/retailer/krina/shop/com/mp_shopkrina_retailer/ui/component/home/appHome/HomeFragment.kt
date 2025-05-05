@@ -105,7 +105,7 @@ import java.util.Collections
 class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     DynamicHtmlInterface, StoreApiInterface, BucketGameInterface {
     private val TAG = this.javaClass.name
-    private lateinit var appCtx: RetailerSDKApp
+
     private var mBinding: FragmentHome1Binding? = null
     private lateinit var appHomeViewModel: AppHomeViewModel
     private var rlHeader: RelativeLayout? = null
@@ -135,7 +135,6 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
     override fun onAttach(context: Context) {
         super.onAttach(context)
         homeActivity = context as? HomeActivity
-        appCtx = homeActivity?.application as RetailerSDKApp
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -814,10 +813,10 @@ class HomeFragment : Fragment(), FlashDealsOfferInterface, ItemsOfferInterface,
                     homeActivity!!
                 )
                 if (ActivityCompat.checkSelfPermission(
-                        homeActivity,
+                        homeActivity!!,
                         Manifest.permission.ACCESS_FINE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        homeActivity,
+                        homeActivity!!,
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {

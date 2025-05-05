@@ -172,7 +172,7 @@ class StoryActivity : AppCompatActivity(), View.OnClickListener, ViewFlipListene
                 mBinding!!.progressBar.visibility = View.VISIBLE
 
                 Glide.with(this@StoryActivity)
-                    .load(EndPointPref.getInstance(RetailerSDKApp.getInstance()).baseUrl + list[position].imagePath)
+                    .load(EndPointPref.getInstance(RetailerSDKApp.context).baseUrl + list[position].imagePath)
                     .error(R.drawable.murli_story_end_page)
                     .into(ivImage1)
             }

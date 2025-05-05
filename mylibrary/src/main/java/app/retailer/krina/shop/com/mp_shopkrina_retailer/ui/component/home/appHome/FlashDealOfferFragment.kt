@@ -42,7 +42,6 @@ import java.util.concurrent.TimeUnit
 class FlashDealOfferFragment : Fragment() {
     private var activity: HomeActivity? = null
     private val TAG = FlashDealOfferFragment::class.java.name
-    private lateinit var appCtx: RetailerSDKApp
     private lateinit var mBinding: FragmentFlashDealOfferBinding
     private lateinit var appHomeViewModel: AppHomeViewModel
     private var mFlashDealItemListAdapter: FlashDealItemListAdapter? = null
@@ -63,8 +62,6 @@ class FlashDealOfferFragment : Fragment() {
     override fun onAttach(_context: Context) {
         super.onAttach(_context)
         activity = _context as HomeActivity
-        appCtx = activity!!.application as RetailerSDKApp
-
     }
 
     override fun onCreateView(
@@ -74,7 +71,7 @@ class FlashDealOfferFragment : Fragment() {
     ): View {
         mBinding =
             FragmentFlashDealOfferBinding.inflate(inflater, container, false)
-        val appRepository = AppRepository(homeActivity!!.applicationContext)
+        val appRepository = AppRepository(activity!!.applicationContext)
         appHomeViewModel =
             ViewModelProvider(
                 activity!!,

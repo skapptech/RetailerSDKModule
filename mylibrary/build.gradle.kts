@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.firebase.config)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.crashlytics)
+//    implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.appcheck)
 //    google
     implementation(libs.play.analytics)

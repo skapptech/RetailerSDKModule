@@ -46,7 +46,6 @@ import app.retailer.krina.shop.com.mp_shopkrina_retailer.utils.Validation
 import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.gson.JsonObject
 import io.reactivex.observers.DisposableObserver
 import java.lang.Boolean
@@ -555,7 +554,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    FirebaseCrashlytics.getInstance().log(e.message!!)
                 }
             }
 

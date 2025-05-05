@@ -57,6 +57,7 @@ public class RetailerSDKApp {
     public boolean isReloadCart = false;
     public boolean isCommentOpen = false;
 
+
     public RetailerSDKApp() {
         onCreate();
     }
